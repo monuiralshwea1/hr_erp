@@ -1,0 +1,16 @@
+/* hr_erp: RTL + HR portal styling */
+body.rtl .form-group {
+	direction: rtl;
+	text-align: right;
+}
+
+/* number card value alignment on Arabic dashboards */
+.rtl .number-card .number,
+.rtl .number-card .card-title {
+	text-align: right;
+}
+
+/* portal list view polish */
+.rtl .frappe-list .list-row {
+	text-align: right;
+}
