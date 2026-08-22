@@ -1,0 +1,39 @@
+{
+ "name": "Users Role",
+ "owner": "bshmool@gmail.com",
+ "creation": "2025-12-28 12:02:25.119700",
+ "modified": "2025-12-28 19:05:58.999023",
+ "modified_by": "bshmool@gmail.com",
+ "docstatus": 0,
+ "idx": 0,
+ "report_name": "Users Role",
+ "ref_doctype": "User",
+ "reference_report": null,
+ "is_standard": "No",
+ "module": "hrms-erp",
+ "report_type": "Query Report",
+ "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+ "add_total_row": 0,
+ "disabled": 0,
+ "prepared_report": 0,
+ "add_translate_data": 0,
+ "timeout": 0,
+ "query": "SELECT \nu.full_name,\n    u.name AS user,\n    e.branch,\n    e.department,e.designation,\n    GROUP_CONCAT(r.role ORDER BY r.role SEPARATOR ', ') AS roles,\n    u.creation,\n    CASE WHEN u.enabled = 1 THEN 'Active' ELSE 'Closed' END Status\nFROM `tabUser` u\nleft join `tabEmployee` e on e.user_id = u.name\nLEFT JOIN `tabHas Role` r ON r.parent = u.name\nGROUP BY u.name\nORDER BY u.name;",
+ "report_script": null,
+ "javascript": null,
+ "json": null,
+ "doctype": "Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Desk User"
+  },
+  {
+   "role": "Employee Self Service"
+  }
+ ],
+ "columns": [],
+ "filters": []
+}

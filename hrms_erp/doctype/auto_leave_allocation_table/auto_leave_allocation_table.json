@@ -1,0 +1,58 @@
+{
+ "name": "Auto Leave Allocation Table",
+ "module": "hrms-erp",
+ "istable": 1,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "leave_allocation_id",
+   "fieldtype": "Link",
+   "label": "Leave Allocation ID",
+   "options": "Leave Allocation",
+   "idx": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "last_allocation_date",
+   "fieldtype": "Date",
+   "label": "Last Allocation Date",
+   "idx": 4
+  },
+  {
+   "fieldname": "last_allocated_leaves",
+   "fieldtype": "Float",
+   "label": "Last Allocated Leaves",
+   "reqd": 1,
+   "in_list_view": 1,
+   "precision": "2",
+   "idx": 5
+  },
+  {
+   "fieldname": "new_leaves",
+   "fieldtype": "Float",
+   "label": "New Leaves",
+   "in_list_view": 1,
+   "idx": 6
+  }
+ ],
+ "doctype": "DocType"
+}

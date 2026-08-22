@@ -1,0 +1,164 @@
+{
+ "name": "Auto Salary Entry Table",
+ "module": "hrms-erp",
+ "istable": 1,
+ "is_submittable": 1,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "search_index": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "net_salary",
+   "fieldtype": "Currency",
+   "label": "Net Salary",
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "absent_deductions",
+   "fieldtype": "Currency",
+   "label": "Absent Deductions",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "non_negative": 1,
+   "idx": 4
+  },
+  {
+   "fieldname": "late_deductions",
+   "fieldtype": "Currency",
+   "label": "Late Deductions",
+   "non_negative": 1,
+   "idx": 5
+  },
+  {
+   "fieldname": "total_deductions",
+   "fieldtype": "Currency",
+   "label": "Total Deductions",
+   "read_only": 1,
+   "in_list_view": 1,
+   "non_negative": 1,
+   "idx": 6
+  },
+  {
+   "fieldname": "total_advance",
+   "fieldtype": "Currency",
+   "label": "Total Advance",
+   "in_list_view": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "present",
+   "fieldtype": "Float",
+   "label": "Present",
+   "read_only": 1,
+   "non_negative": 1,
+   "precision": "1",
+   "idx": 8
+  },
+  {
+   "fieldname": "absent",
+   "fieldtype": "Float",
+   "label": "Absent",
+   "non_negative": 1,
+   "precision": "1",
+   "idx": 9
+  },
+  {
+   "fieldname": "holidays",
+   "fieldtype": "Int",
+   "label": "Holidays",
+   "read_only": 1,
+   "non_negative": 1,
+   "idx": 10
+  },
+  {
+   "fieldname": "leaves",
+   "fieldtype": "Data",
+   "label": "Leaves",
+   "read_only": 1,
+   "idx": 11
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Auto Salary Entry Table",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 12
+  },
+  {
+   "fieldname": "auto_salary_entry",
+   "fieldtype": "Link",
+   "label": "Auto Salary Entry",
+   "options": "Auto Salary Entry",
+   "read_only": 1,
+   "idx": 13
+  },
+  {
+   "fieldname": "base_salary",
+   "fieldtype": "Currency",
+   "label": "Base Salary",
+   "reqd": 1,
+   "read_only": 1,
+   "non_negative": 1,
+   "idx": 14
+  },
+  {
+   "fieldname": "base_present",
+   "fieldtype": "Float",
+   "label": "Base Present",
+   "reqd": 1,
+   "read_only": 1,
+   "non_negative": 1,
+   "idx": 15
+  },
+  {
+   "fieldname": "additional_allowance",
+   "fieldtype": "Currency",
+   "label": "Additional Allowance",
+   "idx": 16
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1,
+   "idx": 17
+  },
+  {
+   "fieldname": "account_number",
+   "fieldtype": "Data",
+   "label": "Account Number",
+   "in_list_view": 1,
+   "idx": 18
+  }
+ ],
+ "doctype": "DocType"
+}

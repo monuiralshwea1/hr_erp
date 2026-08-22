@@ -1,0 +1,189 @@
+{
+ "name": "Short Leave",
+ "track_changes": 1,
+ "module": "hrms-erp",
+ "autoname": "format:SL-{#####}",
+ "naming_rule": "Expression",
+ "title_field": "employee_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "allow_rename": 1,
+ "engine": "InnoDB",
+ "is_submittable": 1,
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "delete": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1,
+   "print": 1,
+   "email": 1,
+   "select": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1,
+   "print": 1,
+   "email": 1,
+   "select": 1
+  }
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_srfr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "insert_after": "section_break_srfr",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "insert_after": "employee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nnhr",
+   "fieldtype": "Column Break",
+   "insert_after": "employee_name"
+  },
+  {
+   "fieldname": "short_leave_date",
+   "fieldtype": "Date",
+   "label": "Short Leave Date",
+   "insert_after": "column_break_nnhr",
+   "reqd": 1
+  },
+  {
+   "fieldname": "log_type",
+   "fieldtype": "Select",
+   "label": "Log Type",
+   "options": "IN\nOUT",
+   "insert_after": "short_leave_date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_o2lf",
+   "fieldtype": "Section Break",
+   "insert_after": "log_type"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Short Leave",
+   "insert_after": "section_break_o2lf",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "leave_type",
+   "fieldtype": "Link",
+   "label": "Leave Type",
+   "options": "Leave Type",
+   "insert_after": "amended_from",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "leave_allocation",
+   "fieldtype": "Link",
+   "label": "Leave Allocation",
+   "options": "Leave Allocation",
+   "insert_after": "leave_type",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "leave_balance",
+   "fieldtype": "Float",
+   "label": "Leave Balance",
+   "insert_after": "leave_allocation",
+   "read_only": 1,
+   "precision": "1"
+  },
+  {
+   "fieldname": "leave_balance_minutes",
+   "fieldtype": "Float",
+   "label": "Leave Balance (in minutes)",
+   "default": "0",
+   "insert_after": "leave_balance",
+   "read_only": 1,
+   "precision": "1"
+  },
+  {
+   "fieldname": "column_break_zyad",
+   "fieldtype": "Column Break",
+   "insert_after": "leave_balance_minutes"
+  },
+  {
+   "fieldname": "shift_type",
+   "fieldtype": "Link",
+   "label": "Shift Type",
+   "options": "Shift Type",
+   "default": "صباحية",
+   "insert_after": "column_break_zyad",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shift_duration_minutes",
+   "fieldtype": "Float",
+   "label": "Shift Duration (in hours)",
+   "default": "8",
+   "insert_after": "shift_type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_rzjg",
+   "fieldtype": "Section Break",
+   "insert_after": "shift_duration_minutes"
+  },
+  {
+   "fieldname": "short_leave_amount_in_minuts",
+   "fieldtype": "Int",
+   "label": "Short Leave Amount (in minutes)",
+   "insert_after": "section_break_rzjg",
+   "reqd": 1,
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_kirw",
+   "fieldtype": "Column Break",
+   "insert_after": "short_leave_amount_in_minuts"
+  },
+  {
+   "fieldname": "short_leave_approvar",
+   "fieldtype": "Link",
+   "label": "Short Leave Approvar",
+   "options": "User",
+   "insert_after": "column_break_kirw",
+   "read_only": 1
+  }
+ ],
+ "states": [],
+ "doctype": "DocType"
+}

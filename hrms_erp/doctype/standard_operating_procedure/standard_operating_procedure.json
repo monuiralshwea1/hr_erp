@@ -1,0 +1,126 @@
+{
+ "name": "Standard Operating Procedure",
+ "module": "hrms-erp",
+ "engine": "InnoDB",
+ "naming_rule": "Expression",
+ "autoname": "format:SOP-{department}-{#####}",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "general_information_section",
+   "fieldtype": "Section Break",
+   "label": "General Information",
+   "idx": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "responsible_person",
+   "fieldtype": "Data",
+   "label": "Responsible Person",
+   "default": "All",
+   "reqd": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 4
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "idx": 5
+  },
+  {
+   "fieldname": "column_break_wbud",
+   "fieldtype": "Column Break",
+   "idx": 6
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "description": "وصف مختصر يوضح الغرض من هذا الاجراء",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "domain",
+   "fieldtype": "Small Text",
+   "label": "Domain",
+   "description": "الانظمة أو التطبيقات التي يشملها هذا الاجراء",
+   "reqd": 1,
+   "idx": 8
+  },
+  {
+   "fieldname": "tools_and_softwares",
+   "fieldtype": "Section Break",
+   "label": "Tools and Softwares",
+   "idx": 9
+  },
+  {
+   "fieldname": "small_text_jvyu",
+   "fieldtype": "Small Text",
+   "idx": 10
+  },
+  {
+   "fieldname": "procedures",
+   "fieldtype": "Section Break",
+   "label": "Procedures",
+   "idx": 11
+  },
+  {
+   "fieldname": "text_editor_wclx",
+   "fieldtype": "Text Editor",
+   "idx": 12
+  },
+  {
+   "fieldname": "results",
+   "fieldtype": "Section Break",
+   "label": "Results",
+   "idx": 13
+  },
+  {
+   "fieldname": "text_editor_ahjd",
+   "fieldtype": "Text Editor",
+   "idx": 14
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Shumul Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "import": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

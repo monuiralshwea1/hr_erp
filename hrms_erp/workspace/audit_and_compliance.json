@@ -1,0 +1,38 @@
+{
+ "name": "Audit and compliance",
+ "label": "Audit and compliance",
+ "module": null,
+ "icon": "color-review-points",
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "content": "[{\"id\":\"LGib6TpAFH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Clients Sanctions Lists\",\"col\":3}}]",
+ "links": [],
+ "shortcuts": [
+  {
+   "name": "2t47jrph3d",
+   "owner": "bshmool@gmail.com",
+   "creation": "2026-06-09 17:35:23.504627",
+   "modified": "2026-06-09 17:40:15.013480",
+   "modified_by": "bshmool@gmail.com",
+   "docstatus": 0,
+   "idx": 1,
+   "type": "DocType",
+   "link_to": "Clients Sanctions Lists",
+   "url": null,
+   "doc_view": "List",
+   "kanban_board": null,
+   "label": "Clients Sanctions Lists",
+   "icon": null,
+   "restrict_to_domain": null,
+   "report_ref_doctype": null,
+   "stats_filter": "[[\"Clients Sanctions Lists\",\"workflow_state\",\"not in\",[\"Completed\"],false]]",
+   "color": "Grey",
+   "format": null,
+   "parent": "Audit and compliance",
+   "parentfield": "shortcuts",
+   "parenttype": "Workspace",
+   "doctype": "Workspace Shortcut"
+  }
+ ],
+ "charts": []
+}

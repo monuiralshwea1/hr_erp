@@ -1,0 +1,23 @@
+{
+ "name": "Addresses And Contacts",
+ "module": "hrms-erp",
+ "ref_doctype": "Address",
+ "report_type": "Script Report",
+ "is_standard": "Yes",
+ "add_total_row": 0,
+ "roles": [
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Purchase User"
+  },
+  {
+   "role": "Maintenance User"
+  },
+  {
+   "role": "Accounts User"
+  }
+ ],
+ "doctype": "Report"
+}

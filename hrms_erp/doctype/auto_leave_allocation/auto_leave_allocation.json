@@ -1,0 +1,97 @@
+{
+ "name": "Auto Leave Allocation",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "track_changes": 1,
+ "engine": "InnoDB",
+ "naming_rule": "By fieldname",
+ "autoname": "field:title",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "section_break_w6ig",
+   "fieldtype": "Section Break",
+   "idx": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Auto Leave Allocation",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "unique": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "leave_type",
+   "fieldtype": "Link",
+   "label": "Leave Type",
+   "options": "Leave Type",
+   "idx": 4
+  },
+  {
+   "fieldname": "column_break_bxto",
+   "fieldtype": "Column Break",
+   "idx": 5
+  },
+  {
+   "fieldname": "new_leaves",
+   "fieldtype": "Float",
+   "label": "New Leaves Allocated (In Days)",
+   "default": "0.0\n",
+   "precision": "1",
+   "idx": 6
+  },
+  {
+   "fieldname": "section_break_khgn",
+   "fieldtype": "Section Break",
+   "idx": 7
+  },
+  {
+   "fieldname": "leaves_list",
+   "fieldtype": "Table",
+   "label": "Leaves",
+   "options": "Auto Leave Allocation Table",
+   "idx": 8
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

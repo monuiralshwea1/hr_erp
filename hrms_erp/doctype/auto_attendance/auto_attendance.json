@@ -1,0 +1,141 @@
+{
+ "name": "Auto Attendance",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "engine": "InnoDB",
+ "naming_rule": "By fieldname",
+ "autoname": "field:title",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "section_break_dieu",
+   "fieldtype": "Section Break",
+   "idx": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Auto Attendance",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "unique": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 4
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 5
+  },
+  {
+   "fieldname": "calculated",
+   "fieldtype": "Check",
+   "label": "Calculated",
+   "default": "0",
+   "idx": 6
+  },
+  {
+   "fieldname": "all_employees",
+   "fieldtype": "Check",
+   "label": "All Employees",
+   "default": "1",
+   "idx": 7
+  },
+  {
+   "fieldname": "ignore_exiting_attendance",
+   "fieldtype": "Check",
+   "label": "Ignore Exiting Attendance",
+   "default": "1",
+   "idx": 8
+  },
+  {
+   "fieldname": "saved_records",
+   "fieldtype": "Int",
+   "label": "Saved Records",
+   "default": "500",
+   "non_negative": 1,
+   "idx": 9
+  },
+  {
+   "fieldname": "employees",
+   "fieldtype": "Table",
+   "label": "Employees",
+   "options": "Auto Attendance Table",
+   "idx": 10
+  },
+  {
+   "fieldname": "attendance_results",
+   "fieldtype": "Table",
+   "label": "Attendance Results",
+   "options": "Auto Attendance Temp Table",
+   "read_only": 1,
+   "idx": 11
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

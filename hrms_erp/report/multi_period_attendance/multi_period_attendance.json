@@ -1,0 +1,26 @@
+{
+ "doctype": "Report",
+ "name": "Multi-Period Attendance",
+ "module": "HRMS-ERP",
+ "title": "Multi-Period Attendance",
+ "report_type": "Script Report",
+ "ref_doctype": "Attendance",
+ "is_standard": "Yes",
+ "filters": [
+  {"fieldname": "from_date", "fieldtype": "Date", "label": "From Date", "reqd": 1},
+  {"fieldname": "to_date", "fieldtype": "Date", "label": "To Date", "reqd": 1},
+  {"fieldname": "employee", "fieldtype": "Link", "label": "Employee", "options": "Employee"},
+  {"fieldname": "department", "fieldtype": "Link", "label": "Department", "options": "Department"},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company"},
+  {"fieldname": "shift_type", "fieldtype": "Link", "label": "Shift Type", "options": "Shift Type"},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "\nPresent\nAbsent\nOn Leave\nHalf Day\nWork From Home"},
+  {"fieldname": "show_period_details", "fieldtype": "Check", "label": "Show Period Details", "default": 0}
+ ],
+ "document_type": "Attendance",
+ "on_render": "",
+ "permissions": [
+  {"role": "HR Manager", "read": 1, "write": 0, "create": 0, "delete": 0},
+  {"role": "HR User", "read": 1, "write": 0, "create": 0, "delete": 0},
+  {"role": "Employee", "read": 1, "write": 0, "create": 0, "delete": 0}
+ ]
+}

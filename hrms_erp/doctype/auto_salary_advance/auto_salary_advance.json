@@ -1,0 +1,136 @@
+{
+ "name": "Auto Salary Advance",
+ "module": "hrms-erp",
+ "title_field": "title",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "allow_rename": 1,
+ "engine": "InnoDB",
+ "is_submittable": 1,
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "delete": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "share": 1,
+   "print": 1,
+   "email": 1,
+   "select": 1
+  }
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ytha",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Auto Salary Advance",
+   "insert_after": "section_break_ytha",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "insert_after": "amended_from",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date",
+   "default": "now",
+   "insert_after": "title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "insert_after": "issue_date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_ufrp",
+   "fieldtype": "Column Break",
+   "insert_after": "from_date"
+  },
+  {
+   "fieldname": "calc_method",
+   "fieldtype": "Select",
+   "label": "Calculation Method",
+   "options": "Percentage\nAmount",
+   "insert_after": "column_break_ufrp",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Currency",
+   "label": "Value",
+   "insert_after": "calc_method",
+   "reqd": 1,
+   "in_list_view": 1,
+   "non_negative": 1
+  },
+  {
+   "fieldname": "long_term_advance",
+   "fieldtype": "Link",
+   "label": "Long Term Advance",
+   "options": "Long Term Advance",
+   "insert_after": "value",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_cglh",
+   "fieldtype": "Section Break",
+   "insert_after": "long_term_advance"
+  },
+  {
+   "fieldname": "use_deduction",
+   "fieldtype": "Link",
+   "label": "Use Deduction ?",
+   "options": "Auto Salary Advance",
+   "insert_after": "section_break_cglh"
+  },
+  {
+   "fieldname": "deduction_list",
+   "fieldtype": "Table",
+   "label": "Deduction List",
+   "options": "Deduction Advance Table",
+   "insert_after": "use_deduction"
+  },
+  {
+   "fieldname": "section_break_goxg",
+   "fieldtype": "Section Break",
+   "insert_after": "deduction_list"
+  },
+  {
+   "fieldname": "advance_list",
+   "fieldtype": "Table",
+   "label": "Salary Advance List",
+   "options": "Auto Salary Advance Table",
+   "insert_after": "section_break_goxg",
+   "reqd": 1,
+   "ignore_user_permissions": 1
+  }
+ ],
+ "states": [],
+ "doctype": "DocType"
+}

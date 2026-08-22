@@ -1,0 +1,31 @@
+{
+ "name": "Special Shift Assignment Employee Table",
+ "istable": 1,
+ "editable_grid": 1,
+ "module": "hrms-erp",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "allow_rename": 1,
+ "engine": "InnoDB",
+ "permissions": [],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "insert_after": "employee",
+   "read_only": 1,
+   "in_list_view": 1
+  }
+ ],
+ "states": [],
+ "doctype": "DocType"
+}

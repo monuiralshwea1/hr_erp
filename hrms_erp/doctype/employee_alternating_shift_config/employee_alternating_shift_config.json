@@ -1,0 +1,65 @@
+{
+ "name": "Employee Alternating Shift Config",
+ "module": "hrms-erp",
+ "engine": "InnoDB",
+ "naming_rule": "By fieldname",
+ "autoname": "field:employee",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee",
+   "reqd": 1,
+   "in_list_view": 1,
+   "unique": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "shift_for_even_weeks",
+   "fieldtype": "Link",
+   "label": "Shift for EVEN Weeks",
+   "options": "Shift Type",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "shift_for_odd_weeks",
+   "fieldtype": "Link",
+   "label": "Shift for ODD Weeks",
+   "options": "Shift Type",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Comapny",
+   "options": "Company",
+   "idx": 4
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "default": "0",
+   "idx": 5
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "doctype": "DocType"
+}

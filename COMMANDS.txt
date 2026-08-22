@@ -1,0 +1,68 @@
+=============================================
+   HR ERP - أوامر تثبيت وتنزيل البيانات التجريبية
+=============================================
+
+تثبيت التطبيق (Install):
+    cd /home/newsmart/frappe-bench2
+    bench --site site1.local install-app hr_erp
+
+تنزيل التطبيق (Uninstall):
+    cd /home/newsmart/frappe-bench2
+    bench --site site1.local uninstall-app hr_erp
+
+إعادة بناء قاعدة البيانات:
+    cd /home/newsmart/frappe-bench2
+    bench --site site1.local clear-cache
+    bench --site site1.local migrate
+    bench build
+
+=============================================
+   أوامر البيانات التجريبية
+=============================================
+
+1. تثبيت البيانات الهيكلية (الأقسام، التسميات، النوبات، الفترات...):
+    bench --site site1.local execute hr_erp.hrms_erp.seed_setup_data.execute
+
+2. إنشاء بيانات تجريبية (موظفون + حضور + بصمات):
+    bench --site site1.local execute hr_erp.hrms_erp.seed_demo_employees.execute
+
+3. حذف البيانات التجريبية (يحتفظ بالبيانات الهيكلية):
+    bench --site site1.local execute hr_erp.hrms_erp.clear_demo_data.execute
+
+=============================================
+   سير العمل الكامل
+=============================================
+
+خطوة 1: تثبيت التطبيق + البيانات الهيكلية + التجريبية
+    bench --site site1.local install-app hr_erp
+    bench --site site1.local execute hr_erp.hrms_erp.seed_setup_data.execute
+    bench --site site1.local execute hr_erp.hrms_erp.seed_demo_employees.execute
+    bench --site site1.local build
+
+خطوة 2: للتجربة - يجرب النظام بالبيانات التجريبية
+
+خطوة 3: حذف البيانات التجريبية (الأسماء فقط)
+    bench --site site1.local execute hr_erp.hrms_erp.clear_demo_data.execute
+
+خطوة 4: يدخل بيانات عملائه الحقيقية
+    (الأقسام والنوبات والفترات والرواتب جاهزة - يدخل فقط أسماء الموظفين)
+
+=============================================
+   ملاحظات
+=============================================
+
+- الشركة المستخدمة هي الشركة الافتراضية في النظام (سمارت)
+- لا يتم إنشاء شركات جديدة
+- عند حذف البيانات التجريبية تت删:
+    + الموظفين
+    + سجلات الحضور والبصمات
+    + رواتب الإجازات
+    + تعيينات النوبات والرواتب
+- تبقى سليمة:
+    + الأقسام والتسميات والفروع
+    + أنواع النوبات والفترات
+    + أنواع الإجازات وقوائم العطل
+    + مكونات الرواتب والهيكل
+    + الأجهزة البيومترية
+
+=============================================

@@ -1,0 +1,127 @@
+{
+ "name": "Manual Attendance",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "engine": "InnoDB",
+ "naming_rule": "Expression",
+ "autoname": "format:MA-{#####}",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "section_break_uf2d",
+   "fieldtype": "Section Break",
+   "idx": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "reqd": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "attachements",
+   "fieldtype": "Attach",
+   "label": "Attachements",
+   "idx": 4
+  },
+  {
+   "fieldname": "column_break_hgbm",
+   "fieldtype": "Column Break",
+   "idx": 5
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 6
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1,
+   "in_list_view": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date",
+   "default": "now",
+   "in_list_view": 1,
+   "set_only_once": 1,
+   "idx": 8
+  },
+  {
+   "fieldname": "section_break_gbrv",
+   "fieldtype": "Section Break",
+   "idx": 9
+  },
+  {
+   "fieldname": "checks",
+   "fieldtype": "Table",
+   "label": "Checks",
+   "options": "Manual Attendance Checks Table",
+   "reqd": 1,
+   "idx": 10
+  },
+  {
+   "fieldname": "section_break_gkqs",
+   "fieldtype": "Section Break",
+   "idx": 11
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Manual Attendance",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 12
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

@@ -1,0 +1,149 @@
+{
+ "name": "Special Shift Assignment",
+ "module": "hrms-erp",
+ "engine": "InnoDB",
+ "naming_rule": "Expression",
+ "autoname": "format:SSA-{title}",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "unique": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "shift_type",
+   "fieldtype": "Link",
+   "label": "Shift Type",
+   "options": "Shift Type",
+   "reqd": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "default": "1",
+   "in_list_view": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "shift_type_2",
+   "fieldtype": "Link",
+   "label": "Shift Type 2",
+   "options": "Shift Type",
+   "idx": 4
+  },
+  {
+   "fieldname": "column_break_lnqn",
+   "fieldtype": "Column Break",
+   "idx": 5
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1,
+   "idx": 6
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "is_default",
+   "fieldtype": "Check",
+   "label": "Is Default",
+   "default": "0",
+   "idx": 8
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priority",
+   "options": "1\n2\n3\n4\n5",
+   "default": "1",
+   "reqd": 1,
+   "idx": 9
+  },
+  {
+   "fieldname": "section_break_vfva",
+   "fieldtype": "Section Break",
+   "idx": 10
+  },
+  {
+   "fieldname": "days_of_week",
+   "fieldtype": "Table",
+   "label": "Days Of Week",
+   "options": "Days of Week Table",
+   "ignore_user_permissions": 1,
+   "idx": 11
+  },
+  {
+   "fieldname": "section_break_wror",
+   "fieldtype": "Section Break",
+   "idx": 12
+  },
+  {
+   "fieldname": "include_employees",
+   "fieldtype": "Select",
+   "label": "Include Employees",
+   "options": "Include All\nInclude Only\nExclude Only",
+   "default": "Include All",
+   "reqd": 1,
+   "idx": 13
+  },
+  {
+   "fieldname": "column_break_yjof",
+   "fieldtype": "Column Break",
+   "idx": 14
+  },
+  {
+   "fieldname": "btn_fetch_managers",
+   "fieldtype": "Button",
+   "label": "Fetch Managers",
+   "idx": 15
+  },
+  {
+   "fieldname": "section_break_qhhg",
+   "fieldtype": "Section Break",
+   "idx": 16
+  },
+  {
+   "fieldname": "employees",
+   "fieldtype": "Table",
+   "label": "Employees",
+   "options": "Special Shift Assignment Employee Table",
+   "idx": 17
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

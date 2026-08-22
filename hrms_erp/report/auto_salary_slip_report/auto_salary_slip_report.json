@@ -1,0 +1,33 @@
+{
+ "name": "Auto Salary Slip Report",
+ "owner": "alshumul@gmail.com",
+ "creation": "2025-04-30 13:51:55.268740",
+ "modified": "2025-05-02 19:37:49.810232",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "report_name": "Auto Salary Slip Report",
+ "ref_doctype": "Auto Salary Slip",
+ "reference_report": null,
+ "is_standard": "No",
+ "module": "hrms-erp",
+ "report_type": "Report Builder",
+ "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+ "add_total_row": 1,
+ "disabled": 0,
+ "prepared_report": 1,
+ "add_translate_data": 0,
+ "timeout": 0,
+ "query": null,
+ "report_script": null,
+ "javascript": null,
+ "json": "{\"filters\":[],\"fields\":[[\"name\",\"Auto Salary Slip\"],[\"docstatus\",\"Auto Salary Slip\"],[\"employee_name\",\"Auto Salary Slip\"],[\"net_salary\",\"Auto Salary Slip\"],[\"salary_deductions\",\"Auto Salary Slip\"],[\"present\",\"Auto Salary Slip\"],[\"absent\",\"Auto Salary Slip\"]],\"order_by\":\"`tabAuto Salary Slip`.`modified` desc\",\"page_length\":20,\"column_widths\":{\"name\":120,\"docstatus\":120,\"employee_name\":120,\"net_salary\":120,\"salary_deductions\":120,\"present\":120,\"absent\":120},\"group_by\":null}",
+ "doctype": "Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "columns": [],
+ "filters": []
+}

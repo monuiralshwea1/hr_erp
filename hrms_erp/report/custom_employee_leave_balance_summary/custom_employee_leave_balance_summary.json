@@ -1,0 +1,62 @@
+{
+ "name": "Custom Employee Leave Balance Summary",
+ "owner": "bshmool@gmail.com",
+ "creation": "2025-09-29 13:55:27.435780",
+ "modified": "2026-01-13 13:59:29.612349",
+ "modified_by": "bshmool@gmail.com",
+ "docstatus": 0,
+ "idx": 0,
+ "report_name": "Custom Employee Leave Balance Summary",
+ "ref_doctype": "Leave Allocation",
+ "reference_report": "",
+ "is_standard": "No",
+ "module": "hrms-erp",
+ "report_type": "Script Report",
+ "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+ "add_total_row": 0,
+ "disabled": 0,
+ "prepared_report": 0,
+ "add_translate_data": 0,
+ "timeout": 0,
+ "query": null,
+ "report_script": "date = filters.get(\"date\")\r\ncompany = filters.get(\"company\")\r\nreport_filters = {\r\n            \"date\": date,\r\n            \"company\": company,\r\n            \"employee_status\": \"Active\"\r\n        }\r\n\r\nreport_data = frappe.call(\r\n    \"frappe.desk.query_report.run\",\r\n    report_name=\"Employee Leave Balance Summary\",\r\n    filters=report_filters,\r\n    _lang=\"en\"\r\n)\r\n\r\ncolumns = report_data.get(\"columns\")\r\nresult_rows = report_data.get(\"result\")\r\n\r\nprev_short_leaves = frappe.get_list(\r\n    \"Short Leave\",\r\n    fields= ['*'],\r\n    filters=[\r\n        [\"docstatus\", \"=\", 1],\r\n    ],\r\n    limit=0\r\n);\r\n\r\nfor r in result_rows:\r\n    emp = r.get(\"employee\") #or r[\"الموظف\"]\r\n    emp_name = r.get(\"employee_name\") #or r[\"اسم_الموظف\"]\r\n    \r\n    total_short_leaves = {}\r\n    for sl in prev_short_leaves:\r\n        if sl.employee == emp:\r\n            short_leave_value = (sl.short_leave_amount_in_minuts / sl.shift_duration_minutes / 60)\r\n            key = f\"{sl.leave_type}\"\r\n            \r\n            if key not in total_short_leaves:\r\n                total_short_leaves[key] = round(short_leave_value,2)\r\n            else:\r\n                total_short_leaves[key] = round(total_short_leaves[key] + short_leave_value,2)\r\n    \r\n    for tsl in total_short_leaves:\r\n        key = f\"{tsl}\"\r\n        v = total_short_leaves[key]\r\n        rKey = key.replace(\" \", \"_\")\r\n        oldValue = r[rKey]\r\n        r[rKey] = round(float(r[rKey]) - v,2)\r\n        g = r[rKey]\r\n\r\ndata = columns, result_rows",
+ "javascript": null,
+ "json": null,
+ "doctype": "Report",
+ "roles": [
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "Employee Self Service"
+  },
+  {
+   "role": "Employee"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "columns": [],
+ "filters": [
+  {
+   "label": "Date",
+   "fieldtype": "Date",
+   "fieldname": "date",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "label": "Company",
+   "fieldtype": "Link",
+   "fieldname": "company",
+   "mandatory": 1,
+   "wildcard_filter": 0,
+   "options": "Company",
+   "default": "بنك الشمول عدن"
+  }
+ ]
+}

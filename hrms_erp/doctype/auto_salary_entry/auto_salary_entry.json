@@ -1,0 +1,162 @@
+{
+ "name": "Auto Salary Entry",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "engine": "InnoDB",
+ "naming_rule": "By fieldname",
+ "autoname": "field:title",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "section_break_am8m",
+   "fieldtype": "Section Break",
+   "idx": 1
+  },
+  {
+   "fieldname": "dates_column",
+   "fieldtype": "Column Break",
+   "label": "General",
+   "idx": 2
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Auto Salary Entry",
+   "hidden": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "unique": 1,
+   "idx": 4
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 5
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 6
+  },
+  {
+   "fieldname": "days",
+   "fieldtype": "Data",
+   "label": "Days",
+   "read_only_depends_on": "frm.doc.docstatus == 1",
+   "idx": 7
+  },
+  {
+   "fieldname": "column_break_bzww",
+   "fieldtype": "Column Break",
+   "label": "Holiday",
+   "idx": 8
+  },
+  {
+   "fieldname": "holiday_from",
+   "fieldtype": "Select",
+   "label": "Holiday From",
+   "options": "Holiday List\nCompany\nEmployee",
+   "reqd": 1,
+   "idx": 9
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "hidden": 1,
+   "idx": 10
+  },
+  {
+   "fieldname": "holiday_list",
+   "fieldtype": "Link",
+   "label": "Holiday List",
+   "options": "Holiday List",
+   "idx": 11
+  },
+  {
+   "fieldname": "req_for_all",
+   "fieldtype": "Check",
+   "label": "Holiday Required for All",
+   "default": "0",
+   "idx": 12
+  },
+  {
+   "fieldname": "working_hours_calculate",
+   "fieldtype": "Select",
+   "label": "Working Hours Calculate",
+   "options": "8 Hours\nWorking Time",
+   "default": "8 Hours",
+   "reqd": 1,
+   "idx": 13
+  },
+  {
+   "fieldname": "exchange_rate",
+   "fieldtype": "Float",
+   "label": "Exchange Rate",
+   "default": "150",
+   "description": "From SAR to other currencies",
+   "non_negative": 1,
+   "precision": "1",
+   "idx": 14
+  },
+  {
+   "fieldname": "section_break_uflh",
+   "fieldtype": "Section Break",
+   "idx": 15
+  },
+  {
+   "fieldname": "salary_list",
+   "fieldtype": "Table",
+   "label": "Salary List",
+   "options": "Auto Salary Entry Table",
+   "in_standard_filter": 1,
+   "allow_on_submit": 1,
+   "idx": 16
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "doctype": "DocType"
+}

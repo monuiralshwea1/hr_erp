@@ -1,0 +1,52 @@
+{
+ "name": "CBS Roles",
+ "module": "hrms-erp",
+ "engine": "InnoDB",
+ "naming_rule": "By fieldname",
+ "autoname": "field:role_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "search_fields": "role_name",
+ "fields": [
+  {
+   "fieldname": "role_name",
+   "fieldtype": "Data",
+   "label": "Role Name",
+   "reqd": 1,
+   "in_list_view": 1,
+   "unique": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "column_break_zell",
+   "fieldtype": "Column Break",
+   "idx": 2
+  },
+  {
+   "fieldname": "cbs_role_name",
+   "fieldtype": "Data",
+   "label": "CBS Role Name",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 3
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Shumul Employee",
+   "read": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

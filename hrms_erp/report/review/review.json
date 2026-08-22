@@ -1,0 +1,17 @@
+{
+ "name": "Review",
+ "module": "hrms-erp",
+ "ref_doctype": "Quality Action",
+ "report_type": "Query Report",
+ "is_standard": "Yes",
+ "add_total_row": 0,
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Quality Manager"
+  }
+ ],
+ "doctype": "Report"
+}

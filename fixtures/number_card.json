@@ -1,0 +1,30 @@
+[
+ {
+  "aggregate_function_based_on": null,
+  "background_color": null,
+  "color": null,
+  "currency": null,
+  "docstatus": 0,
+  "doctype": "Number Card",
+  "document_type": null,
+  "dynamic_filters_json": null,
+  "filters_config": null,
+  "filters_json": "{}",
+  "function": "Count",
+  "is_public": 0,
+  "is_standard": 0,
+  "label": "Sum of Amount",
+  "method": null,
+  "modified": "2025-06-16 19:26:13.880129",
+  "module": null,
+  "name": "Sum of Amount",
+  "parent_document_type": null,
+  "report_field": "amount",
+  "report_function": "Sum",
+  "report_name": "Auto Salary Advance Report",
+  "show_full_number": 0,
+  "show_percentage_stats": 1,
+  "stats_time_interval": "Daily",
+  "type": "Report"
+ }
+]

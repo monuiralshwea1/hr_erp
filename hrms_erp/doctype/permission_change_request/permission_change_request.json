@@ -1,0 +1,312 @@
+{
+ "name": "Permission Change Request",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "engine": "InnoDB",
+ "naming_rule": "Random",
+ "autoname": "hash",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details",
+   "idx": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "ignore_user_permissions": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1,
+   "in_list_view": 1,
+   "ignore_user_permissions": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1,
+   "ignore_user_permissions": 1,
+   "idx": 4
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "read_only_depends_on": "eval: cur_frm.doc.workflow_state != 'First Request'\n",
+   "read_only": 1,
+   "ignore_user_permissions": 1,
+   "idx": 5
+  },
+  {
+   "fieldname": "employee_user",
+   "fieldtype": "Link",
+   "label": "Employee User",
+   "options": "User",
+   "depends_on": "false",
+   "read_only": 1,
+   "ignore_user_permissions": 1,
+   "idx": 6
+  },
+  {
+   "fieldname": "manager_user",
+   "fieldtype": "Link",
+   "label": "Approved Manager",
+   "options": "User",
+   "ignore_user_permissions": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "column_break_mtof",
+   "fieldtype": "Column Break",
+   "idx": 8
+  },
+  {
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date",
+   "default": "now",
+   "in_list_view": 1,
+   "idx": 9
+  },
+  {
+   "fieldname": "request_type",
+   "fieldtype": "Select",
+   "label": "Request Type",
+   "options": "\nفتح حساب\nاضافة صلاحية\nتغيير صلاحية\nايقاف حساب",
+   "idx": 10
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "label": "Client ID",
+   "in_list_view": 1,
+   "idx": 11
+  },
+  {
+   "fieldname": "old_role",
+   "fieldtype": "Link",
+   "label": "Old Role",
+   "options": "CBS Roles",
+   "in_list_view": 1,
+   "ignore_user_permissions": 1,
+   "idx": 12
+  },
+  {
+   "fieldname": "new_role",
+   "fieldtype": "Link",
+   "label": "New Role",
+   "options": "CBS Roles",
+   "ignore_user_permissions": 1,
+   "idx": 13
+  },
+  {
+   "fieldname": "new_branch",
+   "fieldtype": "Link",
+   "label": "New Branch",
+   "options": "Branch",
+   "reqd": 1,
+   "ignore_user_permissions": 1,
+   "idx": 14
+  },
+  {
+   "fieldname": "hr_approval_section",
+   "fieldtype": "Section Break",
+   "label": "HR Details",
+   "mandatory_depends_on": "true",
+   "idx": 15
+  },
+  {
+   "fieldname": "approval_date",
+   "fieldtype": "Date",
+   "label": "HR Date",
+   "idx": 16
+  },
+  {
+   "fieldname": "hr_user",
+   "fieldtype": "Link",
+   "label": "HR User",
+   "options": "User",
+   "depends_on": "false",
+   "ignore_user_permissions": 1,
+   "idx": 17
+  },
+  {
+   "fieldname": "column_break_kkqh",
+   "fieldtype": "Column Break",
+   "idx": 18
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description",
+   "idx": 19
+  },
+  {
+   "fieldname": "direct_to",
+   "fieldtype": "Select",
+   "label": "Direct To",
+   "options": "\nالمالية\nالايتي",
+   "depends_on": "false",
+   "idx": 20
+  },
+  {
+   "fieldname": "hr_department",
+   "fieldtype": "Link",
+   "label": "HR Department",
+   "options": "Department",
+   "depends_on": "false",
+   "read_only": 1,
+   "ignore_user_permissions": 1,
+   "idx": 21
+  },
+  {
+   "fieldname": "financing_details_section",
+   "fieldtype": "Section Break",
+   "label": "Financial Details",
+   "idx": 22
+  },
+  {
+   "fieldname": "finance_user",
+   "fieldtype": "Link",
+   "label": "Finance User",
+   "options": "User",
+   "depends_on": "false",
+   "ignore_user_permissions": 1,
+   "idx": 23
+  },
+  {
+   "fieldname": "financial_date",
+   "fieldtype": "Date",
+   "label": "Financial Date",
+   "idx": 24
+  },
+  {
+   "fieldname": "financial_department",
+   "fieldtype": "Link",
+   "label": "Financial Department",
+   "options": "Department",
+   "depends_on": "false",
+   "read_only": 1,
+   "ignore_user_permissions": 1,
+   "idx": 25
+  },
+  {
+   "fieldname": "cbs_currencies",
+   "fieldtype": "Table",
+   "label": "CBS Currencies",
+   "options": "PCR Accounts",
+   "idx": 26
+  },
+  {
+   "fieldname": "it_details_section",
+   "fieldtype": "Section Break",
+   "label": "IT Details",
+   "idx": 27
+  },
+  {
+   "fieldname": "it_date",
+   "fieldtype": "Date",
+   "label": "IT Date",
+   "idx": 28
+  },
+  {
+   "fieldname": "it_user",
+   "fieldtype": "Link",
+   "label": "IT User",
+   "options": "User",
+   "depends_on": "false",
+   "ignore_user_permissions": 1,
+   "idx": 29
+  },
+  {
+   "fieldname": "it_department",
+   "fieldtype": "Link",
+   "label": "IT Department",
+   "options": "Department",
+   "depends_on": "false",
+   "read_only": 1,
+   "ignore_user_permissions": 1,
+   "idx": 30
+  },
+  {
+   "fieldname": "table_fvgd",
+   "fieldtype": "Table",
+   "label": "Systems",
+   "options": "PCR IT Details",
+   "idx": 31
+  },
+  {
+   "fieldname": "section_break_eq16",
+   "fieldtype": "Section Break",
+   "depends_on": "false",
+   "idx": 32
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Permission Change Request",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 33
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "label": "Workflow State",
+   "options": "Workflow State",
+   "hidden": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  },
+  {
+   "role": "Shumul Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "export": 1,
+   "import": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

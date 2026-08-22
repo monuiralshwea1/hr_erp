@@ -1,0 +1,142 @@
+{
+ "actions": [],
+ "creation": "2026-08-20 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "general_section",
+  "attendance_day_start_time",
+  "attendance_day_end_time",
+  "column_break_general",
+  "enable_overtime",
+  "overtime_threshold_minutes",
+  "section_break_absence",
+  "absence_policy",
+  "column_break_absence",
+  "absent_threshold_percentage",
+  "section_break_cross_midnight",
+  "allow_cross_midnight",
+  "column_break_cross_midnight",
+  "default_late_grace_period",
+  "default_early_exit_grace_period"
+ ],
+ "fields": [
+  {
+   "fieldname": "general_section",
+   "fieldtype": "Section Break",
+   "label": "General Settings"
+  },
+  {
+   "default": "06:00:00",
+   "description": "The time when the operational day starts (e.g., 06:00 for shifts crossing midnight)",
+   "fieldname": "attendance_day_start_time",
+   "fieldtype": "Time",
+   "label": "Attendance Day Start Time"
+  },
+  {
+   "default": "05:59:00",
+   "description": "The time when the operational day ends",
+   "fieldname": "attendance_day_end_time",
+   "fieldtype": "Time",
+   "label": "Attendance Day End Time"
+  },
+  {
+   "fieldname": "column_break_general",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_overtime",
+   "fieldtype": "Check",
+   "label": "Enable Overtime (Global)"
+  },
+  {
+   "default": "30",
+   "depends_on": "enable_overtime",
+   "description": "Minimum minutes before overtime starts being counted",
+   "fieldname": "overtime_threshold_minutes",
+   "fieldtype": "Int",
+   "label": "Overtime Threshold (minutes)"
+  },
+  {
+   "fieldname": "section_break_absence",
+   "fieldtype": "Section Break",
+   "label": "Absence Policy"
+  },
+  {
+   "default": "All Periods Required",
+   "description": "How to determine daily attendance status based on period attendance",
+   "fieldname": "absence_policy",
+   "fieldtype": "Select",
+   "label": "Absence Policy",
+   "options": "All Periods Required\nHalf Day on Any Absence\nProportional to Hours"
+  },
+  {
+   "fieldname": "column_break_absence",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "100",
+   "depends_on": "eval:doc.absence_policy === 'Proportional to Hours'",
+   "description": "Percentage of required hours below which employee is marked Absent",
+   "fieldname": "absent_threshold_percentage",
+   "fieldtype": "Float",
+   "label": "Absent Threshold (%)"
+  },
+  {
+   "fieldname": "section_break_cross_midnight",
+   "fieldtype": "Section Break",
+   "label": "Cross-Midnight & Grace"
+  },
+  {
+   "default": "1",
+   "description": "Allow shifts to cross midnight boundary",
+   "fieldname": "allow_cross_midnight",
+   "fieldtype": "Check",
+   "label": "Allow Cross-Midnight Shifts"
+  },
+  {
+   "fieldname": "column_break_cross_midnight",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Default late grace period in minutes if not set on period",
+   "fieldname": "default_late_grace_period",
+   "fieldtype": "Int",
+   "label": "Default Late Grace Period (min)"
+  },
+  {
+   "default": "0",
+   "description": "Default early exit grace period in minutes if not set on period",
+   "fieldname": "default_early_exit_grace_period",
+   "fieldtype": "Int",
+   "label": "Default Early Exit Grace (min)"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-20 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HRMS-ERP",
+ "name": "Multi Period Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
