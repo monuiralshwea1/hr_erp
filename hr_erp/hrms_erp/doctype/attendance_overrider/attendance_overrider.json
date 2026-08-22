@@ -1,0 +1,144 @@
+{
+ "name": "Attendance Overrider",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "engine": "InnoDB",
+ "naming_rule": "By fieldname",
+ "autoname": "field:title",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "section_break_eldg",
+   "fieldtype": "Section Break",
+   "idx": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Attendance Overrider",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1,
+   "unique": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "all_employees",
+   "fieldtype": "Check",
+   "label": "All Employees",
+   "default": "1",
+   "idx": 4
+  },
+  {
+   "fieldname": "section_general",
+   "fieldtype": "Section Break",
+   "idx": 5
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "default": "now",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 6
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "default": "now",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "default_shift",
+   "fieldtype": "Link",
+   "label": "Default Shift",
+   "options": "Shift Type",
+   "idx": 8
+  },
+  {
+   "fieldname": "column_break_mtjs",
+   "fieldtype": "Column Break",
+   "idx": 9
+  },
+  {
+   "fieldname": "from_status",
+   "fieldtype": "Select",
+   "label": "From Status",
+   "options": "\nPresent\nAbsent\nOn Leave\nHalf Day\nWork From Home",
+   "default": "Half Day",
+   "reqd": 1,
+   "idx": 10
+  },
+  {
+   "fieldname": "to_status",
+   "fieldtype": "Select",
+   "label": "To Status",
+   "options": "\nPresent\nAbsent\nOn Leave\nHalf Day\nWork From Home",
+   "default": "Present",
+   "reqd": 1,
+   "idx": 11
+  },
+  {
+   "fieldname": "max_days",
+   "fieldtype": "Int",
+   "label": "Max Days",
+   "default": "4",
+   "reqd": 1,
+   "non_negative": 1,
+   "idx": 12
+  },
+  {
+   "fieldname": "section_table",
+   "fieldtype": "Section Break",
+   "idx": 13
+  },
+  {
+   "fieldname": "employees",
+   "fieldtype": "Table",
+   "label": "Employees",
+   "options": "Attendance Overrider Table",
+   "idx": 14
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

@@ -1,0 +1,35 @@
+{
+ "name": "Users Permissions Control",
+ "module": "hrms-erp",
+ "issingle": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "perm_list",
+   "fieldtype": "Table",
+   "label": "Permissions",
+   "options": "Project Permission Table",
+   "in_standard_filter": 1,
+   "idx": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "HR User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ],
+ "doctype": "DocType"
+}

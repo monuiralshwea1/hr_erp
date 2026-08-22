@@ -1,0 +1,84 @@
+{
+ "name": "Attendance Overrider Table",
+ "module": "hrms-erp",
+ "istable": 1,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "employee_date",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "idx": 2
+  },
+  {
+   "fieldname": "shift_type",
+   "fieldtype": "Link",
+   "label": "Shift Type",
+   "options": "Shift Type",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "from_status",
+   "fieldtype": "Select",
+   "label": "From Status",
+   "options": "\nPresent\nAbsent\nOn Leave\nHalf Day\nWork From Home",
+   "default": "Half Day",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 4
+  },
+  {
+   "fieldname": "to_status",
+   "fieldtype": "Select",
+   "label": "To Status",
+   "options": "\nPresent\nAbsent\nOn Leave\nHalf Day\nWork From Home",
+   "default": "Present",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 5
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From",
+   "default": "now",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 6
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To",
+   "default": "now",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "max_days",
+   "fieldtype": "Int",
+   "label": "Max Days",
+   "default": "4",
+   "reqd": 1,
+   "in_list_view": 1,
+   "non_negative": 1,
+   "idx": 8
+  }
+ ],
+ "doctype": "DocType"
+}

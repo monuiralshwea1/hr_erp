@@ -1,0 +1,21 @@
+{
+ "name": "Days of Week Table",
+ "module": "hrms-erp",
+ "istable": 1,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "day_name",
+   "fieldtype": "Link",
+   "label": "Day Name",
+   "options": "Day of the Week",
+   "in_list_view": 1,
+   "ignore_user_permissions": 1,
+   "idx": 1
+  }
+ ],
+ "doctype": "DocType"
+}

@@ -1,0 +1,233 @@
+{
+ "name": "Inbox Messages",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "engine": "InnoDB",
+ "naming_rule": "By fieldname",
+ "autoname": "field:naming_series",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "section_break_8kcw",
+   "fieldtype": "Section Break",
+   "label": "Sender Details",
+   "read_only": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "sender_details_column",
+   "fieldtype": "Column Break",
+   "idx": 2
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "Subject",
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Datetime",
+   "label": "Issue Date",
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1,
+   "idx": 4
+  },
+  {
+   "fieldname": "message_status",
+   "fieldtype": "Select",
+   "label": "Message Status",
+   "options": "Seen\nForwarded\nIn Review\nCompleted\nReply",
+   "reqd": 1,
+   "read_only": 1,
+   "translatable": 1,
+   "idx": 5
+  },
+  {
+   "fieldname": "column_break_dibq",
+   "fieldtype": "Column Break",
+   "idx": 6
+  },
+  {
+   "fieldname": "from_department",
+   "fieldtype": "Data",
+   "label": "From Department",
+   "options": "Department",
+   "reqd": 1,
+   "read_only": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "from_employee_name",
+   "fieldtype": "Data",
+   "label": "Sender Employee ",
+   "reqd": 1,
+   "read_only": 1,
+   "in_standard_filter": 1,
+   "idx": 8
+  },
+  {
+   "fieldname": "from_employee",
+   "fieldtype": "Data",
+   "label": "From Employee",
+   "depends_on": "false",
+   "reqd": 1,
+   "read_only": 1,
+   "idx": 9
+  },
+  {
+   "fieldname": "to_employee",
+   "fieldtype": "Link",
+   "label": "To Employee",
+   "options": "Employee",
+   "depends_on": "false",
+   "reqd": 1,
+   "read_only": 1,
+   "idx": 10
+  },
+  {
+   "fieldname": "to_user",
+   "fieldtype": "Link",
+   "label": "To User",
+   "options": "User",
+   "read_only": 1,
+   "idx": 11
+  },
+  {
+   "fieldname": "to_department",
+   "fieldtype": "Link",
+   "label": "To Department",
+   "options": "Department",
+   "depends_on": "false",
+   "read_only": 1,
+   "idx": 12
+  },
+  {
+   "fieldname": "shortcut",
+   "fieldtype": "Data",
+   "label": "Shortcut",
+   "hidden": 1,
+   "read_only": 1,
+   "idx": 13
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "label": "Naming Series",
+   "hidden": 1,
+   "read_only": 1,
+   "unique": 1,
+   "idx": 14
+  },
+  {
+   "fieldname": "section_break_qixg",
+   "fieldtype": "Section Break",
+   "label": "Sender Details",
+   "idx": 15
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description",
+   "reqd": 1,
+   "read_only": 1,
+   "idx": 16
+  },
+  {
+   "fieldname": "quick_reply",
+   "fieldtype": "Text Editor",
+   "label": "Quick Reply",
+   "read_only": 1,
+   "idx": 17
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Table",
+   "label": "Attachments",
+   "options": "Attachments List",
+   "read_only": 1,
+   "idx": 18
+  },
+  {
+   "fieldname": "references_section",
+   "fieldtype": "Section Break",
+   "label": "References",
+   "idx": 19
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Inbox Messages",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 20
+  },
+  {
+   "fieldname": "column_break_crer",
+   "fieldtype": "Column Break",
+   "idx": 21
+  },
+  {
+   "fieldname": "internal_reference_id",
+   "fieldtype": "Link",
+   "label": "internal_reference_id",
+   "options": "Internal Message",
+   "depends_on": "false",
+   "read_only": 1,
+   "idx": 22
+  },
+  {
+   "fieldname": "inbox_reference_id",
+   "fieldtype": "Link",
+   "label": "inbox_reference_id",
+   "options": "Inbox Messages",
+   "depends_on": "false",
+   "read_only": 1,
+   "idx": 23
+  },
+  {
+   "fieldname": "conversation_id",
+   "fieldtype": "Link",
+   "label": "conversation_id",
+   "options": "Internal Message",
+   "depends_on": "false",
+   "read_only": 1,
+   "idx": 24
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  },
+  {
+   "role": "Shumul Employee",
+   "read": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  }
+ ],
+ "doctype": "DocType"
+}

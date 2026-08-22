@@ -1,0 +1,1378 @@
+[
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2020-02-01 11:03:23.816448",
+  "module": "Quality Management",
+  "name": "Review",
+  "prepared_report": 0,
+  "query": "SELECT\n  `tabQuality Action`.name as \"Name:Data:200\",\n  `tabQuality Action`.corrective_preventive as \"Action:Select/[Corrective,Preventive]:200\",\n  `tabQuality Action`.document_type as \"Document Type:Select/[Quality Review, Quality Feedback]:200\",\n  `tabQuality Action`.date as \"Date:Date:120\",\n  `tabQuality Action`.status as \"Status:Select/Planned:150\"\nFROM\n  `tabQuality Action`\nWHERE\n  `tabQuality Action`.document_type='Quality Review'\n  \n  ",
+  "ref_doctype": "Quality Action",
+  "reference_report": null,
+  "report_name": "Review",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "parent": "Review",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Review",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Quality Manager"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2023-01-31 14:53:37.778576",
+  "module": "Custom",
+  "name": "Audit System Hooks",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Property Setter",
+  "reference_report": null,
+  "report_name": "Audit System Hooks",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Audit System Hooks",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[],\"fields\":[[\"name\",\"Auto Salary Slip\"],[\"docstatus\",\"Auto Salary Slip\"],[\"employee_name\",\"Auto Salary Slip\"],[\"net_salary\",\"Auto Salary Slip\"],[\"salary_deductions\",\"Auto Salary Slip\"],[\"present\",\"Auto Salary Slip\"],[\"absent\",\"Auto Salary Slip\"]],\"order_by\":\"`tabAuto Salary Slip`.`modified` desc\",\"page_length\":20,\"column_widths\":{\"name\":120,\"docstatus\":120,\"employee_name\":120,\"net_salary\":120,\"salary_deductions\":120,\"present\":120,\"absent\":120},\"group_by\":null}",
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2025-05-02 19:37:49.810232",
+  "module": "Payroll",
+  "name": "Auto Salary Slip Report",
+  "prepared_report": 1,
+  "query": null,
+  "ref_doctype": "Auto Salary Slip",
+  "reference_report": null,
+  "report_name": "Auto Salary Slip Report",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Auto Salary Slip Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{}",
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2025-07-16 21:05:40.582787",
+  "module": "Core",
+  "name": "Issues activity",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Comment",
+  "reference_report": null,
+  "report_name": "Issues activity",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Issues activity",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   },
+   {
+    "parent": "Issues activity",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Issues activity",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [
+   {
+    "fieldname": "doctype",
+    "fieldtype": "Link",
+    "label": "DocType",
+    "options": null,
+    "parent": "Issue Test Report",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   }
+  ],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{}",
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2025-07-17 08:13:10.814916",
+  "module": "Core",
+  "name": "Issue Test Report",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Comment",
+  "reference_report": null,
+  "report_name": "Issue Test Report",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Issue Test Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Issue Test Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Website Manager"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [
+   {
+    "fieldname": "name",
+    "fieldtype": "Link",
+    "label": "ID",
+    "options": "Employee",
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "full_name",
+    "fieldtype": "Data",
+    "label": "الاسم الكامل",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "date_of_joining",
+    "fieldtype": "Data",
+    "label": "تاريخ الانضمام",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "fingerprint_id",
+    "fieldtype": "Data",
+    "label": "البصمة/الرقم الوظيفي",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "gender",
+    "fieldtype": "Data",
+    "label": "الجنس",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "department",
+    "fieldtype": "Data",
+    "label": "القسم",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "designation",
+    "fieldtype": "Data",
+    "label": "التخصص",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "is_manager",
+    "fieldtype": "Data",
+    "label": "مدير ؟",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "grade",
+    "fieldtype": "Data",
+    "label": "الدرجة",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "level",
+    "fieldtype": "Int",
+    "label": "المستوى",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "class",
+    "fieldtype": "Int",
+    "label": "الفئة",
+    "options": null,
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "total_earning",
+    "fieldtype": "Currency",
+    "label": "الراتب",
+    "options": "",
+    "parent": "Employees Details",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   }
+  ],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2025-10-27 08:41:29.784163",
+  "module": "Payroll",
+  "name": "Employees Details",
+  "prepared_report": 0,
+  "query": "SELECT DISTINCT\ne.name as 'ID',\nconcat(e.first_name,' ', IFNULL(e.middle_name, ''),' ', IFNULL(e.last_name, '')) as 'Full Name',\ne.date_of_joining as 'Date Of Joining',\ne.fingerprint_id as 'Fingerprint ID',\ncase when e.gender = 'Male' then 'ذكر' Else 'انثى' end as 'Gender',\ne.department as 'Department',\ne.designation as 'Designation',\ncase when e.is_manager = 1 then 'نعم' Else 'لا' end as 'Is Manager ?',\ne.grade as 'Grade',\ne.level as 'Level',\ne.class as 'Class',\ne.ctc as 'Total Earning'\nFROM `tabEmployee` e\nwhere e.status = 'Active'\norder by e.ctc DESC",
+  "ref_doctype": "Employee",
+  "reference_report": "",
+  "report_name": "Employees Details",
+  "report_script": "",
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "parent": "Employees Details",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Employees Details",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": "",
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "From Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Fingerprint Device Events",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "",
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "To Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Fingerprint Device Events",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": "",
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-01-07 15:51:35.841158",
+  "module": "HR",
+  "name": "Fingerprint Device Events",
+  "prepared_report": 0,
+  "query": "SELECT\r\natt.employee,\r\natt.employee_name,\r\nMAX(CASE WHEN DAY(att.attendance_date) = 1  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd1',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 2  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd2',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 3  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd3',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 4  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd4',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 5  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd5',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 6  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd6',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 7  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd7',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 8  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd8',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 9  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd9',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 10 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd10',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 11 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd11',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 12 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd12',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 13 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd13',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 14 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd14',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 15 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd15',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 16 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd16',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 17 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd17',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 18 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd18',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 19 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd19',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 20 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd20',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 21 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd21',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 22 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd22',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 23 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd23',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 24 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd24',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 25 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd25',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 26 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd26',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 27 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd27',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 28 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd28',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 29 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd29',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 30 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd30',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 31 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd31'\r\nFROM\r\ntabAttendance att\r\nWHERE\r\natt.attendance_date between %(from_date)s and %(to_date)s\r\nAND att.docstatus = 1\r\nGROUP BY\r\natt.employee,\r\natt.employee_name\r\nORDER BY\r\natt.employee_name;",
+  "ref_doctype": "Attendance",
+  "reference_report": null,
+  "report_name": "Fingerprint Device Events",
+  "report_script": "from_date = filters.get(\"from_date\")\r\nto_date = filters.get(\"to_date\")\r\n# user_id = frappe.session.user\r\n# current_emps = frappe.get_list(\r\n#     \"Employee\",\r\n#     fields= ['*'],\r\n#     filters=[\r\n#         [\"user_id\", \"=\", user_id],\r\n#     ],\r\n#     limit=1\r\n# );\r\n# current_emp = None\r\n# if len(current_emps) > 0:\r\n#     current_emp = current_emps[0]\r\n\r\n\r\nget_raw_data_sql = f\"\"\"\r\n        SELECT\r\n    ec.employee,\r\n    ec.employee_name,\r\n    DATE(ec.time) AS work_date,\r\n    e.fingerprint_id,\r\n    e.department,\r\n    e.designation,\r\n    e.branch,\r\n    GROUP_CONCAT(\r\n        time(ec.time)\r\n        ORDER BY ec.time ASC SEPARATOR ', '\r\n    ) AS times\r\nFROM\r\n    `tabEmployee Checkin` ec\r\nINNER JOIN `tabEmployee` e ON e.name = ec.employee\r\nWHERE\r\n    DATE(ec.time) BETWEEN %(from_date)s AND %(to_date)s\r\nGROUP BY\r\n    ec.employee,\r\n    DATE(ec.time),\r\n    e.fingerprint_id,\r\n    ec.employee_name\r\nORDER BY\r\n    e.fingerprint_id,\r\n    DATE(ec.time) DESC\r\n    \r\n\r\n\"\"\"\r\n\r\n# get_raw_data_sql2 = f\"\"\"\r\n#         SELECT\r\n#     ec.employee,\r\n#     ec.employee_name,\r\n#     DATE(ec.time) AS work_date,\r\n#     e.fingerprint_id,\r\n#     e.department,\r\n#     e.designation,\r\n#     e.branch,\r\n#     e.reports_to,\r\n#     GROUP_CONCAT(\r\n#         time(ec.time)\r\n#         ORDER BY ec.time ASC SEPARATOR ', '\r\n#     ) AS times\r\n# FROM\r\n#     `tabEmployee Checkin` ec\r\n# INNER JOIN `tabEmployee` e ON e.name = ec.employee\r\n# WHERE\r\n#     DATE(ec.time) BETWEEN %(from_date)s AND %(to_date)s AND\r\n#     case when {current_emp != None} then\r\n#     e.employee = 'HR-EMP-00025' or reports_to = 'HR-EMP-00025' \r\n#     ELSE 1=1\r\n#     END\r\n# GROUP BY\r\n#     ec.employee,\r\n#     DATE(ec.time),\r\n#     e.fingerprint_id,\r\n#     ec.employee_name\r\n# ORDER BY\r\n#     e.fingerprint_id,\r\n#     DATE(ec.time) DESC\r\n    \r\n\r\n# \"\"\"\r\n\r\nraw_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date}, as_dict=True)\r\n\r\ncolumns = []\r\ncolumns.append({\"label\": \"#\", \"fieldname\": \"employee\", \"fieldtype\": \"Link\", \"options\": \"Employee\", \"width\": 150})\r\ncolumns.append({\"label\": \"أسم الموظف\", \"fieldname\": \"employee_name\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"الفرع\", \"fieldname\": \"branch\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"القسم\", \"fieldname\": \"department\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"التخصص\", \"fieldname\": \"designation\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"البصمة\", \"fieldname\": \"fingerprint_id\", \"fieldtype\": \"Int\"})\r\ncolumns.append({\"label\": \"التاريخ\", \"fieldname\": \"date\", \"fieldtype\": \"Data\", \"width\": 300})\r\n\r\nfor i in range(20):\r\n    columns.append({\r\n        \"label\": f\"F{i+1}\",\r\n        \"fieldname\": f\"F{i}\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 100\r\n    })\r\nemps = []\r\nfor r in raw_data:\r\n    employee_map = {}\r\n    employee_map[\"employee\"] = r.employee\r\n    employee_map[\"employee_name\"] = f\"{r.employee_name}\"\r\n    employee_map[\"date\"] = f\"{r.work_date}\"\r\n    employee_map[\"fingerprint_id\"] = f\"{r.fingerprint_id}\"\r\n    employee_map[\"department\"] = f\"{r.department}\"\r\n    employee_map[\"designation\"] = f\"{r.designation}\"\r\n    employee_map[\"branch\"] = f\"{r.branch}\"\r\n    \r\n    times_list = [t.strip() for t in r.times.split(\",\")]\r\n    fixed_times = []\r\n    f_index = 0\r\n    for t in times_list:\r\n        employee_map[f\"F{f_index}\"] = frappe.utils.format_time(t, \"hh:mm a\")\r\n        f_index = f_index + 1\r\n        \r\n    emps.append(employee_map)\r\n    \r\ndata = columns, emps",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Fingerprint Device Events",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   },
+   {
+    "parent": "Fingerprint Device Events",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   },
+   {
+    "parent": "Fingerprint Device Events",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Fingerprint Device Events",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   },
+   {
+    "parent": "Fingerprint Device Events",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee Self Service"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": "",
+    "fieldname": "date",
+    "fieldtype": "Date",
+    "label": "Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Custom Employee Leave Balance Summary",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "بنك الشمول عدن",
+    "fieldname": "company",
+    "fieldtype": "Link",
+    "label": "Company",
+    "mandatory": 1,
+    "options": "Company",
+    "parent": "Custom Employee Leave Balance Summary",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-02-08 18:30:41.924167",
+  "module": "HR",
+  "name": "Custom Employee Leave Balance Summary",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Leave Allocation",
+  "reference_report": "",
+  "report_name": "Custom Employee Leave Balance Summary",
+  "report_script": "date = filters.get(\"date\")\r\ncompany = filters.get(\"company\")\r\nreport_filters = {\r\n            \"date\": date,\r\n            \"company\": company,\r\n            \"employee_status\": \"Active\"\r\n        }\r\n\r\nreport_data = frappe.call(\r\n    \"frappe.desk.query_report.run\",\r\n    report_name=\"Employee Leave Balance Summary\",\r\n    filters=report_filters,\r\n    _lang=\"en\"\r\n)\r\n\r\ncolumns = report_data.get(\"columns\")\r\ncolumns.append({'fieldtype': 'Float', 'width': '160', 'label': 'مجموع الاذونات', 'fieldname': 'SL'})\r\n\r\nresult_rows = report_data.get(\"result\")\r\n\r\nprev_short_leaves = frappe.get_list(\r\n    \"Short Leave\",\r\n    fields= ['*'],\r\n    filters=[\r\n        [\"docstatus\", \"=\", 1],\r\n        [\"short_leave_date\", \"<=\", date],\r\n    ],\r\n    limit=0,\r\n    ignore_permissions=True\r\n);\r\nfor r in result_rows:\r\n    emp = r.get(\"employee\") or r[\"الموظف\"]\r\n    emp_name = r.get(\"employee_name\") or r[\"اسم_الموظف\"]\r\n\r\n    total_short_leaves = {}\r\n    for sl in prev_short_leaves:\r\n        if sl.employee == emp:\r\n            short_leave_value = (sl.short_leave_amount_in_minuts / sl.shift_duration_minutes / 60)\r\n            \r\n            key = f\"{sl.leave_type}\"\r\n            \r\n            if key not in total_short_leaves:\r\n                total_short_leaves[key] = round(short_leave_value,2)\r\n            else:\r\n                total_short_leaves[key] = round(total_short_leaves[key] + short_leave_value,2)\r\n    \r\n    total_SL = 0\r\n    for tsl in total_short_leaves:\r\n        key = f\"{tsl}\"\r\n        v = total_short_leaves[key]\r\n        rKey = key.replace(\" \", \"_\")\r\n        oldValue = r[rKey]\r\n        r[rKey] = round(float(r[rKey]) - v,2)\r\n        \r\n        total_SL = total_SL + v\r\n        \r\n        g = r[rKey]\r\n    \r\n    r['SL'] = total_SL\r\n\r\ndata = columns, result_rows",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Custom Employee Leave Balance Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   },
+   {
+    "parent": "Custom Employee Leave Balance Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   },
+   {
+    "parent": "Custom Employee Leave Balance Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee Self Service"
+   },
+   {
+    "parent": "Custom Employee Leave Balance Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   },
+   {
+    "parent": "Custom Employee Leave Balance Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": null,
+    "fieldname": "conversation",
+    "fieldtype": "Data",
+    "label": "Conversation",
+    "mandatory": 1,
+    "options": "",
+    "parent": "Conversation Replies Report",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-01-13 09:27:15.108178",
+  "module": "HR",
+  "name": "Conversation Replies Report",
+  "prepared_report": 0,
+  "query": "   \r\nSELECT \r\n    msg.name AS 'Message Id',\r\n    msg.issue_date AS 'Created On',\r\n    msg.subject AS Subject,\r\n    msg.from_department AS 'Sender Department',\r\n    msg.message_status AS Status,\r\n    GROUP_CONCAT(td.employee_name SEPARATOR ', ') AS 'To Employees'\r\nFROM \r\n    `tabInternal Message` AS msg\r\nLEFT JOIN \r\n    `tabInternal Message` AS root\r\n    ON root.name = msg.conversation_id\r\nLEFT JOIN \r\n    `tabEmployees List` AS td\r\n    ON td.parent = msg.name\r\nWHERE msg.conversation_id = %(conversation)s or msg.name = %(conversation)s\r\n\r\nGROUP BY \r\n    msg.name\r\nORDER BY \r\n     msg.creation ASC",
+  "ref_doctype": "Internal Message",
+  "reference_report": "",
+  "report_name": "Conversation Replies Report",
+  "report_script": "conversation = filters.get(\"conversation\")\r\ncolumns = [\r\n    {\r\n        \"label\": _(\"Message Id\"),\r\n        \"fieldname\": \"Message Id\",\r\n        \"fieldtype\": \"Link\",\r\n        \"options\": \"Internal Message\",\r\n        \"width\": 150\r\n    },\r\n    {\r\n        \"label\": _(\"Created On\"),\r\n        \"fieldname\": \"Created On\",\r\n        \"fieldtype\": \"Date\",\r\n        \"width\": 160\r\n    },\r\n    {\r\n        \"label\": _(\"Created At\"),\r\n        \"fieldname\": \"Created At\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 160\r\n    },\r\n    {\r\n        \"label\": _(\"Subject\"),\r\n        \"fieldname\": \"Subject\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 300\r\n    },\r\n    {\r\n        \"label\": _(\"Sender Department\"),\r\n        \"fieldname\": \"Sender Department\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 180\r\n    },\r\n    {\r\n        \"label\": _(\"Sender Employee\"),\r\n        \"fieldname\": \"Sender Employee\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 180\r\n    },\r\n    {\r\n        \"label\": _(\"Status\"),\r\n        \"fieldname\": \"Status\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 120\r\n    }\r\n]\r\n\r\n\r\nfetch_data = frappe.db.sql(f\"\"\"\r\n    SELECT \r\n        msg.name AS 'Message Id',\r\n        DATE(msg.issue_date) AS 'Created On',\r\n        DATE_FORMAT(msg.issue_date, '%r') AS 'Created At',\r\n        msg.subject AS 'Subject',\r\n        REPLACE(dep.department_name, ' - SH', '') AS 'Sender Department',\r\n        msg.employee_name AS 'Sender Employee',\r\n        msg.message_status AS 'Status',\r\n        GROUP_CONCAT(CONCAT(td.employee_name, ' (', REPLACE(to_dep.department_name, ' - SH', ''), ')') SEPARATOR ' | ') AS \"To\"\r\n    FROM \r\n        `tabInternal Message` AS msg\r\n    LEFT JOIN \r\n        `tabInternal Message` AS root\r\n        ON root.name = msg.conversation_id\r\n    LEFT JOIN \r\n        `tabEmployees List` AS td\r\n        ON td.parent = msg.name\r\n    LEFT JOIN \r\n        `tabDepartment` AS dep\r\n        ON dep.name = msg.from_department \r\n    LEFT JOIN \r\n        `tabDepartment` AS to_dep\r\n        ON to_dep.name = td.department\r\n    WHERE \r\n        msg.conversation_id = '{conversation}' OR msg.name = '{conversation}'\r\n    GROUP BY \r\n        msg.name\r\n    ORDER BY \r\n        msg.creation ASC\r\n\"\"\", as_dict=True)\r\n\r\nmax_cols = 0\r\n\r\nfor msg in fetch_data:\r\n    to_list = [t.strip() for t in msg.To.split(\" | \")]\r\n    if len(to_list) > max_cols:\r\n        max_cols = len(to_list)\r\n        \r\nfor col in range(0,max_cols):\r\n    columns.append(\r\n    {\r\n        \"label\": _(f\"To\"),\r\n        \"fieldname\": f\"To({col})\",\r\n        \"fieldtype\": \"Data\",\r\n    })\r\n\r\nfinal_data = []\r\nfor msg in fetch_data:\r\n\r\n    row = {\r\n        \"Message Id\": msg[\"Message Id\"],\r\n        \"Created On\": msg[\"Created On\"],\r\n        \"Created At\": msg[\"Created At\"],\r\n        \"Subject\": msg[\"Subject\"],\r\n        \"Sender Department\": msg[\"Sender Department\"],\r\n        \"Sender Employee\": msg[\"Sender Employee\"],\r\n        \"Status\": msg[\"Status\"]\r\n    }\r\n\r\n    receiver_list = [r.strip() for r in msg.To.split(\" | \") if r.strip()]\r\n    receiver_index = 0\r\n    for receiver in receiver_list:\r\n        row[f\"To({receiver_index})\"] = receiver\r\n        receiver_index = receiver_index + 1\r\n\r\n    final_data.append(row)\r\n\r\n\r\ndata = columns, final_data",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Conversation Replies Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Shumul Employee"
+   },
+   {
+    "parent": "Conversation Replies Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Conversation Replies Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": "",
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "From Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Figureprint Summary",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "",
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "To Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Figureprint Summary",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": "frappe.query_reports[\"Figureprint Summary\"] = {\r\n\t\"formatter\": function(value, row, column, data, default_formatter) {\r\n\t\tvalue = default_formatter(value, row, column, data);\r\n\t\tif (value == \"L\") {\r\n\t\t\tvalue = \"<div style='background-color:#00c4ff;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"A\") {\r\n\t\t\tvalue = \"<div style='background-color:red;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"P\") {\r\n\t\t\tvalue = \"<div style='background-color:#39ed39;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"HD\") {\r\n\t\t\tvalue = \"<div style='background-color:#ffae00;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"W\") {\r\n\t\t\tvalue = \"<div style='background-color:#00d3ff;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"H\") {\r\n\t\t\tvalue = \"<div style='background-color:#6cafb1;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\treturn value;\r\n\t},\r\n};",
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-03-30 08:03:41.741531",
+  "module": "HR",
+  "name": "Figureprint Summary",
+  "prepared_report": 1,
+  "query": "SELECT\r\natt.employee,\r\natt.employee_name,\r\nMAX(CASE WHEN DAY(att.attendance_date) = 1  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd1',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 2  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd2',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 3  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd3',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 4  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd4',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 5  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd5',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 6  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd6',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 7  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd7',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 8  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd8',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 9  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd9',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 10 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd10',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 11 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd11',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 12 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd12',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 13 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd13',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 14 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd14',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 15 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd15',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 16 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd16',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 17 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd17',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 18 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd18',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 19 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd19',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 20 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd20',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 21 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd21',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 22 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd22',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 23 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd23',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 24 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd24',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 25 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd25',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 26 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd26',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 27 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd27',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 28 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd28',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 29 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd29',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 30 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd30',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 31 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd31'\r\nFROM\r\ntabAttendance att\r\nWHERE\r\natt.attendance_date between %(from_date)s and %(to_date)s\r\nAND att.docstatus = 1\r\nGROUP BY\r\natt.employee,\r\natt.employee_name\r\nORDER BY\r\natt.employee_name;",
+  "ref_doctype": "Employee Checkin",
+  "reference_report": null,
+  "report_name": "Figureprint Summary",
+  "report_script": "from_date = filters.get(\"from_date\")\r\nto_date = filters.get(\"to_date\")\r\n\r\nget_raw_data_sql = \"\"\"\r\n   \r\nSELECT\r\n    at.employee,\r\n    at.employee_name,\r\n    at.attendance_date AS attendance_date,\r\n    time(0) as late_enter_time,\r\n    time(0) as early_exit_time,\r\n    CASE WHEN  COUNT(ec.time) > 1 THEN 'Present' \r\n        WHEN COUNT(ec.time) = 0 THEN  at.status\r\n        WHEN COUNT(ec.time) = 1 THEN  'Half Day'\r\n        ELSE 'Absent' END as status,\r\n        \r\n    COUNT(ec.time) AS checks_count\r\nFROM `tabAttendance` at\r\nLEFT JOIN `tabEmployee Checkin` ec\r\n       ON ec.employee = at.employee\r\n      AND DATE(ec.time) = at.attendance_date\r\nWHERE \r\n    at.attendance_date BETWEEN %(from_date)s AND %(to_date)s\r\nGROUP BY \r\n    at.employee,\r\n    at.employee_name,\r\n    at.attendance_date\r\n\r\nUNION\r\n\r\n-- Part 2: Checkins without attendance\r\nSELECT\r\n    ec.employee,\r\n    ec.employee_name,\r\n    DATE(ec.time) AS attendance_date,\r\n    time(0) as late_enter_time,\r\n    time(0) as early_exit_time,\r\n    \r\n    CASE WHEN  COUNT(ec.time) > 1 THEN 'Present' \r\n        WHEN COUNT(ec.time) = 0 THEN  at.status\r\n        WHEN COUNT(ec.time) = 1 THEN  'Half Day'\r\n        ELSE 'Absent' END as status,\r\n        \r\n    COUNT(ec.time) AS checks_count\r\nFROM `tabEmployee Checkin` ec\r\nLEFT JOIN `tabAttendance` at\r\n       ON at.employee = ec.employee\r\n      AND at.attendance_date = DATE(ec.time)\r\nWHERE \r\n    DATE(ec.time) BETWEEN %(from_date)s AND %(to_date)s\r\n    AND at.attendance_date IS NULL\r\nGROUP BY \r\n    ec.employee,\r\n    ec.employee_name,\r\n    DATE(ec.time)\r\n\r\n\"\"\"\r\n\r\nraw_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date}, as_dict=True)\r\n\r\nget_raw_data_sql = \"\"\"\r\nSELECT DISTINCT e.*, concat(e.first_name,' ', IFNULL(e.middle_name, ''),' ', IFNULL(e.last_name, '')) as full_name,\r\n    d.department_name\r\nFROM\r\n        `tabEmployee` e\r\nINNER JOIN `tabDepartment` d on d.name = e.department\r\nWHERE status = 'Active'\r\n\r\nORDER BY CAST(fingerprint_id AS INT)\r\n\"\"\"\r\n\r\nemployees = frappe.db.sql(get_raw_data_sql, as_dict=True)\r\n\r\nget_raw_data_sql = \"\"\"\r\n    SELECT\r\n        *\r\n    FROM\r\n        `tabHoliday`\r\n        \r\n    WHERE\r\n        holiday_date between %(from_date)s and %(to_date)s\r\n    ORDER BY holiday_date\r\n    \r\n\"\"\"\r\n\r\nholidays_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date}, as_dict=True)\r\n\r\nlog(raw_data)\r\n\r\ncolumns = []\r\ncolumns.append({\"label\": \"#\", \"fieldname\": \"employee\", \"fieldtype\": \"Link\", \"options\": \"Employee\", \"width\": 150})\r\ncolumns.append({\"label\": \"أسم الموظف\", \"fieldname\": \"employee_name\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"الفرع\", \"fieldname\": \"branch\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"القسم\", \"fieldname\": \"department\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"التخصص\", \"fieldname\": \"designation\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"االبصمة\", \"fieldname\": \"fingerprint_id\", \"fieldtype\": \"Data\"})\r\n\r\ncurrent_date = from_date\r\nwhile current_date <= to_date:\r\n\r\n    m = frappe.utils.formatdate(current_date, \"MM\") \r\n    d = frappe.utils.formatdate(current_date, \"dd\") \r\n    weekday = frappe.utils.get_weekday(frappe.utils.getdate(current_date)) \r\n    \r\n    columns.append({\r\n        \"label\": f\"{d}/{m} {weekday[:2]}\",\r\n        \"fieldname\": f\"{d}/{m}\",\r\n        \"fieldtype\": \"Data\"\r\n    })\r\n    current_date = frappe.utils.add_days(current_date, 1)\r\n    \r\ncolumns.append({\r\n    \"label\": f\"الحضور\",\r\n    \"fieldname\": f\"presents\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\n\r\ncolumns.append({\r\n    \"label\": f\"الغياب\",\r\n    \"fieldname\": f\"absents\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\n\r\ncolumns.append({\r\n    \"label\": f\"الاجازات\",\r\n    \"fieldname\": f\"leaves\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"العطل\",\r\n    \"fieldname\": f\"holidays\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\n\r\nemps = []\r\n\r\nfor e in employees:\r\n    presents = 0\r\n    absents = 0\r\n    half_day = 0\r\n    leaves = 0\r\n    holidays = 0\r\n    \r\n    employee_map = {}\r\n    employee_map[\"employee\"] = e.name\r\n    employee_map[\"employee_name\"] = f\"{e.full_name}\"\r\n    employee_map[\"branch\"] = f\"{e.branch}\"\r\n    employee_map[\"department\"] = f\"{e.department}\"\r\n    employee_map[\"designation\"] = f\"{e.designation}\"\r\n    employee_map[\"fingerprint_id\"] = f\"{e.fingerprint_id}\"\r\n    \r\n\r\n    current_att = from_date\r\n    while current_att <= to_date:\r\n    \r\n        current_date = frappe.utils.getdate(current_att)\r\n        is_holiday = False\r\n        \r\n        m = frappe.utils.formatdate(current_date, \"MM\") \r\n        d = frappe.utils.formatdate(current_date, \"dd\")\r\n        \r\n        statu = None\r\n        for hd in holidays_data:\r\n            if hd.holiday_date == current_date:\r\n                is_holiday = True\r\n                holidays = holidays + 1\r\n                break;\r\n    \r\n        if is_holiday:\r\n            employee_map[f\"{d}/{m}\"] = \"H\"\r\n            current_att = frappe.utils.add_days(current_att, 1)\r\n            continue\r\n        \r\n        att = None\r\n        for at in raw_data:\r\n            if at.attendance_date == current_date and at.employee == e.name:\r\n                att = at\r\n                break;\r\n        \r\n        if att:\r\n            statu = None\r\n            if att.status == \"On Leave\":\r\n                statu = \"L\"\r\n                leaves = leaves + 1\r\n                \r\n            if att.status == \"Present\":\r\n                presents = presents + 1\r\n                statu = \"P\"\r\n                \r\n            if att.status == \"Absent\":\r\n                statu = \"A\"\r\n                absents = absents + 1\r\n                \r\n            if att.status == \"Half Day\":\r\n                statu = \"HD\"\r\n                half_day = half_day + 1\r\n                presents = presents + 0.5\r\n                absents = absents + 0.5\r\n                \r\n            if att.status == \"Work From Home\":\r\n                statu = \"W\"\r\n                presents = presents + 1\r\n                \r\n            employee_map[f\"{d}/{m}\"] = statu\r\n        else:\r\n            statu = \"A\"\r\n            for hd in holidays_data:\r\n                if hd.holiday_date == current_date:\r\n                    statu = \"H\"\r\n                    break;\r\n            \r\n            if statu == \"A\":\r\n                absents = absents + 1\r\n                \r\n            if statu == \"H\":\r\n                presents = presents + 1\r\n                \r\n            employee_map[f\"{d}/{m}\"] = statu\r\n        current_att = frappe.utils.add_days(current_att, 1)\r\n\r\n    employee_map[f\"presents\"] = presents\r\n    employee_map[f\"absents\"] = absents\r\n    employee_map[f\"half_day\"] = half_day\r\n    employee_map[\"leaves\"] = leaves\r\n    employee_map[\"holidays\"] = holidays\r\n    emps.append(employee_map)\r\n\r\ndata = columns, emps\r\n\r\n\r\n\r\n\r\n\r\n",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Figureprint Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   },
+   {
+    "parent": "Figureprint Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   },
+   {
+    "parent": "Figureprint Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Figureprint Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   },
+   {
+    "parent": "Figureprint Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee Self Service"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-06-24 17:03:30.395183",
+  "module": "HR",
+  "name": "Shift Summary",
+  "prepared_report": 0,
+  "query": "SELECT\r\nemployee_id as 'ID',\r\nemployee_name as 'اسم الموظف',\r\ndepartment_name as 'القسم',\r\ndesignation as 'التخصص',\r\nbranch as 'الفرع',\r\nshift_type as 'الشفت الاول',\r\nCONCAT(DATE_FORMAT(start_time, '%H:%i'),' -> ', DATE_FORMAT(end_time, '%H:%i')) as 'الفترة الاولى',\r\nshift_type_2 as 'الشفت الثاني',\r\nCONCAT(DATE_FORMAT(start_time2, '%H:%i'),' -> ', DATE_FORMAT(end_time2, '%H:%i')) as 'الفترة الثانية,\r\ndays as 'ايام الدوام'\r\nFROM (\r\n    SELECT \r\n        inner_results.*,\r\n        -- Calculate if this specific employee has ANY assignment marked as default (1)\r\n        -- This creates a flag '1' for all rows of an employee if at least one row is default\r\n        MAX(inner_results.is_default) OVER (PARTITION BY inner_results.employee_id) as emp_has_default_flag\r\n    FROM (\r\n        SELECT\r\n            e.name AS employee_id,\r\n            e.employee_name,\r\n            dep.department_name,\r\n            e.designation,\r\n            e.branch,\r\n            ssa.title AS shift_title,\r\n            ssa.shift_type,\r\n            st.start_time,\r\n            st.end_time,\r\n            ssa.shift_type_2,\r\n            st2.start_time as start_time2,\r\n            st2.end_time as end_time2,\r\n            ssa.is_default,\r\n            CASE\r\n                WHEN ssa.include_employees = 'Exclude Only' \r\n                     AND EXISTS (\r\n                         SELECT 1 \r\n                         FROM `tabSpecial Shift Assignment Employee Table` emps \r\n                         WHERE emps.employee = e.employee \r\n                           AND emps.parent = ssa.name\r\n                     )\r\n                THEN 'خارج الشفت'\r\n                ELSE 'داخل'\r\n            END AS employee_status,\r\n            GROUP_CONCAT(\r\n                \r\n                CASE LOWER(dow.day_name)\r\n                    WHEN 'saturday'    THEN 'السبت'\r\n                    WHEN 'sunday'   THEN 'الاحد'\r\n                    WHEN 'Monday' THEN 'الاثنين'\r\n                    WHEN 'thursday'  THEN 'الثلاثاء'\r\n                    WHEN 'Wednesday'    THEN 'الاربعاء'\r\n                    WHEN 'Tuesday'  THEN 'الخميس'\r\n                    WHEN 'Friday'    THEN 'الجمعة'\r\n                END\r\n                \r\n                \r\n                ORDER BY \r\n                \r\n                CASE LOWER(dow.day_name)\r\n                    WHEN 'saturday'    THEN 1\r\n                    WHEN 'sunday'   THEN 2\r\n                    WHEN 'Monday' THEN 3\r\n                    WHEN 'thursday'  THEN 4\r\n                    WHEN 'Wednesday'    THEN 5\r\n                    WHEN 'Tuesday'  THEN 6\r\n                    WHEN 'Friday'    THEN 7\r\n                END\r\n                desc\r\n                 SEPARATOR ' ,'\r\n            ) AS days\r\n        FROM `tabEmployee` e\r\n        INNER JOIN `tabSpecial Shift Assignment` ssa\r\n            ON (\r\n                ssa.include_employees = 'Include All'\r\n                OR (\r\n                    ssa.include_employees = 'Include Only'\r\n                    AND EXISTS (\r\n                        SELECT 1 \r\n                        FROM `tabSpecial Shift Assignment Employee Table` emps \r\n                        WHERE emps.employee = e.employee \r\n                          AND emps.parent = ssa.name\r\n                    )\r\n                )\r\n                OR ssa.include_employees = 'Exclude Only'\r\n            )\r\n        INNER JOIN `tabDepartment` dep on dep.name = e.department\r\n        INNER JOIN `tabShift Type` st on st.name = ssa.shift_type\r\n        LEFT JOIN `tabShift Type` st2 on st2.name = ssa.shift_type_2\r\n        LEFT JOIN `tabDays of Week Table` dow\r\n            ON dow.parent = ssa.name\r\n            AND dow.parenttype = 'Special Shift Assignment'\r\n            AND dow.parentfield = 'days_of_week'\r\n        GROUP BY\r\n            dep.department_name,\r\n            e.designation,\r\n            e.branch,\r\n            e.employee_name,\r\n            e.name,\r\n            ssa.title,\r\n            ssa.include_employees,\r\n            ssa.shift_type,\r\n            ssa.is_default,\r\n            ssa.shift_type_2\r\n    ) AS inner_results\r\n) AS final_filter\r\nWHERE \r\n    -- LOGIC: \r\n    -- 1. If the employee has a default record (flag=1), show ONLY records where is_default=1\r\n    (emp_has_default_flag = 1 AND is_default = 1)\r\n    OR \r\n    -- 2. If the employee has NO default records (flag=0), show ALL their records\r\n    (emp_has_default_flag = 0);",
+  "ref_doctype": "Special Shift Assignment",
+  "reference_report": null,
+  "report_name": "Shift Summary",
+  "report_script": "columns = [\r\n    {\"label\": \"ID\", \"fieldname\": \"ID\", \"fieldtype\": \"Data\", \"width\": 120},\r\n    {\"label\": \"اسم الموظف\", \"fieldname\": \"اسم الموظف\", \"fieldtype\": \"Data\", \"width\": 200},\r\n    {\"label\": \"القسم\", \"fieldname\": \"القسم\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"التخصص\", \"fieldname\": \"التخصص\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"الفرع\", \"fieldname\": \"الفرع\", \"fieldtype\": \"Data\", \"width\": 120},\r\n    {\"label\": \"اسم الشفت\", \"fieldname\": \"اسم الشفت\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"الشفت الاول\", \"fieldname\": \"الشفت الاول\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"الفترة الاولى\", \"fieldname\": \"الفترة الاولى\", \"fieldtype\": \"Data\", \"width\": 200},\r\n    {\"label\": \"الشفت الثاني\", \"fieldname\": \"الشفت الثاني\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"الفترة الثانية\", \"fieldname\": \"الفترة الثانية\", \"fieldtype\": \"Data\", \"width\": 200},\r\n    {\"label\": \"ايام الدوام\", \"fieldname\": \"ايام الدوام\", \"fieldtype\": \"Data\", \"width\": 220},\r\n]\r\n\r\ndata = frappe.db.sql(\"\"\"\r\n    SELECT\r\n        employee_id AS 'ID',\r\n        employee_name AS 'اسم الموظف',\r\n        department_name AS 'القسم',\r\n        designation AS 'التخصص',\r\n        branch AS 'الفرع',\r\n        shift_title as 'اسم الشفت',\r\n        shift_type AS 'الشفت الاول',\r\n        CONCAT(DATE_FORMAT(start_time, \"%h:%i %p\"),' -> ', DATE_FORMAT(end_time, \"%h:%i %p\")) as 'الفترة الاولى',\r\n        shift_type_2 as 'الشفت الثاني',\r\n        CONCAT(DATE_FORMAT(start_time2, \"%h:%i %p\"),' -> ', DATE_FORMAT(end_time2, \"%h:%i %p\")) as 'الفترة الثانية',\r\n\r\n        days AS 'ايام الدوام'\r\n    FROM (\r\n        SELECT \r\n            inner_results.*,\r\n            MAX(inner_results.is_default)\r\n                OVER (PARTITION BY inner_results.employee_id) AS emp_has_default_flag\r\n        FROM (\r\n            SELECT\r\n                e.name AS employee_id,\r\n                e.employee_name,\r\n                dep.department_name,\r\n                e.designation,\r\n                e.branch,\r\n                ssa.title AS shift_title,\r\n                ssa.shift_type,\r\n                st.start_time,\r\n                st.end_time,\r\n                ssa.shift_type_2,\r\n                st2.start_time AS start_time2,\r\n                st2.end_time AS end_time2,\r\n                ssa.is_default,\r\n                GROUP_CONCAT(\r\n                    CASE LOWER(dow.day_name)\r\n                        WHEN 'saturday'  THEN 'السبت'\r\n                        WHEN 'sunday'    THEN 'الاحد'\r\n                        WHEN 'monday'    THEN 'الاثنين'\r\n                        WHEN 'tuesday'   THEN 'الثلاثاء'\r\n                        WHEN 'wednesday' THEN 'الاربعاء'\r\n                        WHEN 'thursday'  THEN 'الخميس'\r\n                        WHEN 'friday'    THEN 'الجمعة'\r\n                    END\r\n                    ORDER BY\r\n                        CASE LOWER(dow.day_name)\r\n                            WHEN 'saturday'  THEN 1\r\n                            WHEN 'sunday'    THEN 2\r\n                            WHEN 'monday'    THEN 3\r\n                            WHEN 'tuesday'   THEN 4\r\n                            WHEN 'wednesday' THEN 5\r\n                            WHEN 'thursday'  THEN 6\r\n                            WHEN 'friday'    THEN 7\r\n                        END DESC\r\n                    SEPARATOR ' ,'\r\n                ) AS days\r\n            FROM `tabEmployee` e\r\n            INNER JOIN `tabSpecial Shift Assignment` ssa\r\n                ON (\r\n                    ssa.include_employees = 'Include All'\r\n                    OR (\r\n                        ssa.include_employees = 'Include Only'\r\n                        AND EXISTS (\r\n                            SELECT 1\r\n                            FROM `tabSpecial Shift Assignment Employee Table` emps\r\n                            WHERE emps.employee = e.employee\r\n                            AND emps.parent = ssa.name\r\n                        )\r\n                    )\r\n                    OR ssa.include_employees = 'Exclude Only'\r\n                )\r\n            INNER JOIN `tabDepartment` dep ON dep.name = e.department\r\n            INNER JOIN `tabShift Type` st ON st.name = ssa.shift_type\r\n            LEFT JOIN `tabShift Type` st2 ON st2.name = ssa.shift_type_2\r\n            LEFT JOIN `tabDays of Week Table` dow\r\n                ON dow.parent = ssa.name\r\n                AND dow.parenttype = 'Special Shift Assignment'\r\n                AND dow.parentfield = 'days_of_week'\r\n            WHERE\r\n                ssa.is_active = 1\r\n            GROUP BY\r\n                dep.department_name,\r\n                e.designation,\r\n                e.branch,\r\n                e.employee_name,\r\n                e.name,\r\n                ssa.title,\r\n                ssa.include_employees,\r\n                ssa.shift_type,\r\n                ssa.is_default,\r\n                ssa.shift_type_2\r\n        ) AS inner_results\r\n    ) AS final_filter\r\n    WHERE\r\n        (emp_has_default_flag = 1 AND is_default = 1)\r\n        OR\r\n        (emp_has_default_flag = 0)\r\n\"\"\", as_dict=True)\r\n\r\ndata = columns, data\r\n",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Shift Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Shift Summary",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": "",
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "From Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "",
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "To Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "00:00:00",
+    "fieldname": "from_time",
+    "fieldtype": "Time",
+    "label": "From Time",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "23:59:59",
+    "fieldname": "to_time",
+    "fieldtype": "Time",
+    "label": "To Time",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "IN",
+    "fieldname": "log_type",
+    "fieldtype": "Select",
+    "label": "Log Type ",
+    "mandatory": 1,
+    "options": "IN\nOUT",
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "0",
+    "fieldname": "only_managers",
+    "fieldtype": "Check",
+    "label": "Only Managers",
+    "mandatory": 0,
+    "options": null,
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": "",
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-08-17 22:06:56.642771",
+  "module": "HR",
+  "name": "Fingerprint Device Events Advanced",
+  "prepared_report": 0,
+  "query": "SELECT\r\natt.employee,\r\natt.employee_name,\r\nMAX(CASE WHEN DAY(att.attendance_date) = 1  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd1',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 2  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd2',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 3  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd3',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 4  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd4',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 5  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd5',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 6  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd6',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 7  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd7',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 8  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd8',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 9  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd9',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 10 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd10',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 11 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd11',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 12 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd12',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 13 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd13',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 14 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd14',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 15 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd15',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 16 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd16',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 17 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd17',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 18 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd18',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 19 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd19',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 20 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd20',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 21 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd21',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 22 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd22',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 23 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd23',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 24 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd24',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 25 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd25',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 26 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd26',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 27 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd27',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 28 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd28',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 29 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd29',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 30 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd30',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 31 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd31'\r\nFROM\r\ntabAttendance att\r\nWHERE\r\natt.attendance_date between %(from_date)s and %(to_date)s\r\nAND att.docstatus = 1\r\nGROUP BY\r\natt.employee,\r\natt.employee_name\r\nORDER BY\r\natt.employee_name;",
+  "ref_doctype": "Attendance",
+  "reference_report": null,
+  "report_name": "Fingerprint Device Events Advanced",
+  "report_script": "from_date = filters.get(\"from_date\")\r\nto_date = filters.get(\"to_date\")\r\nlog_type = filters.get(\"log_type\")\r\nfrom_time = filters.get(\"from_time\")\r\nto_time = filters.get(\"to_time\")\r\nonly_managers = filters.get(\"only_managers\")\r\n\r\nget_raw_data_sql = f\"\"\"\r\nSELECT\r\n    ec.employee,\r\n    ec.employee_name,\r\n    DATE(ec.time) AS work_date,\r\n    CASE DAYOFWEEK(ec.time)\r\n        WHEN 1 THEN 'الأحد'\r\n        WHEN 2 THEN 'الاثنين'\r\n        WHEN 3 THEN 'الثلاثاء'\r\n        WHEN 4 THEN 'الأربعاء'\r\n        WHEN 5 THEN 'الخميس'\r\n        WHEN 6 THEN 'الجمعة'\r\n        WHEN 7 THEN 'السبت'\r\n    END AS day_name,\r\n    e.is_manager,\r\n    e.fingerprint_id,\r\n    e.department,\r\n    e.designation,\r\n    e.branch,\r\n    GROUP_CONCAT(\r\n        TIME(ec.time)\r\n        ORDER BY ec.time ASC SEPARATOR ', '\r\n    ) AS times\r\nFROM\r\n    `tabEmployee Checkin` ec\r\nINNER JOIN `tabEmployee` e ON e.name = ec.employee\r\nWHERE\r\n    DATE(ec.time) BETWEEN %(from_date)s AND %(to_date)s\r\nGROUP BY\r\n    ec.employee,\r\n    DATE(ec.time),\r\n    e.is_manager,\r\n    e.fingerprint_id,\r\n    ec.employee_name\r\nORDER BY\r\n    e.fingerprint_id,\r\n    DATE(ec.time) DESC\r\n    \r\n\r\n\"\"\"\r\n\r\nraw_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date}, as_dict=True)\r\n\r\ncolumns = []\r\ncolumns.append({\"label\": \"#\", \"fieldname\": \"employee\", \"fieldtype\": \"Link\", \"options\": \"Employee\", \"width\": 150})\r\ncolumns.append({\"label\": \"أسم الموظف\", \"fieldname\": \"employee_name\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"الفرع\", \"fieldname\": \"branch\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"القسم\", \"fieldname\": \"department\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"التخصص\", \"fieldname\": \"designation\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"مدير؟\", \"fieldname\": \"is_manager\", \"fieldtype\": \"Int\"})\r\ncolumns.append({\"label\": \"البصمة\", \"fieldname\": \"fingerprint_id\", \"fieldtype\": \"Int\"})\r\ncolumns.append({\"label\": \"التاريخ\", \"fieldname\": \"date\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"اليوم\", \"fieldname\": \"day\", \"fieldtype\": \"Data\", \"width\": 300})\r\n\r\n\r\nfor i in range(20):\r\n    columns.append({\r\n        \"label\": f\"F{i+1}\",\r\n        \"fieldname\": f\"F{i}\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 100\r\n    })\r\nemps = []\r\nfor r in raw_data:\r\n    \r\n    if only_managers and r.is_manager == 0:\r\n        continue\r\n    \r\n    employee_map = {}\r\n    employee_map[\"employee\"] = r.employee\r\n    employee_map[\"employee_name\"] = f\"{r.employee_name}\"\r\n    employee_map[\"date\"] = f\"{r.work_date}\"\r\n    employee_map[\"fingerprint_id\"] = f\"{r.fingerprint_id}\"\r\n    employee_map[\"department\"] = f\"{r.department}\"\r\n    employee_map[\"designation\"] = f\"{r.designation}\"\r\n    employee_map[\"branch\"] = f\"{r.branch}\"\r\n    employee_map[\"is_manager\"] = f\"{r.is_manager}\"\r\n    employee_map[\"day\"] = f\"{r.day_name}\"\r\n    \r\n    times_list = [t.strip() for t in r.times.split(\",\")]\r\n    fixed_times = []\r\n    f_index = 0\r\n    is_found = False;\r\n    if log_type == \"IN\":\r\n        first_time = times_list[0]\r\n        if frappe.utils.get_time(first_time) >= frappe.utils.get_time(from_time) and frappe.utils.get_time(first_time) <= frappe.utils.get_time(to_time):\r\n            is_found = True\r\n    \r\n    if log_type == \"OUT\":\r\n        first_time = times_list[-1]\r\n        if frappe.utils.get_time(first_time) >= frappe.utils.get_time(from_time) and frappe.utils.get_time(first_time) <= frappe.utils.get_time(to_time):\r\n            is_found = True\r\n            \r\n    for t in times_list:\r\n        employee_map[f\"F{f_index}\"] = frappe.utils.format_time(t, \"hh:mm a\")\r\n        f_index = f_index + 1\r\n    \r\n    if is_found:  \r\n        emps.append(employee_map)\r\n    \r\ndata = columns, emps",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   },
+   {
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   },
+   {
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   },
+   {
+    "parent": "Fingerprint Device Events Advanced",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee Self Service"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2025-12-28 19:05:58.999023",
+  "module": "Core",
+  "name": "Users Role",
+  "prepared_report": 0,
+  "query": "SELECT \nu.full_name,\n    u.name AS user,\n    e.branch,\n    e.department,e.designation,\n    GROUP_CONCAT(r.role ORDER BY r.role SEPARATOR ', ') AS roles,\n    u.creation,\n    CASE WHEN u.enabled = 1 THEN 'Active' ELSE 'Closed' END Status\nFROM `tabUser` u\nleft join `tabEmployee` e on e.user_id = u.name\nLEFT JOIN `tabHas Role` r ON r.parent = u.name\nGROUP BY u.name\nORDER BY u.name;",
+  "ref_doctype": "User",
+  "reference_report": null,
+  "report_name": "Users Role",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "parent": "Users Role",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Users Role",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Desk User"
+   },
+   {
+    "parent": "Users Role",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee Self Service"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": "{\"filters\":[],\"fields\":[[\"name\",\"Employee Checkin\"],[\"employee_name\",\"Employee Checkin\"],[\"employee\",\"Employee Checkin\"],[\"log_type\",\"Employee Checkin\"],[\"time\",\"Employee Checkin\"]],\"order_by\":\"`tabEmployee Checkin`.`creation` asc\",\"add_totals_row\":0,\"page_length\":40,\"column_widths\":{\"name\":120,\"employee_name\":120,\"employee\":120,\"log_type\":120,\"time\":120},\"group_by\":null}",
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-01-06 15:15:13.947958",
+  "module": "HR",
+  "name": "nnn",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Employee Checkin",
+  "reference_report": null,
+  "report_name": "nnn",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "nnn",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   },
+   {
+    "parent": "nnn",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   },
+   {
+    "parent": "nnn",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "nnn",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": "",
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "From Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Fingerprint Device Events V2",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "",
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "To Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Fingerprint Device Events V2",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": null,
+    "fieldname": "employee",
+    "fieldtype": "Link",
+    "label": "Employee",
+    "mandatory": 1,
+    "options": "Employee",
+    "parent": "Fingerprint Device Events V2",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": "",
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-03-28 08:49:32.604961",
+  "module": "HR",
+  "name": "Fingerprint Device Events V2",
+  "prepared_report": 0,
+  "query": "SELECT\r\natt.employee,\r\natt.employee_name,\r\nMAX(CASE WHEN DAY(att.attendance_date) = 1  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd1',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 2  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd2',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 3  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd3',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 4  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd4',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 5  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd5',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 6  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd6',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 7  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd7',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 8  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd8',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 9  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd9',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 10 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd10',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 11 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd11',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 12 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd12',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 13 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd13',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 14 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd14',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 15 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd15',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 16 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd16',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 17 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd17',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 18 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd18',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 19 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd19',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 20 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd20',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 21 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd21',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 22 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd22',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 23 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd23',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 24 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd24',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 25 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd25',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 26 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd26',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 27 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd27',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 28 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd28',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 29 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd29',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 30 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd30',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 31 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd31'\r\nFROM\r\ntabAttendance att\r\nWHERE\r\natt.attendance_date between %(from_date)s and %(to_date)s\r\nAND att.docstatus = 1\r\nGROUP BY\r\natt.employee,\r\natt.employee_name\r\nORDER BY\r\natt.employee_name;",
+  "ref_doctype": "Attendance",
+  "reference_report": null,
+  "report_name": "Fingerprint Device Events V2",
+  "report_script": "from_date = filters.get(\"from_date\")\r\nto_date = filters.get(\"to_date\")\r\nemployee = filters.get(\"employee\")\r\n\r\nget_raw_data_sql = f\"\"\"\r\n        SELECT\r\n    ec.employee,\r\n    ec.employee_name,\r\n    DATE(ec.time) AS work_date,\r\n    e.fingerprint_id,\r\n    e.department,\r\n    e.designation,\r\n    e.branch,\r\n    GROUP_CONCAT(\r\n        time(ec.time)\r\n        ORDER BY ec.time ASC SEPARATOR ', '\r\n    ) AS times\r\nFROM\r\n    `tabEmployee Checkin` ec\r\nINNER JOIN `tabEmployee` e ON e.name = ec.employee\r\nWHERE\r\n    DATE(ec.time) BETWEEN %(from_date)s AND %(to_date)s\r\nGROUP BY\r\n    ec.employee,\r\n    DATE(ec.time),\r\n    e.fingerprint_id,\r\n    ec.employee_name\r\nORDER BY\r\n    e.fingerprint_id,\r\n    DATE(ec.time) DESC\r\n    \r\n\r\n\"\"\"\r\n\r\nget_raw_data_sql = f\"\"\"\r\n   \r\n    WITH RECURSIVE calendar AS (\r\n    SELECT DATE(%(from_date)s) AS work_date\r\n    UNION ALL\r\n    SELECT DATE_ADD(work_date, INTERVAL 1 DAY)\r\n    FROM calendar\r\n    WHERE work_date < %(to_date)s\r\n)\r\n\r\nSELECT\r\n    e.name AS employee,\r\n    e.employee_name,\r\n    c.work_date,\r\n    e.fingerprint_id,\r\n    e.department,\r\n    e.designation,\r\n    e.branch,\r\n    CASE \r\n        WHEN at.status IS NOT NULL AND at.status <> '' \r\n            THEN at.status\r\n        ELSE (CASE WHEN h.description <> '' THEN h.description WHEN Count(ec.time) > 0 THEN 'Present' ELSE 'Absent' END)\r\n    END AS status,\r\n    GROUP_CONCAT(\r\n        TIME(ec.time)\r\n        ORDER BY ec.time ASC SEPARATOR ', '\r\n    ) AS times\r\nFROM calendar c\r\nINNER JOIN `tabEmployee` e\r\n    ON e.name = %(employee)s\r\nLEFT JOIN `tabAttendance` at\r\n    ON at.employee = e.name\r\n    AND at.attendance_date = c.work_date\r\nLEFT JOIN `tabEmployee Checkin` ec\r\n    ON ec.employee = e.name\r\n    AND DATE(ec.time) = c.work_date\r\nLEFT JOIN `tabHoliday` h\r\n    ON h.holiday_date = c.work_date\r\nWHERE\r\n    e.status = 'Active'\r\nGROUP BY\r\n    c.work_date,\r\n    e.name,\r\n    e.employee_name,\r\n    e.fingerprint_id,\r\n    e.department,\r\n    e.designation,\r\n    e.branch,\r\n    at.status,\r\n    h.description\r\nORDER BY\r\n    e.fingerprint_id,\r\n    c.work_date DESC;\r\n\r\n\r\n\"\"\"\r\n\r\nraw_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date, \"employee\":employee}, as_dict=True)\r\ncolumns = []\r\ncolumns.append({\"label\": \"#\", \"fieldname\": \"employee\", \"fieldtype\": \"Link\", \"options\": \"Employee\", \"width\": 150})\r\ncolumns.append({\"label\": \"أسم الموظف\", \"fieldname\": \"employee_name\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"الفرع\", \"fieldname\": \"branch\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"القسم\", \"fieldname\": \"department\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"التخصص\", \"fieldname\": \"designation\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"البصمة\", \"fieldname\": \"fingerprint_id\", \"fieldtype\": \"Int\"})\r\ncolumns.append({\"label\": \"التاريخ\", \"fieldname\": \"date\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"الحالة\", \"fieldname\": \"status\", \"fieldtype\": \"Data\", \"width\": 300})\r\n\r\nfor i in range(20):\r\n    columns.append({\r\n        \"label\": f\"F{i+1}\",\r\n        \"fieldname\": f\"F{i}\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 100\r\n    })\r\n    \r\nemps = []\r\nfor r in raw_data:\r\n    employee_map = {}\r\n    employee_map[\"employee\"] = r.employee\r\n    employee_map[\"employee_name\"] = f\"{r.employee_name}\"\r\n    employee_map[\"date\"] = f\"{r.work_date}\"\r\n    employee_map[\"fingerprint_id\"] = f\"{r.fingerprint_id}\"\r\n    employee_map[\"department\"] = f\"{r.department}\"\r\n    employee_map[\"designation\"] = f\"{r.designation}\"\r\n    employee_map[\"branch\"] = f\"{r.branch}\"\r\n    employee_map[\"status\"] = f\"{r.status}\"\r\n    \r\n    \r\n    if r.times != None:\r\n        times_list = [t.strip() for t in r.times.split(\",\")]\r\n        fixed_times = []\r\n        f_index = 0\r\n        for t in times_list:\r\n            employee_map[f\"F{f_index}\"] = frappe.utils.format_time(t, \"hh:mm a\")\r\n            f_index = f_index + 1\r\n        \r\n        # if f_index > 1:\r\n        #     employee_map[\"status\"] = \"Present\"\r\n        # elif f_index == 1:\r\n        #     employee_map[\"status\"] = \"FP_FOGET\"\r\n        \r\n    att_status = employee_map[\"status\"]\r\n    if att_status == \"Present\":\r\n        employee_map[\"status\"] = \"حاضر\"\r\n    elif att_status == \"FP_FOGET\":\r\n        employee_map[\"status\"] = \"نسيان بصمة\"\r\n    elif att_status == \"Absent\":\r\n        employee_map[\"status\"] = \"غائب\"\r\n    elif att_status == \"On Leave\":\r\n        employee_map[\"status\"] = \"اجازة\"\r\n    elif att_status == \"Friday\":\r\n        employee_map[\"status\"] = \"جمعة\"\r\n        \r\n    emps.append(employee_map)\r\n    \r\ndata = columns, emps",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Fingerprint Device Events V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   },
+   {
+    "parent": "Fingerprint Device Events V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   },
+   {
+    "parent": "Fingerprint Device Events V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Fingerprint Device Events V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   },
+   {
+    "parent": "Fingerprint Device Events V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee Self Service"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [
+   {
+    "fieldname": "employee_name",
+    "fieldtype": "Data",
+    "label": "Employee Name",
+    "options": null,
+    "parent": "Taken Leaves",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "leave_type",
+    "fieldtype": "Data",
+    "label": "Leave Type",
+    "options": null,
+    "parent": "Taken Leaves",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "leaves",
+    "fieldtype": "Data",
+    "label": "Count",
+    "options": null,
+    "parent": "Taken Leaves",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   }
+  ],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": null,
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "From Date",
+    "mandatory": 0,
+    "options": null,
+    "parent": "Taken Leaves",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": null,
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "To Date",
+    "mandatory": 0,
+    "options": null,
+    "parent": "Taken Leaves",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": null,
+    "fieldname": "summary",
+    "fieldtype": "Check",
+    "label": "Summary",
+    "mandatory": 0,
+    "options": null,
+    "parent": "Taken Leaves",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-02-17 10:14:16.344721",
+  "module": "HR",
+  "name": "Taken Leaves",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Attendance",
+  "reference_report": null,
+  "report_name": "Taken Leaves",
+  "report_script": "from_date = filters.get(\"from_date\")\nto_date = filters.get(\"to_date\")\nsummary = filters.get(\"summary\")\n\ncolumns = []\nget_raw_data_sql = \"\"\nraw_data = None\n\nif summary:\n    columns = []\n    get_raw_data_sql = \"\"\n\n    columns.append({\"label\": _('Employee Name'), \"fieldname\": \"employee_name\", \"fieldtype\": \"Data\", \"width\": 150})\n    columns.append({\"label\": _('Leave Type'), \"fieldname\": \"leave_type\", \"fieldtype\": \"Data\", \"width\": 150})\n    columns.append({\"label\": _('Leaves'), \"fieldname\": \"leaves\", \"fieldtype\": \"Data\", \"width\": 150})\n    \n    get_raw_data_sql = f\"\"\"\n    \n        SELECT employee_name,\n        leave_type,\n        COUNT(employee_name) as leaves from `tabAttendance` e\n        WHERE attendance_date between %(from_date)s and %(to_date)s and status = 'On Leave'\n        GROUP BY employee_name, leave_type\n        order by employee_name desc\n    \"\"\"\n    \n    raw_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date}, as_dict=True)\nelse:\n    columns = []\n    get_raw_data_sql = \"\"\n\n    columns.append({\"label\": _('Employee Name'), \"fieldname\": \"employee_name\", \"fieldtype\": \"Data\", \"width\": 150})\n    columns.append({\"label\": _('Leave Type'), \"fieldname\": \"leave_type\", \"fieldtype\": \"Data\", \"width\": 150})\n    columns.append({\"label\": _('Date'), \"fieldname\": \"attendance_date\", \"fieldtype\": \"Data\", \"width\": 150})\n    \n    get_raw_data_sql = f\"\"\"\n    \n        SELECT \n            employee_name,\n            leave_type,\n            attendance_date\n        from `tabAttendance` e\n        WHERE attendance_date between %(from_date)s and %(to_date)s and status = 'On Leave'\n        order by employee_name, attendance_date desc \n    \"\"\"\n    raw_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date}, as_dict=True)\n    \ndata = columns, raw_data",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Taken Leaves",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   },
+   {
+    "parent": "Taken Leaves",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   },
+   {
+    "parent": "Taken Leaves",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Taken Leaves",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   },
+   {
+    "parent": "Taken Leaves",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee Self Service"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": "",
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "From Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Attendance Summary V2",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": "",
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "To Date",
+    "mandatory": 1,
+    "options": null,
+    "parent": "Attendance Summary V2",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": null,
+    "fieldname": "employee",
+    "fieldtype": "Link",
+    "label": "Employee",
+    "mandatory": 0,
+    "options": "Employee",
+    "parent": "Attendance Summary V2",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": "frappe.query_reports[\"Attendance Summary V2\"] = {\r\n\t\"formatter\": function(value, row, column, data, default_formatter) {\r\n\t\tvalue = default_formatter(value, row, column, data);\r\n\t\tif (value == \"L\") {\r\n\t\t\tvalue = \"<div style='background-color:#00c4ff;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"A\") {\r\n\t\t\tvalue = \"<div style='background-color:red;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value.toString().includes(\"P in\") || value.toString().includes(\"P out\")) {\r\n\t\t\tvalue = \"<div style='background-color:#28a24e;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"P\") {\r\n\t\t\tvalue = \"<div style='background-color:#39ed39;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"HD\") {\r\n\t\t\tvalue = \"<div style='background-color:#ffae00;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"W\") {\r\n\t\t\tvalue = \"<div style='background-color:#00d3ff;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\telse if (value == \"H\") {\r\n\t\t\tvalue = \"<div style='background-color:#6cafb1;color:white;text-align:center;'>\" + value + \"</div>\";\r\n\t\t}\r\n\t\treturn value;\r\n\t},\r\n};",
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-07-02 15:06:44.392874",
+  "module": "HR",
+  "name": "Attendance Summary V2",
+  "prepared_report": 1,
+  "query": "SELECT\r\natt.employee,\r\natt.employee_name,\r\nMAX(CASE WHEN DAY(att.attendance_date) = 1  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd1',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 2  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd2',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 3  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd3',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 4  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd4',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 5  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd5',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 6  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd6',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 7  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd7',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 8  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd8',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 9  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd9',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 10 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd10',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 11 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd11',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 12 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd12',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 13 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd13',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 14 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd14',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 15 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd15',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 16 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd16',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 17 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd17',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 18 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd18',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 19 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd19',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 20 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd20',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 21 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd21',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 22 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd22',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 23 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd23',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 24 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd24',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 25 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd25',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 26 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd26',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 27 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd27',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 28 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd28',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 29 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd29',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 30 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd30',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 31 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd31'\r\nFROM\r\ntabAttendance att\r\nWHERE\r\natt.attendance_date between %(from_date)s and %(to_date)s\r\nAND att.docstatus = 1\r\nGROUP BY\r\natt.employee,\r\natt.employee_name\r\nORDER BY\r\natt.employee_name;",
+  "ref_doctype": "Attendance",
+  "reference_report": null,
+  "report_name": "Attendance Summary V2",
+  "report_script": "from_date = filters.get(\"from_date\")\r\nto_date = filters.get(\"to_date\")\r\nemployee = filters.get(\"employee\")\r\n\r\n\r\nget_raw_data_sql = \"\"\"\r\n      SELECT\r\n        at.employee,\r\n        at.employee_name,\r\n        at.attendance_date,\r\n        at.status,\r\n        sl.short_leave_amount_in_minuts,\r\n        sl.log_type,\r\n        at.late_enter_time as OLD,\r\n        (SELECT COUNT(*) FROM `tabEmployee Checkin` ec where date(ec.time) = at.attendance_date and ec.employee = at.employee) fb_count,\r\n        \r\n        SEC_TO_TIME(\r\n            GREATEST(0, \r\n                CASE \r\n                    -- Check if the net late time in seconds exceeds 16 minutes (960 seconds)\r\n                    WHEN (TIME_TO_SEC(at.late_enter_time) - (CASE WHEN sl.log_type = 'IN' THEN sl.short_leave_amount_in_minuts * 60 ELSE 0 END)) > 960 \r\n                    -- If yes, return the actual net late time\r\n                    THEN (TIME_TO_SEC(at.late_enter_time) - (CASE WHEN sl.log_type = 'IN' THEN sl.short_leave_amount_in_minuts * 60 ELSE 0 END))\r\n                    -- Otherwise, return 0\r\n                    ELSE 0 \r\n                END\r\n            )\r\n        ) as late_enter_time,\r\n                \r\n            \r\n        SEC_TO_TIME(\r\n            GREATEST(0, TIME_TO_SEC(at.early_exit_time) - (CASE WHEN sl.log_type = 'OUT' THEN sl.short_leave_amount_in_minuts*60 ELSE 0 END))\r\n            ) as early_exit_time\r\n    FROM\r\n        `tabAttendance`at\r\n    LEFT JOIN\r\n        (SELECT \r\n            sl.short_leave_date,\r\n            sl.log_type, \r\n            sl.employee, \r\n            SUM(sl.short_leave_amount_in_minuts) AS short_leave_amount_in_minuts\r\n        FROM `tabShort Leave` sl where sl.docstatus = 1\r\n        \r\n        GROUP BY     \r\n        sl.short_leave_date,\r\n        sl.log_type, \r\n        sl.employee)\r\n        \r\n        sl on sl.short_leave_date = at.attendance_date and at.employee = sl.employee\r\n    WHERE\r\n        at.attendance_date BETWEEN %(from_date)s AND %(to_date)s\r\n        AND at.docstatus = 1\r\n        AND at.employee = CASE \r\n            WHEN %(employee)s IS NULL OR %(employee)s = '' THEN at.employee\r\n            ELSE %(employee)s\r\n        END\r\n    ORDER BY\r\n        at.employee, at.attendance_date\r\n\"\"\"\r\n\r\nraw_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date, \"employee\":employee}, as_dict=True)\r\n#frappe.throw(f\"{raw_data}\")\r\n\r\n\r\nget_raw_data_sql = \"\"\"\r\n    SELECT\r\n        sl.employee,sl.employee_name, SUM(sl.short_leave_amount_in_minuts) minutes, sl.log_type\r\n    FROM\r\n        `tabShort Leave` sl\r\n    WHERE\r\n        sl.short_leave_date BETWEEN %(from_date)s AND %(to_date)s\r\n        AND sl.docstatus = 1\r\n    \r\n    GROUP BY sl.employee,sl.employee_name, sl.log_type\r\n    ORDER BY\r\n        sl.employee, sl.short_leave_date\r\n\"\"\"\r\n\r\nshort_leaves = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date}, as_dict=True)\r\n\r\nget_raw_data_sql = \"\"\"\r\n    SELECT DISTINCT *, concat(first_name,' ', IFNULL(middle_name, ''),' ', IFNULL(last_name, '')) as full_name\r\n    FROM\r\n        `tabEmployee`\r\n    Where status = 'Active'\r\n        AND employee = CASE \r\n            WHEN %(employee)s IS NULL OR %(employee)s = '' THEN employee\r\n            ELSE %(employee)s\r\n        END\r\n        \r\n    ORDER BY CAST(fingerprint_id AS INT)\r\n\"\"\"\r\n\r\nemployees = frappe.db.sql(get_raw_data_sql, values={\"employee\":employee} , as_dict=True)\r\n\r\nget_raw_data_sql = \"\"\"\r\n    SELECT\r\n        *\r\n    FROM\r\n        `tabHoliday`\r\n        \r\n    WHERE\r\n        holiday_date between %(from_date)s and %(to_date)s\r\n    ORDER BY holiday_date\r\n    \r\n\"\"\"\r\n\r\nholidays_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date}, as_dict=True)\r\n\r\n\r\ncolumns = []\r\ncolumns.append({\"label\": \"#\", \"fieldname\": \"employee\", \"fieldtype\": \"Link\", \"options\": \"Employee\", \"width\": 150})\r\ncolumns.append({\"label\": \"أسم الموظف\", \"fieldname\": \"employee_name\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"الفرع\", \"fieldname\": \"branch\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"القسم\", \"fieldname\": \"department\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"التخصص\", \"fieldname\": \"designation\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"االبصمة\", \"fieldname\": \"fingerprint_id\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"مدير؟\", \"fieldname\": \"is_manager\", \"fieldtype\": \"Data\"})\r\ncurrent_date = from_date\r\nwhile current_date <= to_date:\r\n\r\n    m = frappe.utils.formatdate(current_date, \"MM\") \r\n    d = frappe.utils.formatdate(current_date, \"dd\") \r\n    weekday = frappe.utils.get_weekday(frappe.utils.getdate(current_date)) \r\n    \r\n    columns.append({\r\n        \"label\": f\"{d}/{m} {weekday[:2]}\",\r\n        \"fieldname\": f\"{d}/{m}\",\r\n        \"fieldtype\": \"Data\"\r\n    })\r\n    current_date = frappe.utils.add_days(current_date, 1)\r\n    \r\ncolumns.append({\r\n    \"label\": f\"الحضور\",\r\n    \"fieldname\": f\"presents\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\n\r\ncolumns.append({\r\n    \"label\": f\"الغياب\",\r\n    \"fieldname\": f\"absents\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\n\r\ncolumns.append({\r\n    \"label\": f\"الاجازات\",\r\n    \"fieldname\": f\"leaves\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"العطل\",\r\n    \"fieldname\": f\"holidays\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"اذونات الدخول (بالدقيقة)\",\r\n    \"fieldname\": f\"in_short_leaves\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"اذونات الخروج (بالدقيقة)\",\r\n    \"fieldname\": f\"out_short_leaves\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"التأخير (بالدقيقة) بعد الاذن\",\r\n    \"fieldname\": f\"lates\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"ايام التأخير\",\r\n    \"fieldname\": f\"lates_day\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"ايام نسيان البصمة\",\r\n    \"fieldname\": f\"half_day\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"الخروج المبكر (بالدقيقة)\",\r\n    \"fieldname\": f\"early_exit\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\ncolumns.append({\r\n    \"label\": f\"ايام الخروج المبكر\",\r\n    \"fieldname\": f\"early_exit_day\",\r\n    \"fieldtype\": \"Data\"\r\n})\r\nemps = []\r\nfor e in employees:\r\n    presents = 0\r\n    absents = 0\r\n    lates = 0\r\n    lates_day = 0\r\n    half_day = 0\r\n    early_exit_day = 0\r\n    early_exit = 0\r\n    leaves = 0\r\n    holidays = 0\r\n    \r\n    employee_map = {}\r\n    employee_map[\"employee\"] = e.name\r\n    employee_map[\"employee_name\"] = f\"{e.full_name}\"\r\n    employee_map[\"branch\"] = f\"{e.branch}\"\r\n    employee_map[\"department\"] = f\"{e.department}\"\r\n    employee_map[\"designation\"] = f\"{e.designation}\"\r\n    employee_map[\"fingerprint_id\"] = f\"{e.fingerprint_id}\"\r\n    employee_map[\"is_manager\"] = f\"{e.is_manager}\"\r\n    \r\n    emp_in_short_leaves = 0\r\n    emp_out_short_leaves = 0\r\n    \r\n    for sl in short_leaves:\r\n        if sl[\"employee\"] == e.name:\r\n            if sl[\"log_type\"] == \"IN\":\r\n                emp_in_short_leaves = sl[\"minutes\"]\r\n            if sl[\"log_type\"] == \"OUT\":\r\n                emp_out_short_leaves = sl[\"minutes\"]\r\n                \r\n    current_att = from_date\r\n    while current_att <= to_date:\r\n        \r\n        current_date = frappe.utils.getdate(current_att)\r\n        is_holiday = False\r\n        \r\n        m = frappe.utils.formatdate(current_date, \"MM\") \r\n        d = frappe.utils.formatdate(current_date, \"dd\")\r\n        \r\n        statu = None\r\n        for hd in holidays_data:\r\n            if hd.holiday_date == current_date:\r\n                is_holiday = True\r\n                holidays = holidays + 1\r\n                break;\r\n    \r\n        if is_holiday:\r\n            employee_map[f\"{d}/{m}\"] = \"H\"\r\n            current_att = frappe.utils.add_days(current_att, 1)\r\n            continue\r\n        \r\n        att = None\r\n        for at in raw_data:\r\n            if at.attendance_date == current_date and at.employee == e.name:\r\n                att = at\r\n                break;\r\n        \r\n        if att:\r\n            statu = None\r\n            if att.status == \"On Leave\":\r\n                statu = \"L\"\r\n                leaves = leaves + 1\r\n                \r\n            if att.status == \"Present\" and att.fb_count > 1:\r\n                presents = presents + 1\r\n                \r\n                current_late = frappe.utils.get_time(att.late_enter_time)\r\n                current_late_minutes = (current_late.hour * 60) + current_late.minute\r\n                    \r\n                current_early_exit = frappe.utils.get_time(att.early_exit_time)\r\n                current_early_ext_minutes = (current_early_exit.hour * 60) + current_early_exit.minute\r\n                \r\n                \r\n                in_late_text = \"\"\r\n                out_late_text = \"\"\r\n                \r\n                if current_late_minutes > 3:\r\n                    lates = lates +  current_late_minutes\r\n                    lates_day = lates_day + 1\r\n                    in_late_text = f\" in({current_late_minutes}m)\"\r\n                \r\n                if current_early_ext_minutes > 2:\r\n                    early_exit = early_exit + current_early_ext_minutes\r\n                    early_exit_day = early_exit_day + 1\r\n                    out_late_text = f\" out({current_early_ext_minutes}m)\"\r\n                    \r\n                statu = f\"P\" + in_late_text + out_late_text\r\n                \r\n            if att.status == \"Absent\":\r\n                statu = \"A\"\r\n                absents = absents + 1\r\n                \r\n            if att.status == \"Half Day\" or att.fb_count == 1:\r\n                statu = \"HD\"\r\n                half_day = half_day + 1\r\n                presents = presents + 0.5\r\n                absents = absents + 0.5\r\n                \r\n            if att.status == \"Work From Home\":\r\n                statu = \"W\"\r\n                presents = presents + 1\r\n                \r\n            employee_map[f\"{d}/{m}\"] = statu\r\n        else:\r\n            statu = \"A\"\r\n            for hd in holidays_data:\r\n                if hd.holiday_date == current_date:\r\n                    statu = \"H\"\r\n                    break;\r\n            \r\n            if statu == \"A\":\r\n                absents = absents + 1\r\n                \r\n            if statu == \"H\":\r\n                presents = presents + 1\r\n                \r\n            employee_map[f\"{d}/{m}\"] = statu\r\n        current_att = frappe.utils.add_days(current_att, 1)\r\n        \r\n\r\n    employee_map[f\"presents\"] = presents\r\n    employee_map[f\"absents\"] = absents\r\n    employee_map[f\"lates\"] = lates\r\n    employee_map[f\"in_short_leaves\"] = emp_in_short_leaves\r\n    employee_map[f\"lates_day\"] = lates_day\r\n    employee_map[f\"half_day\"] = half_day\r\n    employee_map[f\"early_exit_day\"] = early_exit_day\r\n    employee_map[f\"early_exit\"] = early_exit\r\n    employee_map[f\"out_short_leaves\"] = emp_out_short_leaves\r\n    employee_map[\"leaves\"] = leaves\r\n    employee_map[\"holidays\"] = holidays\r\n    emps.append(employee_map)\r\n\r\ndata = columns, emps\r\n\r\n\r\n\r\n\r\n\r\n",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Attendance Summary V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee"
+   },
+   {
+    "parent": "Attendance Summary V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   },
+   {
+    "parent": "Attendance Summary V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Attendance Summary V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   },
+   {
+    "parent": "Attendance Summary V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Employee Self Service"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": "frappe.query_reports[\"Shift Summary V2\"] = {\r\n    \"formatter\": function(value, row, column, data, default_formatter) {\r\n\t\tvalue = default_formatter(value, row, column, data);\r\n\t\tif (value == \"\" || value == undefined) {\r\n\t\t\tvalue = \"<div style='background-color:red;color:white;text-align:center;'>لايوجد</div>\";\r\n\t\t}\r\n\t\treturn value;\r\n\t},\r\n};",
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2026-07-01 16:59:56.339731",
+  "module": "HR",
+  "name": "Shift Summary V2",
+  "prepared_report": 0,
+  "query": "SELECT\r\nemployee_id as 'ID',\r\nemployee_name as 'اسم الموظف',\r\ndepartment_name as 'القسم',\r\ndesignation as 'التخصص',\r\nbranch as 'الفرع',\r\nshift_type as 'الشفت الاول',\r\nCONCAT(DATE_FORMAT(start_time, '%H:%i'),' -> ', DATE_FORMAT(end_time, '%H:%i')) as 'الفترة الاولى',\r\nshift_type_2 as 'الشفت الثاني',\r\nCONCAT(DATE_FORMAT(start_time2, '%H:%i'),' -> ', DATE_FORMAT(end_time2, '%H:%i')) as 'الفترة الثانية,\r\ndays as 'ايام الدوام'\r\nFROM (\r\n    SELECT \r\n        inner_results.*,\r\n        -- Calculate if this specific employee has ANY assignment marked as default (1)\r\n        -- This creates a flag '1' for all rows of an employee if at least one row is default\r\n        MAX(inner_results.is_default) OVER (PARTITION BY inner_results.employee_id) as emp_has_default_flag\r\n    FROM (\r\n        SELECT\r\n            e.name AS employee_id,\r\n            e.employee_name,\r\n            dep.department_name,\r\n            e.designation,\r\n            e.branch,\r\n            ssa.title AS shift_title,\r\n            ssa.shift_type,\r\n            st.start_time,\r\n            st.end_time,\r\n            ssa.shift_type_2,\r\n            st2.start_time as start_time2,\r\n            st2.end_time as end_time2,\r\n            ssa.is_default,\r\n            CASE\r\n                WHEN ssa.include_employees = 'Exclude Only' \r\n                     AND EXISTS (\r\n                         SELECT 1 \r\n                         FROM `tabSpecial Shift Assignment Employee Table` emps \r\n                         WHERE emps.employee = e.employee \r\n                           AND emps.parent = ssa.name\r\n                     )\r\n                THEN 'خارج الشفت'\r\n                ELSE 'داخل'\r\n            END AS employee_status,\r\n            GROUP_CONCAT(\r\n                \r\n                CASE LOWER(dow.day_name)\r\n                    WHEN 'saturday'    THEN 'السبت'\r\n                    WHEN 'sunday'   THEN 'الاحد'\r\n                    WHEN 'Monday' THEN 'الاثنين'\r\n                    WHEN 'thursday'  THEN 'الثلاثاء'\r\n                    WHEN 'Wednesday'    THEN 'الاربعاء'\r\n                    WHEN 'Tuesday'  THEN 'الخميس'\r\n                    WHEN 'Friday'    THEN 'الجمعة'\r\n                END\r\n                \r\n                \r\n                ORDER BY \r\n                \r\n                CASE LOWER(dow.day_name)\r\n                    WHEN 'saturday'    THEN 1\r\n                    WHEN 'sunday'   THEN 2\r\n                    WHEN 'Monday' THEN 3\r\n                    WHEN 'thursday'  THEN 4\r\n                    WHEN 'Wednesday'    THEN 5\r\n                    WHEN 'Tuesday'  THEN 6\r\n                    WHEN 'Friday'    THEN 7\r\n                END\r\n                desc\r\n                 SEPARATOR ' ,'\r\n            ) AS days\r\n        FROM `tabEmployee` e\r\n        INNER JOIN `tabSpecial Shift Assignment` ssa\r\n            ON (\r\n                ssa.include_employees = 'Include All'\r\n                OR (\r\n                    ssa.include_employees = 'Include Only'\r\n                    AND EXISTS (\r\n                        SELECT 1 \r\n                        FROM `tabSpecial Shift Assignment Employee Table` emps \r\n                        WHERE emps.employee = e.employee \r\n                          AND emps.parent = ssa.name\r\n                    )\r\n                )\r\n                OR ssa.include_employees = 'Exclude Only'\r\n            )\r\n        INNER JOIN `tabDepartment` dep on dep.name = e.department\r\n        INNER JOIN `tabShift Type` st on st.name = ssa.shift_type\r\n        LEFT JOIN `tabShift Type` st2 on st2.name = ssa.shift_type_2\r\n        LEFT JOIN `tabDays of Week Table` dow\r\n            ON dow.parent = ssa.name\r\n            AND dow.parenttype = 'Special Shift Assignment'\r\n            AND dow.parentfield = 'days_of_week'\r\n        GROUP BY\r\n            dep.department_name,\r\n            e.designation,\r\n            e.branch,\r\n            e.employee_name,\r\n            e.name,\r\n            ssa.title,\r\n            ssa.include_employees,\r\n            ssa.shift_type,\r\n            ssa.is_default,\r\n            ssa.shift_type_2\r\n    ) AS inner_results\r\n) AS final_filter\r\nWHERE \r\n    -- LOGIC: \r\n    -- 1. If the employee has a default record (flag=1), show ONLY records where is_default=1\r\n    (emp_has_default_flag = 1 AND is_default = 1)\r\n    OR \r\n    -- 2. If the employee has NO default records (flag=0), show ALL their records\r\n    (emp_has_default_flag = 0);",
+  "ref_doctype": "Special Shift Assignment",
+  "reference_report": null,
+  "report_name": "Shift Summary V2",
+  "report_script": "columns = [\r\n    {\"label\": \"ID\", \"fieldname\": \"ID\", \"fieldtype\": \"Data\", \"width\": 120},\r\n    {\"label\": \"اسم الموظف\", \"fieldname\": \"اسم الموظف\", \"fieldtype\": \"Data\", \"width\": 200},\r\n    {\"label\": \"القسم\", \"fieldname\": \"القسم\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"التخصص\", \"fieldname\": \"التخصص\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"الفرع\", \"fieldname\": \"الفرع\", \"fieldtype\": \"Data\", \"width\": 120},\r\n    {\"label\": \"اسم الشفت\", \"fieldname\": \"اسم الشفت\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"الشفت الاول\", \"fieldname\": \"الشفت الاول\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"الفترة الاولى\", \"fieldname\": \"الفترة الاولى\", \"fieldtype\": \"Data\", \"width\": 200},\r\n    {\"label\": \"الشفت الثاني\", \"fieldname\": \"الشفت الثاني\", \"fieldtype\": \"Data\", \"width\": 150},\r\n    {\"label\": \"الفترة الثانية\", \"fieldname\": \"الفترة الثانية\", \"fieldtype\": \"Data\", \"width\": 200},\r\n    {\"label\": \"ايام الدوام\", \"fieldname\": \"ايام الدوام\", \"fieldtype\": \"Data\", \"width\": 220},\r\n]\r\n\r\ndata = frappe.db.sql(\"\"\"\r\n    SELECT\r\n    employee_id AS 'ID',\r\n    employee_name AS 'اسم الموظف',\r\n    department_name AS 'القسم',\r\n    designation AS 'التخصص',\r\n    branch AS 'الفرع',\r\n    shift_title as 'اسم الشفت',\r\n    shift_type AS 'الشفت الاول',\r\n    CASE \r\n        WHEN start_time IS NOT NULL THEN CONCAT(DATE_FORMAT(start_time, \"%h:%i %p\"),' -> ', DATE_FORMAT(end_time, \"%h:%i %p\")) \r\n        ELSE NULL \r\n    END as 'الفترة الاولى',\r\n    shift_type_2 as 'الشفت الثاني',\r\n    CASE \r\n        WHEN start_time2 IS NOT NULL THEN CONCAT(DATE_FORMAT(start_time2, \"%h:%i %p\"),' -> ', DATE_FORMAT(end_time2, \"%h:%i %p\")) \r\n        ELSE NULL \r\n    END as 'الفترة الثانية',\r\n    days AS 'ايام الدوام'\r\nFROM (\r\n    SELECT \r\n        inner_results.*,\r\n        MAX(inner_results.is_default)\r\n            OVER (PARTITION BY inner_results.employee_id) AS emp_has_default_flag\r\n    FROM (\r\n        SELECT\r\n            e.name AS employee_id,\r\n            e.employee_name,\r\n            dep.department_name,\r\n            e.designation,\r\n            e.branch,\r\n            ssa.title AS shift_title,\r\n            ssa.shift_type,\r\n            st.start_time,\r\n            st.end_time,\r\n            ssa.shift_type_2,\r\n            st2.start_time AS start_time2,\r\n            st2.end_time AS end_time2,\r\n            ssa.is_default,\r\n            GROUP_CONCAT(\r\n                CASE LOWER(dow.day_name)\r\n                    WHEN 'saturday'  THEN 'السبت'\r\n                    WHEN 'sunday'    THEN 'الاحد'\r\n                    WHEN 'monday'    THEN 'الاثنين'\r\n                    WHEN 'tuesday'   THEN 'الثلاثاء'\r\n                    WHEN 'wednesday' THEN 'الاربعاء'\r\n                    WHEN 'thursday'  THEN 'الخميس'\r\n                    WHEN 'friday'    THEN 'الجمعة'\r\n                END\r\n                ORDER BY\r\n                    CASE LOWER(dow.day_name)\r\n                        WHEN 'saturday'  THEN 1\r\n                        WHEN 'sunday'    THEN 2\r\n                        WHEN 'monday'    THEN 3\r\n                        WHEN 'tuesday'   THEN 4\r\n                        WHEN 'wednesday' THEN 5\r\n                        WHEN 'thursday'  THEN 6\r\n                        WHEN 'friday'    THEN 7\r\n                    END DESC\r\n                SEPARATOR ' ,'\r\n            ) AS days\r\n        FROM `tabEmployee` e\r\n        -- تحويل الربط إلى LEFT JOIN لتضمين الموظف حتى لو لم يطابق أي شفت\r\n        LEFT JOIN `tabSpecial Shift Assignment` ssa\r\n            ON (\r\n                ssa.is_active = 1 AND (\r\n                    ssa.include_employees = 'Include All'\r\n                    OR (\r\n                        ssa.include_employees = 'Include Only'\r\n                        AND EXISTS (\r\n                            SELECT 1\r\n                            FROM `tabSpecial Shift Assignment Employee Table` emps\r\n                            WHERE emps.employee = e.employee\r\n                            AND emps.parent = ssa.name\r\n                        )\r\n                    )\r\n                    OR ssa.include_employees = 'Exclude Only'\r\n                )\r\n            )\r\n        -- تحويل باقي الجداول المرتبطة بالشفت إلى LEFT JOIN\r\n        LEFT JOIN `tabDepartment` dep ON dep.name = e.department\r\n        LEFT JOIN `tabShift Type` st ON st.name = ssa.shift_type\r\n        LEFT JOIN `tabShift Type` st2 ON st2.name = ssa.shift_type_2\r\n        LEFT JOIN `tabDays of Week Table` dow\r\n            ON dow.parent = ssa.name\r\n            AND dow.parenttype = 'Special Shift Assignment'\r\n            AND dow.parentfield = 'days_of_week'\r\n        GROUP BY\r\n            dep.department_name,\r\n            e.designation,\r\n            e.branch,\r\n            e.employee_name,\r\n            e.name,\r\n            ssa.title,\r\n            ssa.include_employees,\r\n            ssa.shift_type,\r\n            ssa.is_default,\r\n            ssa.shift_type_2\r\n    ) AS inner_results\r\n) AS final_filter\r\nWHERE\r\n    -- الموظف لديه شفت افتراضي ونعرض الشفت الافتراضي فقط\r\n    (emp_has_default_flag = 1 AND is_default = 1)\r\n    OR\r\n    -- الموظف لديه شفتات ولكن ليس بينها شفت افتراضي (نعرضها كلها)\r\n    (emp_has_default_flag = 0)\r\n    OR\r\n    -- الموظف ليس لديه أي شفت على الإطلاق (الحالة الجديدة)\r\n    (emp_has_default_flag IS NULL);\r\n\"\"\", as_dict=True)\r\n\r\ndata = columns, data\r\n",
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Shift Summary V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Shift Summary V2",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR User"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+   {
+    "default": null,
+    "fieldname": "from_date",
+    "fieldtype": "Date",
+    "label": "From Date",
+    "mandatory": 0,
+    "options": null,
+    "parent": "Auto Salary Advance Report",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   },
+   {
+    "default": null,
+    "fieldname": "to_date",
+    "fieldtype": "Date",
+    "label": "To Date",
+    "mandatory": 0,
+    "options": null,
+    "parent": "Auto Salary Advance Report",
+    "parentfield": "filters",
+    "parenttype": "Report",
+    "wildcard_filter": 0
+   }
+  ],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+  "modified": "2025-06-19 11:17:56.336616",
+  "module": "Payroll",
+  "name": "Auto Salary Advance Report",
+  "prepared_report": 0,
+  "query": "SELECT\r\n adv.title, adv.from_date, employee, employee_name, amount\r\nFROM\r\n `tabAuto Salary Advance Table` adv_t\r\n INNER JOIN `tabAuto Salary Advance` adv ON adv.name = adv_t.parent\r\n \r\n WHERE\r\n adv.docstatus = 1 and adv.from_date = %(to_date)s\r\n \r\nORDER BY adv.from_date\r\n",
+  "ref_doctype": "Auto Salary Advance",
+  "reference_report": "",
+  "report_name": "Auto Salary Advance Report",
+  "report_script": "",
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "parent": "Auto Salary Advance Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Auto Salary Advance Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "HR Manager"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2017-04-10 15:04:12.498920",
+  "module": "Contacts",
+  "name": "Addresses And Contacts",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Address",
+  "reference_report": null,
+  "report_name": "Addresses And Contacts",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Addresses And Contacts",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Addresses And Contacts",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Purchase User"
+   },
+   {
+    "parent": "Addresses And Contacts",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Maintenance User"
+   },
+   {
+    "parent": "Addresses And Contacts",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   }
+  ],
+  "timeout": 0
+ }
+]

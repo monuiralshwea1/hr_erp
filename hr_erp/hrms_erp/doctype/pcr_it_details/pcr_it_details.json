@@ -1,0 +1,41 @@
+{
+ "name": "PCR IT Details",
+ "module": "hrms-erp",
+ "istable": 1,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "system",
+   "fieldtype": "Select",
+   "label": "System",
+   "options": "Core Banking\nDomain\nEmail",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "column_break_xjal",
+   "fieldtype": "Column Break",
+   "idx": 2
+  },
+  {
+   "fieldname": "cbs_username",
+   "fieldtype": "Data",
+   "label": "CBS Username",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description",
+   "in_list_view": 1,
+   "idx": 4
+  }
+ ],
+ "doctype": "DocType"
+}

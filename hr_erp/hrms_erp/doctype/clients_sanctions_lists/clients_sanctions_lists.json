@@ -1,0 +1,166 @@
+{
+ "name": "Clients Sanctions Lists",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "engine": "InnoDB",
+ "naming_rule": "Expression",
+ "autoname": "format:CSL-{#####}-{DD}{MM}{YYYY}",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "review_department_section",
+   "fieldtype": "Section Break",
+   "label": "Review Department",
+   "idx": 1
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "label": "Client ID",
+   "description": "Consisting of 6 digits",
+   "read_only_depends_on": "eval:cur_frm.doc.is_aml",
+   "reqd": 1,
+   "in_list_view": 1,
+   "unique": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "test_result",
+   "fieldtype": "Select",
+   "label": "Test Result",
+   "options": "\nDone\nNot Done\nDone incorrectly",
+   "read_only_depends_on": "eval:cur_frm.doc.is_aml",
+   "reqd": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "review_description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "read_only_depends_on": "eval:cur_frm.doc.is_aml",
+   "idx": 4
+  },
+  {
+   "fieldname": "retrieve_reason",
+   "fieldtype": "Data",
+   "label": "Reason for Retrieval",
+   "read_only": 1,
+   "idx": 5
+  },
+  {
+   "fieldname": "column_break_ogiw",
+   "fieldtype": "Column Break",
+   "idx": 6
+  },
+  {
+   "fieldname": "client_name",
+   "fieldtype": "Data",
+   "label": "Client Name",
+   "read_only": 1,
+   "in_list_view": 1,
+   "idx": 7
+  },
+  {
+   "fieldname": "opened_date",
+   "fieldtype": "Datetime",
+   "label": "Opened Date",
+   "read_only": 1,
+   "in_list_view": 1,
+   "idx": 8
+  },
+  {
+   "fieldname": "opened_by",
+   "fieldtype": "Data",
+   "label": "Opened By",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 9
+  },
+  {
+   "fieldname": "aml_department_section",
+   "fieldtype": "Section Break",
+   "label": "AML Department",
+   "depends_on": "eval: cur_frm.doc.is_aml",
+   "idx": 10
+  },
+  {
+   "fieldname": "is_aml",
+   "fieldtype": "Check",
+   "label": "Is AML",
+   "default": "0",
+   "depends_on": "false",
+   "read_only": 1,
+   "idx": 11
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "mandatory_depends_on": "eval:cur_frm.doc.is_aml",
+   "idx": 12
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Table",
+   "label": "Attachments",
+   "options": "Attachments List",
+   "idx": 13
+  },
+  {
+   "fieldname": "section_break_uxke",
+   "fieldtype": "Section Break",
+   "idx": 14
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Clients Sanctions Lists",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 15
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "label": "Workflow State",
+   "options": "Workflow State",
+   "hidden": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "import": 1
+  },
+  {
+   "role": "Shumul AML Employee",
+   "read": 1,
+   "write": 1,
+   "submit": 1,
+   "export": 1
+  },
+  {
+   "role": "Shumul Review Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1
+  }
+ ],
+ "doctype": "DocType"
+}

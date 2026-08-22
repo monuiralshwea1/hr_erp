@@ -1,0 +1,56 @@
+{
+ "allow_rename": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "version_code",
+   "fieldtype": "Data",
+   "label": "Version Code",
+   "reqd": true,
+   "in_list_view": true,
+   "unique": true,
+   "set_only_once": true
+  },
+  {
+   "fieldname": "is_stop",
+   "fieldtype": "Check",
+   "label": "Stop",
+   "default": "0",
+   "insert_after": "version_code",
+   "in_list_view": true
+  },
+  {
+   "fieldname": "column_break_qtii",
+   "fieldtype": "Column Break",
+   "insert_after": "is_stop"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "insert_after": "column_break_qtii"
+  }
+ ],
+ "module": "hrms-erp",
+ "name": "App Version Control",
+ "permissions": [
+  {
+   "email": true,
+   "write": true,
+   "create": true,
+   "export": true,
+   "report": true,
+   "delete": true,
+   "role": "System Manager",
+   "print": true,
+   "read": true,
+   "share": true
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "title_field": "version_code",
+ "doctype": "DocType"
+}

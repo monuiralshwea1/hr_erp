@@ -1,0 +1,39 @@
+{
+ "name": "Customer Details",
+ "module": "hrms-erp",
+ "issingle": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "label": "Client ID",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "section_break_jxuv",
+   "fieldtype": "Section Break",
+   "idx": 2
+  },
+  {
+   "fieldname": "table_ncqm",
+   "fieldtype": "Table",
+   "options": "Customer Not Matched Data",
+   "idx": 3
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ],
+ "doctype": "DocType"
+}

@@ -1,0 +1,43 @@
+{
+ "name": "Issue Test Report",
+ "owner": "Administrator",
+ "creation": "2025-07-17 08:12:29.084614",
+ "modified": "2025-07-17 08:13:10.814916",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "report_name": "Issue Test Report",
+ "ref_doctype": "Comment",
+ "reference_report": null,
+ "is_standard": "No",
+ "module": "hrms-erp",
+ "report_type": "Report Builder",
+ "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+ "add_total_row": 0,
+ "disabled": 0,
+ "prepared_report": 0,
+ "add_translate_data": 0,
+ "timeout": 0,
+ "query": null,
+ "report_script": null,
+ "javascript": null,
+ "json": "{}",
+ "doctype": "Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Website Manager"
+  }
+ ],
+ "columns": [
+  {
+   "fieldname": "doctype",
+   "label": "DocType",
+   "fieldtype": "Link",
+   "width": 0
+  }
+ ],
+ "filters": []
+}

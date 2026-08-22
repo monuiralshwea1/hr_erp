@@ -1,0 +1,84 @@
+{
+ "name": "Branch Management Circulars",
+ "module": "hrms-erp",
+ "track_changes": 1,
+ "engine": "InnoDB",
+ "naming_rule": "Expression (old style)",
+ "autoname": "BM-CIR-.#####",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "section_break_v4jz",
+   "fieldtype": "Section Break",
+   "idx": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "unique": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "default": "now",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 3
+  },
+  {
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "label": "File",
+   "options": ".txt",
+   "idx": 4
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description",
+   "idx": 5
+  },
+  {
+   "fieldname": "permissions_section",
+   "fieldtype": "Section Break",
+   "label": "Permissions",
+   "idx": 6
+  },
+  {
+   "fieldname": "is_private",
+   "fieldtype": "Check",
+   "label": "Is Private ?",
+   "default": "0",
+   "idx": 7
+  },
+  {
+   "fieldname": "only_to_department",
+   "fieldtype": "Link",
+   "label": "Only to Department",
+   "options": "Department",
+   "default": "إدارة الفروع - SH",
+   "read_only": 1,
+   "idx": 8
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "doctype": "DocType"
+}

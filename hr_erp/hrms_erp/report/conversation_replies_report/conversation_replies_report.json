@@ -1,0 +1,47 @@
+{
+ "name": "Conversation Replies Report",
+ "owner": "bshmool@gmail.com",
+ "creation": "2025-10-30 20:04:49.815343",
+ "modified": "2026-01-13 09:27:15.108178",
+ "modified_by": "bshmool@gmail.com",
+ "docstatus": 0,
+ "idx": 0,
+ "report_name": "Conversation Replies Report",
+ "ref_doctype": "Internal Message",
+ "reference_report": "",
+ "is_standard": "No",
+ "module": "hrms-erp",
+ "report_type": "Script Report",
+ "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+ "add_total_row": 0,
+ "disabled": 0,
+ "prepared_report": 0,
+ "add_translate_data": 0,
+ "timeout": 0,
+ "query": "   \r\nSELECT \r\n    msg.name AS 'Message Id',\r\n    msg.issue_date AS 'Created On',\r\n    msg.subject AS Subject,\r\n    msg.from_department AS 'Sender Department',\r\n    msg.message_status AS Status,\r\n    GROUP_CONCAT(td.employee_name SEPARATOR ', ') AS 'To Employees'\r\nFROM \r\n    `tabInternal Message` AS msg\r\nLEFT JOIN \r\n    `tabInternal Message` AS root\r\n    ON root.name = msg.conversation_id\r\nLEFT JOIN \r\n    `tabEmployees List` AS td\r\n    ON td.parent = msg.name\r\nWHERE msg.conversation_id = %(conversation)s or msg.name = %(conversation)s\r\n\r\nGROUP BY \r\n    msg.name\r\nORDER BY \r\n     msg.creation ASC",
+ "report_script": "conversation = filters.get(\"conversation\")\r\ncolumns = [\r\n    {\r\n        \"label\": _(\"Message Id\"),\r\n        \"fieldname\": \"Message Id\",\r\n        \"fieldtype\": \"Link\",\r\n        \"options\": \"Internal Message\",\r\n        \"width\": 150\r\n    },\r\n    {\r\n        \"label\": _(\"Created On\"),\r\n        \"fieldname\": \"Created On\",\r\n        \"fieldtype\": \"Date\",\r\n        \"width\": 160\r\n    },\r\n    {\r\n        \"label\": _(\"Created At\"),\r\n        \"fieldname\": \"Created At\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 160\r\n    },\r\n    {\r\n        \"label\": _(\"Subject\"),\r\n        \"fieldname\": \"Subject\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 300\r\n    },\r\n    {\r\n        \"label\": _(\"Sender Department\"),\r\n        \"fieldname\": \"Sender Department\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 180\r\n    },\r\n    {\r\n        \"label\": _(\"Sender Employee\"),\r\n        \"fieldname\": \"Sender Employee\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 180\r\n    },\r\n    {\r\n        \"label\": _(\"Status\"),\r\n        \"fieldname\": \"Status\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 120\r\n    }\r\n]\r\n\r\n\r\nfetch_data = frappe.db.sql(f\"\"\"\r\n    SELECT \r\n        msg.name AS 'Message Id',\r\n        DATE(msg.issue_date) AS 'Created On',\r\n        DATE_FORMAT(msg.issue_date, '%r') AS 'Created At',\r\n        msg.subject AS 'Subject',\r\n        REPLACE(dep.department_name, ' - SH', '') AS 'Sender Department',\r\n        msg.employee_name AS 'Sender Employee',\r\n        msg.message_status AS 'Status',\r\n        GROUP_CONCAT(CONCAT(td.employee_name, ' (', REPLACE(to_dep.department_name, ' - SH', ''), ')') SEPARATOR ' | ') AS \"To\"\r\n    FROM \r\n        `tabInternal Message` AS msg\r\n    LEFT JOIN \r\n        `tabInternal Message` AS root\r\n        ON root.name = msg.conversation_id\r\n    LEFT JOIN \r\n        `tabEmployees List` AS td\r\n        ON td.parent = msg.name\r\n    LEFT JOIN \r\n        `tabDepartment` AS dep\r\n        ON dep.name = msg.from_department \r\n    LEFT JOIN \r\n        `tabDepartment` AS to_dep\r\n        ON to_dep.name = td.department\r\n    WHERE \r\n        msg.conversation_id = '{conversation}' OR msg.name = '{conversation}'\r\n    GROUP BY \r\n        msg.name\r\n    ORDER BY \r\n        msg.creation ASC\r\n\"\"\", as_dict=True)\r\n\r\nmax_cols = 0\r\n\r\nfor msg in fetch_data:\r\n    to_list = [t.strip() for t in msg.To.split(\" | \")]\r\n    if len(to_list) > max_cols:\r\n        max_cols = len(to_list)\r\n        \r\nfor col in range(0,max_cols):\r\n    columns.append(\r\n    {\r\n        \"label\": _(f\"To\"),\r\n        \"fieldname\": f\"To({col})\",\r\n        \"fieldtype\": \"Data\",\r\n    })\r\n\r\nfinal_data = []\r\nfor msg in fetch_data:\r\n\r\n    row = {\r\n        \"Message Id\": msg[\"Message Id\"],\r\n        \"Created On\": msg[\"Created On\"],\r\n        \"Created At\": msg[\"Created At\"],\r\n        \"Subject\": msg[\"Subject\"],\r\n        \"Sender Department\": msg[\"Sender Department\"],\r\n        \"Sender Employee\": msg[\"Sender Employee\"],\r\n        \"Status\": msg[\"Status\"]\r\n    }\r\n\r\n    receiver_list = [r.strip() for r in msg.To.split(\" | \") if r.strip()]\r\n    receiver_index = 0\r\n    for receiver in receiver_list:\r\n        row[f\"To({receiver_index})\"] = receiver\r\n        receiver_index = receiver_index + 1\r\n\r\n    final_data.append(row)\r\n\r\n\r\ndata = columns, final_data",
+ "javascript": null,
+ "json": null,
+ "doctype": "Report",
+ "roles": [
+  {
+   "role": "Shumul Employee"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Employee"
+  }
+ ],
+ "columns": [],
+ "filters": [
+  {
+   "label": "Conversation",
+   "fieldtype": "Data",
+   "fieldname": "conversation",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  }
+ ]
+}

@@ -1,0 +1,111 @@
+{
+ "name": "Employees Details",
+ "owner": "Administrator",
+ "creation": "2025-08-27 18:25:02.068042",
+ "modified": "2025-10-27 08:41:29.784163",
+ "modified_by": "bshmool@gmail.com",
+ "docstatus": 0,
+ "idx": 0,
+ "report_name": "Employees Details",
+ "ref_doctype": "Employee",
+ "reference_report": "",
+ "is_standard": "No",
+ "module": "hrms-erp",
+ "report_type": "Query Report",
+ "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+ "add_total_row": 1,
+ "disabled": 0,
+ "prepared_report": 0,
+ "add_translate_data": 0,
+ "timeout": 0,
+ "query": "SELECT DISTINCT\ne.name as 'ID',\nconcat(e.first_name,' ', IFNULL(e.middle_name, ''),' ', IFNULL(e.last_name, '')) as 'Full Name',\ne.date_of_joining as 'Date Of Joining',\ne.fingerprint_id as 'Fingerprint ID',\ncase when e.gender = 'Male' then 'ذكر' Else 'انثى' end as 'Gender',\ne.department as 'Department',\ne.designation as 'Designation',\ncase when e.is_manager = 1 then 'نعم' Else 'لا' end as 'Is Manager ?',\ne.grade as 'Grade',\ne.level as 'Level',\ne.class as 'Class',\ne.ctc as 'Total Earning'\nFROM `tabEmployee` e\nwhere e.status = 'Active'\norder by e.ctc DESC",
+ "report_script": "",
+ "javascript": null,
+ "json": null,
+ "doctype": "Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "HR Manager"
+  }
+ ],
+ "columns": [
+  {
+   "fieldname": "name",
+   "label": "ID",
+   "fieldtype": "Link",
+   "options": "Employee",
+   "width": 0
+  },
+  {
+   "fieldname": "full_name",
+   "label": "الاسم الكامل",
+   "fieldtype": "Data",
+   "width": 0
+  },
+  {
+   "fieldname": "date_of_joining",
+   "label": "تاريخ الانضمام",
+   "fieldtype": "Data",
+   "width": 0
+  },
+  {
+   "fieldname": "fingerprint_id",
+   "label": "البصمة/الرقم الوظيفي",
+   "fieldtype": "Data",
+   "width": 0
+  },
+  {
+   "fieldname": "gender",
+   "label": "الجنس",
+   "fieldtype": "Data",
+   "width": 0
+  },
+  {
+   "fieldname": "department",
+   "label": "القسم",
+   "fieldtype": "Data",
+   "width": 0
+  },
+  {
+   "fieldname": "designation",
+   "label": "التخصص",
+   "fieldtype": "Data",
+   "width": 0
+  },
+  {
+   "fieldname": "is_manager",
+   "label": "مدير ؟",
+   "fieldtype": "Data",
+   "width": 0
+  },
+  {
+   "fieldname": "grade",
+   "label": "الدرجة",
+   "fieldtype": "Data",
+   "width": 0
+  },
+  {
+   "fieldname": "level",
+   "label": "المستوى",
+   "fieldtype": "Int",
+   "width": 0
+  },
+  {
+   "fieldname": "class",
+   "label": "الفئة",
+   "fieldtype": "Int",
+   "width": 0
+  },
+  {
+   "fieldname": "total_earning",
+   "label": "الراتب",
+   "fieldtype": "Currency",
+   "options": "",
+   "width": 0
+  }
+ ],
+ "filters": []
+}

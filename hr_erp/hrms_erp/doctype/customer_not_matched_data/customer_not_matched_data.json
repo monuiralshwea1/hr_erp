@@ -1,0 +1,38 @@
+{
+ "name": "Customer Not Matched Data",
+ "module": "hrms-erp",
+ "istable": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "data_type",
+   "fieldtype": "Data",
+   "label": "Data Type",
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "old_data",
+   "fieldtype": "Data",
+   "label": "Old Data",
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "new_data",
+   "fieldtype": "Data",
+   "label": "New Data",
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1,
+   "idx": 3
+  }
+ ],
+ "doctype": "DocType"
+}

@@ -1,0 +1,51 @@
+{
+ "name": "Auto Salary Advance Report",
+ "owner": "Administrator",
+ "creation": "2025-06-16 19:02:20.501086",
+ "modified": "2025-06-19 11:17:56.336616",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 1,
+ "report_name": "Auto Salary Advance Report",
+ "ref_doctype": "Auto Salary Advance",
+ "reference_report": "",
+ "is_standard": "No",
+ "module": "hrms-erp",
+ "report_type": "Query Report",
+ "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+ "add_total_row": 1,
+ "disabled": 0,
+ "prepared_report": 0,
+ "add_translate_data": 0,
+ "timeout": 0,
+ "query": "SELECT\r\n adv.title, adv.from_date, employee, employee_name, amount\r\nFROM\r\n `tabAuto Salary Advance Table` adv_t\r\n INNER JOIN `tabAuto Salary Advance` adv ON adv.name = adv_t.parent\r\n \r\n WHERE\r\n adv.docstatus = 1 and adv.from_date = %(to_date)s\r\n \r\nORDER BY adv.from_date\r\n",
+ "report_script": "",
+ "javascript": null,
+ "json": null,
+ "doctype": "Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "HR Manager"
+  }
+ ],
+ "columns": [],
+ "filters": [
+  {
+   "label": "From Date",
+   "fieldtype": "Date",
+   "fieldname": "from_date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "label": "To Date",
+   "fieldtype": "Date",
+   "fieldname": "to_date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  }
+ ]
+}

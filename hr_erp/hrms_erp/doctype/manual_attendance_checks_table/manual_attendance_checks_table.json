@@ -1,0 +1,29 @@
+{
+ "name": "Manual Attendance Checks Table",
+ "module": "hrms-erp",
+ "istable": 1,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nIN\nOUT",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 2
+  }
+ ],
+ "doctype": "DocType"
+}

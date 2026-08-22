@@ -1,0 +1,170 @@
+{
+ "name": "Auto Salary Slip",
+ "module": "hrms-erp",
+ "is_submittable": 1,
+ "track_changes": 1,
+ "engine": "InnoDB",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 1
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "options": "employee",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "idx": 2
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "idx": 3
+  },
+  {
+   "fieldname": "base_salary",
+   "fieldtype": "Currency",
+   "label": "Base Salary",
+   "idx": 4
+  },
+  {
+   "fieldname": "net_salary",
+   "fieldtype": "Currency",
+   "label": "Net Salary",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 5
+  },
+  {
+   "fieldname": "additional_allowance",
+   "fieldtype": "Currency",
+   "label": "Additional Allowance",
+   "idx": 6
+  },
+  {
+   "fieldname": "absent_deductions",
+   "fieldtype": "Data",
+   "label": "Absent Deductions",
+   "idx": 7
+  },
+  {
+   "fieldname": "late_deductions",
+   "fieldtype": "Currency",
+   "label": "Late Deductions",
+   "non_negative": 1,
+   "idx": 8
+  },
+  {
+   "fieldname": "total_deductions",
+   "fieldtype": "Currency",
+   "label": "Total Deductions",
+   "non_negative": 1,
+   "idx": 9
+  },
+  {
+   "fieldname": "present",
+   "fieldtype": "Float",
+   "label": "Present",
+   "reqd": 1,
+   "in_list_view": 1,
+   "non_negative": 1,
+   "precision": "1",
+   "idx": 10
+  },
+  {
+   "fieldname": "absent",
+   "fieldtype": "Float",
+   "label": "Absent",
+   "reqd": 1,
+   "non_negative": 1,
+   "precision": "1",
+   "idx": 11
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 12
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1,
+   "in_list_view": 1,
+   "idx": 13
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Auto Salary Slip",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1,
+   "search_index": 1,
+   "idx": 14
+  },
+  {
+   "fieldname": "auto_salary_entry",
+   "fieldtype": "Link",
+   "label": "Auto Salary Entry",
+   "options": "Auto Salary Entry",
+   "in_standard_filter": 1,
+   "idx": 15
+  },
+  {
+   "fieldname": "entry_title",
+   "fieldtype": "Data",
+   "label": "Entry Title",
+   "in_list_view": 1,
+   "idx": 16
+  }
+ ],
+ "permissions": [
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Employee",
+   "read": 1,
+   "export": 1
+  }
+ ],
+ "doctype": "DocType"
+}

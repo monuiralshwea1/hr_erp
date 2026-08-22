@@ -1,0 +1,211 @@
+{
+ "actions": [],
+ "creation": "2026-08-20 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "attendance",
+  "shift_type",
+  "period_name",
+  "period_number",
+  "period_start",
+  "period_end",
+  "column_break_1",
+  "actual_check_in",
+  "actual_check_out",
+  "working_hours",
+  "section_break_status",
+  "period_status",
+  "column_break_status",
+  "late_minutes",
+  "early_exit_minutes",
+  "section_break_device",
+  "device_check_in",
+  "device_check_out",
+  "column_break_device",
+  "device_name_in",
+  "device_name_out",
+  "section_break_extra",
+  "absent_hours",
+  "overtime_hours"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "attendance",
+   "fieldtype": "Link",
+   "label": "Attendance",
+   "options": "Attendance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "shift_type",
+   "fieldtype": "Link",
+   "label": "Shift Type",
+   "options": "Shift Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "period_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Period Name",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "period_number",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Period #",
+   "read_only": 1
+  },
+  {
+   "fieldname": "period_start",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Period Start",
+   "read_only": 1
+  },
+  {
+   "fieldname": "period_end",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Period End",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "actual_check_in",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Actual Check In",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_check_out",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Actual Check Out",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "working_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Working Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_status",
+   "fieldtype": "Section Break",
+   "label": "Status & Calculations"
+  },
+  {
+   "default": "Present",
+   "fieldname": "period_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Present\nLate\nAbsent\nPartial\nMissing Checkin\nBreak\nOn Leave\nHoliday\nOvertime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_status",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "late_minutes",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Late (min)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "early_exit_minutes",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Early Exit (min)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_device",
+   "fieldtype": "Section Break",
+   "label": "Device Information"
+  },
+  {
+   "fieldname": "device_check_in",
+   "fieldtype": "Data",
+   "label": "Device Check In",
+   "read_only": 1
+  },
+  {
+   "fieldname": "device_check_out",
+   "fieldtype": "Data",
+   "label": "Device Check Out",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_device",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "device_name_in",
+   "fieldtype": "Data",
+   "label": "Device (Check In)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "device_name_out",
+   "fieldtype": "Data",
+   "label": "Device (Check Out)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_extra",
+   "fieldtype": "Section Break",
+   "label": "Absent & Overtime"
+  },
+  {
+   "default": "0",
+   "fieldname": "absent_hours",
+   "fieldtype": "Float",
+   "label": "Absent Hours",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "overtime_hours",
+   "fieldtype": "Float",
+   "label": "Overtime Hours",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-20 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HRMS-ERP",
+ "name": "Attendance Period Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 0
+}

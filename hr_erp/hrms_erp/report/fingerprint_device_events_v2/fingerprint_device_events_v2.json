@@ -1,0 +1,68 @@
+{
+ "name": "Fingerprint Device Events V2",
+ "owner": "bshmool@gmail.com",
+ "creation": "2026-01-07 15:51:50.841751",
+ "modified": "2026-01-20 14:39:10.427189",
+ "modified_by": "bshmool@gmail.com",
+ "docstatus": 0,
+ "idx": 0,
+ "report_name": "Fingerprint Device Events V2",
+ "ref_doctype": "Attendance",
+ "reference_report": null,
+ "is_standard": "No",
+ "module": "hrms-erp",
+ "report_type": "Script Report",
+ "letter_head": "بنك الشمول للتمويل الاصغر الاسلامي",
+ "add_total_row": 1,
+ "disabled": 0,
+ "prepared_report": 0,
+ "add_translate_data": 0,
+ "timeout": 0,
+ "query": "SELECT\r\natt.employee,\r\natt.employee_name,\r\nMAX(CASE WHEN DAY(att.attendance_date) = 1  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd1',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 2  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd2',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 3  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd3',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 4  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd4',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 5  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd5',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 6  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd6',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 7  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd7',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 8  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd8',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 9  THEN LEFT(att.status, 1) ELSE NULL END) AS 'd9',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 10 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd10',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 11 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd11',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 12 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd12',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 13 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd13',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 14 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd14',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 15 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd15',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 16 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd16',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 17 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd17',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 18 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd18',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 19 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd19',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 20 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd20',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 21 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd21',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 22 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd22',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 23 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd23',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 24 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd24',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 25 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd25',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 26 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd26',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 27 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd27',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 28 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd28',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 29 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd29',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 30 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd30',\r\nMAX(CASE WHEN DAY(att.attendance_date) = 31 THEN LEFT(att.status, 1) ELSE NULL END) AS 'd31'\r\nFROM\r\ntabAttendance att\r\nWHERE\r\natt.attendance_date between %(from_date)s and %(to_date)s\r\nAND att.docstatus = 1\r\nGROUP BY\r\natt.employee,\r\natt.employee_name\r\nORDER BY\r\natt.employee_name;",
+ "report_script": "from_date = filters.get(\"from_date\")\r\nto_date = filters.get(\"to_date\")\r\nemployee = filters.get(\"employee\")\r\n\r\nget_raw_data_sql = f\"\"\"\r\n        SELECT\r\n    ec.employee,\r\n    ec.employee_name,\r\n    DATE(ec.time) AS work_date,\r\n    e.fingerprint_id,\r\n    e.department,\r\n    e.designation,\r\n    e.branch,\r\n    GROUP_CONCAT(\r\n        time(ec.time)\r\n        ORDER BY ec.time ASC SEPARATOR ', '\r\n    ) AS times\r\nFROM\r\n    `tabEmployee Checkin` ec\r\nINNER JOIN `tabEmployee` e ON e.name = ec.employee\r\nWHERE\r\n    DATE(ec.time) BETWEEN %(from_date)s AND %(to_date)s\r\nGROUP BY\r\n    ec.employee,\r\n    DATE(ec.time),\r\n    e.fingerprint_id,\r\n    ec.employee_name\r\nORDER BY\r\n    e.fingerprint_id,\r\n    DATE(ec.time) DESC\r\n    \r\n\r\n\"\"\"\r\n\r\nget_raw_data_sql = f\"\"\"\r\n   \r\n    WITH RECURSIVE calendar AS (\r\n    SELECT DATE(%(from_date)s) AS work_date\r\n    UNION ALL\r\n    SELECT DATE_ADD(work_date, INTERVAL 1 DAY)\r\n    FROM calendar\r\n    WHERE work_date < %(to_date)s\r\n)\r\n\r\nSELECT\r\n    e.name AS employee,\r\n    e.employee_name,\r\n    c.work_date,\r\n    e.fingerprint_id,\r\n    e.department,\r\n    e.designation,\r\n    e.branch,\r\n    CASE \r\n        WHEN at.status IS NOT NULL AND at.status <> '' \r\n            THEN at.status\r\n        ELSE (CASE WHEN h.description <> '' THEN h.description WHEN Count(ec.time) > 0 THEN 'Present' ELSE 'Absent' END)\r\n    END AS status,\r\n    GROUP_CONCAT(\r\n        TIME(ec.time)\r\n        ORDER BY ec.time ASC SEPARATOR ', '\r\n    ) AS times\r\nFROM calendar c\r\nINNER JOIN `tabEmployee` e\r\n    ON e.name = %(employee)s\r\nLEFT JOIN `tabAttendance` at\r\n    ON at.employee = e.name\r\n    AND at.attendance_date = c.work_date\r\nLEFT JOIN `tabEmployee Checkin` ec\r\n    ON ec.employee = e.name\r\n    AND DATE(ec.time) = c.work_date\r\nLEFT JOIN `tabHoliday` h\r\n    ON h.holiday_date = c.work_date\r\nWHERE\r\n    e.status = 'Active'\r\nGROUP BY\r\n    c.work_date,\r\n    e.name,\r\n    e.employee_name,\r\n    e.fingerprint_id,\r\n    e.department,\r\n    e.designation,\r\n    e.branch,\r\n    at.status,\r\n    h.description\r\nORDER BY\r\n    e.fingerprint_id,\r\n    c.work_date DESC;\r\n\r\n\r\n\"\"\"\r\n\r\nraw_data = frappe.db.sql(get_raw_data_sql, values={\"from_date\":from_date, \"to_date\":to_date, \"employee\":employee}, as_dict=True)\r\ncolumns = []\r\ncolumns.append({\"label\": \"#\", \"fieldname\": \"employee\", \"fieldtype\": \"Link\", \"options\": \"Employee\", \"width\": 150})\r\ncolumns.append({\"label\": \"أسم الموظف\", \"fieldname\": \"employee_name\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"الفرع\", \"fieldname\": \"branch\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"القسم\", \"fieldname\": \"department\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"التخصص\", \"fieldname\": \"designation\", \"fieldtype\": \"Data\"})\r\ncolumns.append({\"label\": \"البصمة\", \"fieldname\": \"fingerprint_id\", \"fieldtype\": \"Int\"})\r\ncolumns.append({\"label\": \"التاريخ\", \"fieldname\": \"date\", \"fieldtype\": \"Data\", \"width\": 300})\r\ncolumns.append({\"label\": \"الحالة\", \"fieldname\": \"status\", \"fieldtype\": \"Data\", \"width\": 300})\r\n\r\nfor i in range(20):\r\n    columns.append({\r\n        \"label\": f\"F{i+1}\",\r\n        \"fieldname\": f\"F{i}\",\r\n        \"fieldtype\": \"Data\",\r\n        \"width\": 100\r\n    })\r\n    \r\nemps = []\r\nfor r in raw_data:\r\n    employee_map = {}\r\n    employee_map[\"employee\"] = r.employee\r\n    employee_map[\"employee_name\"] = f\"{r.employee_name}\"\r\n    employee_map[\"date\"] = f\"{r.work_date}\"\r\n    employee_map[\"fingerprint_id\"] = f\"{r.fingerprint_id}\"\r\n    employee_map[\"department\"] = f\"{r.department}\"\r\n    employee_map[\"designation\"] = f\"{r.designation}\"\r\n    employee_map[\"branch\"] = f\"{r.branch}\"\r\n    employee_map[\"status\"] = f\"{r.status}\"\r\n    \r\n    if r.status == \"Present\":\r\n        times_list = [t.strip() for t in r.times.split(\",\")]\r\n        fixed_times = []\r\n        f_index = 0\r\n        for t in times_list:\r\n            employee_map[f\"F{f_index}\"] = frappe.utils.format_time(t, \"hh:mm a\")\r\n            f_index = f_index + 1\r\n        \r\n        if f_index > 1:\r\n            employee_map[\"status\"] = \"Present\"\r\n        elif f_index == 1:\r\n            employee_map[\"status\"] = \"FP_FOGET\"\r\n        \r\n    att_status = employee_map[\"status\"]\r\n    if att_status == \"Present\":\r\n        employee_map[\"status\"] = \"حاضر\"\r\n    elif att_status == \"FP_FOGET\":\r\n        employee_map[\"status\"] = \"نسيان بصمة\"\r\n    elif att_status == \"Absent\":\r\n        employee_map[\"status\"] = \"غائب\"\r\n    elif att_status == \"On Leave\":\r\n        employee_map[\"status\"] = \"اجازة\"\r\n    elif att_status == \"Friday\":\r\n        employee_map[\"status\"] = \"جمعة\"\r\n        \r\n    emps.append(employee_map)\r\n    \r\ndata = columns, emps",
+ "javascript": "",
+ "json": null,
+ "doctype": "Report",
+ "roles": [
+  {
+   "role": "Employee"
+  },
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "Employee Self Service"
+  }
+ ],
+ "columns": [],
+ "filters": [
+  {
+   "label": "From Date",
+   "fieldtype": "Date",
+   "fieldname": "from_date",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "label": "To Date",
+   "fieldtype": "Date",
+   "fieldname": "to_date",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "label": "Employee",
+   "fieldtype": "Link",
+   "fieldname": "employee",
+   "mandatory": 1,
+   "wildcard_filter": 0,
+   "options": "Employee"
+  }
+ ]
+}
