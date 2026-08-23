@@ -35504,7 +35504,7 @@ DATA = {'accounts': [{'account_name': 'Debtors',
 # ══════════════════════════════════════════════════════════════════
 # التشغيل المباشر:
 #   cd /home/<user>/<bench>
-#   env/bin/python /path/to/shahadhi_full_seed.py <sitename> [sites_path]
+#   env/bin/python apps/hr_erp/shahadhi_full_seed.py <sitename>
 # ══════════════════════════════════════════════════════════════════
 if __name__ == "__main__":
     import os
@@ -35513,7 +35513,24 @@ if __name__ == "__main__":
     if not _site:
         print("Usage: env/bin/python shahadhi_full_seed.py <sitename> [sites_path]")
         sys.exit(1)
-    _sites_path = sys.argv[2] if len(sys.argv) > 2 else os.path.join(os.getcwd(), "sites")
+    _sites_path = sys.argv[2] if len(sys.argv) > 2 else None
+    if not _sites_path:
+        _d = os.getcwd()
+        for _ in range(4):
+            _cand = os.path.join(_d, "sites")
+            if os.path.isfile(os.path.join(_cand, "common_site_config.json")):
+                _sites_path = _cand
+                break
+            _parent = os.path.dirname(_d)
+            if _parent == _d:
+                break
+            _d = _parent
+    if not _sites_path or not os.path.isdir(_sites_path):
+        print("ERROR: لم يتم العثور على مجلد sites — نفّذ السكربت من داخل مجلد البينش")
+        print("مثال:  cd ~/frappe-bench2 && env/bin/python apps/hr_erp/shahadhi_full_seed.py <sitename>")
+        sys.exit(1)
+    # مسارات اللوج في frappe نسبية ويجب أن يكون cwd هو مجلد sites
+    os.chdir(_sites_path)
     import frappe
     frappe.init(site=_site, sites_path=_sites_path)
     frappe.connect()
