@@ -367,15 +367,43 @@ def seed_salary_components(D):
         else:
             frappe.db.set_value("Salary Component", c, "type",
                                 "Deduction" if c in ded_comps else "Earning")
+        # إجبار الاختصار المتوقع حتى لو كان المكوّن موجوداً مسبقاً
+        # باختصار مختلف (وإلا تفشل معادلات الهيكل مثل HOU في الضريبة)
+        _expected = abbr_map.get(c, "TAX" if c == TAX_COMPONENT else None)
+        if _expected and frappe.db.get_value(
+                "Salary Component", c, "salary_component_abbr") != _expected:
+            frappe.db.set_value("Salary Component", c,
+                                "salary_component_abbr", _expected)
+            print(f"    ~ صحّح اختصار {c} إلى {_expected}")
     frappe.db.set_value("Salary Component", TAX_COMPONENT,
                         "depends_on_payment_days", 0)
     frappe.db.commit()
+
+
+def sync_structure_row_abbrs(structure_name):
+    """يصحح اختصارات صفوف هيكل موجود ليتطابق مع المعادلات (إصلاح ذاتي)."""
+    abbr_map = {"الراتب الأساسي": "BAS", "بدل مواصلات": "TRN",
+                "بدل مخاطر": "RISK", "بدل طبيعه عمل": "NAT",
+                "بدل سكن": "HOU", "ضريبة الدخل": "TAX"}
+    rows = frappe.get_all("Salary Detail",
+                          filters={"parent": structure_name},
+                          fields=["name", "salary_component", "abbr"])
+    fixed = 0
+    for r in rows:
+        want = abbr_map.get(r.salary_component)
+        if want and r.abbr != want:
+            frappe.db.set_value("Salary Detail", r.name, "abbr", want)
+            fixed += 1
+    if fixed:
+        print(f"      ~ صحّح اختصارات {fixed} صف في الهيكل")
+    return fixed
 
 
 def seed_salary_structures(D, accounts):
     print("[6] هياكل الرواتب...")
     for ss in D.get("salary_structures", []):
         if frappe.db.exists("Salary Structure", ss["name"]):
+            sync_structure_row_abbrs(ss["name"])
             print(f"    ✓ {ss['name']} موجود")
             continue
         doc = frappe.get_doc({
