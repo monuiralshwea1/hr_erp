@@ -1,17 +1,36 @@
 {
- "charts": [],
- "content": "[{\"id\":\"hrp-kpi-block\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"\u0645\u0624\u0634\u0631\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629\",\"col\":12}},{\"id\":\"hrp-header-1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0633\u0631\u064a\u0639\u0629</b></span>\",\"col\":12}},{\"id\":\"hrp-sh-1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"hrp-sh-2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leave Application\",\"col\":3}},{\"id\":\"hrp-sh-3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Attendance\",\"col\":3}},{\"id\":\"hrp-sh-4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Document\",\"col\":3}},{\"id\":\"hrp-sp-1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"hrp-header-2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629</b></span>\",\"col\":12}},{\"id\":\"hrp-card-0\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a\",\"col\":4}},{\"id\":\"hrp-card-1\",\"type\":\"card\",\"data\":{\"card_name\":\"Employee\",\"col\":4}},{\"id\":\"hrp-card-2\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0627\u062c\u0627\u0632\u0627\u062a\",\"col\":4}},{\"id\":\"hrp-card-3\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u0627\u0646\u0635\u0631\u0627\u0641\",\"col\":4}},{\"id\":\"hrp-card-4\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0643\u0634\u0641 \u0627\u0644\u0631\u0648\u0627\u062a\u0628\",\"col\":4}},{\"id\":\"hrp-card-5\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u0645\u0637\u0627\u0644\u0628\u0629 \u0628\u0627\u0644\u0646\u0641\u0642\u0627\u062a\",\"col\":4}},{\"id\":\"hrp-card-6\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u062a\u0648\u0638\u064a\u0641\",\"col\":4}},{\"id\":\"hrp-card-7\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0627\u0644\u062a\u0642\u0627\u0631\u064a\u0631 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629\",\"col\":4}},{\"id\":\"hrp-nc-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0627\u0644\u0645\u0624\u0634\u0631\u0627\u062a</b></span>\",\"col\":12}},{\"id\":\"hrp-tabs-block\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"\u062a\u062d\u0644\u064a\u0644\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629\",\"col\":12}}]",
- "creation": "2026-08-08 22:32:37.328687",
- "custom_blocks": [
+ "charts": [
   {
-   "custom_block_name": "\u0645\u0624\u0634\u0631\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629",
-   "label": "\u0645\u0624\u0634\u0631\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629"
+   "chart_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645"
   },
   {
-   "custom_block_name": "\u062a\u062d\u0644\u064a\u0644\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629",
-   "label": "\u062a\u062d\u0644\u064a\u0644\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629"
+   "chart_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0641\u0631\u0639"
+  },
+  {
+   "chart_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0646\u0648\u0639 \u0627\u0644\u062a\u0648\u0638\u064a\u0641"
+  },
+  {
+   "chart_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u062d\u0627\u0644\u0629"
+  },
+  {
+   "chart_name": "\u0633\u062c\u0644 \u0627\u0644\u062d\u0636\u0648\u0631 - \u0622\u062e\u0631 30 \u064a\u0648\u0645"
+  },
+  {
+   "chart_name": "\u0627\u0644\u0625\u062c\u0627\u0632\u0627\u062a \u062d\u0633\u0628 \u0627\u0644\u0646\u0648\u0639"
+  },
+  {
+   "chart_name": "\u0625\u062c\u0645\u0627\u0644\u064a \u0627\u0644\u0631\u0648\u0627\u062a\u0628 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645"
+  },
+  {
+   "chart_name": "\u0627\u0644\u062a\u0639\u064a\u064a\u0646\u0627\u062a \u0627\u0644\u062c\u062f\u064a\u062f\u0629 - \u0622\u062e\u0631 12 \u0634\u0647\u0631"
+  },
+  {
+   "chart_name": "\u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0648\u0646 - \u0622\u062e\u0631 12 \u0634\u0647\u0631"
   }
  ],
+ "content": "[{\"id\": \"hrp-header-1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0633\u0631\u064a\u0639\u0629</b></span>\", \"col\": 12}}, {\"id\": \"hrp-sh-1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Employee\", \"col\": 3}}, {\"id\": \"hrp-sh-2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Leave Application\", \"col\": 3}}, {\"id\": \"hrp-sh-3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Attendance\", \"col\": 3}}, {\"id\": \"hrp-sh-4\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Employee Document\", \"col\": 3}}, {\"id\": \"hrp-sp-1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"hrp-header-2\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629</b></span>\", \"col\": 12}}, {\"id\": \"hrp-card-0\", \"type\": \"card\", \"data\": {\"card_name\": \"Setup\", \"col\": 4}}, {\"id\": \"hrp-card-1\", \"type\": \"card\", \"data\": {\"card_name\": \"Employee\", \"col\": 4}}, {\"id\": \"hrp-card-2\", \"type\": \"card\", \"data\": {\"card_name\": \"Leaves\", \"col\": 4}}, {\"id\": \"hrp-card-3\", \"type\": \"card\", \"data\": {\"card_name\": \"Attendance\", \"col\": 4}}, {\"id\": \"hrp-card-4\", \"type\": \"card\", \"data\": {\"card_name\": \"Payroll\", \"col\": 4}}, {\"id\": \"hrp-card-5\", \"type\": \"card\", \"data\": {\"card_name\": \"Expense Claim\", \"col\": 4}}, {\"id\": \"hrp-card-6\", \"type\": \"card\", \"data\": {\"card_name\": \"Recruitment\", \"col\": 4}}, {\"id\": \"hrp-card-7\", \"type\": \"card\", \"data\": {\"card_name\": \"Key Reports\", \"col\": 4}}, {\"id\": \"hrp-nc-header\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>\u0627\u0644\u0645\u0624\u0634\u0631\u0627\u062a</b></span>\", \"col\": 12}}, {\"id\": \"hrp-nc-0\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u0627\u0644\u0646\u0634\u0637\u0648\u0646\", \"col\": 3}}, {\"id\": \"hrp-nc-1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u062d\u0636\u0648\u0631 \u0627\u0644\u064a\u0648\u0645\", \"col\": 3}}, {\"id\": \"hrp-nc-2\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u063a\u064a\u0627\u0628 \u0627\u0644\u064a\u0648\u0645\", \"col\": 3}}, {\"id\": \"hrp-nc-3\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0637\u0644\u0628\u0627\u062a \u0625\u062c\u0627\u0632\u0629 \u0645\u0639\u0644\u0642\u0629\", \"col\": 3}}, {\"id\": \"hrp-nc-4\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0645\u0648\u0638\u0641\u0648\u0646 \u0641\u064a \u0625\u062c\u0627\u0632\u0629 \u0627\u0644\u064a\u0648\u0645\", \"col\": 3}}, {\"id\": \"hrp-nc-5\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0645\u0648\u0638\u0641\u0648\u0646 \u062c\u062f\u062f \u0647\u0630\u0627 \u0627\u0644\u0634\u0647\u0631\", \"col\": 3}}, {\"id\": \"hrp-nc-6\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0625\u062c\u0645\u0627\u0644\u064a \u0631\u0648\u0627\u062a\u0628 \u0627\u0644\u0634\u0647\u0631\", \"col\": 3}}, {\"id\": \"hrp-nc-7\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0645\u0635\u0631\u0648\u0641\u0627\u062a \u0645\u0639\u0644\u0642\u0629\", \"col\": 3}}, {\"id\": \"hrp-nc-8\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0648\u0638\u0627\u0626\u0641 \u0645\u0641\u062a\u0648\u062d\u0629\", \"col\": 3}}, {\"id\": \"hrp-nc-9\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0627\u0644\u0645\u062a\u0642\u062f\u0645\u0648\u0646 \u0644\u0644\u0648\u0638\u0627\u0626\u0641\", \"col\": 3}}, {\"id\": \"hrp-nc-10\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u062a\u062f\u0631\u064a\u0628\u0627\u062a \u0642\u0627\u062f\u0645\u0629\", \"col\": 3}}, {\"id\": \"hrp-nc-11\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u0639\u0642\u0648\u062f \u062a\u0646\u062a\u0647\u064a \u0642\u0631\u064a\u0628\u0627\u064b\", \"col\": 3}}, {\"id\": \"hrp-ch-header\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>\u0627\u0644\u0631\u0633\u0648\u0645 \u0627\u0644\u0628\u064a\u0627\u0646\u064a\u0629</b></span>\", \"col\": 12}}, {\"id\": \"hrp-ch-0\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645\", \"col\": 12}}, {\"id\": \"hrp-ch-1\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0641\u0631\u0639\", \"col\": 12}}, {\"id\": \"hrp-ch-2\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0646\u0648\u0639 \u0627\u0644\u062a\u0648\u0638\u064a\u0641\", \"col\": 12}}, {\"id\": \"hrp-ch-3\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u062d\u0627\u0644\u0629\", \"col\": 12}}, {\"id\": \"hrp-ch-4\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0633\u062c\u0644 \u0627\u0644\u062d\u0636\u0648\u0631 - \u0622\u062e\u0631 30 \u064a\u0648\u0645\", \"col\": 12}}, {\"id\": \"hrp-ch-5\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0627\u0644\u0625\u062c\u0627\u0632\u0627\u062a \u062d\u0633\u0628 \u0627\u0644\u0646\u0648\u0639\", \"col\": 12}}, {\"id\": \"hrp-ch-6\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0625\u062c\u0645\u0627\u0644\u064a \u0627\u0644\u0631\u0648\u0627\u062a\u0628 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645\", \"col\": 12}}, {\"id\": \"hrp-ch-7\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0627\u0644\u062a\u0639\u064a\u064a\u0646\u0627\u062a \u0627\u0644\u062c\u062f\u064a\u062f\u0629 - \u0622\u062e\u0631 12 \u0634\u0647\u0631\", \"col\": 12}}, {\"id\": \"hrp-ch-8\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0648\u0646 - \u0622\u062e\u0631 12 \u0634\u0647\u0631\", \"col\": 12}}]",
+ "creation": "2026-08-23 16:13:53.561514",
+ "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "hide_custom": 0,
@@ -21,6 +40,15 @@
  "is_hidden": 0,
  "label": "\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629",
  "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Setup",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -153,79 +181,118 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0627\u0644\u062a\u0642\u0627\u0631\u064a\u0631 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629",
-   "link_count": 8,
+   "label": "Leaves",
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u0645\u0648\u0638\u0641",
+   "is_query_report": 0,
+   "label": "Leave Application",
    "link_count": 0,
-   "link_to": "Employee Information",
-   "link_type": "Report",
+   "link_to": "Leave Application",
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "\u062a\u0642\u0631\u064a\u0631 \u062d\u0636\u0648\u0631 \u0627\u0644\u0645\u0648\u0638\u0641 \u0634\u0647\u0631\u064a\u0627",
+   "is_query_report": 0,
+   "label": "Leave Allocation",
    "link_count": 0,
-   "link_to": "Monthly Attendance Sheet",
-   "link_type": "Report",
+   "link_to": "Leave Allocation",
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "\u062a\u062d\u0644\u064a\u0644\u0627\u062a \u0627\u0644\u0645\u0648\u0638\u0641\u064a\u0646",
+   "is_query_report": 0,
+   "label": "Leave Policy",
    "link_count": 0,
-   "link_to": "Employee Analytics",
-   "link_type": "Report",
+   "link_to": "Leave Policy",
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "\u0631\u0635\u064a\u062f \u0627\u062c\u0627\u0632\u0627\u062a \u0627\u0644\u0645\u0648\u0638\u0641",
+   "is_query_report": 0,
+   "label": "Compensatory Leave Request",
    "link_count": 0,
-   "link_to": "Employee Leave Balance",
-   "link_type": "Report",
+   "link_to": "Compensatory Leave Request",
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "\u0645\u0644\u062e\u0635 \u0631\u0635\u064a\u062f \u0627\u062c\u0627\u0632\u0627\u062a \u0627\u0644\u0645\u0648\u0638\u0641",
+   "is_query_report": 0,
+   "label": "Leave Block List",
    "link_count": 0,
-   "link_to": "Employee Leave Balance Summary",
-   "link_type": "Report",
+   "link_to": "Leave Block List",
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "\u062a\u062d\u0644\u064a\u0644 \u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u062a\u0648\u0638\u064a\u0641",
+   "is_query_report": 0,
+   "label": "Attendance",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Attendance",
    "link_count": 0,
-   "link_to": "Recruitment Analytics",
-   "link_type": "Report",
+   "link_to": "Attendance",
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "\u062a\u0642\u0631\u064a\u0631 \u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u0627\u0646\u0635\u0631\u0627\u0641 \u0627\u0644\u064a\u0648\u0645\u064a",
+   "is_query_report": 0,
+   "label": "Attendance Request",
    "link_count": 0,
-   "link_to": "Attendance Report",
-   "link_type": "Report",
+   "link_to": "Attendance Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee Checkin",
+   "link_count": 0,
+   "link_to": "Employee Checkin",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Shift Assignment",
+   "link_count": 0,
+   "link_to": "Shift Assignment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Shift Request",
+   "link_count": 0,
+   "link_to": "Shift Request",
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   },
@@ -242,56 +309,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0627\u0644\u062a\u0648\u0638\u064a\u0641",
-   "link_count": 4,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0648\u0638\u0627\u0626\u0641 \u0634\u0627\u063a\u0631\u0629",
-   "link_count": 0,
-   "link_to": "Job Opening",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0627\u0644\u0645\u062a\u0642\u062f\u0645\u064a\u0646 \u0644\u0644\u0648\u0638\u064a\u0641\u0629",
-   "link_count": 0,
-   "link_to": "Job Applicant",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u062e\u0637\u0629 \u0627\u0644\u062a\u0648\u0638\u064a\u0641",
-   "link_count": 0,
-   "link_to": "Staffing Plan",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u062a\u0627\u0647\u064a\u0644 \u0627\u0644\u0645\u0648\u0638\u0641",
-   "link_count": 0,
-   "link_to": "Employee Onboarding",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a",
+   "label": "Payroll",
    "link_count": 6,
    "link_type": "DocType",
    "onboard": 0,
@@ -300,76 +318,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0627\u0639\u062f\u0627\u062f\u0627\u062a \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629",
-   "link_count": 0,
-   "link_to": "HR Settings",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0634\u0631\u0643\u0629",
-   "link_count": 0,
-   "link_to": "Company",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0641\u0631\u0639",
-   "link_count": 0,
-   "link_to": "Branch",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0642\u0633\u0645",
-   "link_count": 0,
-   "link_to": "Department",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u062a\u0639\u064a\u064a\u0646",
-   "link_count": 0,
-   "link_to": "Designation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0646\u0648\u0639 \u0627\u0644\u0648\u0638\u064a\u0641\u0629",
-   "link_count": 0,
-   "link_to": "Employment Type",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0643\u0634\u0641 \u0627\u0644\u0631\u0648\u0627\u062a\u0628",
-   "link_count": 6,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u062f\u062e\u0648\u0644 \u0627\u0644\u0631\u0648\u0627\u062a\u0628",
+   "label": "Payroll Entry",
    "link_count": 0,
    "link_to": "Payroll Entry",
    "link_type": "DocType",
@@ -379,7 +328,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0642\u0633\u064a\u0645\u0629 \u0627\u0644\u0631\u0627\u062a\u0628",
+   "label": "Salary Slip",
    "link_count": 0,
    "link_to": "Salary Slip",
    "link_type": "DocType",
@@ -389,7 +338,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0647\u064a\u0627\u0643\u0644 \u0627\u0644\u0631\u0648\u0627\u062a\u0628",
+   "label": "Salary Structure",
    "link_count": 0,
    "link_to": "Salary Structure",
    "link_type": "DocType",
@@ -399,7 +348,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u062a\u0639\u064a\u064a\u0646 \u0647\u064a\u0643\u0644 \u0627\u0644\u0631\u0648\u0627\u062a\u0628",
+   "label": "Salary Structure Assignment",
    "link_count": 0,
    "link_to": "Salary Structure Assignment",
    "link_type": "DocType",
@@ -409,7 +358,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0633\u0644\u0641\u0629 \u0627\u0644\u0645\u0648\u0638\u0641",
+   "label": "Employee Advance",
    "link_count": 0,
    "link_to": "Employee Advance",
    "link_type": "DocType",
@@ -419,7 +368,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0627\u0644\u0631\u0627\u062a\u0628 \u0627\u0644\u0627\u0636\u0627\u0641\u064a",
+   "label": "Additional Salary",
    "link_count": 0,
    "link_to": "Additional Salary",
    "link_type": "DocType",
@@ -429,125 +378,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0627\u0644\u0627\u062c\u0627\u0632\u0627\u062a",
-   "link_count": 5,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0637\u0644\u0628 \u0627\u062c\u0627\u0632\u0629",
-   "link_count": 0,
-   "link_to": "Leave Application",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u062a\u062e\u0635\u064a\u0635 \u0627\u062c\u0627\u0632\u0627\u062a \u0644\u0644\u0645\u0648\u0638\u0641\u064a\u0646",
-   "link_count": 0,
-   "link_to": "Leave Allocation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0633\u064a\u0627\u0633\u0629 \u0627\u0644\u0639\u0637\u0644",
-   "link_count": 0,
-   "link_to": "Leave Policy",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0637\u0644\u0628 \u0627\u0644\u0625\u062c\u0627\u0632\u0629 \u0627\u0644\u062a\u0639\u0648\u064a\u0636\u064a\u0629",
-   "link_count": 0,
-   "link_to": "Compensatory Leave Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0627\u062c\u0627\u0632\u0627\u062a \u0627\u0644\u0645\u062d\u0638\u0648\u0631\u0629",
-   "link_count": 0,
-   "link_to": "Leave Block List",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u0627\u0646\u0635\u0631\u0627\u0641",
-   "link_count": 5,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u062d\u0636\u0648\u0631",
-   "link_count": 0,
-   "link_to": "Attendance",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0637\u0644\u0628 \u0627\u0644\u062d\u0636\u0648\u0631",
-   "link_count": 0,
-   "link_to": "Attendance Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0627\u062f\u0627\u0629 \u0633\u062c\u0644 \u0627\u0648\u0642\u0627\u062a \u062f\u062e\u0648\u0644 \u0648\u062e\u0631\u0648\u062c \u0627\u0644\u0645\u0648\u0638\u0641\u064a\u0646",
-   "link_count": 0,
-   "link_to": "Employee Checkin",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u062a\u0639\u064a\u0646 \u0627\u0644\u0641\u062a\u0631\u0627\u062a",
-   "link_count": 0,
-   "link_to": "Shift Assignment",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0637\u0644\u0628  \u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0641\u062a\u0631\u0629",
-   "link_count": 0,
-   "link_to": "Shift Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "\u0627\u0644\u0645\u0637\u0627\u0644\u0628\u0629 \u0628\u0627\u0644\u0646\u0641\u0642\u0627\u062a",
+   "label": "Expense Claim",
    "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
@@ -556,7 +387,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0627\u0644\u0645\u0637\u0627\u0644\u0628\u0629 \u0628\u0627\u0644\u0646\u0641\u0642\u0627\u062a",
+   "label": "Expense Claim",
    "link_count": 0,
    "link_to": "Expense Claim",
    "link_type": "DocType",
@@ -566,7 +397,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0627\u0646\u0648\u0627\u0639 \u0627\u0644\u0645\u0637\u0627\u0644\u0628\u0629 \u0628\u0627\u0644\u0646\u0641\u0642\u0627\u062a",
+   "label": "Expense Claim Type",
    "link_count": 0,
    "link_to": "Expense Claim Type",
    "link_type": "DocType",
@@ -576,7 +407,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0633\u0644\u0641\u0629 \u0627\u0644\u0645\u0648\u0638\u0641",
+   "label": "Employee Advance",
    "link_count": 0,
    "link_to": "Employee Advance",
    "link_type": "DocType",
@@ -586,19 +417,174 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0627\u0644\u0645\u0637\u0627\u0644\u0628\u0629 \u0628\u0627\u0644\u0633\u0641\u0631",
+   "label": "Travel Request",
    "link_count": 0,
    "link_to": "Travel Request",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Recruitment",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Job Opening",
+   "link_count": 0,
+   "link_to": "Job Opening",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Job Applicant",
+   "link_count": 0,
+   "link_to": "Job Applicant",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Staffing Plan",
+   "link_count": 0,
+   "link_to": "Staffing Plan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee Onboarding",
+   "link_count": 0,
+   "link_to": "Employee Onboarding",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Key Reports",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Employee Information",
+   "link_count": 0,
+   "link_to": "Employee Information",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Monthly Attendance Sheet",
+   "link_count": 0,
+   "link_to": "Monthly Attendance Sheet",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Employee Analytics",
+   "link_count": 0,
+   "link_to": "Employee Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Employee Leave Balance",
+   "link_count": 0,
+   "link_to": "Employee Leave Balance",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Employee Leave Balance Summary",
+   "link_count": 0,
+   "link_to": "Employee Leave Balance Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Recruitment Analytics",
+   "link_count": 0,
+   "link_to": "Recruitment Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-08-10 23:58:29.830569",
+ "modified": "2026-08-23 16:13:53.561514",
  "modified_by": "Administrator",
  "module": "hrms-erp",
  "name": "\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629",
- "number_cards": [],
+ "number_cards": [
+  {
+   "number_card_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u0627\u0644\u0646\u0634\u0637\u0648\u0646"
+  },
+  {
+   "number_card_name": "\u062d\u0636\u0648\u0631 \u0627\u0644\u064a\u0648\u0645"
+  },
+  {
+   "number_card_name": "\u063a\u064a\u0627\u0628 \u0627\u0644\u064a\u0648\u0645"
+  },
+  {
+   "number_card_name": "\u0637\u0644\u0628\u0627\u062a \u0625\u062c\u0627\u0632\u0629 \u0645\u0639\u0644\u0642\u0629"
+  },
+  {
+   "number_card_name": "\u0645\u0648\u0638\u0641\u0648\u0646 \u0641\u064a \u0625\u062c\u0627\u0632\u0629 \u0627\u0644\u064a\u0648\u0645"
+  },
+  {
+   "number_card_name": "\u0645\u0648\u0638\u0641\u0648\u0646 \u062c\u062f\u062f \u0647\u0630\u0627 \u0627\u0644\u0634\u0647\u0631"
+  },
+  {
+   "number_card_name": "\u0625\u062c\u0645\u0627\u0644\u064a \u0631\u0648\u0627\u062a\u0628 \u0627\u0644\u0634\u0647\u0631"
+  },
+  {
+   "number_card_name": "\u0645\u0635\u0631\u0648\u0641\u0627\u062a \u0645\u0639\u0644\u0642\u0629"
+  },
+  {
+   "number_card_name": "\u0648\u0638\u0627\u0626\u0641 \u0645\u0641\u062a\u0648\u062d\u0629"
+  },
+  {
+   "number_card_name": "\u0627\u0644\u0645\u062a\u0642\u062f\u0645\u0648\u0646 \u0644\u0644\u0648\u0638\u0627\u0626\u0641"
+  },
+  {
+   "number_card_name": "\u062a\u062f\u0631\u064a\u0628\u0627\u062a \u0642\u0627\u062f\u0645\u0629"
+  },
+  {
+   "number_card_name": "\u0639\u0642\u0648\u062f \u062a\u0646\u062a\u0647\u064a \u0642\u0631\u064a\u0628\u0627\u064b"
+  }
+ ],
  "owner": "Administrator",
  "public": 1,
  "quick_lists": [],
@@ -632,6 +618,14 @@
    "label": "Employee Document",
    "link_to": "Employee Document",
    "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "\u0643\u0634\u0641 \u0627\u0644\u0628\u0635\u0645\u0627\u062a",
+   "link_to": "\u0643\u0634\u0641 \u0627\u0644\u0628\u0635\u0645\u0627\u062a",
+   "report_ref_doctype": "Employee Checkin",
+   "type": "Report"
   }
  ],
  "title": "\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629"
