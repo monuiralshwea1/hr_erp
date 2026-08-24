@@ -1,6 +1,6 @@
 {
  "name": "Deduction Advance Table",
- "is_virtual": 1,
+ "is_virtual": 0,
  "istable": 1,
  "module": "hrms-erp",
  "sort_field": "modified",
