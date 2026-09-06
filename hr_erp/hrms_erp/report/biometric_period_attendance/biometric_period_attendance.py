@@ -1,171 +1,446 @@
-# Copyright (c) 2026, moneer and contributors
-# For license information, please see license.txt
+# -*- coding: utf-8 -*-
+# Copyright (c) 2026, Shumul. All rights reserved.
+# تقرير الحضور والانصراف حسب الفترات (Biometric Period Attendance)
+# يعرض لكل موظف ولكل يوم البصمات مقسمة على الفترات (صباحية/مسائية/غيرها)
+# الدخول = أول بصمة IN داخل الفترة، الخروج = أول بصمة OUT بعد الدخول داخل الفترة
+# الفترات تُقرأ من الشفت المتعدد (Shift Type -> Shift Period) وتُطبق على الجميع
 
 import frappe
 from frappe import _
+from frappe.utils import getdate, get_time, get_datetime, add_days, cint, flt, nowdate
+from datetime import datetime, timedelta
 
-
-STATUS_TRANSLATIONS = {
-    "Present": "حاضر",
-    "Absent": "غائب",
-    "Late": "متأخر",
-    "Half Day": "نصف يوم",
-    "On Leave": "في إجازة",
-    "Holiday": "عطلة رسمية",
-    "Work From Home": "عمل من المنزل",
-    "Break": "استراحة",
+# الفترات الافتراضية عند عدم وجود أي فترات معرفة على الشفتات (مرتبة زمنياً وغير متداخلة)
+DEFAULT_PERIOD_TIMES = {
+	"الفترة الصباحية": ("07:30:00", "13:30:00"),
+	"الفترة المسائية": ("14:50:00", "23:00:00"),
 }
+DEFAULT_PERIOD_ORDER = ["الفترة الصباحية", "الفترة المسائية"]
+
+
+class Punch(object):
+	def __init__(self, time, log_type=None, device_id=None, source="biometric"):
+		self.time = get_datetime(time)
+		self.log_type = log_type
+		self.device_id = device_id
+		self.source = source
+
+
+def get_fallback_periods():
+	"""الفترات الافتراضية (هدف للعرض عند غياب فترات معرفة)."""
+	return [
+		{
+			"period_name": name,
+			"period_number": i + 1,
+			"start_time": get_time(st),
+			"end_time": get_time(et),
+			"late_grace_period": 0,
+			"early_exit_grace_period": 0,
+			"minimum_working_hours": 0,
+			"is_break": 0,
+		}
+		for i, name in enumerate(DEFAULT_PERIOD_ORDER)
+		for st, et in [DEFAULT_PERIOD_TIMES[name]]
+	]
+
+
+def get_shift_periods(shift_name):
+	"""فترات الشفت المتعدد المعرفة (Shift Period rows). بلا فترات تعيد قائمة فارغة."""
+	if not shift_name:
+		return []
+	try:
+		shift_doc = frappe.get_cached_doc("Shift Type", shift_name)
+	except Exception:
+		return []
+
+	rows = [p for p in (getattr(shift_doc, "shift_periods", None) or []) if not cint(p.is_break)]
+	work_rows = [
+		{
+			"period_name": p.period_name,
+			"period_number": cint(p.period_number or 0),
+			"start_time": get_time(p.start_time),
+			"end_time": get_time(p.end_time),
+			"late_grace_period": cint(p.late_grace_period or 0),
+			"early_exit_grace_period": cint(p.early_exit_grace_period or 0),
+			"minimum_working_hours": flt(p.minimum_working_hours or 0),
+			"is_break": cint(p.is_break or 0),
+		}
+		for p in rows
+	]
+	return sorted(work_rows, key=lambda p: p["period_number"])
+
+
+def get_period_range(period, ref_date):
+	"""نطاق الفترة (يدعم المرور عبر منتصف الليل)."""
+	start_t = period["start_time"]
+	end_t = period["end_time"]
+	ref = getdate(ref_date)
+	start = datetime.combine(ref, start_t)
+	if start_t <= end_t:
+		end = datetime.combine(ref, end_t)
+	else:
+		end = datetime.combine(ref + timedelta(days=1), end_t)
+	return start, end
+
+
+def assign_punch_to_period(punch, periods, ref_date):
+	"""إسناد البصمة لأقرب فترة زمنية."""
+	best = None
+	best_dist = timedelta(days=365)
+	for p in periods:
+		if p["is_break"]:
+			continue
+		p_start, p_end = get_period_range(p, ref_date)
+		if p_start <= punch.time <= p_end:
+			return p["period_number"]
+		d = abs(punch.time - p_start)
+		if d < best_dist:
+			best_dist = d
+			best = p["period_number"]
+	if best is not None and best_dist <= timedelta(minutes=30):
+		return best
+	return None
+
+
+def analyze_period(logs, period, ref_date):
+	"""حساب نتيجة الفترة الواحدة."""
+	result = {
+		"status": "غ",
+		"check_in": None,
+		"check_out": None,
+		"late_minutes": 0,
+		"early_arrival_minutes": 0,
+		"early_exit_minutes": 0,
+		"late_exit_minutes": 0,
+		"device_in": None,
+		"device_out": None,
+		"source": None,
+	}
+	p_start, p_end = get_period_range(period, ref_date)
+	logs = sorted(logs, key=lambda l: l.time)
+
+	in_log = None
+	out_log = None
+	for l in logs:
+		if in_log is None and (not l.log_type or l.log_type == "IN"):
+			in_log = l
+			continue
+		if in_log is not None and l.log_type == "OUT":
+			out_log = l
+			break
+	if in_log is None and logs:
+		in_log = logs[0]
+
+	if in_log:
+		result["check_in"] = in_log.time
+		result["device_in"] = in_log.device_id
+		result["source"] = in_log.source
+	if out_log:
+		result["check_out"] = out_log.time
+		result["device_out"] = out_log.device_id
+
+	if not in_log:
+		result["status"] = "غ"
+		return result
+
+	# التبكير (قبل بداية الفترة)
+	if in_log.time < p_start:
+		result["early_arrival_minutes"] = round((p_start - in_log.time).total_seconds() / 60.0, 1)
+
+	# التأخير (من بداية الفترة + مهلة السماح)
+	late_grace = timedelta(minutes=cint(period["late_grace_period"]))
+	if in_log.time > p_start + late_grace:
+		result["late_minutes"] = round((in_log.time - p_start).total_seconds() / 60.0, 1)
+
+	if out_log:
+		# الخروج المبكر (قبل نهاية الفترة - مهلة السماح)
+		early_grace = timedelta(minutes=cint(period["early_exit_grace_period"]))
+		if out_log.time < p_end - early_grace:
+			result["early_exit_minutes"] = round((p_end - out_log.time).total_seconds() / 60.0, 1)
+		# الخروج المتأخر (بعد نهاية الفترة)
+		if out_log.time > p_end:
+			result["late_exit_minutes"] = round((out_log.time - p_end).total_seconds() / 60.0, 1)
+
+	# حالة الفترة
+	if result["late_minutes"] > 0 and result["early_exit_minutes"] > 0 and result["late_exit_minutes"] > 0:
+		result["status"] = "متأخر + مبكر + خروج متأخر"
+	elif result["late_minutes"] > 0 and result["early_exit_minutes"] > 0:
+		result["status"] = "متأخر + مبكر"
+	elif result["late_minutes"] > 0 and result["late_exit_minutes"] > 0:
+		result["status"] = "متأخر + خروج متأخر"
+	elif result["late_minutes"] > 0:
+		result["status"] = "متأخر"
+	elif result["early_exit_minutes"] > 0:
+		result["status"] = "خروج مبكر"
+	elif result["late_exit_minutes"] > 0:
+		result["status"] = "خروج متأخر"
+	elif not out_log:
+		result["status"] = "دخول فقط"
+	else:
+		result["status"] = "ح"
+	return result
+
+
+def get_assignment_map(emp_names, from_date, to_date):
+	"""خريطة الشفتات المعينة لكل موظف لكل يوم ضمن النطاق."""
+	assignments = frappe.get_all(
+		"Shift Assignment",
+		filters={
+			"employee": ["in", emp_names],
+			"docstatus": 1,
+		},
+		fields=["employee", "shift_type", "start_date", "end_date"],
+		order_by="employee,start_date",
+	)
+	mapping = {}  # emp -> list of (start, end, shift)
+	for a in assignments:
+		mapping.setdefault(a.employee, []).append(
+			(getdate(a.start_date), getdate(a.end_date) if a.end_date else None, a.shift_type)
+		)
+	return mapping
+
+
+def resolve_shift(emp, date, assignment_map, checkin_shift_by_date, default_shift_by_emp):
+	"""الشفت الفعلي للموظف في تاريخ محدد."""
+	best = None
+	best_start = None
+	for start, end, shift in assignment_map.get(emp, []):
+		if start <= date and (end is None or date <= end):
+			if best_start is None or start > best_start:
+				best_start = start
+				best = shift
+	if best:
+		return best
+	if date in checkin_shift_by_date.get(emp, {}):
+		return checkin_shift_by_date[emp][date]
+	return default_shift_by_emp.get(emp)
 
 
 def execute(filters=None):
-    filters = frappe._dict(filters or {})
-    columns = get_columns()
-    data = get_data(filters)
-    return columns, data
+	filters = filters or {}
+	from_date = getdate(filters.get("from_date") or nowdate())
+	to_date = getdate(filters.get("to_date") or nowdate())
+	employee = filters.get("employee")
+	branch = filters.get("branch")
+	department = filters.get("department")
+	company = filters.get("company")
+	shift_filter = filters.get("shift_type")
 
+	emp_filter = {"status": ["in", ["Active", ""]]}
+	if employee:
+		emp_filter["name"] = employee
+	if branch:
+		emp_filter["branch"] = branch
+	if department:
+		emp_filter["department"] = department
+	if company:
+		emp_filter["company"] = company
 
-def get_columns():
-    return [
-        {"fieldname": "employee", "label": _("Employee No."), "fieldtype": "Link", "options": "Employee", "width": 120},
-        {"fieldname": "employee_name", "label": _("Employee Name"), "fieldtype": "Data", "width": 180},
-        {"fieldname": "branch", "label": _("Branch"), "fieldtype": "Data", "width": 130},
-        {"fieldname": "department", "label": _("Department"), "fieldtype": "Link", "options": "Department", "width": 140},
-        {"fieldname": "company", "label": _("Company"), "fieldtype": "Link", "options": "Company", "width": 150},
-        {"fieldname": "attendance_date", "label": _("Date"), "fieldtype": "Date", "width": 100},
-        {"fieldname": "period_name", "label": _("Period"), "fieldtype": "Data", "width": 120},
-        {"fieldname": "period_number", "label": _("Period No."), "fieldtype": "Int", "width": 70},
-        {"fieldname": "actual_check_in", "label": _("Period In Time"), "fieldtype": "Data", "width": 100},
-        {"fieldname": "actual_check_out", "label": _("Period Out Time"), "fieldtype": "Data", "width": 100},
-        {"fieldname": "working_hours", "label": _("Working Hours"), "fieldtype": "Float", "width": 90},
-        {"fieldname": "period_status", "label": _("Period Status"), "fieldtype": "Data", "width": 100},
-        {"fieldname": "status", "label": _("Status"), "fieldtype": "Data", "width": 100},
-        {"fieldname": "late_minutes", "label": _("Late (min)"), "fieldtype": "Float", "width": 80},
-        {"fieldname": "early_exit_minutes", "label": _("Early Exit (min)"), "fieldtype": "Float", "width": 100},
-        {"fieldname": "device_name_in", "label": _("Device (In)"), "fieldtype": "Data", "width": 120},
-        {"fieldname": "device_name_out", "label": _("Device (Out)"), "fieldtype": "Data", "width": 120},
-    ]
+	employees = frappe.get_all(
+		"Employee",
+		filters=emp_filter,
+		fields=[
+			"name", "employee_name", "employee_number", "branch", "department",
+			"company", "attendance_device_id", "biometric_employee_id",
+			"biometric_fingerprint_id", "default_shift",
+		],
+		order_by="name",
+	)
+	emp_names = [e.name for e in employees]
 
+	if not emp_names:
+		return [], []
 
-def _fmt_time(value):
-    if value in (None, ""):
-        return ""
-    if hasattr(value, "strftime"):
-        try:
-            return value.strftime("%H:%M:%S")
-        except Exception:
-            return str(value)
-    text = str(value)
-    if len(text) >= 8 and text[2] == ":" and text[5] == ":":
-        return text[:8]
-    return text
+	# البصمات من جهاز البصمة (Employee Checkin) — بالزيادة يوم واحد لتغطية الفترات العابرة لمنتصف الليل
+	checkin_from = datetime.combine(from_date, datetime.min.time())
+	checkin_to = datetime.combine(to_date + timedelta(days=1), datetime.max.time())
+	checkins = frappe.get_all(
+		"Employee Checkin",
+		filters={
+			"employee": ["in", emp_names],
+			"time": ["between", [checkin_from.strftime("%Y-%m-%d %H:%M:%S"), checkin_to.strftime("%Y-%m-%d %H:%M:%S")]],
+		},
+		fields=["employee", "time", "log_type", "device_id", "shift"],
+		order_by="employee,time",
+	)
+	punch_map = {}
+	checkin_shift_by_date = {}
+	for c in checkins:
+		punch_map.setdefault(c.employee, []).append(
+			Punch(c.time, c.log_type, c.device_id, source="biometric")
+		)
+		d = getdate(c.time)
+		checkin_shift_by_date.setdefault(c.employee, {})
+		if c.shift and d not in checkin_shift_by_date[c.employee]:
+			checkin_shift_by_date[c.employee][d] = c.shift
 
+	# الحضور اليدوي (Manual Attendance) — يُدخل كبصمات IN/OUT لهذا اليوم
+	manual_docs = frappe.get_all(
+		"Manual Attendance",
+		filters={"employee": ["in", emp_names], "issue_date": ["between", [from_date, to_date]], "docstatus": 1},
+		fields=["name", "employee", "issue_date"],
+		order_by="employee,issue_date",
+	)
+	if manual_docs:
+		manual_checks = frappe.get_all(
+			"Manual Attendance Checks Table",
+			filters={"parent": ["in", [d.name for d in manual_docs]]},
+			fields=["parent", "time", "status"],
+			order_by="parent,time",
+		)
+		doc_map = {d.name: d for d in manual_docs}
+		for mc in manual_checks:
+			d = doc_map.get(mc.parent)
+			if not d:
+				continue
+			punch_dt = datetime.combine(d.issue_date, get_time(mc.time))
+			punch_map.setdefault(d.employee, []).append(
+				Punch(punch_dt, mc.status, device_id="manual", source="manual")
+			)
 
-def _translate_status(value):
-    if value in (None, ""):
-        return ""
-    return STATUS_TRANSLATIONS.get(str(value), str(value))
+	# تعيينات الشفت + الشفت الافتراضي
+	assignment_map = get_assignment_map(emp_names, from_date, to_date)
+	default_shift_by_emp = {e.name: e.default_shift for e in employees}
 
+	# الشفتات المعنية في النطاق لتجميع أسماء الفترات
+	distinct_shifts = set()
+	for emp in emp_names:
+		cur = from_date
+		while cur <= to_date:
+			sh = resolve_shift(emp, cur, assignment_map, checkin_shift_by_date, default_shift_by_emp)
+			if sh and (not shift_filter or sh == shift_filter):
+				distinct_shifts.add(sh)
+			cur = add_days(cur, 1)
 
-def get_data(filters):
-    from frappe.utils import getdate, today
+	# فترات التقرير: اتحاد فترات الشفتات المتعددة المعرفة، وإلا الافتراضية
+	all_periods = []
+	period_names_order = []
+	for sh in sorted(distinct_shifts):
+		for p in get_shift_periods(sh):
+			if p["period_name"] not in period_names_order:
+				period_names_order.append(p["period_name"])
+			all_periods.append(p)
+	if not all_periods:
+		all_periods = get_fallback_periods()
+		period_names_order = [p["period_name"] for p in all_periods]
 
-    from_date = getdate(filters.get("from_date") or today())
-    to_date = getdate(filters.get("to_date") or today())
+	# جدول الحضور (Attendance) لحالة اليوم
+	attendances = frappe.get_all(
+		"Attendance",
+		filters={
+			"employee": ["in", emp_names],
+			"attendance_date": ["between", [from_date, to_date]],
+			"docstatus": 1,
+		},
+		fields=["employee", "attendance_date", "status", "shift"],
+	)
+	att_map = {}
+	for a in attendances:
+		att_map.setdefault((a.employee, getdate(a.attendance_date)), []).append(a)
 
-    values = {"from_date": from_date, "to_date": to_date}
-    conds1 = [
-        "a.attendance_date BETWEEN %(from_date)s AND %(to_date)s",
-        "a.docstatus = 1",
-    ]
-    conds2 = list(conds1)
+	def fmt_time(dt):
+		return dt.strftime("%H:%M:%S") if dt else ""
 
-    if filters.get("employee"):
-        values["employee"] = filters.get("employee")
-        conds1.append("a.employee = %(employee)s")
-        conds2.append("a.employee = %(employee)s")
-    if filters.get("period_name"):
-        values["period_name"] = filters.get("period_name")
-        conds1.append("apd.period_name = %(period_name)s")
-        conds2.append("1 = 0")
-    if filters.get("branch"):
-        values["branch"] = filters.get("branch")
-        conds1.append("emp.branch = %(branch)s")
-        conds2.append("emp.branch = %(branch)s")
-    if filters.get("department"):
-        values["department"] = filters.get("department")
-        conds1.append("a.department = %(department)s")
-        conds2.append("a.department = %(department)s")
-    if filters.get("company"):
-        values["company"] = filters.get("company")
-        conds1.append("a.company = %(company)s")
-        conds2.append("a.company = %(company)s")
-    if filters.get("status"):
-        values["status"] = filters.get("status")
-        conds1.append("a.status = %(status)s")
-        conds2.append("a.status = %(status)s")
+	# الأعمدة الثابتة
+	columns = [
+		{"label": "الرقم الوظيفي", "fieldname": "employee", "fieldtype": "Link", "options": "Employee", "width": 120},
+		{"label": "اسم الموظف", "fieldname": "employee_name", "fieldtype": "Data", "width": 180},
+		{"label": "الفرع", "fieldname": "branch", "fieldtype": "Data", "width": 130},
+		{"label": "القسم", "fieldname": "department", "fieldtype": "Data", "width": 150},
+		{"label": "الشركة", "fieldname": "company", "fieldtype": "Data", "width": 120},
+		{"label": "التاريخ", "fieldname": "attendance_date", "fieldtype": "Date", "width": 100},
+		{"label": "الدوام", "fieldname": "shift", "fieldtype": "Data", "width": 140},
+		{"label": "رقم البصمة المرتبط", "fieldname": "biometric_number", "fieldtype": "Data", "width": 110},
+	]
+	period_idx = {}
+	for i, pname in enumerate(period_names_order):
+		k = i + 1
+		period_idx[pname] = k
+		columns += [
+			{"label": f"{pname} - دخول", "fieldname": f"p{k}_in", "fieldtype": "Data", "width": 95},
+			{"label": f"{pname} - خروج", "fieldname": f"p{k}_out", "fieldtype": "Data", "width": 95},
+			{"label": f"{pname} - الحالة", "fieldname": f"p{k}_status", "fieldtype": "Data", "width": 150},
+			{"label": f"{pname} - تبكير دخول (د)", "fieldname": f"p{k}_earlyin", "fieldtype": "Data", "width": 90},
+			{"label": f"{pname} - تأخير دخول (د)", "fieldname": f"p{k}_late", "fieldtype": "Data", "width": 90},
+			{"label": f"{pname} - خروج مبكر (د)", "fieldname": f"p{k}_early", "fieldtype": "Data", "width": 90},
+			{"label": f"{pname} - خروج متأخر (د)", "fieldname": f"p{k}_lateout", "fieldtype": "Data", "width": 100},
+		]
+	columns += [
+		{"label": "حالة اليوم", "fieldname": "day_status", "fieldtype": "Data", "width": 110},
+		{"label": "إجمالي التأخير (د)", "fieldname": "total_late", "fieldtype": "Data", "width": 90},
+	]
 
-    query = """
-        {part1}
-        UNION ALL
-        {part2}
-        ORDER BY attendance_date, employee, period_number
-    """.format(
-        part1="""
-            SELECT
-                apd.employee AS employee,
-                COALESCE(a.employee_name, emp.employee_name) AS employee_name,
-                emp.branch AS branch,
-                a.department AS department,
-                a.company AS company,
-                a.attendance_date AS attendance_date,
-                apd.period_name AS period_name,
-                apd.period_number AS period_number,
-                apd.actual_check_in AS check_in,
-                apd.actual_check_out AS check_out,
-                apd.working_hours AS working_hours,
-                apd.period_status AS period_status,
-                a.status AS status,
-                apd.late_minutes AS late_minutes,
-                apd.early_exit_minutes AS early_exit_minutes,
-                apd.device_name_in AS device_name_in,
-                apd.device_name_out AS device_name_out
-            FROM `tabAttendance Period Detail` apd
-            INNER JOIN `tabAttendance` a ON a.name = apd.parent
-            LEFT JOIN `tabEmployee` emp ON emp.name = apd.employee
-            WHERE {conds1}
-        """,
-        part2="""
-            SELECT
-                a.employee AS employee,
-                a.employee_name AS employee_name,
-                emp.branch AS branch,
-                a.department AS department,
-                a.company AS company,
-                a.attendance_date AS attendance_date,
-                "" AS period_name,
-                0 AS period_number,
-                a.in_time AS check_in,
-                a.out_time AS check_out,
-                a.working_hours AS working_hours,
-                "" AS period_status,
-                a.status AS status,
-                0 AS late_minutes,
-                0 AS early_exit_minutes,
-                "" AS device_name_in,
-                "" AS device_name_out
-            FROM `tabAttendance` a
-            LEFT JOIN `tabEmployee` emp ON emp.name = a.employee
-            WHERE {conds2}
-              AND NOT EXISTS (SELECT 1 FROM `tabAttendance Period Detail` x WHERE x.parent = a.name)
-        """,
-    ).format(conds1=" AND ".join(conds1), conds2=" AND ".join(conds2))
+	rows = []
+	for e in employees:
+		emp_punches = sorted(punch_map.get(e.name, []), key=lambda l: l.time)
+		biometric_number = e.attendance_device_id or e.biometric_fingerprint_id or e.biometric_employee_id or ""
+		cur = from_date
+		while cur <= to_date:
+			shift_name = resolve_shift(e.name, cur, assignment_map, checkin_shift_by_date, default_shift_by_emp)
+			if shift_filter and shift_name != shift_filter:
+				cur = add_days(cur, 1)
+				continue
 
-    rows = frappe.db.sql(query, values, as_dict=True)
-    for row in rows:
-        row["check_in"] = _fmt_time(row.get("check_in"))
-        row["check_out"] = _fmt_time(row.get("check_out"))
-        row["period_status"] = _translate_status(row.get("period_status"))
-        row["status"] = _translate_status(row.get("status"))
-        row["actual_check_in"] = row.pop("check_in")
-        row["actual_check_out"] = row.pop("check_out")
-    return rows
+			periods = [dict(p) for p in all_periods]
+			assignments = {p["period_number"]: [] for p in periods}
+			for punch in emp_punches:
+				pidx = assign_punch_to_period(punch, periods, cur)
+				if pidx is not None:
+					assignments[pidx].append(punch)
+
+			period_results = {}
+			total_late = 0.0
+			for p in periods:
+				logs = assignments.get(p["period_number"], [])
+				res = analyze_period(logs, p, cur)
+				period_results[p["period_name"]] = res
+				if res["late_minutes"] > 0:
+					total_late += res["late_minutes"]
+
+			# حالة اليوم: من جدول Attendance إن وجد، وإلا حساب من الفترات
+			att_list = att_map.get((e.name, cur), [])
+			att_status = att_list[0].status if att_list else None
+			if att_status in ("On Leave", "Work From Home", "Holiday"):
+				day_status = att_status
+			else:
+				attended_count = sum(1 for r in period_results.values() if r["check_in"])
+				absent_count = sum(1 for r in period_results.values() if r["status"] == "غ")
+				if attended_count == 0 and len(period_results) > 0 and absent_count == len(period_results):
+					day_status = "غائب"
+				elif attended_count == len(period_results):
+					day_status = "حاضر"
+				elif attended_count > 0:
+					day_status = "جزئي"
+				else:
+					day_status = "غائب"
+
+			row = {
+				"employee": e.name,
+				"employee_name": e.employee_name,
+				"branch": e.branch,
+				"department": e.department,
+				"company": e.company,
+				"attendance_date": cur,
+				"shift": shift_name or "",
+				"biometric_number": biometric_number,
+				"day_status": day_status,
+				"total_late": round(total_late, 1) if total_late else "",
+			}
+			for pname, k in period_idx.items():
+				r = period_results.get(pname, {
+					"status": "غ", "check_in": None, "check_out": None,
+					"late_minutes": 0, "early_arrival_minutes": 0,
+					"early_exit_minutes": 0, "late_exit_minutes": 0,
+				})
+				row[f"p{k}_in"] = fmt_time(r["check_in"])
+				row[f"p{k}_out"] = fmt_time(r["check_out"])
+				row[f"p{k}_status"] = r["status"]
+				row[f"p{k}_earlyin"] = r["early_arrival_minutes"] if r["early_arrival_minutes"] else ""
+				row[f"p{k}_late"] = r["late_minutes"] if r["late_minutes"] else ""
+				row[f"p{k}_early"] = r["early_exit_minutes"] if r["early_exit_minutes"] else ""
+				row[f"p{k}_lateout"] = r["late_exit_minutes"] if r["late_exit_minutes"] else ""
+
+			rows.append(row)
+			cur = add_days(cur, 1)
+
+	return columns, rows

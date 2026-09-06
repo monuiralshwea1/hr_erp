@@ -11,6 +11,7 @@ def after_install():
 	notifications and translations for the hr_erp app."""
 	sync_employee_document_doctype()
 	create_custom_fields()
+	create_multi_period_custom_fields()
 	create_number_cards()
 	create_dashboard_charts()
 	create_workspace()
@@ -100,6 +101,23 @@ def create_custom_fields():
 	for f in _fields:
 		_ensure_custom_field(f)
 	print("Custom fields ready")
+
+
+def create_multi_period_custom_fields():
+	"""Create the multi-period shift custom fields (Shift Type, Attendance,
+	Employee Checkin, Attendance Period Detail) on a fresh install.
+
+	`after_migrate` also calls this; running it here makes `bench install-app`
+	sufficient — no migrate needed on a brand-new server."""
+	try:
+		from hr_erp.hrms_erp.multi_period_shift.custom_fields import (
+			create_custom_fields as _create_mp_fields,
+		)
+
+		_create_mp_fields()
+		print("Multi-period custom fields ready")
+	except Exception as e:
+		print("MP_CF_ERR", repr(e)[:200])
 
 
 def _ensure_custom_field(fields):

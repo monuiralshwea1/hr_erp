@@ -144,6 +144,7 @@ def analyze_period(checkin_logs, period, reference_date):
 		"actual_check_out": None,
 		"working_hours": 0,
 		"late_minutes": 0,
+		"early_arrival_minutes": 0,
 		"early_exit_minutes": 0,
 		"absent_hours": 0,
 		"overtime_hours": 0,
@@ -210,6 +211,10 @@ def analyze_period(checkin_logs, period, reference_date):
 		else:
 			result["working_hours"] = 0
 
+	# Early arrival (before period start)
+	if checkin_time < p_start:
+		result["early_arrival_minutes"] = round((p_start - checkin_time).total_seconds() / 60, 1)
+
 	# Late calculation
 	late_grace = cint(period.late_grace_period or 0)
 	late_threshold = p_start + timedelta(minutes=late_grace)
@@ -269,7 +274,7 @@ def calculate_daily_absence_policy(period_results, settings):
 
 	if policy == "All Periods Required":
 		if all_present:
-			return "Present", 0
+			return "Present", total_working
 		elif any_absent:
 			if total_working <= 0:
 				return "Absent", 0
@@ -414,6 +419,7 @@ def mark_multi_period_attendance(attendance_data):
 				"actual_check_out": pd["actual_check_out"],
 				"working_hours": pd["working_hours"],
 				"late_minutes": pd["late_minutes"],
+				"early_arrival_minutes": pd.get("early_arrival_minutes"),
 				"early_exit_minutes": pd["early_exit_minutes"],
 				"absent_hours": pd["absent_hours"],
 				"overtime_hours": pd["overtime_hours"],
@@ -451,6 +457,7 @@ def mark_multi_period_attendance(attendance_data):
 				"actual_check_out": pd["actual_check_out"],
 				"working_hours": pd["working_hours"],
 				"late_minutes": pd["late_minutes"],
+				"early_arrival_minutes": pd.get("early_arrival_minutes"),
 				"early_exit_minutes": pd["early_exit_minutes"],
 				"absent_hours": pd["absent_hours"],
 				"overtime_hours": pd["overtime_hours"],

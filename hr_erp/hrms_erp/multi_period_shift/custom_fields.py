@@ -160,6 +160,14 @@ CUSTOM_FIELDS = {
 			"insert_after": "biometric_device",
 		},
 	],
+	"Attendance Period Detail": [
+		{
+			"fieldname": "early_arrival_minutes",
+			"fieldtype": "Float",
+			"label": "Early Arrival Minutes",
+			"insert_after": "late_minutes",
+		},
+	],
 }
 
 

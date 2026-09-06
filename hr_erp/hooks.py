@@ -19,9 +19,20 @@ doctype_js = {
 	"Employee Document": "public/js/employee_document.js",
 }
 
+# Override DocType controllers for multi-period shift support
+# -----------------------------------------------------------
+override_doctype_class = {
+	"Shift Type": "hr_erp.hrms_erp.multi_period_shift.shift_type_override.CustomShiftType",
+	"Employee Checkin": "hr_erp.hrms_erp.multi_period_shift.employee_checkin_override.CustomEmployeeCheckin",
+}
+
 # Installation
 # ------------
 after_install = "hr_erp.hrms_erp.install.after_install"
+
+# after_migrate
+# -------------
+after_migrate = ["hr_erp.hrms_erp.multi_period_shift.custom_fields.create_custom_fields"]
 
 # Document Events
 # ---------------

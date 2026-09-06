@@ -46,17 +46,23 @@ def get_branches():
 
 
 @frappe.whitelist()
-def get_employees():
-	"""Active employees with their biometric identity, for enrollment sync."""
+def get_employees(branch=None):
+	"""Active employees of a given branch (or all) with their biometric
+	identity, for enrollment sync. Filtered by branch so that the bridge
+	installed per branch only sees that branch's employees."""
 	_require_hr_permission()
+	filters = {"status": "Active"}
+	if branch:
+		filters["branch"] = branch
 	rows = frappe.get_all(
 		"Employee",
-		filters={"status": "Active"},
+		filters=filters,
 		fields=[
 			"name",
 			"employee_name",
 			"department",
-			"biometric_employee_id",
+			"branch",
+			"attendance_device_id",
 			"biometric_fingerprint_id",
 			"biometric_devices",
 			"biometric_enrolled",
@@ -68,7 +74,8 @@ def get_employees():
 			"employee": e.name,
 			"employee_name": e.employee_name,
 			"department": e.department,
-			"biometric_employee_id": e.biometric_employee_id,
+			"branch": e.branch,
+			"attendance_device_id": e.attendance_device_id,
 			"biometric_fingerprint_id": e.biometric_fingerprint_id,
 			"biometric_devices": e.biometric_devices,
 			"biometric_enrolled": cint(e.biometric_enrolled),
@@ -91,8 +98,8 @@ def register_fingerprint(employee, fingerprint_id=None, device_id=None):
 
 	if fingerprint_id:
 		doc.biometric_fingerprint_id = str(fingerprint_id)
-	if not doc.biometric_employee_id:
-		doc.biometric_employee_id = str(fingerprint_id or employee)
+	if not doc.attendance_device_id:
+		doc.attendance_device_id = str(fingerprint_id or employee)
 
 	if device_id:
 		devices = [d.strip() for d in (doc.biometric_devices or "").split(",") if d.strip()]
@@ -198,9 +205,9 @@ def _existing_log_ids(log_ids):
 
 def _resolve_employee(c):
 	"""Resolve the employee from biometric identity fields sent by the bridge."""
-	bid = (c.get("biometric_employee_id") or "").strip()
+	bid = (c.get("attendance_device_id") or "").strip()
 	if bid:
-		emp = frappe.db.get_value("Employee", {"biometric_employee_id": bid}, "name")
+		emp = frappe.db.get_value("Employee", {"attendance_device_id": bid}, "name")
 		if emp:
 			return emp
 	fid = (c.get("fingerprint_id") or "").strip()

@@ -6,6 +6,7 @@ Override for Employee Checkin to add biometric device tracking and enhanced dupl
 import frappe
 from frappe import _
 from frappe.utils import get_datetime
+from datetime import timedelta
 
 from hrms.hr.doctype.employee_checkin.employee_checkin import EmployeeCheckin
 
@@ -39,14 +40,14 @@ class CustomEmployeeCheckin(EmployeeCheckin):
 			window = 5
 			near_dup = frappe.db.exists(
 				"Employee Checkin",
-				{
-					"employee": self.employee,
-					"time": (">=", checkin_time - frappe.utils.timedelta(seconds=window)),
-					"time": ("<=", checkin_time + frappe.utils.timedelta(seconds=window)),
-					"device_id": self.device_id,
-					"log_type": self.log_type,
-					"name": ("!=", self.name),
-				},
+				[
+					["employee", "=", self.employee],
+					["time", ">=", checkin_time - timedelta(seconds=window)],
+					["time", "<=", checkin_time + timedelta(seconds=window)],
+					["device_id", "=", self.device_id],
+					["log_type", "=", self.log_type],
+					["name", "!=", self.name],
+				],
 			)
 			if near_dup:
 				doc_link = frappe.get_desk_link("Employee Checkin", near_dup)

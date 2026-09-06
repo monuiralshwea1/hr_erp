@@ -103,6 +103,7 @@ def get_employee_period_attendance(employee, attendance_date):
 				"actual_check_out": str(pd.actual_check_out) if pd.actual_check_out else None,
 				"working_hours": pd.working_hours,
 				"late_minutes": pd.late_minutes,
+				"early_arrival_minutes": getattr(pd, "early_arrival_minutes", 0) or 0,
 				"early_exit_minutes": pd.early_exit_minutes,
 				"absent_hours": pd.absent_hours,
 				"overtime_hours": pd.overtime_hours,
