@@ -37,6 +37,7 @@ EMPLOYEE_CHUNK_SIZE = 50
 
 class CustomShiftType(ShiftType):
 
+	@frappe.whitelist()
 	def process_auto_attendance(self, is_manually_triggered=False):
 		if self.has_incorrect_shift_config():
 			return
