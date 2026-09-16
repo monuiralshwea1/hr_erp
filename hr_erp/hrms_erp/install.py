@@ -399,22 +399,25 @@ def create_workspace():
 	workspace.content = json.dumps(blocks, ensure_ascii=False)
 
 	# number cards
+	# NOTE: label MUST be set equal to number_card_name, otherwise Frappe's
+	# clean_up() (desk/desktop.py) drops these child rows on every workspace
+	# save because it keeps only rows whose label is present in content blocks.
 	for card_label in [
 		"الموظفون النشطون", "حضور اليوم", "غياب اليوم", "طلبات إجازة معلقة",
 		"موظفون في إجازة اليوم", "موظفون جدد هذا الشهر", "إجمالي رواتب الشهر",
 		"مصروفات معلقة", "وظائف مفتوحة", "المتقدمون للوظائف", "تدريبات قادمة",
 		"عقود تنتهي قريباً",
 	]:
-		workspace.append("number_cards", {"number_card_name": card_label})
+		workspace.append("number_cards", {"number_card_name": card_label, "label": card_label})
 
-	# charts
+	# charts (label set for the same reason as number cards above)
 	for chart_name in [
 		"الموظفون حسب القسم", "الموظفون حسب الفرع", "الموظفون حسب نوع التوظيف",
 		"الموظفون حسب الحالة", "سجل الحضور - آخر 30 يوم", "الإجازات حسب النوع",
 		"إجمالي الرواتب حسب القسم", "التعيينات الجديدة - آخر 12 شهر",
 		"المغادرون - آخر 12 شهر",
 	]:
-		workspace.append("charts", {"chart_name": chart_name})
+		workspace.append("charts", {"chart_name": chart_name, "label": chart_name})
 
 	# shortcuts: must have matching rows in the shortcuts child table
 	# because content blocks resolve by label via page_data.shortcuts.items

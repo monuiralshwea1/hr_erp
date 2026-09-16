@@ -1,0 +1,238 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-13 00:00:00.000000",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "late_deduction_section",
+  "enable_late_deduction",
+  "late_deduction_component",
+  "late_deduction_factor",
+  "late_grace_period_override",
+  "column_break_late",
+  "absence_deduction_section",
+  "enable_absence_deduction",
+  "absence_deduction_component",
+  "absence_deduction_factor",
+  "working_days_per_month",
+  "column_break_absence",
+  "overtime_section",
+  "enable_overtime_generation",
+  "overtime_15_activity",
+  "overtime_20_activity",
+  "overtime_threshold",
+  "maximum_monthly_hours",
+  "include_early_entry",
+  "column_break_overtime",
+  "biostar_section",
+  "enable_biostar_sync",
+  "biostar_username",
+  "biostar_password",
+  "biostar_ta_url"
+ ],
+ "fields": [
+  {
+   "fieldname": "late_deduction_section",
+   "fieldtype": "Section Break",
+   "label": "Late Deduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_late_deduction",
+   "fieldtype": "Check",
+   "label": "Enable Late Deduction"
+  },
+  {
+   "depends_on": "enable_late_deduction",
+   "fieldname": "late_deduction_component",
+   "fieldtype": "Link",
+   "label": "Late Deduction Component",
+   "options": "Salary Component"
+  },
+  {
+   "default": "1.0",
+   "depends_on": "enable_late_deduction",
+   "description": "Deduction = hourly_rate x factor x (late_minutes / 60)",
+   "fieldname": "late_deduction_factor",
+   "fieldtype": "Float",
+   "label": "Late Deduction Factor"
+  },
+  {
+   "default": "0",
+   "depends_on": "enable_late_deduction",
+   "description": "Overrides Shift Type late_entry_grace_period if > 0",
+   "fieldname": "late_grace_period_override",
+   "fieldtype": "Int",
+   "label": "Late Grace Period Override (min)"
+  },
+  {
+   "fieldname": "column_break_late",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "absence_deduction_section",
+   "fieldtype": "Section Break",
+   "label": "Absence Deduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_absence_deduction",
+   "fieldtype": "Check",
+   "label": "Enable Absence Deduction"
+  },
+  {
+   "depends_on": "enable_absence_deduction",
+   "fieldname": "absence_deduction_component",
+   "fieldtype": "Link",
+   "label": "Absence Deduction Component",
+   "options": "Salary Component"
+  },
+  {
+   "default": "1.0",
+   "depends_on": "enable_absence_deduction",
+   "description": "Deduction = daily_rate x factor x absent_days",
+   "fieldname": "absence_deduction_factor",
+   "fieldtype": "Float",
+   "label": "Absence Deduction Factor"
+  },
+  {
+   "default": "30",
+   "depends_on": "enable_absence_deduction",
+   "fieldname": "working_days_per_month",
+   "fieldtype": "Int",
+   "label": "Working Days Per Month"
+  },
+  {
+   "fieldname": "column_break_absence",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "overtime_section",
+   "fieldtype": "Section Break",
+   "label": "Overtime Generation"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_overtime_generation",
+   "fieldtype": "Check",
+   "label": "Enable Overtime Generation"
+  },
+  {
+   "depends_on": "enable_overtime_generation",
+   "fieldname": "overtime_15_activity",
+   "fieldtype": "Link",
+   "label": "Overtime 1.5 Activity",
+   "options": "Activity Type"
+  },
+  {
+   "depends_on": "enable_overtime_generation",
+   "fieldname": "overtime_20_activity",
+   "fieldtype": "Link",
+   "label": "Overtime 2.0 Activity",
+   "options": "Activity Type"
+  },
+  {
+   "default": "30",
+   "depends_on": "enable_overtime_generation",
+   "description": "Minutes past shift end before time counts as overtime",
+   "fieldname": "overtime_threshold",
+   "fieldtype": "Float",
+   "label": "Overtime Threshold (min)"
+  },
+  {
+   "default": "0",
+   "depends_on": "enable_overtime_generation",
+   "description": "Hours beyond this are carried over to overtime 1.5 in salary slips",
+   "fieldname": "maximum_monthly_hours",
+   "fieldtype": "Float",
+   "label": "Maximum Monthly Hours"
+  },
+  {
+   "default": "0",
+   "depends_on": "enable_overtime_generation",
+   "description": "If checked, hours before shift start are counted",
+   "fieldname": "include_early_entry",
+   "fieldtype": "Check",
+   "label": "Include Early Entry"
+  },
+  {
+   "fieldname": "column_break_overtime",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "biostar_section",
+   "fieldtype": "Section Break",
+   "label": "Biostar Sync"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_biostar_sync",
+   "fieldtype": "Check",
+   "label": "Enable Biostar Sync"
+  },
+  {
+   "depends_on": "enable_biostar_sync",
+   "fieldname": "biostar_username",
+   "fieldtype": "Data",
+   "label": "Biostar Username"
+  },
+  {
+   "depends_on": "enable_biostar_sync",
+   "fieldname": "biostar_password",
+   "fieldtype": "Password",
+   "label": "Biostar Password"
+  },
+  {
+   "depends_on": "enable_biostar_sync",
+   "fieldname": "biostar_ta_url",
+   "fieldtype": "Data",
+   "label": "Biostar TA URL"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-09-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HRMS-ERP",
+ "name": "HR ERP Payroll Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "HR User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

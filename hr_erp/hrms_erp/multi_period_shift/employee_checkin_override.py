@@ -19,6 +19,7 @@ class CustomEmployeeCheckin(EmployeeCheckin):
 
 	def validate_duplicate_log(self):
 		"""Enhanced duplicate detection with device_id support."""
+		# ORIGINAL (active): exact + near-dup matching always filters by log_type.
 		existing = frappe.db.exists(
 			"Employee Checkin",
 			{
@@ -56,3 +57,11 @@ class CustomEmployeeCheckin(EmployeeCheckin):
 						self.device_id, "<Br>" + doc_link
 					)
 				)
+
+		# ============================================================
+		# DISABLED (2026-09-10): BiometricBridge — ignore log_type in
+		# duplicate matching so empty-type bridge punches are not
+		# flagged against typed ones. To re-enable, comment the ORIGINAL
+		# filters above and drop the two "log_type" lines you removed
+		# (see hr_erp_DISABLED_CHANGES.txt). Restored original keeps them.
+		# ============================================================

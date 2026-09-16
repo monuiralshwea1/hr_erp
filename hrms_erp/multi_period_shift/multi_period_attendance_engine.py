@@ -144,6 +144,7 @@ def analyze_period(checkin_logs, period, reference_date):
 		"actual_check_out": None,
 		"working_hours": 0,
 		"late_minutes": 0,
+		"early_arrival_minutes": 0,
 		"early_exit_minutes": 0,
 		"absent_hours": 0,
 		"overtime_hours": 0,
@@ -167,7 +168,13 @@ def analyze_period(checkin_logs, period, reference_date):
 	# Sort checkins by time
 	sorted_logs = sorted(checkin_logs, key=lambda l: get_datetime(l.time))
 
-	# Determine check-in and check-out from logs
+	# ============================================================
+	# DISABLED (2026-09-10): BiometricBridge time-based IN/OUT.
+	# To re-enable, comment the ORIGINAL block below and uncomment
+	# the ENABLED block. See hr_erp_DISABLED_CHANGES.txt
+	# ============================================================
+
+	# ==== ORIGINAL (active): based on explicit Log Type ====
 	in_log = None
 	out_log = None
 	for log in sorted_logs:
@@ -181,6 +188,12 @@ def analyze_period(checkin_logs, period, reference_date):
 				in_log = log
 			else:
 				out_log = log
+	# ========================================================
+
+	# ==== ENABLED (BiometricBridge): first = check-in, last = check-out ====
+	# in_log = sorted_logs[0]
+	# out_log = sorted_logs[-1] if len(sorted_logs) >= 2 else None
+	# =======================================================================
 
 	if not in_log:
 		result["period_status"] = "Missing Checkin"
@@ -209,6 +222,10 @@ def analyze_period(checkin_logs, period, reference_date):
 			result["working_hours"] = round(hrms_time_diff(checkin_time, p_end), 2)
 		else:
 			result["working_hours"] = 0
+
+	# Early arrival (before period start)
+	if checkin_time < p_start:
+		result["early_arrival_minutes"] = round((p_start - checkin_time).total_seconds() / 60, 1)
 
 	# Late calculation
 	late_grace = cint(period.late_grace_period or 0)
@@ -269,7 +286,7 @@ def calculate_daily_absence_policy(period_results, settings):
 
 	if policy == "All Periods Required":
 		if all_present:
-			return "Present", 0
+			return "Present", total_working
 		elif any_absent:
 			if total_working <= 0:
 				return "Absent", 0
@@ -414,6 +431,7 @@ def mark_multi_period_attendance(attendance_data):
 				"actual_check_out": pd["actual_check_out"],
 				"working_hours": pd["working_hours"],
 				"late_minutes": pd["late_minutes"],
+				"early_arrival_minutes": pd.get("early_arrival_minutes"),
 				"early_exit_minutes": pd["early_exit_minutes"],
 				"absent_hours": pd["absent_hours"],
 				"overtime_hours": pd["overtime_hours"],
@@ -451,6 +469,7 @@ def mark_multi_period_attendance(attendance_data):
 				"actual_check_out": pd["actual_check_out"],
 				"working_hours": pd["working_hours"],
 				"late_minutes": pd["late_minutes"],
+				"early_arrival_minutes": pd.get("early_arrival_minutes"),
 				"early_exit_minutes": pd["early_exit_minutes"],
 				"absent_hours": pd["absent_hours"],
 				"overtime_hours": pd["overtime_hours"],

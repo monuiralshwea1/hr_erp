@@ -168,7 +168,13 @@ def analyze_period(checkin_logs, period, reference_date):
 	# Sort checkins by time
 	sorted_logs = sorted(checkin_logs, key=lambda l: get_datetime(l.time))
 
-	# Determine check-in and check-out from logs
+	# ============================================================
+	# DISABLED (2026-09-10): BiometricBridge time-based IN/OUT.
+	# To re-enable, comment the ORIGINAL block below and uncomment
+	# the ENABLED block. See hr_erp_DISABLED_CHANGES.txt
+	# ============================================================
+
+	# ==== ORIGINAL (active): based on explicit Log Type ====
 	in_log = None
 	out_log = None
 	for log in sorted_logs:
@@ -182,6 +188,12 @@ def analyze_period(checkin_logs, period, reference_date):
 				in_log = log
 			else:
 				out_log = log
+	# ========================================================
+
+	# ==== ENABLED (BiometricBridge): first = check-in, last = check-out ====
+	# in_log = sorted_logs[0]
+	# out_log = sorted_logs[-1] if len(sorted_logs) >= 2 else None
+	# =======================================================================
 
 	if not in_log:
 		result["period_status"] = "Missing Checkin"

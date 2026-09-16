@@ -286,7 +286,7 @@ def get_chart(data):
 
 	return {
 		"data": {
-			"labels": ["Present", "Absent", "Leave", "Holiday"],
+			"labels": [_("Present"), _("Absent"), _("Leave"), _("Holiday")],
 			"datasets": [{"values": [total_present, total_absent, total_leave, total_holiday]}],
 		},
 		"type": "donut",

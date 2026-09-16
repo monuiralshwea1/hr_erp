@@ -140,21 +140,14 @@ def analyze_period(logs, period, ref_date):
 	untyped = [l for l in logs if l.log_type not in ("IN", "OUT")]
 
 	if typed:
-		# بصمات مصنفة OUT دون وجود IN مصنف: تعتبر كل البصمات ترتيباً زمنياً
-		# (أول بصمة = دخول، آخر بصمة = خروج) — تعالج بصمات الجهاز المتكررة
-		if in_log is None and any(l.log_type == "OUT" for l in typed) and logs:
-			in_log = logs[0]
-			if len(logs) >= 2 and logs[-1].time > logs[0].time:
-				out_log = logs[-1]
-		else:
-			# مسار HRMS القياسي: IN ثم OUT
-			for l in typed:
-				if in_log is None and l.log_type == "IN":
-					in_log = l
-					continue
-				if in_log is not None and l.log_type == "OUT":
-					out_log = l
-					break
+		# مسار HRMS القياسي: IN ثم OUT
+		for l in typed:
+			if in_log is None and l.log_type == "IN":
+				in_log = l
+				continue
+			if in_log is not None and l.log_type == "OUT":
+				out_log = l
+				break
 		# بصمات بدون نوع داخل الفترة تكمّل الدخول/الخروج زمنياً
 		if untyped:
 			if in_log is None:

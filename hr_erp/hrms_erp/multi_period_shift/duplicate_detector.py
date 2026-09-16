@@ -17,7 +17,7 @@ def is_duplicate_checkin(employee, timestamp, log_type, device_id=None, exclude_
 	"""
 	ts = get_datetime(timestamp)
 
-	# Exact match
+	# ORIGINAL (active). Exact + near/wider window matching always filters by log_type.
 	filters = {
 		"employee": employee,
 		"time": ts,
@@ -57,6 +57,43 @@ def is_duplicate_checkin(employee, timestamp, log_type, device_id=None, exclude_
 		},
 	)
 	return bool(wider_dup)
+
+	# ============================================================
+	# DISABLED (2026-09-10): BiometricBridge empty-log_type dedupe.
+	# To re-enable, comment the ORIGINAL block above and uncomment
+	# this ENABLED block. See hr_erp_DISABLED_CHANGES.txt
+	# ============================================================
+	# ==== ENABLED (BiometricBridge) ====
+	# log_type = (log_type or "").strip().upper() or None
+	# filters = {"employee": employee, "time": ts}
+	# if log_type:
+	# 	filters["log_type"] = log_type
+	# if exclude_name:
+	# 	filters["name"] = ["!=", exclude_name]
+	# if frappe.db.exists("Employee Checkin", filters):
+	# 	return True
+	# if device_id:
+	# 	window = timedelta(seconds=5)
+	# 	near_filters = {
+	# 		"employee": employee,
+	# 		"time": [">=", ts - window],
+	# 		"device_id": device_id,
+	# 		"name": ["!=", exclude_name or ""],
+	# 	}
+	# 	if log_type:
+	# 		near_filters["log_type"] = log_type
+	# 	if frappe.db.exists("Employee Checkin", near_filters):
+	# 		return True
+	# wider_window = timedelta(seconds=10)
+	# wider_filters = {
+	# 	"employee": employee,
+	# 	"time": [">=", ts - wider_window, "<=", ts + wider_window],
+	# 	"name": ["!=", exclude_name or ""],
+	# }
+	# if log_type:
+	# 	wider_filters["log_type"] = log_type
+	# return bool(frappe.db.exists("Employee Checkin", wider_filters))
+	# ============================
 
 
 def safe_create_checkin(employee, timestamp, log_type, device_id=None, skip_auto=0):

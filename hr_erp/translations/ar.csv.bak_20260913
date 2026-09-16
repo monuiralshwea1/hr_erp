@@ -1,0 +1,234 @@
+Source,Target,Context
+Shift Period,فترة النوبة
+Biometric Device,جهاز البصمة
+Attendance Period Detail,تفاصيل حضور الفترة
+Multi Period Settings,إعدادات الفترة المتعددة
+Period Name,اسم الفترة
+Period Number,رقم الفترة
+Start Time,وقت البداية
+End Time,وقت النهاية
+Late Grace Period (min),فترة السماح للتأخر (دقيقة)
+Early Exit Grace (min),فترة السماح للخروج المبكر (دقيقة)
+Minimum Working Hours,الحد الأدنى لساعات العمل
+Overtime Settings,إعدادات العمل الإضافي
+Allow Overtime,السماح بالعمل الإضافي
+Overtime Start After (hours),يبدأ العمل الإضافي بعد (ساعات)
+Is Break,استراحة
+Break Type,نوع الاستراحة
+Paid,مدفوع
+Unpaid,غير مدفوع
+Additional,إضافي
+Enable Period Attendance,تفعيل حضور الفترة
+Notes,ملاحظات
+Device Name,اسم الجهاز
+Device ID / Serial Number,معرف الجهاز / الرقم التسلسلي
+Active,نشط
+Device Information,معلومات الجهاز
+Company,الشركة
+Branch,الفرع
+Location,الموقع
+Device Type,نوع الجهاز
+Fingerprint,بصمة
+Face,وجه
+Card,بطاقة
+Palm,كف
+Connection Settings,إعدادات الاتصال
+IP Address,عنوان IP
+Port,منفذ
+Manufacturer,الشركة المصنعة
+Timezone,المنطقة الزمنية
+Sync Settings,إعدادات التزامن
+Sync Enabled,تفعيل التزامن
+Last Sync,آخر تزامن
+Employee,الموظف
+Attendance,الحضور
+Shift Type,نوع نوبة العمل
+Period Start,بداية الفترة
+Period End,نهاية الفترة
+Actual Check In,وقت تسجيل الدخول الفعلي
+Actual Check Out,وقت تسجيل الخروج الفعلي
+Working Hours,ساعات العمل
+Status & Calculations,الحالة والحسابات
+Status,الحالة
+Present,حاضر
+Late,متأخر
+Absent,غائب
+Partial,جزئي
+Missing Checkin,بصمة مفقودة
+Break,استراحة
+On Leave,إجازة
+Holiday,عطلة
+Overtime,عمل إضافي
+Late (min),التأخر (دقيقة)
+Early Exit (min),الخروج المبكر (دقيقة)
+Device Check In,بصمة الدخول من الجهاز
+Device Check Out,بصمة الخروج من الجهاز
+Device (Check In),الجهاز (دخول)
+Device (Check Out),الجهاز (خروج)
+Absent & Overtime,الغياب والعمل الإضافي
+Absent Hours,ساعات الغياب
+Overtime Hours,ساعات العمل الإضافي
+Period #,رقم الفترة
+General Settings,الإعدادات العامة
+Attendance Day Start Time,وقت بداية يوم الحضور
+Attendance Day End Time,وقت نهاية يوم الحضور
+Enable Overtime (Global),تفعيل العمل الإضافي (عام)
+Overtime Threshold (minutes),حد العمل الإضافي (دقيقة)
+Absence Policy,سياسة الغياب
+All Periods Required,جميع الفترات مطلوبة
+Half Day on Any Absence,نصف يوم عند أي غياب
+Proportional to Hours,نسبة حسب الساعات
+Absent Threshold (%),حد الغياب (%)
+Cross-Midnight & Grace,عبور منتصف الليل والسماح
+Allow Cross-Midnight Shifts,السماح بنوبات عبور منتصف الليل
+Default Late Grace Period (min),فترة السماح للتأخر الافتراضية (دقيقة)
+Default Early Exit Grace (min),فترة السماح للخروج المبكر الافتراضية (دقيقة)
+Multi-Period Shift Settings,إعدادات نوبة العمل متعددة الفترات
+Enable Multi Period Shift,تفعيل نوبة العمل متعددة الفترات
+Shift Periods,فترات نوبة العمل
+Period Summary,ملخص الفترات
+Total Working Period Hours,إجمالي ساعات العمل
+Total Break Period Hours,إجمالي ساعات الاستراحة
+Multi-Period Attendance Details,تفاصيل الحضور متعدد الفترات
+Period Details,تفاصيل الفترات
+Total Late Minutes,إجمالي دقائق التأخر
+Total Overtime Hours,إجمالي ساعات العمل الإضافي
+Approved Overtime Hours,ساعات العمل الإضافي المعتمدة
+Biometric Device,جهاز البصمة
+Original Device Timestamp,وقت الجهاز الأصلي
+Multi-Period Attendance,الحضور متعدد الفترات
+From Date,من تاريخ
+To Date,إلى تاريخ
+Department,القسم
+Show Period Details,عرض تفاصيل الفترات
+Total Late (min),التأخر الكلي (دقيقة)
+Total Overtime (hrs),العمل الإضافي الكلي (ساعات)
+Checkins,البصمات
+Working Hours,ساعات العمل
+Employee Name,اسم الموظف
+Attendance Date,تاريخ الحضور
+'employee_field_value' and 'timestamp' are required.,'قيمة الموظف' و 'الوقت' مطلوبان.
+No Employee found for value '{}': {},لم يتم العثور على موظف بالقيمة '{}': {}
+Auto attendance is not enabled for this shift type.,الحضور التلقائي غير مفعّل لنوع النوبة هذا.
+No attendance found for {} on {},لم يتم العثور على حضور لـ {} في {}
+Invalid JSON format,صيغة JSON غير صالحة
+checkins_json must be a JSON array,يجب أن يكون checkins_json مصفوفة JSON
+No checkins provided,لم يتم تقديم بصمات
+Maximum 1000 checkins per batch. Received {},الحد الأقصى 1000 بصمة لكل دفعة. تم استقبال {}
+Attendance name is required,اسم سجل الحضور مطلوب
+Insufficient permissions,صلاحيات غير كافية
+Can only approve overtime for submitted attendance,يمكن اعتماد العمل الإضافي فقط للحضور المقدم
+No overtime to approve for this attendance,لا يوجد عمل إضافي لاعتماده لهذا الحضور
+Approved overtime ({}) cannot exceed calculated overtime ({}),العمل الإضافي المعتمد ({}) لا يمكن أن يتجاوز العمل الإضافي المحسوب ({})
+No attendance records provided,لم يتم تقديم سجلات حضور
+Please add at least one shift period when Multi-Period is enabled.,يرجى إضافة فترة نوبة واحدة على الأقل عند تفعيل متعدد الفترات.
+Start time and end time cannot be same for multi-period shifts.,وقت البداية ووقت النهاية لا يمكن أن يكونا متساويين لنوبات متعددة الفترات.
+Periods '{0}' and '{1}' overlap.,الفترتان '{0}' و '{1}' يتداخلان.
+This employee already has a log with the same timestamp.,هذا الموظف لديه سجل بالوقت نفسه بالفعل.
+Duplicate fingerprint detected from device.,تم اكتشاف بصمة مكررة من الجهاز.
+Time when operational day starts.,وقت بدء اليوم التشغيلي.
+Grace period for late entry in minutes,فترة السماح لدخول متأخر بالدقائق
+Grace period for early exit in minutes,فترة السماح للخروج المبكر بالدقائق
+Minimum working hours for this period to be counted,الحد الأدنى لساعات العمل لاحساب هذه الفترة
+Overtime starts after this many hours into the period,يبدأ العمل الإضافي بعد هذا العدد من الساعات في الفترة
+If checked this period is a break rest period not counted as working hours,إذا كان محدداً هذه الفترة استراحة لا تحتسب كساعات عمل
+The time when the operational day starts,وقت بدء اليوم التشغيلي
+The time when the operational day ends,وقت انتهاء اليوم التشغيلي
+Minimum minutes before overtime starts being counted,الحد الأدنى من الدقائق قبل بدء احتساب العمل الإضافي
+How to determine daily attendance status based on period attendance,كيفية تحديد حالة الحضور اليومية بناءً على حضور الفترات
+Percentage of required hours below which employee is marked Absent,النسبة المئوية للساعات المطلوبة التي يُعلَّم تحتها الموظف غائباً
+Allow shifts to cross midnight boundary,السماح للنوبات بعبور حد منتصف الليل
+Default late grace period in minutes if not set on period,فترة السماح للتأخر الافتراضية بالدقائق إذا لم تُحدد في الفترة
+Default early exit grace period in minutes if not set on period,فترة السماح للخروج المبكر الافتراضية بالدقائق إذا لم تُحدد في الفترة
+Raw timestamp from the biometric device before timezone conversion,الوقت الأصلي من جهاز البصمة قبل تحويل المنطقة الزمنية
+Shift Type,نوع نوبة العمل
+Attendance,الحضور
+Employee Checkin,بصمة الموظف
+HR ERP Payroll Settings,إعدادات رواتب hr_erp
+Late Deduction,خصم التأخير
+Enable Late Deduction,تفعيل خصم التأخير
+Late Deduction Component,مكوّن خصم التأخير
+Late Deduction Factor,معامل خصم التأخير
+Late Grace Period Override (min),تجاوز فترة سماح التأخير (دقيقة)
+Absence Deduction,خصم الغياب
+Enable Absence Deduction,تفعيل خصم الغياب
+Absence Deduction Component,مكوّن خصم الغياب
+Absence Deduction Factor,معامل خصم الغياب
+Working Days Per Month,أيام العمل في الشهر
+Overtime Generation,توليد الإضافي
+Enable Overtime Generation,تفعيل توليد الإضافي
+Overtime 1.5 Activity,نشاط الإضافي 1.5
+Overtime 2.0 Activity,نشاط الإضافي 2.0
+Overtime Threshold (min),حد الإضافي (دقيقة)
+Maximum Monthly Hours,الحد الأقصى للساعات الشهرية
+Include Early Entry,احتساب الحضور المبكر
+Biostar Sync,مزامنة BioStar
+Enable Biostar Sync,تفعيل مزامنة BioStar
+Biostar Username,اسم مستخدم BioStar
+Biostar Password,كلمة مرور BioStar
+Biostar TA URL,رابط BioStar TA
+Generate Overtime Timesheets,توليد سجلات الإضافي
+Generate,توليد
+Start Date,من تاريخ
+End Date,إلى تاريخ
+Total Absent Days,إجمالي أيام الغياب
+Last Attendance Sync Date,تاريخ آخر مزامنة بصمة
+Attendance Details,تفاصيل الحضور
+Overtime 1.5,إضافي عادي
+Overtime 2.0,إضافي عطلة
+Overtime generation is disabled in HR ERP Payroll Settings,توليد الإضافي معطّل في إعدادات رواتب hr_erp
+Please set up both Overtime 1.5 and Overtime 2.0 activities in HR ERP Payroll Settings,يرجى إعداد نشاطي الإضافي 1.5 و 2.0 في إعدادات رواتب hr_erp
+Biostar sync is disabled in HR ERP Payroll Settings,مزامنة BioStar معطّلة في إعدادات رواتب hr_erp
+The task has been enqueued as a background job.,تمت جدولة المهمة كعمل خلفي.
+No employee with Attendance Device ID found.,لم يُعثر على موظف له معرف جهاز بصمة.
+Something went wrong,حدث خطأ ما
+Login failed or cookie not found,فشل تسجيل الدخول أو لم يُعثر على الكوكي
+Generating...,جارٍ التوليد...
+Generated {0} overtime timesheets,تم توليد {0} سجل إضافي
+Biostar Settings,⚙️ إعدادات BioStar
+Biostar Server Login,🔐 تسجيل دخول خادم BioStar
+Username,👤 اسم المستخدم
+Password,🔑 كلمة المرور
+TA URL,🔗 رابط TA
+Fetch Attendance Logs,📥 جلب سجلات الحضور
+Last Server Status,📡 حالة الخادم الأخيرة
+Online,🟢 متصل
+Offline,🔴 غير متصل
+Fetch Attendance,📥 جلب الحضور
+Failed to start fetch attendance data,⚠️ فشل بدء جلب بيانات الحضور
+No rows selected.,ℹ️ لم يتم تحديد أي صف.
+Navari Custom Payroll Settings,💰 إعدادات الرواتب المخصصة
+Maximum monthly hours,⏱️ الحد الأقصى للساعات الشهرية
+Hours beyond which will be carried over to overtime 1.5,🔄 الساعات التي تتجاوز هذا الحد تُرحَّل إلى الإضافي 1.5
+Hours beyond this are carried over to overtime 1.5 in salary slips,🔄 الساعات التي تتجاوز هذا الحد تُرحَّل إلى الإضافي 1.5 في قسائم الرواتب
+Activity type used to create overtime 1.5 timesheets,📝 نوع النشاط المستخدم لإنشاء سجلات الإضافي 1.5
+Activity type used to create overtime 2.0 timesheets,📝 نوع النشاط المستخدم لإنشاء سجلات الإضافي 2.0
+Include early entry,⏰ احتساب الحضور المبكر
+If checked, hours before shift start time will be considered while making salary slips.,✔️ عند التحديد، تُحتسب ساعات ما قبل بداية الدوام عند إنشاء قسائم الرواتب.
+Overtime Threshold,⏳ حد الإضافي
+Minutes past shift end before time counts as overtime,⌛ الدقائق بعد نهاية الدوام قبل أن تُحسب إضافياً
+Earned Bonus Vs Attained Score Matrix,📊 مصفوفة المكافأة مقابل النقاط المحققة
+Bonus vs Score Matrix,📊 مصفوفة المكافأة مقابل النقاط
+Lower Limit,🔽 الحد الأدنى
+Upper Limit,🔼 الحد الأقصى
+Attained Score,🎯 النقاط المحققة
+Timesheet Center,🕒 مركز سجلات الدوام
+Generate Timesheets,🛠️ توليد سجلات الدوام
+Update Timesheet into Salary Slips,🔄 تحديث الإضافي في قسائم الرواتب
+Updating Timesheet Data...,⏳ جارٍ تحديث بيانات الإضافي...
+Start Date cannot be greater than End Date,⚠️ تاريخ البداية لا يمكن أن يكون أكبر من تاريخ النهاية
+Timesheet,🕒 سجل الدوام
+Hours,⏱️ الساعات
+Hours Worked,⏱️ ساعات العمل
+Billiable Hours,💵 الساعات المحتسبة
+Include Unpaid Breaks,☕ احتساب الاستراحات غير المدفوعة
+Unpaid Breaks (Minutes),☕ الاستراحات غير المدفوعة (دقيقة)
+Min. hours to include a break,⏲️ الحد الأدنى للساعات لاحتساب استراحة
+Deduction = hourly_rate x factor x (late_minutes / 60),🧮 الخصم = سعر الساعة × المعامل × (دقائق التأخير / 60)
+Overrides Shift Type late_entry_grace_period if > 0,🔁 يتجاوز فترة سماح التأخير في نوع النوبة إذا كان أكبر من 0
+Deduction = daily_rate x factor x absent_days,🧮 الخصم = سعر اليوم × المعامل × أيام الغياب
+Biometric Period Attendance,🗓️ حضور الفترات بالبصمة
+Custom Employee Leave Balance Summary V2,📊 ملخص أرصدة إجازات الموظفين المخصص V2
+كشف البصمات,🖐️ كشف البصمات
+تكامل الرواتب,💼 تكامل الرواتب
+تقارير الحضور والبصمة,📊 تقارير الحضور والبصمة

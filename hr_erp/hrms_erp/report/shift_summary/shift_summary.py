@@ -5,7 +5,7 @@ from frappe import _
 
 def execute(filters=None):
 	columns = [
-	    {"label": "ID", "fieldname": "ID", "fieldtype": "Data", "width": 120},
+	    {"label": _("ID"), "fieldname": "ID", "fieldtype": "Data", "width": 120},
 	    {"label": "اسم الموظف", "fieldname": "اسم الموظف", "fieldtype": "Data", "width": 200},
 	    {"label": "القسم", "fieldname": "القسم", "fieldtype": "Data", "width": 150},
 	    {"label": "التخصص", "fieldname": "التخصص", "fieldtype": "Data", "width": 150},

@@ -5,7 +5,7 @@ from frappe import _
 
 def execute(filters=None):
 	columns = [
-	    {"label": "ID", "fieldname": "ID", "fieldtype": "Data", "width": 120},
+	    {"label": _("ID"), "fieldname": "ID", "fieldtype": "Data", "width": 120},
 	    {"label": "اسم الموظف", "fieldname": "اسم الموظف", "fieldtype": "Data", "width": 200},
 	    {"label": "القسم", "fieldname": "القسم", "fieldtype": "Data", "width": 150},
 	    {"label": "التخصص", "fieldname": "التخصص", "fieldtype": "Data", "width": 150},
@@ -27,8 +27,8 @@ def execute(filters=None):
     
 	    {"label": "-", "fieldname": "-", "fieldtype": "Data", "width": 150},
 	    {"label": "ايام الدوام", "fieldname": "ايام الدوام", "fieldtype": "Data", "width": 220},
-	    {"label": "From Date", "fieldname": "from_date", "fieldtype": "Data", "width": 200},
-	    {"label": "To Date", "fieldname": "to_date", "fieldtype": "Data", "width": 200}
+	    {"label": _("From Date"), "fieldname": "from_date", "fieldtype": "Data", "width": 200},
+	    {"label": _("To Date"), "fieldname": "to_date", "fieldtype": "Data", "width": 200}
 	]
 
 	data = frappe.db.sql("""
@@ -48,7 +48,7 @@ def execute(filters=None):
 	        WHEN start_time IS NOT NULL THEN CONCAT(DATE_FORMAT(start_time, "%h:%i %p"),' -> ', DATE_FORMAT(end_time, "%h:%i %p")) 
 	        ELSE NULL 
 	    END as 'الفترة الاولى',
-	    DATE_FORMAT(ADDTIME(end_time, SEC_TO_TIME(end_check_out_after_shift_end * 60)), "%h:%i %p") AS 'end_to',
+	    DATE_FORMAT(ADDTIME(end_time, SEC_TO_TIME(allow_check_out_after_shift_end_time * 60)), "%h:%i %p") AS 'end_to',
 	    '-' as '-',
 	    DATE_FORMAT(SUBTIME(start_time2, SEC_TO_TIME(begin_check_in_before_shift_start_time_2 * 60)), "%h:%i %p") AS 'start_from_2',
 	    shift_type_2 as 'الشفت الثاني',
@@ -56,7 +56,7 @@ def execute(filters=None):
 	        WHEN start_time2 IS NOT NULL THEN CONCAT(DATE_FORMAT(start_time2, "%h:%i %p"),' -> ', DATE_FORMAT(end_time2, "%h:%i %p")) 
 	        ELSE NULL 
 	    END as 'الفترة الثانية',
-	    DATE_FORMAT(ADDTIME(end_time2, SEC_TO_TIME(end_check_out_after_shift_end_2 * 60)), "%h:%i %p") AS 'end_to_2',
+	    DATE_FORMAT(ADDTIME(end_time2, SEC_TO_TIME(allow_check_out_after_shift_end_time_2 * 60)), "%h:%i %p") AS 'end_to_2',
 	    '-' as '-',
 	    days AS 'ايام الدوام'
 	FROM (
@@ -74,9 +74,9 @@ def execute(filters=None):
 	            ssa.title AS shift_title,
 	            ssa.shift_type,
 	            st.begin_check_in_before_shift_start_time,
-	            st.end_check_out_after_shift_end,
+	            st.allow_check_out_after_shift_end_time,
 	            st2.begin_check_in_before_shift_start_time as begin_check_in_before_shift_start_time_2,
-	            st2.end_check_out_after_shift_end as end_check_out_after_shift_end_2,
+	            st2.allow_check_out_after_shift_end_time as allow_check_out_after_shift_end_time_2,
 	            st.start_time,
 	            st.end_time,
 	            ssa.shift_type_2,

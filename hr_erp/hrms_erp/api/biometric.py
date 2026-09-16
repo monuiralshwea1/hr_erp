@@ -166,11 +166,26 @@ def sync_checkins(branch=None, device_id=None, checkins=None):
 				failed += 1
 				continue
 
+			# ============================================================
+# DISABLED (2026-09-10): BiometricBridge — allow empty log_type.
+# To re-enable, uncomment the "== ENABLED ==" block and comment the
+# ORIGINAL block below. Full instructions: hr_erp_DISABLED_CHANGES.txt
+# ============================================================
+			# ==== ENABLED (BiometricBridge empty log_type) ====
+			# log_type = (c.get("log_type") or "").strip().upper() or None
+			# if log_type and log_type not in ("IN", "OUT"):
+			# 	errors.append({"biometric_log_id": log_id, "error": "bad log_type"})
+			# 	failed += 1
+			# 	continue
+			# =================================================
+
+			# ==== ORIGINAL (active) ====
 			log_type = c.get("log_type") or "IN"
 			if log_type not in ("IN", "OUT"):
 				errors.append({"biometric_log_id": log_id, "error": "bad log_type"})
 				failed += 1
 				continue
+			# ============================
 
 			checkin = frappe.new_doc("Employee Checkin")
 			checkin.employee = emp

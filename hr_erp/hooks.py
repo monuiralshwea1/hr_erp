@@ -32,7 +32,11 @@ after_install = "hr_erp.hrms_erp.install.after_install"
 
 # after_migrate
 # -------------
-after_migrate = ["hr_erp.hrms_erp.multi_period_shift.custom_fields.create_custom_fields"]
+after_migrate = [
+	"hr_erp.hrms_erp.multi_period_shift.custom_fields.create_custom_fields",
+	"hr_erp.hrms_erp.payroll_integration.custom_fields.create_custom_fields",
+	"hr_erp.hrms_erp.payroll_integration.default_data.create_default_data",
+]
 
 # Document Events
 # ---------------
@@ -60,5 +64,24 @@ doc_events = {
 	},
 	"Workspace": {
 		"validate": "hr_erp.hrms_erp.api.workspace_utils.fix_workspace",
+	},
+	"Salary Slip": {
+		"validate": [
+			"hr_erp.hrms_erp.payroll_integration.late_absence_deduction.apply_late_absence_deduction",
+			"hr_erp.hrms_erp.payroll_integration.overtime_earning.apply_overtime_earning",
+		],
+	},
+}
+
+# Scheduled Tasks
+# ---------------
+scheduler_events = {
+	"cron": {
+		"10 23 * * *": [
+			"hr_erp.hrms_erp.payroll_integration.biostar_sync.add_checkin_logs_for_current_day"
+		],
+		"0 3 * * *": [
+			"hr_erp.hrms_erp.payroll_integration.biostar_sync.check_for_yesterday_logs"
+		],
 	},
 }
