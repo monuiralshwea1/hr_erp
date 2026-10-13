@@ -56,6 +56,20 @@ SHORTCUTS = [
 		"icon": "file",
 		"color": "#155e75",
 	},
+	{
+		"label": "نوع الدوام",
+		"type": "DocType",
+		"link_to": "Shift Type",
+		"icon": "clock",
+		"color": "#065f46",
+	},
+	{
+		"label": "جدول فترات الدوام الرسمي",
+		"type": "URL",
+		"url": "/app/shift-type/دوام رسمي",
+		"icon": "table",
+		"color": "#9d174d",
+	},
 ]
 
 
