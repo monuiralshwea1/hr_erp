@@ -33,8 +33,33 @@ def is_multi_period_shift(shift_type_doc):
 
 
 def get_sorted_periods(shift_type_doc):
-	"""Get shift periods sorted by period number."""
+	"""Get shift periods sorted by period number.
+
+	Falls back to the standard two-period day (morning/evening) when the
+	shift has multi-period enabled but no period rows defined, matching the
+	report fallback so the engine still works for such shifts.
+	"""
 	periods = shift_type_doc.shift_periods or []
+	if not periods and cint(getattr(shift_type_doc, "enable_multi_period", 0)):
+		defaults = [
+			("الفترة الصباحية", 1, "07:30:00", "13:30:00"),
+			("الفترة المسائية", 2, "14:50:00", "23:00:00"),
+		]
+		periods = [
+			frappe._dict({
+				"period_name": name,
+				"period_number": num,
+				"start_time": st,
+				"end_time": et,
+				"late_grace_period": 0,
+				"early_exit_grace_period": 0,
+				"minimum_working_hours": 0,
+				"is_break": 0,
+				"allow_overtime": 0,
+				"overtime_start_after": 0,
+			})
+			for name, num, st, et in defaults
+		]
 	return sorted(periods, key=lambda p: p.period_number or 0)
 
 
@@ -112,17 +137,20 @@ def assign_checkins_to_periods(checkins, periods, reference_date, shift_actual_s
 					break
 
 		if not assigned:
+			# Boundary-aware fallback: nearest period boundary (start OR end),
+			# so a checkout slightly after period end still maps to that period
+			# (previously only distance to period START was measured).
 			closest_period = None
 			min_distance = timedelta(days=365)
 			for period in periods:
 				if period.is_break:
 					continue
 				p_start, p_end = get_period_datetime_range(period, reference_date)
-				dist_to_start = abs(checkin_time - p_start)
-				if dist_to_start < min_distance:
-					min_distance = dist_to_start
+				dist = min(abs(checkin_time - p_start), abs(checkin_time - p_end))
+				if dist < min_distance:
+					min_distance = dist
 					closest_period = period
-			if closest_period and min_distance <= timedelta(minutes=30):
+			if closest_period and min_distance <= timedelta(minutes=60):
 				period_assignments[closest_period.period_number].append(checkin)
 
 	return period_assignments
@@ -194,6 +222,13 @@ def analyze_period(checkin_logs, period, reference_date):
 	# in_log = sorted_logs[0]
 	# out_log = sorted_logs[-1] if len(sorted_logs) >= 2 else None
 	# =======================================================================
+
+	# Fallback: punches exist but no OUT was determined (e.g. the bridge
+	# sends every punch as IN) → last punch after the check-in is the checkout.
+	if in_log and not out_log and len(sorted_logs) >= 2:
+		last_log = sorted_logs[-1]
+		if get_datetime(last_log.time) > get_datetime(in_log.time):
+			out_log = last_log
 
 	if not in_log:
 		result["period_status"] = "Missing Checkin"
@@ -385,12 +420,26 @@ def process_multi_period_attendance(shift_type_doc, employee, checkins, referenc
 	}
 
 
+def _minutes_to_hhmmss(minutes):
+	"""Convert a duration in minutes to HH:MM:SS for Attendance time fields."""
+	minutes = int(round(minutes or 0))
+	if minutes <= 0:
+		return None
+	h, m = divmod(minutes, 60)
+	return f"{h:02d}:{m:02d}:00"
+
+
 def mark_multi_period_attendance(attendance_data):
 	"""
 	Create or update Attendance record with period details.
 	"""
 	employee = attendance_data["employee"]
 	attendance_date = attendance_data["attendance_date"]
+
+	late_enter_time = _minutes_to_hhmmss(attendance_data.get("total_late_minutes"))
+	early_exit_time = _minutes_to_hhmmss(
+		max((p.get("early_exit_minutes") or 0) for p in attendance_data.get("period_details", [])) if attendance_data.get("period_details") else 0
+	)
 
 	existing = frappe.db.exists(
 		"Attendance",
@@ -417,6 +466,10 @@ def mark_multi_period_attendance(attendance_data):
 		att.in_time = attendance_data["in_time"]
 		att.out_time = attendance_data["out_time"]
 		att.shift = attendance_data["shift"]
+		att.late_enter_time = late_enter_time
+		att.early_exit_time = early_exit_time
+		att.total_late_minutes = attendance_data.get("total_late_minutes")
+		att.total_overtime_hours = attendance_data.get("total_overtime_hours")
 		att.attendance_period_details = []
 		for pd in attendance_data.get("period_details", []):
 			att.append("attendance_period_details", {
@@ -455,6 +508,10 @@ def mark_multi_period_attendance(attendance_data):
 			"in_time": attendance_data["in_time"],
 			"out_time": attendance_data["out_time"],
 			"shift": attendance_data["shift"],
+			"late_enter_time": late_enter_time,
+			"early_exit_time": early_exit_time,
+			"total_late_minutes": attendance_data.get("total_late_minutes"),
+			"total_overtime_hours": attendance_data.get("total_overtime_hours"),
 		})
 		for pd in attendance_data.get("period_details", []):
 			att.append("attendance_period_details", {

@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 import frappe
 from frappe import _
+from hr_erp.hrms_erp.report.biometric_period_attendance.biometric_period_attendance import (
+	Punch,
+	get_effective_periods,
+	assign_punch_to_period,
+	analyze_period,
+)
 
 
 def execute(filters=None):
@@ -22,9 +28,11 @@ def execute(filters=None):
 
 	    at.employee_name,
 
-	    at.attendance_date,
+    at.attendance_date,
 
-	    at.status,
+    at.status,
+
+    at.shift,
 
 
 
@@ -171,6 +179,48 @@ def execute(filters=None):
 	raw_data = frappe.db.sql(get_raw_data_sql, values={"from_date":from_date, "to_date":to_date, "employee":employee}, as_dict=True)
 
 	#frappe.throw(f"{raw_data}")
+
+	# ----------------------------------------------------------------------
+	# حساب التأخير/الخروج المبكر لكل يوم من فترات الشفت (shift_periods) مباشرة
+	# بدلاً من الاعتماد على حقل late_enter_time في الحضور (كان يخزن قيماً خاطئة
+	# من مسار Auto Attendance). كل بصمة تُسند لفترتها (صباحي/مسائي) ثم يُجمع
+	# تأخير كل فترة. يُخصم منه إذن الاستئذان كما كان معمولاً به.
+	# ----------------------------------------------------------------------
+	checkin_rows = frappe.db.sql(
+		"""
+		SELECT employee, time, log_type, device_id
+		FROM `tabEmployee Checkin`
+		WHERE DATE(time) BETWEEN %(from_date)s AND %(to_date)s
+		ORDER BY employee, time
+		""",
+		values={"from_date": from_date, "to_date": to_date},
+		as_dict=True,
+	)
+	punch_map = {}
+	for c in checkin_rows:
+		punch_map.setdefault(c.employee, []).append(Punch(c.time, c.log_type, c.device_id))
+
+	period_late_map = {}
+	for at in raw_data:
+		shift_name = at.get("shift")
+		if not shift_name:
+			continue
+		periods = get_effective_periods(shift_name)
+		if not periods:
+			continue
+		day = frappe.utils.getdate(at.attendance_date)
+		assignments = {p["period_number"]: [] for p in periods}
+		for punch in punch_map.get(at.employee, []):
+			pidx = assign_punch_to_period(punch, periods, day)
+			if pidx is not None:
+				assignments[pidx].append(punch)
+		late_total = 0.0
+		early_total = 0.0
+		for p in periods:
+			r = analyze_period(assignments.get(p["period_number"], []), p, day)
+			late_total += r["late_minutes"]
+			early_total += r["early_exit_minutes"]
+		period_late_map[(at.employee, day)] = (late_total, early_total)
 
 
 
@@ -558,17 +608,28 @@ def execute(filters=None):
 
 	                presents = presents + 1
 
-                
 
-	                current_late = frappe.utils.get_time(att.late_enter_time)
+	                pl = period_late_map.get((e.name, current_date))
 
-	                current_late_minutes = (current_late.hour * 60) + current_late.minute
+	                if pl is not None:
 
-                    
+	                    sl_in = int(getattr(at, "short_leave_in_minutes", 0) or 0)
 
-	                current_early_exit = frappe.utils.get_time(att.early_exit_time)
+	                    sl_out = int(getattr(at, "short_leave_out_minutes", 0) or 0)
 
-	                current_early_ext_minutes = (current_early_exit.hour * 60) + current_early_exit.minute
+	                    current_late_minutes = max(0, int(round(pl[0])) - sl_in)
+
+	                    current_early_ext_minutes = max(0, int(round(pl[1])) - sl_out)
+
+	                else:
+
+	                    current_late = frappe.utils.get_time(att.late_enter_time)
+
+	                    current_late_minutes = (current_late.hour * 60) + current_late.minute
+
+	                    current_early_exit = frappe.utils.get_time(att.early_exit_time)
+
+	                    current_early_ext_minutes = (current_early_exit.hour * 60) + current_early_exit.minute
 
                 
 
@@ -615,6 +676,34 @@ def execute(filters=None):
 	            if att.status == "Half Day" or att.fb_count == 1:
 
 	                statu = "HD"
+
+	                pl_hd = period_late_map.get((e.name, current_date))
+
+	                if pl_hd is not None:
+
+	                    sl_in_hd = int(getattr(at, "short_leave_in_minutes", 0) or 0)
+
+	                    sl_out_hd = int(getattr(at, "short_leave_out_minutes", 0) or 0)
+
+	                    late_hd = max(0, int(round(pl_hd[0])) - sl_in_hd)
+
+	                    early_hd = max(0, int(round(pl_hd[1])) - sl_out_hd)
+
+	                    if late_hd > 3:
+
+	                        lates = lates + late_hd
+
+	                        lates_day = lates_day + 1
+
+	                        statu = statu + f" in({late_hd}m)"
+
+	                    if early_hd > 2:
+
+	                        early_exit = early_exit + early_hd
+
+	                        early_exit_day = early_exit_day + 1
+
+	                        statu = statu + f" out({early_hd}m)"
 
 	                half_day = half_day + 1
 

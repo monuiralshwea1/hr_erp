@@ -129,11 +129,17 @@ def _calc_late_minutes(employee, start_date, end_date, settings):
 			"status": ["in", ["Present", "Half Day", "Work From Home"]],
 			"late_entry": 1,
 		},
-		fields=["name", "attendance_date", "in_time", "shift"],
+		fields=["name", "attendance_date", "in_time", "shift", "total_late_minutes"],
 	)
 
 	total_late = 0.0
 	for att in attendances:
+		# الأفضل: دقائق التأخير المحسوبة من المحرك متعدد الفترات (لكل فترة على حدة)
+		engine_late = flt(att.get("total_late_minutes") or 0)
+		if engine_late > 0:
+			total_late += engine_late
+			continue
+
 		if not att.get("in_time"):
 			continue
 		in_dt = get_datetime(att["in_time"])

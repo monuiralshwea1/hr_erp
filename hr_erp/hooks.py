@@ -36,6 +36,7 @@ after_migrate = [
 	"hr_erp.hrms_erp.multi_period_shift.custom_fields.create_custom_fields",
 	"hr_erp.hrms_erp.payroll_integration.custom_fields.create_custom_fields",
 	"hr_erp.hrms_erp.payroll_integration.default_data.create_default_data",
+	"hr_erp.hrms_erp.guide_install.install",
 ]
 
 # Document Events

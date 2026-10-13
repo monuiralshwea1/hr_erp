@@ -74,6 +74,13 @@ def get_period_columns(filters):
 					"width": 100,
 				})
 				columns.append({
+					"label": f"{period.period_name} - تأخير (د)",
+					"fieldname": f"period_{safe_name}_late",
+					"fieldtype": "Data",
+					"width": 90,
+					"align": "center",
+				})
+				columns.append({
 					"label": f"{period.period_name} - حالة",
 					"fieldname": f"period_{safe_name}_status",
 					"fieldtype": "Data",
@@ -236,6 +243,7 @@ def _parse_period_details(row, details):
 		row[f"period_{safe_name}_status"] = status
 		row[f"period_{safe_name}_in"] = _fmt_time(check_in)
 		row[f"period_{safe_name}_out"] = _fmt_time(check_out)
+		row[f"period_{safe_name}_late"] = detail.get("late_minutes") or ""
 
 
 def _fmt_time(dt):

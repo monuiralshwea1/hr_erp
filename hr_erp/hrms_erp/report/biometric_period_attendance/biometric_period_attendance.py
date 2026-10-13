@@ -95,7 +95,13 @@ def get_period_range(period, ref_date):
 
 
 def assign_punch_to_period(punch, periods, ref_date):
-	"""إسناد البصمة لأقرب فترة زمنية."""
+	"""إسناد البصمة لأقرب فترة زمنية.
+
+	أولاً: البصمة داخل نطاق فترة مباشرة. وإلا: أقرب حدود فترة
+	(بداية أو نهاية) ضمن 60 دقيقة — حتى لا تضيع بصمات الخروج
+	التي تلي نهاية الفترة بقليل (سابقاً كان القياس لأقرب بداية فقط
+	وبحد 30 دقيقة فتضيع بصمات الخروج).
+	"""
 	best = None
 	best_dist = timedelta(days=365)
 	for p in periods:
@@ -104,11 +110,11 @@ def assign_punch_to_period(punch, periods, ref_date):
 		p_start, p_end = get_period_range(p, ref_date)
 		if p_start <= punch.time <= p_end:
 			return p["period_number"]
-		d = abs(punch.time - p_start)
+		d = min(abs(punch.time - p_start), abs(punch.time - p_end))
 		if d < best_dist:
 			best_dist = d
 			best = p["period_number"]
-	if best is not None and best_dist <= timedelta(minutes=30):
+	if best is not None and best_dist <= timedelta(minutes=60):
 		return best
 	return None
 
@@ -147,7 +153,7 @@ def analyze_period(logs, period, ref_date):
 			if len(logs) >= 2 and logs[-1].time > logs[0].time:
 				out_log = logs[-1]
 		else:
-			# مسار HRMS القياسي: IN ثم OUT
+		# مسار HRMS القياسي: IN ثم OUT
 			for l in typed:
 				if in_log is None and l.log_type == "IN":
 					in_log = l
@@ -155,6 +161,10 @@ def analyze_period(logs, period, ref_date):
 				if in_log is not None and l.log_type == "OUT":
 					out_log = l
 					break
+			# كل البصمات المصنفة IN فقط (الجسر يرسل الكل IN): آخر بصمة بعد الدخول = خروج
+			if in_log is not None and out_log is None and len(typed) >= 2:
+				if typed[-1].time > in_log.time:
+					out_log = typed[-1]
 		# بصمات بدون نوع داخل الفترة تكمّل الدخول/الخروج زمنياً
 		if untyped:
 			if in_log is None:
@@ -384,6 +394,7 @@ def execute(filters=None):
 			{"label": f"{pname} - دخول", "fieldname": f"p{k}_in", "fieldtype": "Data", "width": 90},
 			{"label": f"{pname} - خروج", "fieldname": f"p{k}_out", "fieldtype": "Data", "width": 90},
 			{"label": f"{pname} - تأخير (د)", "fieldname": f"p{k}_late", "fieldtype": "Data", "width": 85},
+			{"label": f"{pname} - خروج مبكر (د)", "fieldname": f"p{k}_early", "fieldtype": "Data", "width": 95},
 			{"label": f"{pname} - الحالة", "fieldname": f"p{k}_status", "fieldtype": "Data", "width": 130},
 		]
 	columns += [
@@ -455,6 +466,7 @@ def execute(filters=None):
 				row[f"p{k}_in"] = fmt_time(r["check_in"])
 				row[f"p{k}_out"] = fmt_time(r["check_out"])
 				row[f"p{k}_late"] = r["late_minutes"] if r["late_minutes"] else ""
+				row[f"p{k}_early"] = r["early_exit_minutes"] if r["early_exit_minutes"] else ""
 				row[f"p{k}_status"] = r["status"]
 
 			rows.append(row)

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل استخدام نظام الموارد البشرية — شركة نيو سمارت تك</title>
+<style>
+  :root {
+    --primary: #1e40af;
+    --primary-light: #dbeafe;
+    --accent: #059669;
+    --warn: #b45309;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --bg: #f8fafc;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, 'Noto Kufi Arabic', Arial, sans-serif; color: var(--ink); background: var(--bg); margin: 0; line-height: 1.9; }
+  .toolbar { position: sticky; top: 0; z-index: 50; background: var(--primary); color: #fff; padding: 10px 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+  .toolbar .title { font-weight: 700; font-size: 16px; margin-inline-end: auto; }
+  .btn { background: #fff; color: var(--primary); border: none; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn:hover { background: var(--primary-light); }
+  .btn.alt { background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.4); }
+  .layout { display: flex; max-width: 1200px; margin: 0 auto; gap: 24px; padding: 24px 16px; }
+  nav.toc { flex: 0 0 250px; position: sticky; top: 70px; align-self: flex-start; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px; max-height: calc(100vh - 90px); overflow: auto; }
+  nav.toc h3 { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
+  nav.toc a { display: block; padding: 6px 10px; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: 14px; }
+  nav.toc a:hover { background: var(--primary-light); }
+  main { flex: 1; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 32px; min-width: 0; }
+  h1 { color: var(--primary); font-size: 26px; text-align: center; margin: 0 0 6px; }
+  .subtitle { text-align: center; color: var(--muted); margin-bottom: 28px; }
+  h2 { color: var(--primary); font-size: 20px; border-bottom: 2px solid var(--primary-light); padding-bottom: 6px; margin-top: 42px; }
+  h3 { color: var(--accent); font-size: 17px; margin-top: 26px; }
+  .path { background: var(--primary-light); border-radius: 8px; padding: 8px 14px; font-size: 14px; font-weight: 600; color: var(--primary); display: inline-block; margin: 6px 0; }
+  .path::before { content: "📍 المسار: "; font-weight: 700; }
+  .steps { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 12px 18px; margin: 10px 0; }
+  .steps b { color: var(--accent); }
+  .example { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 12px 18px; margin: 10px 0; font-size: 14px; }
+  .example::before { content: "💡 مثال من النظام: "; font-weight: 700; color: var(--warn); }
+  .note { background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 10px 16px; margin: 10px 0; font-size: 14px; }
+  .note::before { content: "⚠️ "; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: right; }
+  th { background: var(--primary-light); color: var(--primary); }
+  code { background: #f3f4f6; border-radius: 5px; padding: 1px 6px; font-family: Consolas, monospace; font-size: 13px; direction: ltr; display: inline-block; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .footer { text-align: center; color: var(--muted); font-size: 13px; margin: 40px 0 10px; border-top: 1px solid var(--line); padding-top: 16px; }
+  @media (max-width: 900px) { .layout { flex-direction: column; } nav.toc { position: static; max-height: none; } .grid { grid-template-columns: 1fr; } }
+  @media print {
+    .toolbar, nav.toc { display: none !important; }
+    body { background: #fff; }
+    main { border: none; padding: 0; }
+    h2 { page-break-after: avoid; }
+    .example, .steps, .note { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+{% if not pdf_mode %}
+<div class="toolbar">
+  <span class="title">📘 دليل استخدام نظام الموارد البشرية — شركة نيو سمارت تك</span>
+  <a class="btn alt" href="/app/بوابة-الموارد-البشرية">🏠 الرجوع إلى بوابة الموارد البشرية</a>
+  <a class="btn" href="/api/method/hr_erp.hrms_erp.api.guide.download_pdf">⬇️ تنزيل الدليل PDF</a>
+  <button class="btn" onclick="window.print()">🖨️ طباعة</button>
+</div>
+{% endif %}
+
+<div class="layout">
+{% if not pdf_mode %}
+<nav class="toc">
+  <h3>المحتويات</h3>
+  <a href="#intro">1. مقدمة وطريقة الدخول</a>
+  <a href="#setup">2. التهيئة الأولية بالترتيب</a>
+  <a href="#employees">3. إنشاء الموظفين</a>
+  <a href="#shifts">4. الدوام والشفتات والفترات</a>
+  <a href="#biometric">5. جهاز البصمة ورفع البصمات</a>
+  <a href="#attendance">6. الحضور والانصراف</a>
+  <a href="#leaves">7. الإجازات والاستئذان</a>
+  <a href="#payroll">8. الرواتب: المكونات والهياكل والقسائم</a>
+  <a href="#deductions">9. خصم التأخير والغياب والإضافي</a>
+  <a href="#reports">10. التقارير</a>
+  <a href="#settings">11. الإعدادات المهمة</a>
+  <a href="#faq">12. أسئلة شائعة</a>
+</nav>
+{% endif %}
+
+<main>
+  <h1>دليل استخدام نظام الموارد البشرية</h1>
+  <div class="subtitle">شركة نيو سمارت تك — دليل شامل للمستخدم المبتدئ، خطوة بخطوة مع أمثلة من بيانات النظام الفعلية</div>
+
+  <!-- ============ 1. مقدمة ============ -->
+  <h2 id="intro">1. مقدمة وطريقة الدخول</h2>
+  <p>نظام الموارد البشرية يغطي: <b>الموظفين، الهيكل الإداري، الدوام والشفتات، البصمة والحضور، الإجازات، الرواتب والخصومات، والتقارير</b>. هذا الدليل يأخذك من الصفر حتى إصدار قسيمة الراتب.</p>
+  <div class="steps">
+    <b>طريقة الدخول:</b>
+    <ol>
+      <li>افتح رابط النظام في المتصفح — الرابط الذي سلّمه لك مسؤول النظام (مثال: <code>https://hr.yourcompany.com</code> أو عنوان IP داخلي حسب شبكتك).</li>
+      <li>أدخل اسم المستخدم وكلمة المرور.</li>
+      <li>من الصفحة الرئيسية اختر مساحة العمل <b>«بوابة الموارد البشرية»</b> — فيها كل اختصارات النظام مرتبة.</li>
+    </ol>
+  </div>
+  <div class="note">كل مسار في هذا الدليل يبدأ من شريط البحث العلوي (اكتب اسم الشاشة) أو من اختصارات «بوابة الموارد البشرية».</div>
+
+  <!-- ============ 2. التهيئة ============ -->
+  <h2 id="setup">2. التهيئة الأولية بالترتيب</h2>
+  <p>رتّب الإنشاء بهذا الترتيب الإلزامي — كل خطوة تعتمد على سابقتها:</p>
+  <table>
+    <tr><th>#</th><th>الخطوة</th><th>الشاشة</th><th>مثال موجود في نظامكم</th></tr>
+    <tr><td>1</td><td>الشركة</td><td>Company</td><td>نيو سمارت</td></tr>
+    <tr><td>2</td><td>الفروع</td><td>Branch</td><td>هايل، الزبيري، النخيل، المطراق، بيت الفقيه، باجل، صنعاء</td></tr>
+    <tr><td>3</td><td>الأقسام</td><td>Department</td><td>الحسابات، التسويق، مبيعات، العمليات، الإنتاج، الموارد البشرية</td></tr>
+    <tr><td>4</td><td>الرتب الوظيفية</td><td>Designation</td><td>مدير عام، مدير مالي، محاسب، مهندس</td></tr>
+    <tr><td>5</td><td>الموظفون</td><td>Employee</td><td>منير الشويع</td></tr>
+    <tr><td>6</td><td>الشفتات والفترات</td><td>Shift Type</td><td>دوام رسمي، شفت متكامل (صباحي ومسائي)</td></tr>
+    <tr><td>7</td><td>تعيين الشفت</td><td>Shift Assignment</td><td>تعيين «دوام رسمي» للموظف</td></tr>
+    <tr><td>8</td><td>أجهزة البصمة وربط الموظفين</td><td>Biometric Device</td><td>جهاز الفرع</td></tr>
+  </table>
+
+  <h3>2.1 الفروع (Branch)</h3>
+  <div class="path">بوابة الموارد البشرية ← الفروع ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>اضغط «جديد» واكتب اسم الفرع فقط (مثلاً: <b>المطراق</b>).</li>
+      <li>احفظ. الفرع يُستخدم لاحقاً في الموظف وجهاز البصمة والتقارير.</li>
+    </ol>
+  </div>
+  <div class="example">فروعكم المسجلة حالياً: هايل، الزبيري، النخيل، المطراق، بيت الفقيه، باجل، فرع صنعاء.</div>
+
+  <h3>2.2 الأقسام (Department)</h3>
+  <div class="path">بوابة الموارد البشرية ← الأقسام ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>اكتب اسم القسم (مثلاً: <b>الحسابات</b>).</li>
+      <li>حدد «القسم الأب» إن كان قسماً فرعياً، والشركة التابع لها.</li>
+    </ol>
+  </div>
+
+  <h3>2.3 الرتب الوظيفية (Designation)</h3>
+  <div class="path">بوابة الموارد البشرية ← الرتب ← جديد</div>
+  <div class="steps"><ol><li>اكتب اسم الرتبة فقط (مثلاً: <b>محاسب</b> أو <b>مدير مالي</b>) ثم احفظ.</li></ol></div>
+
+  <!-- ============ 3. الموظفون ============ -->
+  <h2 id="employees">3. إنشاء الموظفين</h2>
+  <div class="path">بوابة الموارد البشرية ← الموظفون ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li><b>البيانات الأساسية:</b> الاسم الكامل، الشركة، الفرع، القسم، الرتبة، تاريخ التعيين.</li>
+      <li><b>الدوام الافتراضي (Default Shift):</b> اختر الشفت الأساسي للموظف — مهم للحضور والتقارير.</li>
+      <li><b>الحقول البيومترية:</b>
+        <ul>
+          <li><code>Attendance Device ID</code> = رقم الموظف في جهاز البصمة (الرقم الذي يظهر في الجهاز عند البصم).</li>
+          <li><code>Biometric Fingerprint ID</code> = رقم البصمة البديل إن وُجد.</li>
+        </ul>
+      </li>
+      <li>احفظ. يُفضل إنشاء حساب مستخدم (User) للموظف إن كان سيستخدم النظام.</li>
+    </ol>
+  </div>
+  <div class="example">الموظف «منير الشويع»: القسم <b>الحسابات</b>، الفرع <b>المركز الرئيسي</b>، الرتبة <b>محاسب</b>، الدوام الافتراضي <b>دوام رسمي</b>.</div>
+  <div class="note">بدون رقم البصمة (Attendance Device ID) لن تُربط بصمات الجهاز بالموظف في التقارير.</div>
+
+  <!-- ============ 4. الدوام والشفتات ============ -->
+  <h2 id="shifts">4. الدوام والشفتات والفترات</h2>
+
+  <h3>4.1 شفت عادي (فترة واحدة)</h3>
+  <div class="path">بوابة الموارد البشرية ← أنواع الدوام (Shift Type) ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>اسم الشفت (مثلاً: <b>دوام تواجد</b>).</li>
+      <li>وقت البداية ووقت النهاية (مثال: 08:00 إلى 16:00).</li>
+      <li>إن كان الشفت يعبر منتصف الليل فعّل «ينتهي في اليوم التالي».</li>
+    </ol>
+  </div>
+
+  <h3>4.2 شفت متعدد الفترات (صباحي + مسائي) — الأهم لديكم</h3>
+  <p>الشفت متعدد الفترات يقسم الدوام إلى فترات (مثلاً صباحية ومسائية)، وكل بصمة تُوضع تلقائياً في عمود فترتها الصحيحة في التقارير، ويُحسب التأخير لكل فترة على حدة.</p>
+  <div class="steps">
+    <ol>
+      <li>أنشئ Shift Type جديداً وحدد وقت بداية أول فترة ونهاية آخر فترة.</li>
+      <li>فعّل الخيار <b>«تفعيل الدوام متعدد الفترات» (Enable Multi Period Shift)</b>.</li>
+      <li>سيظهر جدول <b>«فترات نوبة العمل» (shift_periods)</b> — أضف كل فترة:
+        <table>
+          <tr><th>الحقل</th><th>المعنى</th><th>مثال</th></tr>
+          <tr><td>اسم الفترة</td><td>يظهر كعمود في التقارير</td><td>الفترة الصباحية</td></tr>
+          <tr><td>رقم الفترة</td><td>الترتيب (1، 2...)</td><td>1</td></tr>
+          <tr><td>وقت البداية / النهاية</td><td>حدود الفترة</td><td>07:30 — 13:30</td></tr>
+          <tr><td>مهلة التأخير (دقيقة)</td><td>لا يُحسب تأخير قبلها</td><td>0 أو 10</td></tr>
+          <tr><td>مهلة الخروج المبكر</td><td>تسامح نهاية الفترة</td><td>0</td></tr>
+        </table>
+      </li>
+      <li>احفظ.</li>
+    </ol>
+  </div>
+  <div class="example">شفت <b>«دوام رسمي»</b> في نظامكم معرّف بفترتين: <b>الفترة الصباحية</b> (07:30–13:30) و<b>الفترة المسائية</b> (14:50–23:00). وشفت <b>«شفت متكامل (صباحي ومسائي)»</b> يستخدم نفس التقسيم تلقائياً.</div>
+  <div class="note">قاعدة التقارير: البصمة داخل حدود فترة تُسند إليها مباشرة؛ والبصمة القريبة من بداية أو نهاية فترة (ضمن 60 دقيقة) تُسند لأقرب فترة — حتى لا تضيع بصمات الخروج بعد نهاية الفترة.</div>
+
+  <h3>4.3 تعيين الشفت للموظف (Shift Assignment)</h3>
+  <div class="path">بوابة الموارد البشرية ← تعيين الدوام ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>اختر الموظف، ونوع الشفت، وتاريخ البداية (والنهاية إن وجدت).</li>
+      <li>احفظ ثم <b>اعتمد (Submit)</b> — لن يعمل الحضور بدون اعتماد.</li>
+    </ol>
+  </div>
+  <div class="example">معظم موظفي المركز معيّنون على «دوام رسمي»، وفروع الحديد على «SH-داوم فروع الحديد» (07:30–21:00).</div>
+
+  <!-- ============ 5. البصمة ============ -->
+  <h2 id="biometric">5. جهاز البصمة ورفع البصمات</h2>
+  <div class="path">بوابة الموارد البشرية ← أجهزة البصمة (Biometric Device)</div>
+  <div class="steps">
+    <ol>
+      <li>سجّل الجهاز: الاسم، الشركة، الفرع، الموقع.</li>
+      <li>تأكد أن كل موظف له <b>رقم بصمة</b> مطابق لرقمه في الجهاز.</li>
+      <li>البصمات تصل النظام تلقائياً عبر برنامج الجسر (Biometric Bridge) وتُخزن في شاشة <b>«بصمات الموظفين» (Employee Checkin)</b>.</li>
+      <li>البصمة الأولى داخل الفترة تعتبر <b>دخولاً</b> والأخيرة <b>خروجاً</b> تلقائياً — لا حاجة لتحديد النوع من الجهاز.</li>
+    </ol>
+  </div>
+  <div class="note">إذا ظهرت بصمات لموظف «غير معروف» فراجع رقم البصمة في ملف الموظف.</div>
+
+  <!-- ============ 6. الحضور ============ -->
+  <h2 id="attendance">6. الحضور والانصراف</h2>
+  <h3>6.1 الحضور التلقائي (Auto Attendance)</h3>
+  <div class="path">بوابة الموارد البشرية ← الحضور التلقائي ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>حدد الفترة (من/إلى) والموظفين.</li>
+      <li>احفظ — يحسب النظام الحالة والتأخير لكل يوم (للشفتات متعددة الفترات يُحسب لكل فترة على حدة).</li>
+      <li>راجع النتائج ثم اعتمد لإنشاء سجلات الحضور (Attendance).</li>
+    </ol>
+  </div>
+  <h3>6.2 الحضور اليدوي (Manual Attendance)</h3>
+  <div class="path">بوابة الموارد البشرية ← الحضور اليدوي ← جديد</div>
+  <div class="steps"><ol><li>لنسيان البصمة: اختر الموظف والتاريخ وأدخل أوقات الدخول/الخروج — تدخل في التقارير كأنها بصمات جهاز.</li></ol></div>
+  <h3>6.3 سجل الحضور (Attendance)</h3>
+  <p>كل يوم حضور يُخزن فيه: الحالة (حاضر/غائب/نصف يوم/إجازة)، وقت الدخول والخروج، مجموع دقائق التأخير، وجدول <b>تفاصيل الفترات</b> (دخول/خروج/تأخير كل فترة).</p>
+
+  <!-- ============ 7. الإجازات ============ -->
+  <h2 id="leaves">7. الإجازات والاستئذان</h2>
+  <h3>7.1 أنواع الإجازات (Leave Type)</h3>
+  <div class="example">الأنواع المسجلة لديكم: <b>إجازة سنوية، إجازة مرضية، إجازة طارئة، إجازة بدون راتب</b>.</div>
+  <h3>7.2 تخصيص الإجازات (Leave Allocation)</h3>
+  <div class="path">بوابة الموارد البشرية ← تخصيص الإجازات ← جديد</div>
+  <div class="steps"><ol><li>اختر الموظف ونوع الإجازة وعدد الأيام للسنة ثم اعتمد. مثال: 30 يوم سنوية لكل موظف.</li></ol></div>
+  <h3>7.3 طلب إجازة (Leave Application)</h3>
+  <div class="path">بوابة الموارد البشرية ← طلبات الإجازات ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>الموظف/المدير ينشئ الطلب: النوع، من/إلى، السبب.</li>
+      <li>الاعتماد (Submit) يجعل اليوم «إجازة» في الحضور والتقارير تلقائياً.</li>
+    </ol>
+  </div>
+  <h3>7.4 الاستئذان القصير (Short Leave)</h3>
+  <div class="path">بوابة الموارد البشرية ← الاستئذانات ← جديد</div>
+  <div class="steps"><ol><li>سجّل دقائق الاستئذان (دخول متأخر أو خروج مبكر مُبرر) — تُخصم تلقائياً من دقائق التأخير في تقرير الحضور والدوام.</li></ol></div>
+
+  <!-- ============ 8. الرواتب ============ -->
+  <h2 id="payroll">8. الرواتب: المكونات والهياكل والقسائم</h2>
+
+  <h3>8.1 مكونات الراتب (Salary Component) — البدلات والخصومات</h3>
+  <div class="path">الرواتب ← مكونات الراتب ← جديد</div>
+  <p>نوعان: <b>استحقاق (Earning)</b> للبدلات و<b>استقطاع (Deduction)</b> للخصومات.</p>
+  <table>
+    <tr><th>النوع</th><th>أمثلة موجودة في نظامكم</th></tr>
+    <tr><td>بدلات (Earning)</td><td>الراتب الأساسي، بدل سكن، بدل مواصلات، بدل طعام، بدل طبيعة عمل، بدل مخاطر، إضافي 1.5، إضافي 2.0</td></tr>
+    <tr><td>خصومات (Deduction)</td><td>خصم التأخير (Late Deduction)، خصم الغياب (Absence Deduction)، خصم غياب، ضريبة الدخل</td></tr>
+  </table>
+
+  <h3>8.2 هيكل الراتب (Salary Structure)</h3>
+  <div class="path">الرواتب ← هياكل الرواتب ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>سمّ الهيكل (مثال: <b>هيكل رواتب الموظفين</b> لشركة نيو سمارت).</li>
+      <li>أضف جدول الاستحقاقات: الراتب الأساسي + البدلات.</li>
+      <li>أضف جدول الاستقطاعات: الضريبة والخصومات الثابتة.</li>
+      <li>فعّل «نشط» واعتمد الهيكل.</li>
+    </ol>
+  </div>
+
+  <h3>8.3 تعيين الهيكل للموظف (Salary Structure Assignment)</h3>
+  <div class="path">الرواتب ← تعيين هيكل الراتب ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>اختر الموظف والهيكل والراتب الأساسي (Base) وتاريخ البدء.</li>
+      <li>اعتمد — يمكن ضبط النظام لإنشاء قسيمة الراتب تلقائياً عند التعيين (من إعدادات HR: وضع إنشاء القسيمة = تلقائي).</li>
+    </ol>
+  </div>
+
+  <h3>8.4 قسيمة الراتب (Salary Slip)</h3>
+  <div class="path">الرواتب ← قسائم الرواتب ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>اختر الموظف والفترة (بداية/نهاية الشهر).</li>
+      <li>عند الحفظ تُحسب الاستحقاقات والخصومات وأيام العمل تلقائياً — <b>ويُضاف خصم التأخير والغياب تلقائياً</b> (انظر الفصل 9).</li>
+      <li>راجع ثم اعتمد.</li>
+    </ol>
+  </div>
+
+  <h3>8.5 إنشاء قسائم جماعية (Payroll Entry)</h3>
+  <div class="path">الرواتب ← إدخال الرواتب (Payroll Entry) ← جديد</div>
+  <div class="steps">
+    <ol>
+      <li>حدد الشركة والشهر ثم «جلب الموظفين».</li>
+      <li>«إنشاء قسائم الرواتب» ينشئ قسيمة لكل موظف دفعة واحدة.</li>
+      <li>راجع ثم اعتمد الكل، وأنشئ قيد الصرف المحاسبي.</li>
+    </ol>
+  </div>
+
+  <h3>8.6 إعدادات الرواتب (ثلاث شاشات إعداد — تعرف على كل منها)</h3>
+  <p>للنظام ثلاث شاشات إعداد للرواتب، لكل منها دور محدد:</p>
+  <table>
+    <tr><th>الشاشة</th><th>المسار</th><th>ماذا تضبط فيها</th></tr>
+    <tr>
+      <td><b>Payroll Settings</b> (القياسية)</td>
+      <td>البحث ← «Payroll Settings»</td>
+      <td>الإعدادات العامة للرواتب القياسية: أيام العمل، الحد الأقصى للدورات، إعدادات الإثبات المحاسبي للرواتب</td>
+    </tr>
+    <tr>
+      <td><b>إعدادات الرواتب المخصصة نافاري</b> (Navari Custom Payroll Settings)</td>
+      <td>البحث ← «Navari Custom Payroll Settings»</td>
+      <td>الإضافي ومصفوفة المكافآت: <b>أقصى ساعات إضافي شهرية</b>، نشاط <b>Overtime 1.5</b> ونشاط <b>Overtime 2.0</b>، <b>حد احتساب الإضافي (بالدقيقة)</b>، تضمين الدخول المبكر، وجدول «المكافأة مقابل النقاط» (Bonus vs Score)</td>
+    </tr>
+    <tr>
+      <td><b>إعدادات رواتب hr_erp</b> (HR ERP Payroll Settings)</td>
+      <td>البحث ← «HR ERP Payroll Settings»</td>
+      <td>خصم التأخير والغياب وتوليد الإضافي — تفصيلها في الفصلين 9 و10</td>
+    </tr>
+  </table>
+  <div class="steps">
+    <b>خطوات تهيئة إعدادات الرواتب لأول مرة:</b>
+    <ol>
+      <li>أنشئ مكوّنات الراتب أولاً (بدلات وخصومات) — مثل: الراتب الأساسي، بدل سكن، Late Deduction، Absence Deduction، Overtime 1.5، Overtime 2.0.</li>
+      <li>أنشئ «أنواع الأنشطة» (Activity Type) للإضافي: <b>Overtime 1.5</b> و<b>Overtime 2.0</b>.</li>
+      <li>افتح «Navari Custom Payroll Settings» واربط النشاطين وحدد حد الإضافي وأقصى ساعات شهرية.</li>
+      <li>افتح «HR ERP Payroll Settings» وفعّل خصم التأخير/الغياب واربط مكوّنات الخصم وحدد أيام العمل بالشهر (30).</li>
+      <li>أنشئ هيكل الراتب ثم عيّنه للموظفين.</li>
+    </ol>
+  </div>
+
+  <!-- ============ 9. الخصم التلقائي ============ -->
+  <h2 id="deductions">9. خصم التأخير والغياب والوقت الإضافي — أين يُضبط كلٌّ منها</h2>
+
+  <h3>9.1 خصم التأخير — أين يُحدد؟</h3>
+  <table>
+    <tr><th>الإعداد</th><th>الواجهة</th><th>الحقل</th></tr>
+    <tr><td>تفعيل الخصم ومكوّنه ومعامله</td><td><b>HR ERP Payroll Settings</b></td><td>Enable Late Deduction + Late Deduction Component + Late Deduction Factor</td></tr>
+    <tr><td>مهلة السماح العامة (دقائق)</td><td><b>HR ERP Payroll Settings</b></td><td>Late Grace Period Override (تتجاوز إعداد الشفت إذا &gt; 0)</td></tr>
+    <tr><td>مهلة السماح لكل فترة</td><td><b>Shift Type ← جدول «فترات نوبة العمل»</b></td><td>حقل «مهلة التأخير (دقيقة)» في صف كل فترة</td></tr>
+    <tr><td>أيام العمل بالشهر (لتسعير اليوم/الساعة)</td><td><b>HR ERP Payroll Settings</b></td><td>Working Days Per Month = 30</td></tr>
+  </table>
+  <p>الحساب التلقائي في القسيمة: <b>خصم التأخير = مجموع دقائق التأخير في الشهر (لكل فترة) × سعر الساعة</b>، وسعر الساعة = (الراتب ÷ 30) ÷ ساعات الدوام.</p>
+
+  <h3>9.2 خصم الغياب — أين يُحدد؟</h3>
+  <table>
+    <tr><th>الإعداد</th><th>الواجهة</th><th>الحقل</th></tr>
+    <tr><td>تفعيل خصم الغياب ومكوّنه ومعامله</td><td><b>HR ERP Payroll Settings</b></td><td>Enable Absence Deduction + Absence Deduction Component + Factor</td></tr>
+  </table>
+  <p>الحساب: <b>عدد أيام الغياب × (الراتب ÷ 30) × المعامل</b>. وأيام الغياب تُنقص أيام الدفع قياسياً في القسيمة.</p>
+
+  <h3>9.3 الوقت الإضافي (Overtime) — كيف يُنشأ وأين؟</h3>
+  <div class="steps">
+    <b>التهيئة (مرة واحدة):</b>
+    <ol>
+      <li>أنشئ نوعي النشاط: <b>Overtime 1.5</b> و<b>Overtime 2.0</b> من شاشة «Activity Type».</li>
+      <li>افتح <b>HR ERP Payroll Settings</b> وفعّل <b>Enable Overtime Generation</b> ثم حدد:
+        <ul>
+          <li><b>Overtime 1.5/2.0 Activity</b>: ربط النشاطين</li>
+          <li><b>Overtime Threshold (min)</b>: الحد الأدنى بالدقائق لبدء احتساب الإضافي</li>
+          <li><b>Maximum Monthly Hours</b>: سقف الإضافي الشهري</li>
+          <li><b>Include Early Entry</b>: احتساب الحضور المبكر قبل بدء الفترة كإضافي</li>
+        </ul>
+      </li>
+      <li>في <b>Shift Type ← جدول الفترات</b> فعّل «السماح بالإضافي» (Allow Overtime) للفترة وحدد «يبدأ الإضافي بعد» إن أردت.</li>
+      <li>أضف مكوّني <b>Overtime 1.5</b> و<b>Overtime 2.0</b> (نوع Earning) إلى هيكل الراتب.</li>
+    </ol>
+  </div>
+  <p><b>المصدر:</b> البصمات بعد نهاية الفترة (و/أو قبل بدايتها إن فُعّل تضمين الدخول المبكر) تُحسب ساعات إضافية في سجل الحضور (حقل «إجمالي ساعات الإضافي»)، وتُضاف كاستحقاق في قسيمة الراتب تلقائياً عند إنشائها.</p>
+  <div class="example">موظف أنهى الفترة المسائية 23:00 وبصم خروجه 23:45 → 45 دقيقة إضافية تُقاس على الحد المسموح وتظهر في القسيمة تحت مكوّن Overtime 1.5.</div>
+
+  <h3>9.4 ملخص: جدول «أين أضبط ماذا؟»</h3>
+  <table>
+    <tr><th>أريد ضبط…</th><th>الواجهة</th></tr>
+    <tr><td>خصم التأخير (تفعيل/مكوّن/معامل)</td><td>HR ERP Payroll Settings</td></tr>
+    <tr><td>مهلة تأخير فترة معينة</td><td>Shift Type ← فترات نوبة العمل ← صف الفترة</td></tr>
+    <tr><td>خصم الغياب</td><td>HR ERP Payroll Settings</td></tr>
+    <tr><td>توليد الإضافي وحدوده وسقفه الشهري</td><td>HR ERP Payroll Settings</td></tr>
+    <tr><td>أنشطة الإضافي 1.5/2.0 ومصفوفة المكافآت</td><td>Navari Custom Payroll Settings</td></tr>
+    <tr><td>إعدادات الرواتب العامة</td><td>Payroll Settings</td></tr>
+    <tr><td>مكوّنات البدلات والخصومات نفسها</td><td>Salary Component</td></tr>
+  </table>
+  <div class="example">إعداداتكم الحالية: خصم التأخير <b>مفعّل</b> بمكوّن «Late Deduction»، وخصم الغياب <b>مفعّل</b> بمكوّن «Absence Deduction»، بمعامل 1.0 و30 يوم عمل. مثال: موظف تأخر 470 دقيقة في شهر — يُخصم (470÷60) × سعر ساعته تلقائياً في القسيمة.</div>
+  <div class="note">أيام الغياب تُنقص أيام الدفع في القسيمة أيضاً بشكل قياسي، فلا تُحسب مرتين إن اخترت أحد الأسلوبين.</div>
+
+  <!-- ============ 10. التقارير ============ -->
+  <h2 id="reports">10. التقارير</h2>
+  <div class="path">بوابة الموارد البشرية ← التقارير (أو ابحث باسم التقرير)</div>
+
+  <h3>10.1 الحضور البيومتري للفترة (Biometric Period Attendance) — التقرير الأساسي</h3>
+  <p>يعرض لكل موظف وكل يوم <b>كل بصمة في عمود فترتها</b>:</p>
+  <table>
+    <tr><th>العمود</th><th>المحتوى</th></tr>
+    <tr><td>الفترة الصباحية — دخول / خروج</td><td>وقت أول وآخر بصمة داخل الفترة الصباحية</td></tr>
+    <tr><td>الفترة الصباحية — تأخير (د) / خروج مبكر (د)</td><td>دقائق التأخير عن بداية الفترة / الخروج قبل نهايتها (بعد المهلة)</td></tr>
+    <tr><td>الفترة المسائية — …</td><td>نفس الأعمدة للفترة المسائية</td></tr>
+    <tr><td>حالة الفترة</td><td>ح / متأخر / خروج مبكر / دخول فقط / غ (غائب)</td></tr>
+    <tr><td>حالة اليوم + إجمالي التأخير</td><td>حاضر / نصف فترة / جزئي / غائب</td></tr>
+  </table>
+  <div class="example">الموظف «منير الشويع» يوم 05/09: مسائية دخول 15:10 وخروج 22:30 → تأخير 20 دقيقة وخروج مبكر 30 دقيقة، وحالة اليوم «نصف فترة» لغياب بصمة الصباحية.</div>
+
+  <h3>10.2 تقرير الحضور والدوام (Attendance Summary V2)</h3>
+  <p>مصفوفة شهرية: الموظفون × الأيام — خلية كل يوم تظهر <code>P</code> حاضر، <code>A</code> غائب، <code>HD</code> نصف يوم، <code>L</code> إجازة، <code>H</code> عطلة، مع التأخير بين قوسين مثل <code>HD in(20m) out(30m)</code>، وأعمدة إجمالية: الحضور/الغياب/الإجازات/التأخير بالدقيقة/أيام التأخير/الخروج المبكر.</p>
+
+  <h3>10.3 Multi-Period Attendance</h3>
+  <p>تفاصيل الفترات من سجل الحضور المعتمد: فعّل خيار «إظهار تفاصيل الفترات» لترى دخول/خروج/تأخير/حالة كل فترة مع مخطط ملخص.</p>
+
+  <h3>10.4 كشف البصمات (Fingerprint Device Events)</h3>
+  <p>كل البصمات الخام كما وصلت من الأجهزة — للمراجعة والتدقيق.</p>
+
+  <h3>10.5 تقارير أخرى مفيدة</h3>
+  <table>
+    <tr><th>التقرير</th><th>الغرض</th></tr>
+    <tr><td>Attendance Summary / Shift Summary</td><td>ملخصات الحضور والشفتات</td></tr>
+    <tr><td>Custom Employee Leave Balance Summary V2</td><td>أرصدة إجازات الموظفين</td></tr>
+    <tr><td>Auto Salary Slip Report</td><td>قسائم الرواتب المُنشأة تلقائياً</td></tr>
+    <tr><td>Employees Details</td><td>بيانات الموظفين الكاملة</td></tr>
+  </table>
+
+  <!-- ============ 11. الإعدادات ============ -->
+  <h2 id="settings">11. الإعدادات المهمة</h2>
+  <table>
+    <tr><th>الشاشة</th><th>متى تستخدمها</th></tr>
+    <tr><td>HR ERP Payroll Settings</td><td>تفعيل/إيقاف خصم التأخير والغياب، المكونات، المعامل، أيام العمل بالشهر</td></tr>
+    <tr><td>Multi Period Settings</td><td>سياسة الغياب للشفتات متعددة الفترات ونسبة الاحتساب وبداية اليوم التشغيلي</td></tr>
+    <tr><td>HR Settings</td><td>وضع إنشاء قسيمة الراتب (تلقائي/يدوي) واعتمادها التلقائي</td></tr>
+    <tr><td>Holiday List</td><td>قائمة العطل الرسمية السنوية</td></tr>
+  </table>
+
+  <!-- ============ 12. أسئلة شائعة ============ -->
+  <h2 id="faq">12. أسئلة شائعة</h2>
+  <table>
+    <tr><th>المشكلة</th><th>الحل</th></tr>
+    <tr><td>بصمات الموظف لا تظهر في التقارير</td><td>تأكد من رقم البصمة (Attendance Device ID) في ملف الموظف، وأن له تعيين شفت معتمد يغطي التاريخ</td></tr>
+    <tr><td>بصمة الخروج لا تظهر</td><td>تظهر تلقائياً — آخر بصمة بالفترة تعتبر خروجاً حتى لو أرسلها الجهاز كـ IN</td></tr>
+    <tr><td>التأخير لا يُخصم من الراتب</td><td>تأكد من تفعيل خصم التأخير في HR ERP Payroll Settings ووجود مكوّن الخصم</td></tr>
+    <tr><td>الموظف نسي البصمة</td><td>أدخلها من «الحضور اليدوي» — تدخل التقارير كبصمة عادية</td></tr>
+    <tr><td>شفت يعبر منتصف الليل</td><td>فعّل «ينتهي في اليوم التالي» واضبط بداية اليوم التشغيلي في Multi Period Settings</td></tr>
+  </table>
+
+  <div class="footer">
+    دليل استخدام نظام الموارد البشرية — شركة نيو سمارت تك<br>
+    يُحدَّث هذا الدليل مع تطويرات النظام · للدعم الفني راجع مسؤول النظام
+  </div>
+</main>
+</div>
+
+</body>
+</html>

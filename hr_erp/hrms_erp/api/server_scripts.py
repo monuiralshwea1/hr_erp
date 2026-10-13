@@ -895,7 +895,53 @@ def auto_attendance_calculate_v2(doc, method=None):
 	                emp_shifts.append(shift_type_2)
                 
 	            emp_shifts.reverse()
-            
+
+	            # ============================================================
+	            # FIX (2026-10-12): الشفتات متعددة الفترات (shift_periods)
+	            # كانت تُحسب بمنطق الشفت الواحد فيعطي تأخيراً خاطئاً ضخماً
+	            # (غياب بصمات فترة = كامل مدة الفترة كتأخير).
+	            # الآن تُفوَّض للمحرك متعدد الفترات الذي يسند كل بصمة لفترتها
+	            # ويحسب التأخير/الخروج المبكر لكل فترة على حدة.
+	            # ============================================================
+	            if frappe.utils.cint(getattr(shift_type_1, "enable_multi_period", 0)):
+	                from hr_erp.hrms_erp.multi_period_shift.multi_period_attendance_engine import (
+	                    process_multi_period_attendance,
+	                )
+	                try:
+	                    mp_shift_doc = frappe.get_doc("Shift Type", shift_type_1.name)
+	                    mp_result = process_multi_period_attendance(
+	                        mp_shift_doc, emp_id, current_date_checks, frappe.utils.getdate(current_date)
+	                    )
+	                except Exception:
+	                    mp_result = None
+	                    frappe.log_error(frappe.get_traceback(), "auto_attendance multi-period calc")
+
+	                if mp_result:
+	                    late_secs = int((mp_result.get("total_late_minutes") or 0) * 60)
+	                    early_secs = int(
+	                        max([p.get("early_exit_minutes") or 0 for p in mp_result.get("period_details", [])] or [0]) * 60
+	                    )
+	                    overtime_secs = int((mp_result.get("total_overtime_hours") or 0) * 3600)
+	                    total_secs = int((mp_result.get("working_hours") or 0) * 3600)
+	                    mp_status = mp_result.get("status") or "Absent"
+	                    att_record = {
+	                        "employee": e["name"],
+	                        "late_enter_time": seconds_to_hhmm(late_secs),
+	                        "early_exit_time": seconds_to_hhmm(early_secs),
+	                        "extra_time": seconds_to_hhmm(overtime_secs),
+	                        "total_time": seconds_to_hhmm(total_secs),
+	                        "attendance_date": current_date,
+	                        "status": mp_status,
+	                        "half_shifts": 2 if mp_status == "Half Day" else 0,
+	                        "shift": shift_type_1.name,
+	                        "auto_atten_id": doc.name,
+	                        "company": e["company"],
+	                    }
+	                    emp_calculated_att.append(att_record)
+	                current_date = frappe.utils.add_days(current_date, 1)
+	                continue
+	            # ============================================================
+
 	            emp_calculated_shifts = []
             
 	            for current_shift in emp_shifts:
