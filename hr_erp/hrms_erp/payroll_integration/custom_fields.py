@@ -53,8 +53,10 @@ CUSTOM_FIELDS = {
 			"insert_after": "attendance_section",
 		},
 		{
+			# MODIFIED: Int -> Float لدعم نصف يوم الغياب (0.5)
+			# ORIGINAL: "fieldtype": "Int",
 			"fieldname": "total_absent_days",
-			"fieldtype": "Int",
+			"fieldtype": "Float",
 			"label": "Total Absent Days",
 			"read_only": 1,
 			"insert_after": "total_late_minutes",

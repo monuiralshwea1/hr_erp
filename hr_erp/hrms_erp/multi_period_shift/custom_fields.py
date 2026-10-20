@@ -117,6 +117,16 @@ CUSTOM_FIELDS = {
 			"insert_after": "multi_period_section",
 		},
 		{
+			# علامة داخلية: تم إدخال فترات النوبة يدوياً (لتمييزها عن السجلات
+			# التلقائية، فلا تُعاد كتابة حالتها عند إعادة الحفظ).
+			"fieldname": "period_entry_manual",
+			"fieldtype": "Check",
+			"label": "Manual Period Entry",
+			"read_only": 1,
+			"default": "0",
+			"insert_after": "attendance_period_details",
+		},
+		{
 			"fieldname": "total_late_minutes",
 			"fieldtype": "Float",
 			"label": "Total Late Minutes",
@@ -167,6 +177,24 @@ CUSTOM_FIELDS = {
 			"label": "Early Arrival Minutes",
 			"insert_after": "late_minutes",
 		},
+		# الحقول التالية للتحضير اليدوي: المستخدم يحدد "حاضر" لكل فترة،
+		# والنظام يستنتج الحالة (حاضر/نصف يوم/غائب) تلقائياً.
+		{
+			"fieldname": "present",
+			"fieldtype": "Check",
+			"label": "Present",
+			"default": "1",
+			"in_list_view": 1,
+			"insert_after": "period_name",
+		},
+		{
+			"fieldname": "is_break",
+			"fieldtype": "Check",
+			"label": "Is Break Period",
+			"read_only": 1,
+			"default": "0",
+			"insert_after": "present",
+		},
 	],
 }
 
@@ -189,9 +217,12 @@ def create_custom_fields():
 					"depends_on": field.get("depends_on"),
 					"description": field.get("description"),
 					"read_only": field.get("read_only", 0),
+					"in_list_view": field.get("in_list_view", 0),
 					"insert_after": field.get("insert_after"),
 					"module": "hrms-erp",
 				})
 				custom_field.insert(ignore_permissions=True)
 			except Exception as e:
-				frappe.log_error(f"Failed to create custom field {fieldname} on {doctype}: {e}")
+				frappe.log_error(
+					f"Failed to create custom field {field.get('fieldname')} on {doctype}: {e}"
+				)

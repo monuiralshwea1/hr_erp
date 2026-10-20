@@ -103,6 +103,26 @@ def apply_overtime_earning(doc, method=None):
         if amount > 0:
             _add_earning_row(doc, "Overtime 2.0", amount)
 
+    # ==================================================================
+    # MODIFIED (2026-10): إعادة حساب الإجماليات بعد إضافة الإضافي
+    # ------------------------------------------------------------------
+    # سبب الإضافة: doc_events تُنفَّذ بعد Salary Slip.validate() الذي
+    # يستدعي calculate_net_pay()، لذلك تبقى gross_pay / net_pay بقيم
+    # قديمة بعد إضافة سطور الإضافي. نعيد جمعها من السطور الحالية.
+    # الكود الأصلي أعلاه محفوظ كما هو دون حذف.
+    # ==================================================================
+    try:
+        from hr_erp.hrms_erp.payroll_integration.late_absence_deduction import (
+            _recalculate_slip_totals,
+        )
+
+        _recalculate_slip_totals(doc)
+    except Exception:
+        frappe.log_error(
+            frappe.get_traceback(),
+            "overtime_earning: failed to recalculate Salary Slip totals",
+        )
+
 
 # ------------------------------------------------------------------
 # Helpers
@@ -206,7 +226,23 @@ def _shift_end_as_datetime(d, shift_end):
 
 def _get_hourly_rate(doc):
     """Compute hourly rate = base / working_days_per_month / shift_hours."""
-    base = flt(doc.get("base") or doc.get("gross_pay") or 0)
+    # ==================================================================
+    # MODIFIED (2026-10): الأساس لا يشمل الإضافي السابق
+    # ------------------------------------------------------------------
+    # ORIGINAL CODE — DISABLED (محفوظ للرجوع إليه):
+    #   base = flt(doc.get("base") or doc.get("gross_pay") or 0)
+    #
+    # سبب التعطيل: تُستدعى هذه الدالة بعد إزالة سطور الإضافي
+    # (_remove_overtime_rows)، لكن حقل gross_pay ما زال يحمل قيمة الإضافي
+    # من الحفظ السابق، فيصبح الإضافي جزءاً من أساس حسابه فيتصاعد قليلاً مع
+    # كل إعادة حفظ. لذلك نجمع سطور المستحقات الحالية (بعد الإزالة) أولاً،
+    # وهو يساوي القيمة الأصلية في أول حفظ تماماً.
+    # ==================================================================
+    base = flt(doc.get("base") or 0)
+    if base <= 0:
+        base = sum(flt(row.amount) for row in (doc.get("earnings") or []))
+    if base <= 0:
+        base = flt(doc.get("gross_pay") or 0)
     if base <= 0:
         # Try to read from salary structure assignment
         emp = doc.get("employee")

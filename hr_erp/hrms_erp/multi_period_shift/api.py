@@ -6,7 +6,7 @@ Provides whitelisted endpoints for biometric device integration and attendance p
 
 import frappe
 from frappe import _
-from frappe.utils import get_datetime, now_datetime
+from frappe.utils import get_datetime, now_datetime, getdate, nowdate, cint, flt
 
 from hr_erp.hrms_erp.multi_period_shift.duplicate_detector import safe_create_checkin
 from hr_erp.hrms_erp.multi_period_shift.biometric_handler import get_device_by_id, update_device_sync
@@ -93,25 +93,26 @@ def get_employee_period_attendance(employee, attendance_date):
 		"out_time": str(att.out_time) if att.out_time else None,
 		"total_late_minutes": att.total_late_minutes if hasattr(att, 'total_late_minutes') else 0,
 		"total_overtime_hours": att.total_overtime_hours if hasattr(att, 'total_overtime_hours') else 0,
-		"period_details": [
-			{
-				"period_name": pd.period_name,
-				"period_number": pd.period_number,
-				"period_start": str(pd.period_start) if pd.period_start else None,
-				"period_end": str(pd.period_end) if pd.period_end else None,
-				"actual_check_in": str(pd.actual_check_in) if pd.actual_check_in else None,
-				"actual_check_out": str(pd.actual_check_out) if pd.actual_check_out else None,
-				"working_hours": pd.working_hours,
-				"late_minutes": pd.late_minutes,
-				"early_arrival_minutes": getattr(pd, "early_arrival_minutes", 0) or 0,
-				"early_exit_minutes": pd.early_exit_minutes,
-				"absent_hours": pd.absent_hours,
-				"overtime_hours": pd.overtime_hours,
-				"period_status": pd.period_status,
-			}
-			for pd in att.period_details
-		] if hasattr(att, 'period_details') and att.period_details else [],
-	}
+			"period_details": [
+				{
+					"period_name": pd.period_name,
+					"period_number": pd.period_number,
+					"period_start": str(pd.period_start) if pd.period_start else None,
+					"period_end": str(pd.period_end) if pd.period_end else None,
+					"actual_check_in": str(pd.actual_check_in) if pd.actual_check_in else None,
+					"actual_check_out": str(pd.actual_check_out) if pd.actual_check_out else None,
+					"working_hours": pd.working_hours,
+					"late_minutes": pd.late_minutes,
+					"early_arrival_minutes": getattr(pd, "early_arrival_minutes", 0) or 0,
+					"early_exit_minutes": pd.early_exit_minutes,
+					"absent_hours": pd.absent_hours,
+					"overtime_hours": pd.overtime_hours,
+					"period_status": pd.period_status,
+				}
+				# تم تصحيح المرجع: الحقل الفعلي هو attendance_period_details وليس period_details
+				for pd in att.attendance_period_details
+			] if hasattr(att, 'attendance_period_details') and att.attendance_period_details else [],
+		}
 
 
 @frappe.whitelist()
@@ -342,3 +343,87 @@ def get_period_attendance_summary(employee, from_date, to_date):
 				pass
 
 	return summary
+
+
+@frappe.whitelist()
+def get_shift_period_details(shift_type, date=None, employee=None):
+	"""إرجاع فترات نوبة العمل لشفت متعدد الفترات — لتعبئة جدول التحضير اليدوي.
+
+	shift_type : اسم Shift Type.
+	date       : تاريخ التحضير (لحساب بداية/نهاية كل فترة، مع دعم عبور منتصف الليل).
+	employee   : (اختياري) لأغراض العرض فقط.
+
+	يُعيد قائمة الفترات مع أوقاتها الفعلية وطولها بالساعات، وحقل is_break
+	لمعرفة فترات الراحة التي لا تُحتسب في تحديد الحالة.
+	"""
+	if not shift_type:
+		return {"multi_period": False, "periods": []}
+
+	if not frappe.db.exists("Shift Type", shift_type):
+		return {"multi_period": False, "periods": []}
+
+	from hr_erp.hrms_erp.multi_period_shift.multi_period_attendance_engine import (
+		is_multi_period_shift,
+		get_sorted_periods,
+		get_period_datetime_range,
+	)
+
+	shift_doc = frappe.get_doc("Shift Type", shift_type)
+	if not is_multi_period_shift(shift_doc):
+		return {"multi_period": False, "periods": []}
+
+	reference_date = getdate(date) if date else getdate(nowdate())
+	periods = get_sorted_periods(shift_doc)
+
+	result = []
+	for period in periods:
+		period_start, period_end = get_period_datetime_range(period, reference_date)
+		hours = round((period_end - period_start).total_seconds() / 3600, 2)
+		result.append(
+			{
+				"period_name": period.period_name,
+				"period_number": cint(period.period_number),
+				"period_start": str(period_start),
+				"period_end": str(period_end),
+				"is_break": cint(getattr(period, "is_break", 0)),
+				"late_grace_period": cint(getattr(period, "late_grace_period", 0) or 0),
+				"early_exit_grace_period": cint(getattr(period, "early_exit_grace_period", 0) or 0),
+				"minimum_working_hours": flt(getattr(period, "minimum_working_hours", 0) or 0),
+				"hours": hours,
+			}
+		)
+
+	return {
+		"multi_period": True,
+		"shift": shift_type,
+		"date": str(reference_date),
+		"periods": result,
+	}
+
+
+@frappe.whitelist()
+def get_employee_default_shift(employee):
+	"""إرجاع الشفت الافتراضي للموظف (من Employee.default_shift أو آخر تكليف شفت)."""
+	if not employee:
+		return None
+
+	# نُعيد فقط شفتاً صالحاً كـ Shift Type، حتى لا نضع قيمة غير صحيحة في حقل Link.
+	shift = frappe.db.get_value("Employee", employee, "default_shift")
+	if shift and frappe.db.exists("Shift Type", shift):
+		return shift
+
+	assignment = frappe.get_all(
+		"Shift Assignment",
+		filters={
+			"employee": employee,
+			"docstatus": 1,
+			"start_date": ["<=", getdate()],
+		},
+		fields=["shift_type"],
+		order_by="start_date desc",
+		limit=1,
+	)
+	if assignment and frappe.db.exists("Shift Type", assignment[0].shift_type):
+		return assignment[0].shift_type
+
+	return None

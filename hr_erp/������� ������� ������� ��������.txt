@@ -1,0 +1,248 @@
+اصلاحات التقارير والحضور والتأخير
+تطبيق: hr_erp   |   الموقع: site1.local   |   آخر تحديث: 2026-10-20
+==================================================================================
+
+محتويات الملف
+----------------------------------------------------------------------------------
+1) نظرة عامة
+2) الملفات المضافة والمُعدَّلة
+3) آلية خصم التأخير والغياب (شرح تفصيلي)
+   - الإعدادات
+   - المعادلات
+   - نصف اليوم والعطل
+   - أساس الحساب (base / Salary Structure Assignment / gross)
+   - إعادة حساب الإجماليات
+   - تعريب مبلغ الراتب بالكلمات
+4) إعادة احتساب القسائم السابقة (شهرياً)
+5) تقرير خصومات الرواتب (Salary Deductions Report)
+6) الحضور اليدوي متعدد الفترات (تعبئة فترات النوبة تلقائياً)
+7) النشر على السيرفر الثاني
+8) أوامر Git (تجهيز فقط)
+9) تحذيرات وملاحظات
+
+==================================================================================
+1) نظرة عامة
+==================================================================================
+- خصم التأخير يُحتسب بالدقيقة، وخصم الغياب يُحتسب باليوم (والنصف يوم = 0.5).
+- كل القيم تُقرأ من إعدادات "HR ERP Payroll Settings" ويظهر أثرها في:
+    * قسيمة الراتب (Salary Slip) — في جدول الخصومات والمجاميع.
+    * تقرير "تقرير خصومات الرواتب وصافي الراتب".
+- القسائم المُقدَّمة سابقاً (قبل تفعيل الميزة) يمكن إعادة احتسابها شهرياً بأمر واحد.
+- نموذج الحضور اليدوي يدعم فترات نوبة العمل (Shift Periods) بتنزيل تلقائي واستنتاج
+  الحالة (حاضر / نصف يوم / غائب).
+- الكود الأصلي لم يُحذف، بل عُطِّل مع تعليقات توضّح سبب التعطيل (كما هو مطلوب).
+
+==================================================================================
+2) الملفات المضافة والمُعدَّلة
+==================================================================================
+المضافة:
+  hrms_erp/payroll_integration/arabic_amount_words.py
+      تحويل المبالغ إلى كلمات عربية + دالة set_salary_slip_total_in_words_ar().
+  hrms_erp/payroll_integration/slip_deduction_regenerator.py
+      إعادة احتساب خصومات القسائم السابقة شهرياً (dry-run + تنفيذ).
+
+المُعدَّلة:
+  hrms_erp/payroll_integration/late_absence_deduction.py
+      أساس الحساب (base → SSA → gross)، إعادة حساب الإجماليات، تعريب total_in_words.
+  hrms_erp/payroll_integration/overtime_earning.py
+      إصلاح احتساب أجر الساعة (كان يستخدم gross_pay الذي يشمل الإضافي السابق).
+  hrms_erp/multi_period_shift/custom_fields.py
+      إضافة حقلين لنموذج "Attendance Period Detail": present و is_break.
+  hrms_erp/multi_period_shift/api.py
+      إضافة get_shift_period_details() و get_employee_default_shift()، وتصحيح
+      المرجع att.period_details → att.attendance_period_details.
+  hrms_erp/multi_period_shift/multi_period_attendance_engine.py
+      ضبط present/is_break عند إنشاء سجلات الحضور تلقائياً.
+  hrms_erp/api/smart_defaults.py
+      validate_attendance: استنتاج الحالة من فترات النوبة في السجل الجديد.
+  public/js/attendance.js
+      تنزيل فترات النوبة تلقائياً واستنتاج الحالة عند التعديل.
+  hrms_erp/report/salary_deductions_report/salary_deductions_report.py
+      عمودان فعّالان (دقائق/أيام × المعامل) لعكس أثر الإعدادات.
+
+==================================================================================
+3) آلية خصم التأخير والغياب
+==================================================================================
+الإعدادات (DocType: HR ERP Payroll Settings):
+  enable_late_deduction            تشغيل/إيقاف خصم التأخير.
+  late_deduction_component         اسم بند الخصم (افتراضياً "Late Deduction").
+  late_deduction_factor            معامل خصم التأخير (افتراضياً 1.0).
+  late_grace_period_override       تجاهل فت/ فترات سماح التأخير إن كان 1.
+  enable_absence_deduction         تشغيل/إيقاف خصم الغياب.
+  absence_deduction_component      اسم بند الخصم (افتراضياً "Absence Deduction").
+  absence_deduction_factor         معامل خصم الغياب (افتراضياً 1.0).
+  working_days_per_month           عدد أيام الشهر لحساب الأجر اليومي (افتراضياً 30).
+
+المعادلات:
+  الأجر اليومي  = قاعدة الراتب / working_days_per_month
+  أجر الساعة    = الأجر اليومي / (ساعات الشفت اليومية)
+  خصم التأخير   = أجر الساعة × late_deduction_factor × (دقائق التأخير / 60)
+  خصم الغياب    = الأجر اليومي × absence_deduction_factor × (أيام الغياب)
+
+  ملاحظة مهمة: المعامل يُطبَّق على المبلغ وعلى الكمية المعروضة معاً (كما طُلب):
+  فتقرير النظام يعرض عمودين — الكمية الخام، والكمية الفعّالة (× المعامل).
+
+نصف اليوم والعطل:
+  - تسجيل "Half Day" في الحضور يُحتسب 0.5 يوم غياب.
+  - تُستبعد أيام العطلة الأسبوعية (weekly_off) وأيام Holiday List من الغياب.
+  - لا يُحتسب تأخير في أيام العطل/الراحة.
+
+أساس الحساب (بالترتيب):
+  1) حقل base في القسيمة إن وُجد.
+  2) أساس آخر Salary Structure Assignment (docstatus=1) صالح للموظف.
+  3) gross_pay كخيار أخير.
+
+إعادة حساب الإجماليات:
+  hook الـvalidate يُنفَّذ بعد calculate_net_pay، لذا يُعاد حساب:
+  gross_pay / total_deduction / net_pay عبر دالة _recalculate_slip_totals()
+  (تستخدم set_net_pay() ولا تستدعي calculate_net_pay() حتى لا تُصفَّر مبالغ الخصم).
+
+تعريب مبلغ الراتب بالكلمات:
+  Frappe تُنتج total_in_words بالإنجليزية دائماً؛ لذلك تستبدلها دالة
+  set_salary_slip_total_in_words_ar() بالنص العربي بعد set_net_pay().
+  مثال: "ثلاثة وثمانون ألف وسبعمئة وأربعون ريال يمني وأربعة وسبعون فلس فقط"
+
+==================================================================================
+4) إعادة احتساب القسائم السابقة (شهرياً)
+==================================================================================
+الوحدة: hr_erp.hrms_erp.payroll_integration.slip_deduction_regenerator
+
+الخصائص:
+  - يقسّم النطاق إلى أشهر ميلادية.
+  - يتخطى تلقائياً الأشهر بلا بيانات حضور صالحة (Present/Half Day) لتجنّب
+    خصم أشهر بياناتها تجريبية أو فارغة.
+  - dry-run (apply=0) لعرض الأثر قبل التنفيذ.
+  - القسيمة تبقى Submitted ولا تُنتج قيوداً محاسبية جديدة.
+
+أمثلة (من داخل مجلد frappe-bench):
+
+  # معاينة لشهر:
+  bench --site site1.local execute hr_erp.hrms_erp.payroll_integration.slip_deduction_regenerator.execute --kwargs "{'from_date':'2026-08-01','to_date':'2026-08-31','apply':0}"
+
+  # تنفيذ فعلي لشهر:
+  bench --site site1.local execute hr_erp.hrms_erp.payroll_integration.slip_deduction_regenerator.execute --kwargs "{'from_date':'2026-08-01','to_date':'2026-08-31','apply':1}"
+
+  # نطاق كامل (يتخطى الأشهر بلا حضور):
+  bench --site site1.local execute hr_erp.hrms_erp.payroll_integration.slip_deduction_regenerator.execute --kwargs "{'from_date':'2026-01-01','to_date':'2026-12-31','apply':1}"
+
+  # بلا وسائط: يعالج الشهر السابق فقط:
+  bench --site site1.local execute hr_erp.hrms_erp.payroll_integration.slip_deduction_regenerator.execute
+
+  # إجبار معالجة الأشهر الفارغة أيضاً (لا يُنصح به):
+  ... --kwargs "{'from_date':'2026-01-01','to_date':'2026-08-31','apply':1,'skip_invalid_months':0}"
+
+(اختياري) أتمتة شهرية: أضف في hooks.py تحت scheduler_events دالة cron يوم 1 من كل
+شهر تستدعي execute للشهر السابق — لم تُضف تلقائياً لتجنّب تعديل الرواتب دون علمك.
+
+==================================================================================
+5) تقرير خصومات الرواتب (Salary Deductions Report)
+==================================================================================
+المسار: HR ERP > تقرير خصومات الرواتب
+الفلاتر: من تاريخ / إلى تاريخ / الموظف / القسم / الشركة / الحالة.
+الأعمدة تتضمن:
+  - دقائق التأخير            + دقائق التأخير الفعّالة (× معامل التأخير)
+  - خصم التأخير
+  - أيام الغياب              + أيام الغياب الفعّالة (× معامل الغياب)
+  - خصم الغياب
+  - بنود المستحقات والخصومات (أعمدة ديناميكية حسب القسائم)
+  - إجمالي المستحقات / إجمالي الخصومات / صافي الراتب
+  - صف إجمالي في النهاية.
+ملاحظة: عمودا "الفعّالة" يعكسان إعدادات المعامل الحالية، بينما مبالغ الخصم مأخوذة
+من القسيمة نفسها (المحفوظة).
+
+==================================================================================
+6) الحضور اليدوي متعدد الفترات
+==================================================================================
+الهدف: عند اختيار الموظف (أو الشفت) تظهر فترات النوبة تلقائياً في جدول
+"فترات النوبة" (attendance_period_details)، ويمكن تحديد الفترات الحاضرة،
+فتُستنتج الحالة تلقائياً.
+
+الاستخدام:
+  1) أنشئ سجل حضور جديد.
+  2) اختر الموظف → يُجلب شفته الافتراضي تلقائياً، ثم تُعبَّأ الفترات.
+     (أو اختر الشفت يدوياً / غيّر التاريخ → تُحدَّث الفترات.)
+  3) لكل فترة خانة "Present (Manual)":
+       - كل الفترات محددة "حاضر"  → الحالة Present.
+       - لا شيء محدد              → الحالة Absent.
+       - بعضها محدد              → الحالة Half Day (مع ضبط half_shifts وساعات العمل).
+  4) يمكنك حذف صف الفترة الثانية (غير الحاضرة) وستبقى الحالة "نصف يوم".
+  5) زر "تعبئة فترات النوبة" لإعادة التعبئة، وزرا "حاضر"/"غائب" لتبديل الكل.
+  - فترات الراحة (is_break) لا تؤثر في تحديد الحالة.
+
+الحقول المضافة على Attendance Period Detail:
+  present   (Check)  — حاضر (يدوي)، افتراضي 1.
+  is_break  (Check)  — فترة راحة (غير قابل للتعديل)، تُضبط من الشفت.
+
+واجهات برمجية (whitelisted):
+  hr_erp.hrms_erp.multi_period_shift.api.get_shift_period_details(shift_type, date, employee)
+  hr_erp.hrms_erp.multi_period_shift.api.get_employee_default_shift(employee)
+
+ملاحظة: استنتاج الحالة على الخادم مقيّد بالسجلات الجديدة فقط (is_new) حتى لا
+يتعارض مع سجلات الحضور التلقائية (مثل اعتماد الإضافي).
+
+==================================================================================
+7) النشر على السيرفر الثاني
+==================================================================================
+الطريقة الموصى بها (عبر Git): بعد رفع التحديثات إلى المستودع (القسم 8):
+
+  cd /path/to/frappe-bench
+  bench --site <site> backup                      # نسخة احتياطية قبل التحديث
+  cd apps/hr_erp
+  git pull origin main                            # أو git fetch + git reset --hard origin/main
+  cd ../..
+  bench --site <site> migrate                     # ينشئ حقول present/is_break الجديدة
+  bench --site <site> clear-cache
+  bench restart                                   # لتحديث سكربتات العميل (JS)
+
+لو السيرفر الثاني بلا Git بعد (تنصيب أول مرة):
+  bench get-app https://github.com/monuiralshwea1/hr_erp.git main
+  bench --site <site> install-app hr_erp
+  bench --site <site> migrate && bench --site <site> clear-cache && bench restart
+
+ثم (اختياري) إعادة احتساب القسائم السابقة على السيرفر الثاني:
+  bench --site <site> execute hr_erp.hrms_erp.payroll_integration.slip_deduction_regenerator.execute --kwargs "{'from_date':'2026-01-01','to_date':'2026-12-31','apply':0}"   # معاينة أولاً
+  bench --site <site> execute hr_erp.hrms_erp.payroll_integration.slip_deduction_regenerator.execute --kwargs "{'from_date':'2026-01-01','to_date':'2026-12-31','apply':1}"
+
+ملاحظة: التنفيذ الفعلي لم يُنفَّذ بعد (بناءً على طلبك: تخطَّ النشر الآن).
+
+==================================================================================
+8) أوامر Git (تجهيز فقط — لم تُنفَّذ)
+==================================================================================
+على السيرفر حيث مسار التطبيق:
+  cd /home/newsmart/frappe-bench2/apps/hr_erp
+
+  # 1) مراجعة الحالة والفرق
+  git status
+  git diff --stat
+
+  # 2) إضافة التعديلات (بما فيها الملف الجديد والوثيقة)
+  git add hrms_erp/payroll_integration/arabic_amount_words.py
+  git add hrms_erp/payroll_integration/slip_deduction_regenerator.py
+  git add hrms_erp/payroll_integration/late_absence_deduction.py
+  git add hrms_erp/payroll_integration/overtime_earning.py
+  git add hrms_erp/multi_period_shift/custom_fields.py
+  git add hrms_erp/multi_period_shift/api.py
+  git add hrms_erp/multi_period_shift/multi_period_attendance_engine.py
+  git add hrms_erp/api/smart_defaults.py
+  git add public/js/attendance.js
+  git add hrms_erp/report/salary_deductions_report/
+  git add "اصلاحات التقاير والحضور والتاخير.txt"
+
+  # 3) تثبيت الالتزام
+  git commit -m "تخصيص خصم التأخير والغياب + تقرير + تعبئة فترات الحضور + تعريب المبلغ بالكلمات"
+
+  # 4) الرفع (المستودع: https://github.com/monuiralshwea1/hr_erp.git فرع main)
+  git push origin main
+
+تحذير: التطبيق يحتوي ملفات نسخ احتياطية (*.bak_*) غير مطلوبة في المستودع؛ لا تُضِفها.
+
+==================================================================================
+9) تحذيرات وملاحظات
+==================================================================================
+- خُذ نسخة احتياطية قبل أي إعادة احتساب فعلي: bench --site site1.local backup.
+- الأشهر التي بياناتها تجريبية (Jan–Jul 2026: كل الحضور "غائب") لا تُعالج تلقائياً؛
+  يجب تصحيح بيانات الحضور أولاً ثم إعادة التشغيل بلا تخطي.
+- تغيير late_deduction_factor / absence_deduction_factor بعد الاحتساب لا يغيّر
+  المبالغ المحفوظة في القسائم تلقائياً؛ أعد تشغيل regenerator لتحديثها.
+- تعريب total_in_words يحدث عند حفظ/إعادة احتساب القسيمة.
+- لا تستخدم doc.calculate_net_pay() داخل hooks القسيمة (تُصفّر الخصومات).

@@ -2,6 +2,7 @@
  "actions": [],
  "creation": "2026-08-20 10:00:00.000000",
  "doctype": "DocType",
+ "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "employee",
@@ -34,7 +35,6 @@
   {
    "fieldname": "employee",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Employee",
    "options": "Employee",
    "read_only": 1
@@ -64,7 +64,6 @@
    "default": "0",
    "fieldname": "period_number",
    "fieldtype": "Int",
-   "in_list_view": 1,
    "label": "Period #",
    "read_only": 1
   },
@@ -89,14 +88,12 @@
   {
    "fieldname": "actual_check_in",
    "fieldtype": "Datetime",
-   "in_list_view": 1,
    "label": "Actual Check In",
    "read_only": 1
   },
   {
    "fieldname": "actual_check_out",
    "fieldtype": "Datetime",
-   "in_list_view": 1,
    "label": "Actual Check Out",
    "read_only": 1
   },
@@ -104,7 +101,6 @@
    "default": "0",
    "fieldname": "working_hours",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Working Hours",
    "read_only": 1
   },
@@ -130,7 +126,6 @@
    "default": "0",
    "fieldname": "late_minutes",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Late (min)",
    "read_only": 1
   },
@@ -138,7 +133,6 @@
    "default": "0",
    "fieldname": "early_exit_minutes",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Early Exit (min)",
    "read_only": 1
   },
@@ -198,7 +192,7 @@
  "index_web_pages_for_search": 0,
  "istable": 1,
  "links": [],
- "modified": "2026-08-20 10:00:00.000000",
+ "modified": "2026-10-20 13:00:00.000000",
  "modified_by": "Administrator",
  "module": "HRMS-ERP",
  "name": "Attendance Period Detail",

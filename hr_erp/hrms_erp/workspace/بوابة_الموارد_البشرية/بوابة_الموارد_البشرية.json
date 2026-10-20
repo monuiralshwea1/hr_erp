@@ -1,43 +1,43 @@
 {
  "charts": [
   {
-   "chart_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645",
-   "label": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645"
+   "chart_name": "الموظفون حسب القسم",
+   "label": "الموظفون حسب القسم"
   },
   {
-   "chart_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0641\u0631\u0639",
-   "label": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0641\u0631\u0639"
+   "chart_name": "الموظفون حسب الفرع",
+   "label": "الموظفون حسب الفرع"
   },
   {
-   "chart_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0646\u0648\u0639 \u0627\u0644\u062a\u0648\u0638\u064a\u0641",
-   "label": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0646\u0648\u0639 \u0627\u0644\u062a\u0648\u0638\u064a\u0641"
+   "chart_name": "الموظفون حسب نوع التوظيف",
+   "label": "الموظفون حسب نوع التوظيف"
   },
   {
-   "chart_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u062d\u0627\u0644\u0629",
-   "label": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u062d\u0627\u0644\u0629"
+   "chart_name": "الموظفون حسب الحالة",
+   "label": "الموظفون حسب الحالة"
   },
   {
-   "chart_name": "\u0633\u062c\u0644 \u0627\u0644\u062d\u0636\u0648\u0631 - \u0622\u062e\u0631 30 \u064a\u0648\u0645",
-   "label": "\u0633\u062c\u0644 \u0627\u0644\u062d\u0636\u0648\u0631 - \u0622\u062e\u0631 30 \u064a\u0648\u0645"
+   "chart_name": "سجل الحضور - آخر 30 يوم",
+   "label": "سجل الحضور - آخر 30 يوم"
   },
   {
-   "chart_name": "\u0627\u0644\u0625\u062c\u0627\u0632\u0627\u062a \u062d\u0633\u0628 \u0627\u0644\u0646\u0648\u0639",
-   "label": "\u0627\u0644\u0625\u062c\u0627\u0632\u0627\u062a \u062d\u0633\u0628 \u0627\u0644\u0646\u0648\u0639"
+   "chart_name": "الإجازات حسب النوع",
+   "label": "الإجازات حسب النوع"
   },
   {
-   "chart_name": "\u0625\u062c\u0645\u0627\u0644\u064a \u0627\u0644\u0631\u0648\u0627\u062a\u0628 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645",
-   "label": "\u0625\u062c\u0645\u0627\u0644\u064a \u0627\u0644\u0631\u0648\u0627\u062a\u0628 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645"
+   "chart_name": "إجمالي الرواتب حسب القسم",
+   "label": "إجمالي الرواتب حسب القسم"
   },
   {
-   "chart_name": "\u0627\u0644\u062a\u0639\u064a\u064a\u0646\u0627\u062a \u0627\u0644\u062c\u062f\u064a\u062f\u0629 - \u0622\u062e\u0631 12 \u0634\u0647\u0631",
-   "label": "\u0627\u0644\u062a\u0639\u064a\u064a\u0646\u0627\u062a \u0627\u0644\u062c\u062f\u064a\u062f\u0629 - \u0622\u062e\u0631 12 \u0634\u0647\u0631"
+   "chart_name": "التعيينات الجديدة - آخر 12 شهر",
+   "label": "التعيينات الجديدة - آخر 12 شهر"
   },
   {
-   "chart_name": "\u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0648\u0646 - \u0622\u062e\u0631 12 \u0634\u0647\u0631",
-   "label": "\u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0648\u0646 - \u0622\u062e\u0631 12 \u0634\u0647\u0631"
+   "chart_name": "المغادرون - آخر 12 شهر",
+   "label": "المغادرون - آخر 12 شهر"
   }
  ],
- "content": "[{\"data\": {\"col\": 12, \"text\": \"<span class=\\\"h4\\\"><b>\u0627\u062e\u062a\u0635\u0627\u0631\u0627\u062a \u0633\u0631\u064a\u0639\u0629</b></span>\"}, \"id\": \"hrp-header-1\", \"type\": \"header\"}, {\"data\": {\"col\": 3, \"shortcut_name\": \"Employee\"}, \"id\": \"hrp-sh-1\", \"type\": \"shortcut\"}, {\"data\": {\"col\": 3, \"shortcut_name\": \"Leave Application\"}, \"id\": \"hrp-sh-2\", \"type\": \"shortcut\"}, {\"data\": {\"col\": 3, \"shortcut_name\": \"Attendance\"}, \"id\": \"hrp-sh-3\", \"type\": \"shortcut\"}, {\"data\": {\"col\": 3, \"shortcut_name\": \"Employee Document\"}, \"id\": \"hrp-sh-4\", \"type\": \"shortcut\"}, {\"id\": \"c9b1310608\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"\u062f\u0644\u064a\u0644 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0646\u0638\u0627\u0645\", \"col\": 3}}, {\"id\": \"df4b1cd94a\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"\u0627\u0644\u062d\u0636\u0648\u0631 \u0627\u0644\u0628\u064a\u0648\u0645\u062a\u0631\u064a \u0644\u0644\u0641\u062a\u0631\u0629\", \"col\": 3}}, {\"id\": \"ccbd53261e\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"\u062a\u0642\u0631\u064a\u0631 \u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u062f\u0648\u0627\u0645\", \"col\": 3}}, {\"id\": \"9c77912516\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"\u0627\u0644\u062d\u0636\u0648\u0631 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u0641\u062a\u0631\u0627\u062a\", \"col\": 3}}, {\"id\": \"81fc7d8a01\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"\u0645\u0644\u062e\u0635 \u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u062f\u0648\u0627\u0645\", \"col\": 3}}, {\"id\": \"7415e69d0d\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"\u0643\u0634\u0641 \u0627\u0644\u0628\u0635\u0645\u0627\u062a\", \"col\": 3}}, {\"id\": \"435e4e9e57\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"\u0646\u0648\u0639 \u0627\u0644\u062f\u0648\u0627\u0645\", \"col\": 3}}, {\"id\": \"76a884be87\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"\u062c\u062f\u0648\u0644 \u0641\u062a\u0631\u0627\u062a \u0627\u0644\u062f\u0648\u0627\u0645 \u0627\u0644\u0631\u0633\u0645\u064a\", \"col\": 3}}, {\"data\": {\"col\": 12}, \"id\": \"hrp-sp-1\", \"type\": \"spacer\"}, {\"data\": {\"col\": 12, \"text\": \"<span class=\\\"h4\\\"><b>\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629</b></span>\"}, \"id\": \"hrp-header-2\", \"type\": \"header\"}, {\"data\": {\"card_name\": \"Setup\", \"col\": 4}, \"id\": \"hrp-card-0\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Employee\", \"col\": 4}, \"id\": \"hrp-card-1\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Leaves\", \"col\": 4}, \"id\": \"hrp-card-2\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Attendance\", \"col\": 4}, \"id\": \"hrp-card-3\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Payroll\", \"col\": 4}, \"id\": \"hrp-card-4\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Expense Claim\", \"col\": 4}, \"id\": \"hrp-card-5\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Recruitment\", \"col\": 4}, \"id\": \"hrp-card-6\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Key Reports\", \"col\": 4}, \"id\": \"hrp-card-7\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"\u062a\u0643\u0627\u0645\u0644 \u0627\u0644\u0631\u0648\u0627\u062a\u0628\", \"col\": 4}, \"id\": \"hrp-card-d4dede\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"\u062a\u0642\u0627\u0631\u064a\u0631 \u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u0628\u0635\u0645\u0629\", \"col\": 4}, \"id\": \"hrp-card-1ff173\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"\u0643\u0634\u0648\u0641 \u0627\u0644\u0645\u0631\u062a\u0628\u0627\u062a\", \"col\": 4}, \"id\": \"hrp-card-sr\", \"type\": \"card\"}, {\"data\": {\"col\": 12, \"text\": \"<span class=\\\"h4\\\"><b>\u0627\u0644\u0645\u0624\u0634\u0631\u0627\u062a</b></span>\"}, \"id\": \"hrp-nc-header\", \"type\": \"header\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u0627\u0644\u0646\u0634\u0637\u0648\u0646\"}, \"id\": \"hrp-nc-0\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u062d\u0636\u0648\u0631 \u0627\u0644\u064a\u0648\u0645\"}, \"id\": \"hrp-nc-1\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u063a\u064a\u0627\u0628 \u0627\u0644\u064a\u0648\u0645\"}, \"id\": \"hrp-nc-2\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0637\u0644\u0628\u0627\u062a \u0625\u062c\u0627\u0632\u0629 \u0645\u0639\u0644\u0642\u0629\"}, \"id\": \"hrp-nc-3\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0645\u0648\u0638\u0641\u0648\u0646 \u0641\u064a \u0625\u062c\u0627\u0632\u0629 \u0627\u0644\u064a\u0648\u0645\"}, \"id\": \"hrp-nc-4\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0645\u0648\u0638\u0641\u0648\u0646 \u062c\u062f\u062f \u0647\u0630\u0627 \u0627\u0644\u0634\u0647\u0631\"}, \"id\": \"hrp-nc-5\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0625\u062c\u0645\u0627\u0644\u064a \u0631\u0648\u0627\u062a\u0628 \u0627\u0644\u0634\u0647\u0631\"}, \"id\": \"hrp-nc-6\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0645\u0635\u0631\u0648\u0641\u0627\u062a \u0645\u0639\u0644\u0642\u0629\"}, \"id\": \"hrp-nc-7\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0648\u0638\u0627\u0626\u0641 \u0645\u0641\u062a\u0648\u062d\u0629\"}, \"id\": \"hrp-nc-8\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0627\u0644\u0645\u062a\u0642\u062f\u0645\u0648\u0646 \u0644\u0644\u0648\u0638\u0627\u0626\u0641\"}, \"id\": \"hrp-nc-9\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u062a\u062f\u0631\u064a\u0628\u0627\u062a \u0642\u0627\u062f\u0645\u0629\"}, \"id\": \"hrp-nc-10\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"\u0639\u0642\u0648\u062f \u062a\u0646\u062a\u0647\u064a \u0642\u0631\u064a\u0628\u0627\u064b\"}, \"id\": \"hrp-nc-11\", \"type\": \"number_card\"}, {\"data\": {\"col\": 12, \"text\": \"<span class=\\\"h4\\\"><b>\u0627\u0644\u0631\u0633\u0648\u0645 \u0627\u0644\u0628\u064a\u0627\u0646\u064a\u0629</b></span>\"}, \"id\": \"hrp-ch-header\", \"type\": \"header\"}, {\"data\": {\"chart_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645\", \"col\": 12}, \"id\": \"hrp-ch-0\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u0641\u0631\u0639\", \"col\": 12}, \"id\": \"hrp-ch-1\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0646\u0648\u0639 \u0627\u0644\u062a\u0648\u0638\u064a\u0641\", \"col\": 12}, \"id\": \"hrp-ch-2\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u062d\u0633\u0628 \u0627\u0644\u062d\u0627\u0644\u0629\", \"col\": 12}, \"id\": \"hrp-ch-3\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"\u0633\u062c\u0644 \u0627\u0644\u062d\u0636\u0648\u0631 - \u0622\u062e\u0631 30 \u064a\u0648\u0645\", \"col\": 12}, \"id\": \"hrp-ch-4\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"\u0627\u0644\u0625\u062c\u0627\u0632\u0627\u062a \u062d\u0633\u0628 \u0627\u0644\u0646\u0648\u0639\", \"col\": 12}, \"id\": \"hrp-ch-5\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"\u0625\u062c\u0645\u0627\u0644\u064a \u0627\u0644\u0631\u0648\u0627\u062a\u0628 \u062d\u0633\u0628 \u0627\u0644\u0642\u0633\u0645\", \"col\": 12}, \"id\": \"hrp-ch-6\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"\u0627\u0644\u062a\u0639\u064a\u064a\u0646\u0627\u062a \u0627\u0644\u062c\u062f\u064a\u062f\u0629 - \u0622\u062e\u0631 12 \u0634\u0647\u0631\", \"col\": 12}, \"id\": \"hrp-ch-7\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"\u0627\u0644\u0645\u063a\u0627\u062f\u0631\u0648\u0646 - \u0622\u062e\u0631 12 \u0634\u0647\u0631\", \"col\": 12}, \"id\": \"hrp-ch-8\", \"type\": \"chart\"}]",
+ "content": "[{\"data\": {\"col\": 12, \"text\": \"<span class=\\\"h4\\\"><b>اختصارات سريعة</b></span>\"}, \"id\": \"hrp-header-1\", \"type\": \"header\"}, {\"data\": {\"col\": 3, \"shortcut_name\": \"Employee\"}, \"id\": \"hrp-sh-1\", \"type\": \"shortcut\"}, {\"data\": {\"col\": 3, \"shortcut_name\": \"Leave Application\"}, \"id\": \"hrp-sh-2\", \"type\": \"shortcut\"}, {\"data\": {\"col\": 3, \"shortcut_name\": \"Attendance\"}, \"id\": \"hrp-sh-3\", \"type\": \"shortcut\"}, {\"data\": {\"col\": 3, \"shortcut_name\": \"Employee Document\"}, \"id\": \"hrp-sh-4\", \"type\": \"shortcut\"}, {\"id\": \"c9b1310608\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"دليل استخدام النظام\", \"col\": 3}}, {\"id\": \"df4b1cd94a\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"الحضور البيومتري للفترة\", \"col\": 3}}, {\"id\": \"ccbd53261e\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تقرير الحضور والدوام\", \"col\": 3}}, {\"id\": \"9c77912516\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"الحضور متعدد الفترات\", \"col\": 3}}, {\"id\": \"81fc7d8a01\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"ملخص الحضور والدوام\", \"col\": 3}}, {\"id\": \"7415e69d0d\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"كشف البصمات\", \"col\": 3}}, {\"id\": \"435e4e9e57\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"نوع الدوام\", \"col\": 3}}, {\"id\": \"76a884be87\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"جدول فترات الدوام الرسمي\", \"col\": 3}}, {\"data\": {\"col\": 12}, \"id\": \"hrp-sp-1\", \"type\": \"spacer\"}, {\"data\": {\"col\": 12, \"text\": \"<span class=\\\"h4\\\"><b>إدارة الموارد البشرية</b></span>\"}, \"id\": \"hrp-header-2\", \"type\": \"header\"}, {\"data\": {\"card_name\": \"Setup\", \"col\": 4}, \"id\": \"hrp-card-0\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Employee\", \"col\": 4}, \"id\": \"hrp-card-1\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Leaves\", \"col\": 4}, \"id\": \"hrp-card-2\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Attendance\", \"col\": 4}, \"id\": \"hrp-card-3\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Payroll\", \"col\": 4}, \"id\": \"hrp-card-4\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Expense Claim\", \"col\": 4}, \"id\": \"hrp-card-5\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Recruitment\", \"col\": 4}, \"id\": \"hrp-card-6\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"Key Reports\", \"col\": 4}, \"id\": \"hrp-card-7\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"تكامل الرواتب\", \"col\": 4}, \"id\": \"hrp-card-d4dede\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"تقارير الحضور والبصمة\", \"col\": 4}, \"id\": \"hrp-card-1ff173\", \"type\": \"card\"}, {\"data\": {\"card_name\": \"كشوف المرتبات\", \"col\": 4}, \"id\": \"hrp-card-sr\", \"type\": \"card\"}, {\"data\": {\"col\": 12, \"text\": \"<span class=\\\"h4\\\"><b>المؤشرات</b></span>\"}, \"id\": \"hrp-nc-header\", \"type\": \"header\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"الموظفون النشطون\"}, \"id\": \"hrp-nc-0\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"حضور اليوم\"}, \"id\": \"hrp-nc-1\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"غياب اليوم\"}, \"id\": \"hrp-nc-2\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"طلبات إجازة معلقة\"}, \"id\": \"hrp-nc-3\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"موظفون في إجازة اليوم\"}, \"id\": \"hrp-nc-4\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"موظفون جدد هذا الشهر\"}, \"id\": \"hrp-nc-5\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"إجمالي رواتب الشهر\"}, \"id\": \"hrp-nc-6\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"مصروفات معلقة\"}, \"id\": \"hrp-nc-7\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"وظائف مفتوحة\"}, \"id\": \"hrp-nc-8\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"المتقدمون للوظائف\"}, \"id\": \"hrp-nc-9\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"تدريبات قادمة\"}, \"id\": \"hrp-nc-10\", \"type\": \"number_card\"}, {\"data\": {\"col\": 3, \"number_card_name\": \"عقود تنتهي قريباً\"}, \"id\": \"hrp-nc-11\", \"type\": \"number_card\"}, {\"data\": {\"col\": 12, \"text\": \"<span class=\\\"h4\\\"><b>الرسوم البيانية</b></span>\"}, \"id\": \"hrp-ch-header\", \"type\": \"header\"}, {\"data\": {\"chart_name\": \"الموظفون حسب القسم\", \"col\": 12}, \"id\": \"hrp-ch-0\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"الموظفون حسب الفرع\", \"col\": 12}, \"id\": \"hrp-ch-1\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"الموظفون حسب نوع التوظيف\", \"col\": 12}, \"id\": \"hrp-ch-2\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"الموظفون حسب الحالة\", \"col\": 12}, \"id\": \"hrp-ch-3\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"سجل الحضور - آخر 30 يوم\", \"col\": 12}, \"id\": \"hrp-ch-4\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"الإجازات حسب النوع\", \"col\": 12}, \"id\": \"hrp-ch-5\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"إجمالي الرواتب حسب القسم\", \"col\": 12}, \"id\": \"hrp-ch-6\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"التعيينات الجديدة - آخر 12 شهر\", \"col\": 12}, \"id\": \"hrp-ch-7\", \"type\": \"chart\"}, {\"data\": {\"chart_name\": \"المغادرون - آخر 12 شهر\", \"col\": 12}, \"id\": \"hrp-ch-8\", \"type\": \"chart\"}]",
  "creation": "2026-09-06 22:17:26.784212",
  "custom_blocks": [],
  "docstatus": 0,
@@ -47,7 +47,7 @@
  "idx": 0,
  "indicator_color": "green",
  "is_hidden": 0,
- "label": "\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629",
+ "label": "بوابة الموارد البشرية",
  "links": [
   {
    "hidden": 0,
@@ -308,9 +308,9 @@
   {
    "hidden": 0,
    "is_query_report": 1,
-   "label": "\u0643\u0634\u0641 \u0627\u0644\u0628\u0635\u0645\u0627\u062a",
+   "label": "كشف البصمات",
    "link_count": 0,
-   "link_to": "\u0643\u0634\u0641 \u0627\u0644\u0628\u0635\u0645\u0627\u062a",
+   "link_to": "كشف البصمات",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
@@ -554,7 +554,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u062a\u0643\u0627\u0645\u0644 \u0627\u0644\u0631\u0648\u0627\u062a\u0628",
+   "label": "تكامل الرواتب",
    "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
@@ -603,7 +603,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u062a\u0642\u0627\u0631\u064a\u0631 \u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u0628\u0635\u0645\u0629",
+   "label": "تقارير الحضور والبصمة",
    "link_count": 10,
    "link_type": "DocType",
    "onboard": 0,
@@ -712,7 +712,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "\u0643\u0634\u0648\u0641 \u0627\u0644\u0645\u0631\u062a\u0628\u0627\u062a",
+   "label": "كشوف المرتبات",
    "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
@@ -740,10 +740,10 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "Auto Salary Advance Report",
+   "is_query_report": 0,
+   "label": "💵 ملخص سلف الموظفين",
    "link_count": 0,
-   "link_to": "Auto Salary Advance Report",
+   "link_to": "Employee Advance Summary",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
@@ -772,55 +772,55 @@
  "modified": "2026-10-13 16:53:49.625661",
  "modified_by": "Administrator",
  "module": "hrms-erp",
- "name": "\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629",
+ "name": "بوابة الموارد البشرية",
  "number_cards": [
   {
-   "label": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u0627\u0644\u0646\u0634\u0637\u0648\u0646",
-   "number_card_name": "\u0627\u0644\u0645\u0648\u0638\u0641\u0648\u0646 \u0627\u0644\u0646\u0634\u0637\u0648\u0646"
+   "label": "الموظفون النشطون",
+   "number_card_name": "الموظفون النشطون"
   },
   {
-   "label": "\u062d\u0636\u0648\u0631 \u0627\u0644\u064a\u0648\u0645",
-   "number_card_name": "\u062d\u0636\u0648\u0631 \u0627\u0644\u064a\u0648\u0645"
+   "label": "حضور اليوم",
+   "number_card_name": "حضور اليوم"
   },
   {
-   "label": "\u063a\u064a\u0627\u0628 \u0627\u0644\u064a\u0648\u0645",
-   "number_card_name": "\u063a\u064a\u0627\u0628 \u0627\u0644\u064a\u0648\u0645"
+   "label": "غياب اليوم",
+   "number_card_name": "غياب اليوم"
   },
   {
-   "label": "\u0637\u0644\u0628\u0627\u062a \u0625\u062c\u0627\u0632\u0629 \u0645\u0639\u0644\u0642\u0629",
-   "number_card_name": "\u0637\u0644\u0628\u0627\u062a \u0625\u062c\u0627\u0632\u0629 \u0645\u0639\u0644\u0642\u0629"
+   "label": "طلبات إجازة معلقة",
+   "number_card_name": "طلبات إجازة معلقة"
   },
   {
-   "label": "\u0645\u0648\u0638\u0641\u0648\u0646 \u0641\u064a \u0625\u062c\u0627\u0632\u0629 \u0627\u0644\u064a\u0648\u0645",
-   "number_card_name": "\u0645\u0648\u0638\u0641\u0648\u0646 \u0641\u064a \u0625\u062c\u0627\u0632\u0629 \u0627\u0644\u064a\u0648\u0645"
+   "label": "موظفون في إجازة اليوم",
+   "number_card_name": "موظفون في إجازة اليوم"
   },
   {
-   "label": "\u0645\u0648\u0638\u0641\u0648\u0646 \u062c\u062f\u062f \u0647\u0630\u0627 \u0627\u0644\u0634\u0647\u0631",
-   "number_card_name": "\u0645\u0648\u0638\u0641\u0648\u0646 \u062c\u062f\u062f \u0647\u0630\u0627 \u0627\u0644\u0634\u0647\u0631"
+   "label": "موظفون جدد هذا الشهر",
+   "number_card_name": "موظفون جدد هذا الشهر"
   },
   {
-   "label": "\u0625\u062c\u0645\u0627\u0644\u064a \u0631\u0648\u0627\u062a\u0628 \u0627\u0644\u0634\u0647\u0631",
-   "number_card_name": "\u0625\u062c\u0645\u0627\u0644\u064a \u0631\u0648\u0627\u062a\u0628 \u0627\u0644\u0634\u0647\u0631"
+   "label": "إجمالي رواتب الشهر",
+   "number_card_name": "إجمالي رواتب الشهر"
   },
   {
-   "label": "\u0645\u0635\u0631\u0648\u0641\u0627\u062a \u0645\u0639\u0644\u0642\u0629",
-   "number_card_name": "\u0645\u0635\u0631\u0648\u0641\u0627\u062a \u0645\u0639\u0644\u0642\u0629"
+   "label": "مصروفات معلقة",
+   "number_card_name": "مصروفات معلقة"
   },
   {
-   "label": "\u0648\u0638\u0627\u0626\u0641 \u0645\u0641\u062a\u0648\u062d\u0629",
-   "number_card_name": "\u0648\u0638\u0627\u0626\u0641 \u0645\u0641\u062a\u0648\u062d\u0629"
+   "label": "وظائف مفتوحة",
+   "number_card_name": "وظائف مفتوحة"
   },
   {
-   "label": "\u0627\u0644\u0645\u062a\u0642\u062f\u0645\u0648\u0646 \u0644\u0644\u0648\u0638\u0627\u0626\u0641",
-   "number_card_name": "\u0627\u0644\u0645\u062a\u0642\u062f\u0645\u0648\u0646 \u0644\u0644\u0648\u0638\u0627\u0626\u0641"
+   "label": "المتقدمون للوظائف",
+   "number_card_name": "المتقدمون للوظائف"
   },
   {
-   "label": "\u062a\u062f\u0631\u064a\u0628\u0627\u062a \u0642\u0627\u062f\u0645\u0629",
-   "number_card_name": "\u062a\u062f\u0631\u064a\u0628\u0627\u062a \u0642\u0627\u062f\u0645\u0629"
+   "label": "تدريبات قادمة",
+   "number_card_name": "تدريبات قادمة"
   },
   {
-   "label": "\u0639\u0642\u0648\u062f \u062a\u0646\u062a\u0647\u064a \u0642\u0631\u064a\u0628\u0627\u064b",
-   "number_card_name": "\u0639\u0642\u0648\u062f \u062a\u0646\u062a\u0647\u064a \u0642\u0631\u064a\u0628\u0627\u064b"
+   "label": "عقود تنتهي قريباً",
+   "number_card_name": "عقود تنتهي قريباً"
   }
  ],
  "owner": "Administrator",
@@ -861,7 +861,7 @@
    "color": "#1e40af",
    "doc_view": "",
    "icon": "book",
-   "label": "\u062f\u0644\u064a\u0644 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0646\u0638\u0627\u0645",
+   "label": "دليل استخدام النظام",
    "type": "URL",
    "url": "/hr_guide"
   },
@@ -869,7 +869,7 @@
    "color": "#0e7490",
    "doc_view": "",
    "icon": "fingerprint",
-   "label": "\u0627\u0644\u062d\u0636\u0648\u0631 \u0627\u0644\u0628\u064a\u0648\u0645\u062a\u0631\u064a \u0644\u0644\u0641\u062a\u0631\u0629",
+   "label": "الحضور البيومتري للفترة",
    "link_to": "Biometric Period Attendance",
    "report_ref_doctype": "Attendance",
    "type": "Report"
@@ -878,8 +878,8 @@
    "color": "#166534",
    "doc_view": "",
    "icon": "calendar",
-   "label": "\u062a\u0642\u0631\u064a\u0631 \u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u062f\u0648\u0627\u0645",
-   "link_to": "\u062a\u0642\u0631\u064a\u0631 \u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u062f\u0648\u0627\u0645",
+   "label": "تقرير الحضور والدوام",
+   "link_to": "تقرير الحضور والدوام",
    "report_ref_doctype": "Attendance",
    "type": "Report"
   },
@@ -887,7 +887,7 @@
    "color": "#7c2d12",
    "doc_view": "",
    "icon": "list",
-   "label": "\u0627\u0644\u062d\u0636\u0648\u0631 \u0645\u062a\u0639\u062f\u062f \u0627\u0644\u0641\u062a\u0631\u0627\u062a",
+   "label": "الحضور متعدد الفترات",
    "link_to": "Multi-Period Attendance",
    "report_ref_doctype": "Attendance",
    "type": "Report"
@@ -896,7 +896,7 @@
    "color": "#4c1d95",
    "doc_view": "",
    "icon": "sum",
-   "label": "\u0645\u0644\u062e\u0635 \u0627\u0644\u062d\u0636\u0648\u0631 \u0648\u0627\u0644\u062f\u0648\u0627\u0645",
+   "label": "ملخص الحضور والدوام",
    "link_to": "Attendance Summary V2",
    "report_ref_doctype": "Attendance",
    "type": "Report"
@@ -905,8 +905,8 @@
    "color": "#155e75",
    "doc_view": "",
    "icon": "file",
-   "label": "\u0643\u0634\u0641 \u0627\u0644\u0628\u0635\u0645\u0627\u062a",
-   "link_to": "\u0643\u0634\u0641 \u0627\u0644\u0628\u0635\u0645\u0627\u062a",
+   "label": "كشف البصمات",
+   "link_to": "كشف البصمات",
    "report_ref_doctype": "Employee Checkin",
    "type": "Report"
   },
@@ -914,7 +914,7 @@
    "color": "#065f46",
    "doc_view": "",
    "icon": "clock",
-   "label": "\u0646\u0648\u0639 \u0627\u0644\u062f\u0648\u0627\u0645",
+   "label": "نوع الدوام",
    "link_to": "Shift Type",
    "type": "DocType"
   },
@@ -922,10 +922,10 @@
    "color": "#9d174d",
    "doc_view": "",
    "icon": "table",
-   "label": "\u062c\u062f\u0648\u0644 \u0641\u062a\u0631\u0627\u062a \u0627\u0644\u062f\u0648\u0627\u0645 \u0627\u0644\u0631\u0633\u0645\u064a",
+   "label": "جدول فترات الدوام الرسمي",
    "type": "URL",
-   "url": "/app/shift-type/\u062f\u0648\u0627\u0645 \u0631\u0633\u0645\u064a"
+   "url": "/app/shift-type/دوام رسمي"
   }
  ],
- "title": "\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u0645\u0648\u0627\u0631\u062f \u0627\u0644\u0628\u0634\u0631\u064a\u0629"
+ "title": "بوابة الموارد البشرية"
 }

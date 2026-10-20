@@ -18,6 +18,14 @@
        خصم الغياب  = daily_rate  × absence_deduction_factor × absent_days
   5. يضيف سطر خصم في جدول Deductions داخل القسيمة.
 
+تعديلات لاحقة (2026-10):
+  - نصف يوم الغياب (Half Day) يُحتسب 0.5 يوم بدل تجاهله.
+  - تُستبعد أيام العطلة الأسبوعية (weekly_off) وأيام Holiday List من الغياب.
+  - تُخزَّن القيم في حقلي Salary Slip: total_late_minutes / total_absent_days.
+  - تُعاد حساب إجماليات القسيمة (gross_pay / total_deduction / net_pay)
+    بعد إضافة الخصم، لأن doc_events تُنفَّذ بعد calculate_net_pay.
+  - الكود الأصلي محفوظ معلَّقاً في موضعه مع تعليقات توضح سبب التعطيل.
+
 الإيقاف: من DocType "HR ERP Payroll Settings" عطّل:
     enable_late_deduction  → يوقف خصم التأخير
     enable_absence_deduction → يوقف خصم الغياب
@@ -28,6 +36,10 @@
 
 import frappe
 from frappe.utils import flt, getdate, get_datetime, cint
+
+from hr_erp.hrms_erp.payroll_integration.arabic_amount_words import (
+	set_salary_slip_total_in_words_ar,
+)
 
 SETTINGS_DOCTYPE = "HR ERP Payroll Settings"
 
@@ -78,23 +90,71 @@ def apply_late_absence_deduction(doc, method=None):
 		late_minutes = _calc_late_minutes(employee, start_date, end_date, settings)
 
 	# --- حساب أيام الغياب ---
-	absent_days = 0
+	absent_days = 0.0
 	if settings.get("enable_absence") and settings.get("absence_component"):
 		absent_days = _count_absent_days(employee, start_date, end_date)
 
-	if late_minutes <= 0 and absent_days <= 0:
-		return
+	# ==================================================================
+	# ORIGINAL CODE — DISABLED (محفوظ للرجوع إليه)
+	# ------------------------------------------------------------------
+	# سبب التعطيل:
+	#   1) كان يعود مبكراً عند عدم وجود تأخير/غياب، فلا يصفّر أي قيم قديمة.
+	#   2) لم يكن يعيد حساب إجماليات القسيمة بعد إضافة الخصم. وبما أن
+	#      doc_events تُنفَّذ بعد SalarySlip.validate() (الذي يستدعي
+	#      calculate_net_pay)، بقيت total_deduction و net_pay بقيم قديمة.
+	#   3) لم يكن يدعم نصف يوم الغياب (0.5) ولا يستبعد أيام العطلة.
+	#
+	# if late_minutes <= 0 and absent_days <= 0:
+	# 	return
+	#
+	# # --- حساب السعر ---
+	# base = flt(doc.get("base") or doc.get("gross_pay") or 0)
+	# working_days = settings.get("working_days") or 30
+	# daily_rate = base / working_days if working_days else 0
+	# # سعر الساعة = اليومي / ساعات الدوام (نقدّر 8 ساعات افتراضياً إن لم توجد)
+	# shift_hours = _get_shift_hours(doc) or 8.0
+	# hourly_rate = daily_rate / shift_hours if shift_hours else 0
+	#
+	# # --- إضافة سطور الخصم ---
+	# if late_minutes > 0 and settings.get("late_component"):
+	# 	late_amount = round(hourly_rate * settings["late_factor"] * (late_minutes / 60.0), 2)
+	# 	if late_amount > 0:
+	# 		_add_deduction_row(
+	# 			doc,
+	# 			settings["late_component"],
+	# 			late_amount,
+	# 			remark="خصم تأخير: {:.1f} دقيقة".format(late_minutes),
+	# 		)
+	#
+	# if absent_days > 0 and settings.get("absence_component"):
+	# 	absence_amount = round(daily_rate * settings["absence_factor"] * absent_days, 2)
+	# 	if absence_amount > 0:
+	# 		_add_deduction_row(
+	# 			doc,
+	# 			settings["absence_component"],
+	# 			absence_amount,
+	# 			remark="خصم غياب: {} يوم".format(absent_days),
+	# 		)
+	# ==================================================================
+
+	# ==================================================================
+	# MODIFIED CODE — ACTIVE
+	# ==================================================================
+	# تخزين القيم في الحقول المخصصة لتظهر في القسيمة والتقرير
+	doc.total_late_minutes = late_minutes
+	doc.total_absent_days = absent_days
 
 	# --- حساب السعر ---
-	base = flt(doc.get("base") or doc.get("gross_pay") or 0)
+	# الحساب من راتب الأساس بدل gross_pay، وانظر _get_base_amount للتوضيح
+	base = _get_base_amount(doc, employee)
 	working_days = settings.get("working_days") or 30
 	daily_rate = base / working_days if working_days else 0
 	# سعر الساعة = اليومي / ساعات الدوام (نقدّر 8 ساعات افتراضياً إن لم توجد)
 	shift_hours = _get_shift_hours(doc) or 8.0
 	hourly_rate = daily_rate / shift_hours if shift_hours else 0
 
-	# --- إضافة سطور الخصم ---
-	if late_minutes > 0 and settings.get("late_component"):
+	# --- إضافة/تحديث سطور الخصم ---
+	if settings.get("enable_late") and settings.get("late_component"):
 		late_amount = round(hourly_rate * settings["late_factor"] * (late_minutes / 60.0), 2)
 		if late_amount > 0:
 			_add_deduction_row(
@@ -103,16 +163,24 @@ def apply_late_absence_deduction(doc, method=None):
 				late_amount,
 				remark="خصم تأخير: {:.1f} دقيقة".format(late_minutes),
 			)
+		else:
+			# لا نضيف سطراً صفرياً جديداً، لكن نُصفّر أي سطر قديم (idempotent)
+			_zero_deduction_row(doc, settings["late_component"])
 
-	if absent_days > 0 and settings.get("absence_component"):
+	if settings.get("enable_absence") and settings.get("absence_component"):
 		absence_amount = round(daily_rate * settings["absence_factor"] * absent_days, 2)
 		if absence_amount > 0:
 			_add_deduction_row(
 				doc,
 				settings["absence_component"],
 				absence_amount,
-				remark="خصم غياب: {} يوم".format(absent_days),
+				remark="خصم غياب: {:.1f} يوم".format(absent_days),
 			)
+		else:
+			_zero_deduction_row(doc, settings["absence_component"])
+
+	# إعادة حساب الإجماليات بعد تعديل سطور الخصم
+	_recalculate_slip_totals(doc)
 
 
 # ----------------------------------------------------------------------
@@ -212,22 +280,109 @@ def _get_shift_hours(doc):
 	return 0
 
 
+def _get_base_amount(doc, employee):
+	"""أساس حساب سعر اليوم والساعة.
+
+	الأولوية:
+	  1. حقل base إن وُجد على المستند
+	  2. راتب الأساس (base) من Salary Structure Assignment
+	  3. إجمالي المستحقات gross_pay
+
+	سبب التعديل: الكود الأصلي (المحفوظ معلَّقاً داخل apply_late_absence_deduction)
+	كان يستخدم `doc.get("base") or gross_pay`. وحقل base غير موجود على Salary
+	Slip فيفترض None، فيصبح الأساس = gross_pay. وعموماً gross_pay يتضمن البدلات
+	والإضافي، فتتغيّر قيمة الخصم عند كل إعادة حفظ للقسيمة (غير idempotent).
+	ولذلك نقرأ راتب الأساس من Salary Structure Assignment وهو الأصل في الحساب.
+	"""
+	base = flt(doc.get("base") or 0)
+	if base <= 0 and employee:
+		base = flt(
+			frappe.db.get_value(
+				"Salary Structure Assignment",
+				{"employee": employee, "docstatus": 1},
+				"base",
+			)
+			or 0
+		)
+	if base <= 0:
+		base = flt(doc.get("gross_pay") or 0)
+	return base
+
+
 # ----------------------------------------------------------------------
 # حساب أيام الغياب
 # ----------------------------------------------------------------------
 def _count_absent_days(employee, start_date, end_date):
-	"""عدد أيام الغياب (status = Absent) ضمن الفترة."""
+	"""عدد أيام الغياب مع احتساب نصف اليوم = 0.5 واستبعاد العطلات."""
+	# ==================================================================
+	# ORIGINAL CODE — DISABLED (محفوظ للرجوع إليه)
+	# ------------------------------------------------------------------
+	# كان يحتسب سجلات status="Absent" فقط، دون Half Day، ودون استبعاد
+	# أيام العطلة الأسبوعية أو أيام Holiday List.
+	#
+	# rows = frappe.get_all(
+	# 	"Attendance",
+	# 	filters={
+	# 		"employee": employee,
+	# 		"attendance_date": ["between", [start_date, end_date]],
+	# 		"docstatus": 1,
+	# 		"status": "Absent",
+	# 	},
+	# 	fields=["name"],
+	# )
+	# return len(rows)
+	# ==================================================================
+
 	rows = frappe.get_all(
 		"Attendance",
 		filters={
 			"employee": employee,
 			"attendance_date": ["between", [start_date, end_date]],
 			"docstatus": 1,
-			"status": "Absent",
+			"status": ["in", ["Absent", "Half Day"]],
 		},
-		fields=["name"],
+		fields=["attendance_date", "status"],
 	)
-	return len(rows)
+
+	holiday_dates, weekly_off = _get_employee_off_days(employee, start_date, end_date)
+	weekday_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+	total_days = 0.0
+	for row in rows:
+		att_date = getdate(row.attendance_date)
+
+		# استبعاد أيام العطلة الرسمية
+		if att_date in holiday_dates:
+			continue
+
+		# استبعاد يوم العطلة الأسبوعية (مثل الجمعة)
+		if weekly_off and weekday_names[att_date.weekday()] == weekly_off:
+			continue
+
+		# نصف يوم = 0.5، غياب كامل = 1.0
+		total_days += 0.5 if row.status == "Half Day" else 1.0
+
+	return total_days
+
+
+def _get_employee_off_days(employee, start_date, end_date):
+	"""إرجاع (set أيام العطل الرسمية, اسم يوم العطلة الأسبوعية)."""
+	holiday_list = frappe.db.get_value("Employee", employee, "holiday_list")
+	if not holiday_list:
+		return set(), None
+
+	try:
+		holiday_doc = frappe.get_cached_doc("Holiday List", holiday_list)
+	except Exception:
+		return set(), None
+
+	holiday_dates = set()
+	for row in holiday_doc.get("holidays") or []:
+		holiday_date = getdate(row.holiday_date)
+		if start_date <= holiday_date <= end_date:
+			holiday_dates.add(holiday_date)
+
+	return holiday_dates, holiday_doc.get("weekly_off")
 
 
 # ----------------------------------------------------------------------
@@ -248,3 +403,38 @@ def _add_deduction_row(doc, component, amount, remark=""):
 			"amount": amount,
 		},
 	)
+
+
+def _zero_deduction_row(doc, component):
+	"""تصفير سطر خصم موجود دون إضافة سطر جديد (idempotent)."""
+	for row in doc.get("deductions") or []:
+		if row.salary_component == component:
+			row.amount = 0
+			return
+
+
+def _recalculate_slip_totals(doc):
+	"""إعادة حساب إجماليات القسيمة من سطور المستحقات والخصومات.
+
+	ملاحظة مهمة: لا نستخدم doc.calculate_net_pay() هنا لأنها تستدعي
+	calculate_component_amounts("deductions") فتعيد حساب مبالغ الخصم من
+	Salary Structure وتلغي القيم التي وضعناها. لذلك نجمع السطور مباشرة ثم
+	نستدعي set_net_pay() التي تكتفي بجمع المبالغ الموجودة.
+	"""
+	earnings = doc.get("earnings") or []
+	gross = sum(flt(row.amount) for row in earnings)
+
+	doc.gross_pay = flt(gross)
+	doc.base_gross_pay = flt(gross * flt(doc.get("exchange_rate") or 1))
+
+	if hasattr(doc, "set_net_pay"):
+		doc.set_net_pay()
+	else:
+		# احتياطي في حال استُدعيت الدالة خارج سياق Salary Slip
+		total_deduction = sum(flt(row.amount) for row in (doc.get("deductions") or []))
+		doc.total_deduction = flt(total_deduction)
+		doc.net_pay = flt(gross - total_deduction - flt(doc.get("total_loan_repayment")))
+
+	# تعريب مبلغ الراتب بالكلمات: set_net_pay() تُنتج النص الإنجليزي دائماً،
+	# لذا نستبدله بالنص العربي بعد اكتمال حساب الصافي.
+	set_salary_slip_total_in_words_ar(doc)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import frappe
 from frappe import _
-from frappe.utils import flt, getdate, nowdate
+from frappe.utils import flt, getdate, get_datetime, nowdate
 
 
 # ------------------------------------------------------------------
@@ -167,11 +167,113 @@ def validate_attendance(doc, method=None):
 		if getdate(doc.attendance_date) > getdate(nowdate()):
 			frappe.throw(_("لا يمكن تسجيل الحضور لتاريخ في المستقبل."))
 
+	if not doc.get("company"):
+		doc.company = frappe.defaults.get_user_default("Company")
+
+	# في التحضير اليدوي متعدد الفترات: تُعبَّأ فترات الشفت تلقائياً إن كانت فارغة،
+	# ثم تُستنتج الحالة من الفترات المحددة "حاضر".
+	# نقطة أمان على الخادم حتى لو حُفظ السجل من خارج الواجهة أو لم يعمل سكربت العميل.
+	# مقيّدة بالسجلات الجديدة فقط كي لا تمس سجلات النظام التلقائي عند إعادة الحفظ
+	# (مثل اعتماد الإضافي عبر approve_overtime).
+	if doc.is_new():
+		_autopopulate_periods(doc)
+
+	# تُعاد كتابة الحالة من الفترات للسجلات اليدوية (الجديدة أو المعلَّمة)،
+	# ولا تُمس السجلات التلقائية إلا عندما تكون جديدة.
+	if (doc.is_new() or doc.get("period_entry_manual")) and _apply_period_status(doc):
+		return
+
 	if not doc.get("status"):
 		doc.status = "Present"
 
-	if not doc.get("company"):
-		doc.company = frappe.defaults.get_user_default("Company")
+
+def _autopopulate_periods(doc):
+	"""تعبئة فترات نوبة العمل تلقائياً للسجل الجديد متعدد الفترات إن كان الجدول فارغاً."""
+	if doc.get("attendance_period_details"):
+		return
+	if frappe.flags.in_install or frappe.flags.in_patch or frappe.flags.in_migrate:
+		return
+
+	shift = doc.get("shift")
+	if not shift or not frappe.db.exists("Shift Type", shift):
+		return
+
+	from hr_erp.hrms_erp.multi_period_shift.multi_period_attendance_engine import (
+		is_multi_period_shift,
+		get_sorted_periods,
+		get_period_datetime_range,
+	)
+
+	shift_doc = frappe.get_doc("Shift Type", shift)
+	if not is_multi_period_shift(shift_doc):
+		return
+
+	# تمييز السجل بأن الفترات أُدخلت/عُبِّئت يدوياً.
+	if hasattr(doc, "period_entry_manual"):
+		doc.period_entry_manual = 1
+
+	reference_date = getdate(doc.attendance_date) if doc.get("attendance_date") else getdate(nowdate())
+
+	for period in get_sorted_periods(shift_doc):
+		period_start, period_end = get_period_datetime_range(period, reference_date)
+		is_break = 1 if period.get("is_break") else 0
+		doc.append(
+			"attendance_period_details",
+			{
+				"employee": doc.get("employee"),
+				"shift_type": shift,
+				"period_name": period.period_name,
+				"period_number": period.period_number,
+				"period_start": period_start,
+				"period_end": period_end,
+				"present": 0 if is_break else 1,
+				"is_break": is_break,
+				"period_status": "Break" if is_break else "Present",
+			},
+		)
+
+
+def _apply_period_status(doc):
+	"""استنتاج حالة الحضور من فترات النوبة المحدَّدة يدوياً.
+
+	- كل الفترات العاملة حاضرة → Present
+	- لا شيء حاضر → Absent
+	- بعضها حاضر → Half Day (مع ضبط half_shifts و working_hours)
+	تُعيد True إذا طُبّقت الحالة من الفترات.
+	"""
+	rows = doc.get("attendance_period_details") or []
+	work_rows = [row for row in rows if not row.get("is_break")]
+	if not work_rows:
+		return False
+
+	present_rows = [row for row in work_rows if row.get("present")]
+
+	if len(present_rows) == len(work_rows):
+		doc.status = "Present"
+	elif not present_rows:
+		doc.status = "Absent"
+	else:
+		doc.status = "Half Day"
+
+	if hasattr(doc, "half_shifts"):
+		doc.half_shifts = 1 if doc.status == "Half Day" else 0
+
+	working_hours = 0.0
+	for row in present_rows:
+		if row.get("period_start") and row.get("period_end"):
+			try:
+				working_hours += (
+					get_datetime(row.get("period_end")) - get_datetime(row.get("period_start"))
+				).total_seconds() / 3600
+			except Exception:
+				pass
+
+	doc.working_hours = round(working_hours, 2)
+
+	for row in work_rows:
+		row.period_status = "Present" if row.get("present") else "Absent"
+
+	return True
 
 
 # ------------------------------------------------------------------
