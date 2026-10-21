@@ -241,6 +241,81 @@ class TestAutoRecalc(FrappeTestCase):
 			if "Test Co" in str(key):
 				frappe.cache().delete_value(key)
 
+	def test_attendance_quality_guard_blocks_high_absence_ratio(self):
+		"""حماية: نسبة غياب غير منطقية ⇐ يُتخطّى الشهر (يمنع خصم خاطئ)."""
+		from_date, to_date = self._valid_month()
+
+		ok, message = auto_recalc.check_attendance_quality(from_date, to_date)
+		self.assertTrue(ok, f"شهر سليم يجب أن يجتاز: {message}")
+
+		# نضبط الحدّ على قيمة أقل من نسبة الغياب الفعلية ⇒ يجب أن يُرفض
+		rows = frappe.db.sql(
+			"""
+			select count(*) as total,
+			       sum(case when status = 'Absent' then 1 else 0 end) as absent
+			from `tabAttendance`
+			where docstatus = 1 and attendance_date between %s and %s
+			""",
+			(from_date, to_date),
+			as_dict=True,
+		)
+		total = int((rows[0] or {}).get("total") or 0)
+		absent = int((rows[0] or {}).get("absent") or 0)
+		if total < 20 or absent == 0:
+			self.skipTest("لا توجد بيانات كافية لاختبار حدّ الجودة")
+
+		settings = frappe.get_single("HR ERP Payroll Settings")
+		old_limit = settings.get("absence_data_quality_limit")
+		settings.absence_data_quality_limit = 0.01
+		settings.save(ignore_permissions=True)
+		frappe.clear_cache(doctype="HR ERP Payroll Settings")
+		try:
+			ok2, message2 = auto_recalc.check_attendance_quality(from_date, to_date)
+			self.assertFalse(ok2, "يجب رفض الشهر عند تجاوز حدّ الجودة")
+			self.assertTrue(message2)
+		finally:
+			settings.reload()
+			settings.absence_data_quality_limit = old_limit
+			settings.save(ignore_permissions=True)
+			frappe.clear_cache(doctype="HR ERP Payroll Settings")
+
+	def test_high_absence_month_is_skipped_not_applied(self):
+		"""شهر بنسبة غياب عالية لا يُكتب فيه أي خصم."""
+		self._ensure_fields()
+		self._ensure_settings()
+
+		from_date, to_date = self._valid_month()
+		slips = self._slips_in(from_date, to_date)
+		if not slips:
+			self.skipTest("لا توجد كشوف رواتب في الشهر المختار")
+
+		def deduction_sum():
+			return frappe.db.sql(
+				"""
+				select sum(ifnull(total_deduction, 0))
+				from `tabSalary Slip`
+				where docstatus = 1 and start_date <= %s and end_date >= %s
+				""",
+				(to_date, from_date),
+			)[0][0] or 0
+
+		before = deduction_sum()
+		settings = frappe.get_single("HR ERP Payroll Settings")
+		old_limit = settings.get("absence_data_quality_limit")
+		settings.absence_data_quality_limit = 0.01
+		settings.save(ignore_permissions=True)
+		frappe.clear_cache(doctype="HR ERP Payroll Settings")
+		try:
+			result = auto_recalc.recalculate_range(from_date, to_date, apply=1, reason="test")
+			self.assertTrue(result.get("skipped"))
+			self.assertEqual(result.get("slips_updated"), 0)
+			self.assertAlmostEqual(float(before or 0), float(deduction_sum() or 0), places=2)
+		finally:
+			settings.reload()
+			settings.absence_data_quality_limit = old_limit
+			settings.save(ignore_permissions=True)
+			frappe.clear_cache(doctype="HR ERP Payroll Settings")
+
 	def test_audit_log_not_written_for_no_change(self):
 		"""لا تتضخّم سجلات التدقيق: التشغيل المتكرر لنفس النتيجة لا يضيف صفوفاً."""
 		self._ensure_fields()

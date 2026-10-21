@@ -18,6 +18,7 @@
   "absence_deduction_component",
   "absence_deduction_factor",
   "working_days_per_month",
+  "absence_data_quality_limit",
   "column_break_absence",
   "overtime_section",
   "enable_overtime_generation",
@@ -106,6 +107,12 @@
    "label": "Working Days Per Month"
   },
   {
+   "default": "50",
+   "description": "حدّ أقصى (نسبة مئوية) لنسبة الغياب في الشهر. إذا تجاوزته يُعتبر الشهر مولَّداً تلقائياً (بيانات غير صحيحة) ويُتخطّى.",
+   "fieldname": "absence_data_quality_limit",
+   "fieldtype": "Percent",
+   "label": "Absence Data Quality Limit (%)"
+  },  {
    "fieldname": "column_break_absence",
    "fieldtype": "Column Break"
   },

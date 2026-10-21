@@ -47,6 +47,12 @@ DIRTY_KEY_PREFIX = "payroll_recalc_dirty"
 # الحالة (شهر فاسد) تُحفظ في Redis بمفتاح per company + شهر
 DIRTY_TTL = 60 * 60 * 24 * 7
 
+# الحدّ الافتراضي لنسبة الغياب المسموحة (يُضبط من الإعدادات)
+DEFAULT_ABSENCE_QUALITY_LIMIT = 50
+
+# الحدّ الأدنى لعدد سجلات الحضور حتى تُطبَّق قاعدة الجودة
+MIN_RECORDS_FOR_QUALITY_CHECK = 20
+
 # الحركات التي تعني أن بيانات الشهر تغيّرت
 ATTENDANCE_STATUSES = ("Present", "Half Day", "Work From Home", "Absent", "On Leave", "Holiday")
 
@@ -101,6 +107,64 @@ def _slip_fingerprint_field():
 
 
 # ----------------------------------------------------------------------
+# فحص جودة بيانات الحضور (حماية من الخصم الخاطئ)
+# ----------------------------------------------------------------------
+def get_absence_quality_limit():
+	"""حدّ نسبة الغياب المسموحة (نسبة مئوية) من الإعدادات."""
+	limit = DEFAULT_ABSENCE_QUALITY_LIMIT
+	try:
+		settings = frappe.get_cached_doc("HR ERP Payroll Settings")
+		value = settings.get("absence_data_quality_limit")
+		if value not in (None, ""):
+			limit = frappe.utils.flt(value)
+	except Exception:
+		pass
+	return limit or DEFAULT_ABSENCE_QUALITY_LIMIT
+
+
+def check_attendance_quality(from_date, to_date):
+	"""يفحص بيانات الحضور في المدى: نسبة غياب غير منطقية ⇐ بيانات مولّدة تلقائياً.
+
+	يُرجع (سليم, رسالة).
+	"""
+	rows = frappe.db.sql(
+		"""
+		select
+			count(*) as total,
+			sum(case when status in ('Present', 'Half Day', 'Work From Home') then 1 else 0 end) as good,
+			sum(case when status = 'Absent' then 1 else 0 end) as absent
+		from `tabAttendance`
+		where docstatus = 1 and attendance_date between %s and %s
+		""",
+		(from_date, to_date),
+		as_dict=True,
+	)
+	r = rows[0] if rows else None
+	total = int((r or {}).get("total") or 0)
+	absent = int((r or {}).get("absent") or 0)
+	good = int((r or {}).get("good") or 0)
+
+	if total < MIN_RECORDS_FOR_QUALITY_CHECK:
+		return True, None
+
+	ratio = (absent * 100.0) / total
+	limit = get_absence_quality_limit()
+
+	if ratio > limit:
+		return False, _(
+			"Absence ratio {0}% exceeds the quality limit {1}% - the attendance data looks "
+			"auto-generated (no biometric check-ins). Month skipped to avoid wrong deductions."
+		).format(round(ratio, 1), limit)
+
+	if good == 0 and absent > 0:
+		return False, _(
+			"No real attendance in this period (all records are absences) - month skipped."
+		)
+
+	return True, None
+
+
+# ----------------------------------------------------------------------
 # تحديد القسائم التي تحتاج تحديثاً
 # ----------------------------------------------------------------------
 def get_stale_slips(from_date, to_date, fingerprint):
@@ -121,11 +185,21 @@ def get_stale_slips(from_date, to_date, fingerprint):
 # ----------------------------------------------------------------------
 # تنفيذ إعادة الاحتساب
 # ----------------------------------------------------------------------
-def recalculate_range(from_date, to_date, apply=1, company=None, reason="", only_stale=True, verbose=1):
+def recalculate_range(
+	from_date,
+	to_date,
+	apply=1,
+	company=None,
+	reason="",
+	only_stale=True,
+	verbose=1,
+	force=0,
+):
 	"""إعادة احتساب خصومات النطاق الزمني.
 
 	apply      : 1 تنفيذ فعلي وكتابة | 0 معاينة فقط
 	only_stale : True ⇒ لا يعيد الاحتساب إلا إذا تغيّرت بصمة بيانات الحضور
+	force      : 1 تجاوز فحص جودة البيانات (استخدام واعٍ)
 	"""
 	from_date = getdate(from_date)
 	to_date = getdate(to_date)
@@ -154,6 +228,7 @@ def recalculate_range(from_date, to_date, apply=1, company=None, reason="", only
 		"to_date": str(to_date),
 		"fingerprint": fingerprint,
 		"slips_scanned": 0,
+		"slips_pending": 0,
 		"slips_updated": 0,
 		"late_minutes": 0.0,
 		"absent_days": 0.0,
@@ -168,6 +243,15 @@ def recalculate_range(from_date, to_date, apply=1, company=None, reason="", only
 		summary["message"] = _("No real attendance in this period - skipped.")
 		_log(summary, company=company, status="Skipped")
 		return summary
+
+	# حماية من الخصم الخاطئ: نسبة غياب غير منطقية ⇐ بيانات مولّدة تلقائياً (لا بصمة)
+	if not force:
+		quality_ok, quality_message = check_attendance_quality(from_date, to_date)
+		if not quality_ok:
+			summary["skipped"] = True
+			summary["message"] = quality_message
+			_log(summary, company=company, status="Skipped")
+			return summary
 
 	slips = frappe.get_all(
 		"Salary Slip",
@@ -189,6 +273,8 @@ def recalculate_range(from_date, to_date, apply=1, company=None, reason="", only
 		_log(summary, company=company, status="No Change")
 		return summary
 
+	summary["slips_pending"] = len(stale)
+
 	total = {"late_minutes": 0.0, "absent_days": 0.0, "late_deduction": 0.0, "absence_deduction": 0.0}
 
 	for slip in stale:
@@ -196,7 +282,6 @@ def recalculate_range(from_date, to_date, apply=1, company=None, reason="", only
 		result = recalculate_slip(doc, apply=bool(apply))
 		if not result:
 			continue
-		summary["slips_updated"] += 1
 		for key in total:
 			total[key] += frappe.utils.flt(result.get(key) or 0)
 
@@ -205,6 +290,7 @@ def recalculate_range(from_date, to_date, apply=1, company=None, reason="", only
 			if frappe.db.has_column("Salary Slip", LAST_RECALC_FIELD):
 				fields[LAST_RECALC_FIELD] = now_datetime()
 			frappe.db.set_value("Salary Slip", slip.name, fields, update_modified=False)
+			summary["slips_updated"] += 1
 
 	summary.update(total)
 
@@ -266,11 +352,12 @@ def _log(summary, company=None, status="Applied"):
 # ----------------------------------------------------------------------
 # واجهة التنفيذ المجدول
 # ----------------------------------------------------------------------
-def execute(lookback_months=12, apply=1, company=None, verbose=1):
+def execute(lookback_months=12, apply=1, company=None, verbose=1, force=0):
 	"""مهمة مجدولة: تعيد احتساب كل شهر تغيّرت فيه بيانات الحضور.
 
 	lookback_months : كم شهراً للخلف (افتراضي 12)
 	apply           : 1 تنفيذ فعلي | 0 معاينة فقط
+	force           : 1 تجاوز فحص جودة بيانات الحضور
 	"""
 	if frappe.flags.in_install or frappe.flags.in_migrate or frappe.flags.in_patch:
 		return
@@ -296,13 +383,15 @@ def execute(lookback_months=12, apply=1, company=None, verbose=1):
 			reason="scheduled",
 			only_stale=True,
 			verbose=verbose,
+			force=force,
 		)
 		results.append(summary)
 		if verbose:
 			print(
-				"[{0}] scanned={1} updated={2} late_min={3} absent_days={4} {5}".format(
+				"[{0}] scanned={1} pending={2} updated={3} late_min={4} absent_days={5} {6}".format(
 					summary.get("from_date"),
 					summary.get("slips_scanned"),
+					summary.get("slips_pending"),
 					summary.get("slips_updated"),
 					summary.get("late_minutes"),
 					summary.get("absent_days"),
