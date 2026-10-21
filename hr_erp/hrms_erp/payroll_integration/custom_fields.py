@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2026, Shumul. All rights reserved.
 """
-الحقول المخصصة لتكامل الرواتب — custom_fields.py
-===================================================
-
-تُنشأ تلقائياً عبر after_migrate (انظر hooks.py).
+تعديلات على الحقول المخصصة للرواتب — custom_fields.py
+=====================================================
+يُنشأ تلقائياً عبر after_migrate (انظر hooks.py).
 كل حقل يُنشأ مرة واحدة فقط (idempotent).
-
-الإيقاف: احذف السطر من after_migrate في hooks.py ثم احذف الحقول يدوياً
-  من Setup > Custom Field إذا رغبت.
 
 الحقول:
   - Employee: custom_last_attendance_sync_date (آخر مزامنة بصمة — BioStar)
   - Salary Slip: attendance_details (تفاصيل الحضور — تبويب)
   - Timesheet: attendance (ربط بالحضور)
+
+الحقول الجديدة (2026-10-21) — نظام إعادة الاحتساب التلقائية:
+  - Salary Slip: audit_recalc_fingerprint  (بصمة بيانات الحضور آخر مرة احتُسبت)
+  - Salary Slip: audit_last_recalc_at      (آخر إعادة احتساب)
 """
 
 import frappe
@@ -60,6 +60,23 @@ CUSTOM_FIELDS = {
 			"label": "Total Absent Days",
 			"read_only": 1,
 			"insert_after": "total_late_minutes",
+		},
+		{
+			# MODIFIED (2026-10-21): حقول نظام إعادة الاحتساب التلقائية
+			# البصمة تُخزَّن على القسيمة لمقارنة بيانات الحضور الحالية بما احتُسب سابقاً
+			"fieldname": "audit_last_recalc_at",
+			"fieldtype": "Datetime",
+			"label": "Last Deduction Reconciliation",
+			"read_only": 1,
+			"insert_after": "total_absent_days",
+		},
+		{
+			"fieldname": "audit_recalc_fingerprint",
+			"fieldtype": "Data",
+			"label": "Attendance Fingerprint",
+			"read_only": 1,
+			"hidden": 1,
+			"insert_after": "audit_last_recalc_at",
 		},
 	],
 	"Timesheet": [

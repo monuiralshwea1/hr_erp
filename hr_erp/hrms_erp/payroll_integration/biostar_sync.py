@@ -66,6 +66,26 @@ def get_employee_checkins(start_date, end_date, employees=None):
 	biostar.get_attendance_report(attendance_ids, start_date, end_date)
 	biostar.format_attendance_logs()
 
+	# MODIFIED (2026-10-21): بعد استيراد بصمة (قد تكون لفترات سابقة) نطلب
+	# إعادة احتساب خصومات التأخير/الغياب للأشهر المتأثرة فوراً.
+	# failures هنا لا يجب أن تُفشل المزامنة.
+	try:
+		from . import auto_recalc
+
+		auto_recalc.recalculate_range(
+			start_date,
+			end_date,
+			apply=1,
+			reason="biostar sync ({0} → {1})".format(start_date, end_date),
+			only_stale=True,
+			verbose=0,
+		)
+	except Exception:
+		frappe.log_error(
+			title="Payroll auto recalc: failed after biostar sync",
+			message=frappe.get_traceback(),
+		)
+
 
 @frappe.whitelist()
 def add_checkin_logs_for_current_day():

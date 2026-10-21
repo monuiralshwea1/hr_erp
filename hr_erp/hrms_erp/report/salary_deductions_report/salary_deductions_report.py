@@ -127,7 +127,8 @@ def get_salary_slips(filters):
 			ss.start_date, ss.end_date, ss.docstatus, ss.status,
 			ss.gross_pay, ss.total_deduction, ss.net_pay,
 			ss.total_late_minutes, ss.total_absent_days,
-			ss.total_loan_repayment
+			ss.total_loan_repayment,
+			ss.audit_last_recalc_at
 		from `tabSalary Slip` ss
 		where {where_clause}
 		order by ss.start_date desc, ss.employee asc
@@ -263,6 +264,12 @@ def get_columns(
 			"fieldtype": "Currency",
 			"width": 110,
 		},
+		{
+			"label": "آخر إعادة احتساب",
+			"fieldname": "audit_last_recalc_at",
+			"fieldtype": "Datetime",
+			"width": 140,
+		},
 	]
 
 	# أعمدة المستحقات الديناميكية
@@ -380,6 +387,7 @@ def get_data(
 			"total_absent_days": raw_absent_days,
 			"total_absent_days_effective": flt(raw_absent_days * flt(absence_factor)),
 			"absence_deduction": absence_deduction,
+			"audit_last_recalc_at": getattr(slip, "audit_last_recalc_at", None),
 			"gross_pay": gross_pay,
 			"total_deduction": total_deduction,
 			"net_pay": net_pay,

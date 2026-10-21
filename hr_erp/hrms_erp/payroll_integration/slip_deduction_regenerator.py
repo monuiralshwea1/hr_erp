@@ -95,6 +95,54 @@ def get_slips_in_range(from_date, to_date):
 	)
 
 
+def recalculate_slip(
+	doc,
+	apply=False,
+	late_component=None,
+	absence_component=None,
+	parent_fields=None,
+):
+	"""إعادة احتساب خصومات قسيمة واحدة.
+
+	تستخدم نفس منطق الـhook المستخدم عند إنشاء كشف الراتب، فتكون النتيجة
+	مطابقة تماماً لما سيُحسب مستقبلاً (عملية idempotent: سطر الخصم يُحدَّث
+	ولا يُضاف سطر جديد).
+
+	المعاملات:
+		doc              : مستند كشف الراتب
+		apply            : True = كتابة القيم في قاعدة البيانات
+		parent_fields    : الحقول التي تُكتب على كشف الراتب (تُحسب تلقائياً إن لم تُمرَّر)
+
+	يُعيد قاموساً فيه: late_minutes, absent_days, late_deduction, absence_deduction.
+	"""
+	settings = get_settings()
+	late_component = late_component or settings.get("late_component")
+	absence_component = absence_component or settings.get("absence_component")
+	parent_fields = parent_fields if parent_fields is not None else _parent_fields()
+
+	apply_late_absence_deduction(doc)
+
+	row_amounts = {}
+	for row in doc.deductions or []:
+		if row.salary_component in (late_component, absence_component):
+			row_amounts[row.salary_component] = flt(row.amount)
+			if apply:
+				frappe.db.set_value(
+					"Salary Detail", row.name, "amount", flt(row.amount), update_modified=False
+				)
+
+	if apply:
+		fields = {field: doc.get(field) for field in parent_fields}
+		frappe.db.set_value("Salary Slip", doc.name, fields, update_modified=False)
+
+	return {
+		"late_minutes": flt(doc.get("total_late_minutes")),
+		"absent_days": flt(doc.get("total_absent_days")),
+		"late_deduction": row_amounts.get(late_component, 0.0),
+		"absence_deduction": row_amounts.get(absence_component, 0.0),
+	}
+
+
 def recalculate_slips(from_date, to_date, apply=False):
 	"""إعادة احتساب الخصومات لقسائم المدى.
 
@@ -122,23 +170,16 @@ def recalculate_slips(from_date, to_date, apply=False):
 
 	for slip in slips:
 		doc = frappe.get_doc("Salary Slip", slip.name)
-		apply_late_absence_deduction(doc)
+		result = recalculate_slip(
+			doc,
+			apply=apply,
+			late_component=late_component,
+			absence_component=absence_component,
+			parent_fields=parent_fields,
+		)
 
-		row_amounts = {}
-		for row in doc.deductions or []:
-			if row.salary_component in (late_component, absence_component):
-				row_amounts[row.salary_component] = flt(row.amount)
-				if apply:
-					frappe.db.set_value(
-						"Salary Detail", row.name, "amount", flt(row.amount), update_modified=False
-					)
-
-		if apply:
-			fields = {field: doc.get(field) for field in parent_fields}
-			frappe.db.set_value("Salary Slip", doc.name, fields, update_modified=False)
-
-		late_amount = row_amounts.get(late_component, 0.0)
-		absence_amount = row_amounts.get(absence_component, 0.0)
+		late_amount = result.get("late_deduction", 0.0)
+		absence_amount = result.get("absence_deduction", 0.0)
 
 		summary["updated"] += 1
 		summary["late_minutes"] += flt(doc.get("total_late_minutes"))

@@ -13,6 +13,7 @@ app_include_js = "/assets/hr_erp/js/hr_common.js"
 # include js in doctype views
 doctype_js = {
 	"Leave Application": "public/js/leave_application.js",
+	"Salary Slip": "public/js/salary_slip_reconcile.js",
 	"Attendance": "public/js/attendance.js",
 	"Expense Claim": "public/js/expense_claim.js",
 	"Job Applicant": "public/js/job_applicant.js",
@@ -52,6 +53,10 @@ doc_events = {
 	},
 	"Attendance": {
 		"validate": "hr_erp.hrms_erp.api.smart_defaults.validate_attendance",
+		# MODIFIED (2026-10-21): تعليم الشهر بأن بيانات الحضور تغيّرت
+		# فيقوم النظام بإعادة احتساب خصومات ذلك الشهر تلقائياً.
+		"after_insert": "hr_erp.hrms_erp.payroll_integration.auto_recalc.mark_attendance_dirty",
+		"on_update": "hr_erp.hrms_erp.payroll_integration.auto_recalc.mark_attendance_dirty",
 	},
 	"Expense Claim": {
 		"validate": "hr_erp.hrms_erp.api.smart_defaults.validate_expense_claim",
@@ -85,4 +90,10 @@ scheduler_events = {
 			"hr_erp.hrms_erp.payroll_integration.biostar_sync.check_for_yesterday_logs"
 		],
 	},
+	# MODIFIED (2026-10-21): إعادة احتساب خصومات التأخير/الغياب تلقائياً
+	# كل ساعة — تعيد الاحتساب فقط للأشهر التي تغيّرت فيها بيانات الحضور
+	# (تُقارن ببصمة الحضور المخزّنة على كل كشف راتب).
+	"hourly": [
+		"hr_erp.hrms_erp.payroll_integration.auto_recalc.execute"
+	],
 }

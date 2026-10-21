@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-10-21 12:00:00.000000",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_overview",
+  "company",
+  "month",
+  "status",
+  "column_break_overview",
+  "slips_scanned",
+  "slips_updated",
+  "section_totals",
+  "total_late_minutes",
+  "total_absent_days",
+  "late_deduction",
+  "absence_deduction",
+  "column_break_totals",
+  "section_details",
+  "attendance_fingerprint",
+  "details"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_overview",
+   "fieldtype": "Section Break",
+   "label": "Overview"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Month",
+   "reqd": 1
+  },
+  {
+   "default": "Applied",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Applied\nNo Change\nSkipped\nError",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_overview",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "slips_scanned",
+   "fieldtype": "Int",
+   "label": "Slips Scanned"
+  },
+  {
+   "fieldname": "slips_updated",
+   "fieldtype": "Int",
+   "label": "Slips Updated"
+  },
+  {
+   "fieldname": "section_totals",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total_late_minutes",
+   "fieldtype": "Float",
+   "label": "Total Late Minutes"
+  },
+  {
+   "fieldname": "total_absent_days",
+   "fieldtype": "Float",
+   "label": "Total Absent Days"
+  },
+  {
+   "fieldname": "late_deduction",
+   "fieldtype": "Currency",
+   "label": "Late Deduction"
+  },
+  {
+   "fieldname": "absence_deduction",
+   "fieldtype": "Currency",
+   "label": "Absence Deduction"
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "attendance_fingerprint",
+   "fieldtype": "Data",
+   "label": "Attendance Fingerprint",
+   "read_only": 1
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Small Text",
+   "label": "Details"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-10-21 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HRMS-ERP",
+ "name": "Payroll Deduction Recalc Log",
+ "naming_rule": "Random",
+ "autoname": "hash",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "track_seen": 0,
+ "track_views": 0
+}
