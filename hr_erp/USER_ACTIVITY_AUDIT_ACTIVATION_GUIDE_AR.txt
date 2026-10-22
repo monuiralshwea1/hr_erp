@@ -908,3 +908,185 @@ cd apps/hr_erp && git log --oneline -1 && git rev-parse HEAD
 نهاية الملف
 ================================================================================
 
+================================================================================
+19) مشكلة تشوّه الأسماء العربية (Mojibake) — السبب الجذري والحل
+================================================================================
+
+19.1 ما هي المشكلة بالضبط؟
+--------------------------------------------------------------------------------
+عند سحب التحديثات إلى السيرفر الثاني تظهر أسماء الملفات والمجلدات العربية
+محوّلة إلى رموز غريبة، مثل:
+
+    الصحيح : بوابة_الموارد_البشرية
+    التالف  : ط¨ظˆط§ط¨ط©_ط§ظ„ظ…طˆط§ط±ط¯_ط§ظ„ط¨ط´ط±طٹط©
+
+أو على مستوى الملفات:
+
+    الصحيح : USER_ACTIVITY_AUDIT_ACTIVATION_GUIDE_AR.txt
+    التالف  : ط·ط±ظٹظ‚ط© طھظپط¹ظٹط„ ... .txt
+
+النتيجة: مجلدات التقارير ومساحات العمل لا تُقرأ ⇒ لا يظهر التقرير ولا
+البطاقة، ويظهر خطأ "Report not found" أو مساحة عمل مفقودة.
+
+19.2 السبب الجذري (تم التحقق منه على السيرفر الأساسي)
+--------------------------------------------------------------------------------
+السبب ليس في git ولا في Frappe — بل في اللغة/الترميز أثناء النقل:
+
+  1) أسماء الملفات العربية مخزَّنة في git كبايتات UTF-8 خام.
+  2) عند سحبها على نظام لغته ليست UTF-8 (مثل CP1256 / latin-1) أو عبر أداة
+     تقرأ UTF-8 على أنها CP1256، تتحوّل البايتات إلى نص مشوّهة.
+  3) الأداة تكتب الناتج مرة أخرى بترميز UTF-8 ⇒ ترميزاً مزدوجاً.
+     (أي: UTF-8 → قُرئ CP1256 → كُتب UTF-8) ⇒ النص التالف نفسه UTF-8 صالح،
+     ولهذا يبدو "سليماً" في محرر النصوص لكنه اسم خاطئ.
+
+كما يوجد في المستودع أسماء قديمة مخزَّنة بترميز CP1256 القديم أصلاً
+(ليست UTF-8) مثل:
+    hr_erp/اصلاحات التقاير والحضور والتاخير.txt
+تم تحويل هذا الاسم إلى ASCII ضمن هذا التحديث:
+    hr_erp/ATTENDANCE_AND_DEDUCTION_FIXES_AR.txt
+
+19.3 الوقاية (الأهم) — سطران قبل أي git pull
+--------------------------------------------------------------------------------
+    export LANG=C.UTF-8
+    export LC_ALL=C.UTF-8
+    git config --global core.quotepath false
+
+ملاحظة: git config core.quotepath false يؤثر على طريقة عرض المسارات فقط
+(cosmetically) ولا يغيّر الترميز — ضبط LANG هو ما يمنع التلف فعلياً.
+
+19.4 أداة الإصلاح التلقائي (part of this update)
+--------------------------------------------------------------------------------
+أُضيفت أداة داخل التطبيق بمسار ASCII لا يتأثر بالمشكلة:
+
+    apps/hr_erp/hr_erp/scripts/fix_mojibake_filenames.py
+
+تعمل الأداة كالتالي:
+  * تقرأ الأسماء المتوقعة من git:  git ls-files -z
+  * لكل مسار متوقع تبحث على القرص عن المدخل المقابل بثلاث صيغ:
+      1) نفس البايتات (سليم)
+      2) CP1256 قديم  → يُصلَح إلى UTF-8
+      3) ترميز مزدوج (UTF-8 مقروء كـ CP1256) → يُعاد إلى الأصل
+  * تعيد التسمية داخل git عبر git mv ليبقى الفهرس متسقاً.
+
+الاستخدام:
+
+    cd ~/frappe2
+    # فحص فقط (لا تعديل):
+    ./env/bin/python apps/hr_erp/hr_erp/scripts/fix_mojibake_filenames.py --check
+    # إصلاح فعلي:
+    ./env/bin/python apps/hr_erp/hr_erp/scripts/fix_mojibake_filenames.py
+
+19.5 الطريقة الموصى بها على السيرفر الثاني (سحب آمن بنقرة واحدة)
+--------------------------------------------------------------------------------
+أُضيف سكربت جاهز يجمع كل الخطوات بالترتيب الصحيح:
+
+    cd ~/frappe2
+    ./apps/hr_erp/hr_erp/scripts/pull_update_safe.sh albashaer.newsmart.local
+
+ما يفعله:
+    [1/5] ضبط LANG/LC_ALL على UTF-8
+    [2/5] فحص الأسماء قبل السحب
+    [3/5] git pull --ff-only
+    [4/5] إصلاح أي أسماء متشوّهة
+    [5/5] bench --site <الموقع> migrate + clear-cache + bench restart
+
+ملاحظة مهمة: لا تستخدم  bench --site <الموقع> migrate  قبل step 4 في حال
+كانت الأسماء تالفة، لأن migrate يستورد ملفات التقارير ومساحات العمل، ولو
+كانت الأسماء تالفة فلن يجدها ⇒ نفس نتيجة "التقرير غير موجود".
+
+19.5.1 خطة الطوارئ: إصلاح فوري بدون تنزيل أي ملف
+--------------------------------------------------------------------------------
+لو كان السحب تالفاً لدرجة أن أداة الإصلاح لم تصل (أو أريد إصلاحاً فورياً
+بنسخ/لصق فقط)، الصق هذا الكود كاملاً في الطرفية على السيرفر الثاني:
+
+    export LANG=C.UTF-8 LC_ALL=C.UTF-8
+    cd ~/frappe2/apps/hr_erp
+    python3 - <<'PYEOF'
+    import os, subprocess
+    R = os.getcwd()
+    out = subprocess.run(["git", "ls-files", "-z"], capture_output=True).stdout
+    paths = [p for p in out.split(b"\x00") if p and any(b > 127 for b in p)]
+    def forms(raw):
+        s = {raw}
+        try: s.add(raw.decode("cp1256").encode("utf-8"))
+        except Exception: pass
+        try:
+            t = raw.decode("utf-8")
+            for cp in ("cp1256", "cp1252", "latin-1"):
+                try: s.add(t.encode(cp))
+                except Exception: pass
+        except Exception: pass
+        return s
+    fixed = 0
+    for p in paths:
+        try: p.decode("utf-8")
+        except UnicodeDecodeError: continue
+        cur = R
+        for part in p.split(b"/"):
+            try: entries = os.listdir(cur)
+            except Exception: entries = []
+            hit = None
+            for e in entries:
+                raw = os.fsencode(e)
+                if raw == part or part in forms(raw):
+                    hit = (e, raw); break
+            if hit is None: break
+            e, raw = hit
+            if raw != part:
+                new = os.path.join(cur, os.fsdecode(part))
+                try:
+                    os.rename(os.path.join(cur, e), new); fixed += 1
+                    print("  fixed:", e, "->", os.fsdecode(part))
+                except Exception as ex:
+                    print("  FAILED:", e, ex)
+                cur = new
+            else:
+                cur = os.path.join(cur, e)
+    print("Total fixed:", fixed)
+    PYEOF
+
+المتوقع أن يطبع عدد الأسماء التي أصلحها (مثل: Total fixed: 11).
+
+19.6 تنبيه لا يمكن تجاهله: أسماء مجلدات Frappe يجب أن تبقى عربية
+--------------------------------------------------------------------------------
+هذه المجلدات مرتبطة باسم الـdoctype داخل Frappe — يبحث عنها Frappe
+بـ scrub(name) ⇒ لا يجوز تسميتها ASCII ولا حذفها ولا إعادة ترميزها:
+
+    apps/hr_erp/hr_erp/hrms_erp/report/كشف_البصمات/
+    apps/hr_erp/hr_erp/hrms_erp/report/تقرير_الحضور_والدوام/
+    apps/hr_erp/hr_erp/hrms_erp/workspace/بوابة_الموارد_البشرية/
+    apps/hr_erp/hrms_erp/hrms_erp/dashboard_chart/المغادرون___آخر_12_شهر/
+
+(المسار الصحيح للاخير: apps/hr_erp/hr_erp/hrms_erp/dashboard_chart/...)
+
+أما ملفات التوثيق (.txt) فليست مرتبطة بـ Frappe، لذلك حُوّلت أسماؤها إلى
+ASCII في هذا التحديث لتفادي التلف نهائياً:
+
+    hr_erp/USER_ACTIVITY_AUDIT_ACTIVATION_GUIDE_AR.txt
+        ->  hr_erp/USER_ACTIVITY_AUDIT_ACTIVATION_GUIDE_AR.txt   (هذا الملف)
+    hr_erp/تعليمات_التنفيذ.txt
+        ->  hr_erp/EXECUTION_INSTRUCTIONS_AR.txt
+    hr_erp/خطوات_الرفع_والتنزيل.txt
+        ->  hr_erp/DEPLOYMENT_STEPS_AR.txt
+    hr_erp/اصلاحات التقاير والحضور والتاخير.txt   (كان CP1256)
+        ->  hr_erp/ATTENDANCE_AND_DEDUCTION_FIXES_AR.txt
+
+19.7 تحقّق بعد الإصلاح
+--------------------------------------------------------------------------------
+    cd ~/frappe2
+    ls apps/hr_erp/hr_erp/hrms_erp/workspace/
+    # يجب أن ترى: بوابة_الموارد_البشرية
+
+    ls apps/hr_erp/hr_erp/hrms_erp/report/ | grep البصمات
+    # يجب أن ترى: كشف_البصمات
+
+    ./env/bin/python apps/hr_erp/hr_erp/scripts/fix_mojibake_filenames.py --check
+    # المتوقع: لا توجد أسماء تالفة — كل الأسماء سليمة ✓
+
+19.8 الحالة على السيرفر الأساسي (تم التحقق)
+--------------------------------------------------------------------------------
+  * المستودع على السيرفر الأساسي سليم تماماً (لا Mojibake).
+  * تم اختبار الأداة على نسخة مُتلفة عمداً: 11 اسماً/مجلداً تضرّر،
+    وأصلحتها الأداة كلها، والنتيجة مطابقة تماماً لـ HEAD (لا فرق).
+  * تقرير "كشف البصمات" يعمل بعد الإصلاح (JSON صالح، ref_doctype =
+    Employee Checkin).
